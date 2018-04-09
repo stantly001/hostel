@@ -32,7 +32,8 @@
         "assets/js/jquery.flexslider.js",
         "assets/js/responsiveslides.min.js",
         "assets/js/move-top.js",
-        "assets/js/easing.js"
+        "assets/js/easing.js",
+        "assets/js/custom.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,5 +1,5 @@
 {
-  "name": "hotel",
+  "name": "hostel",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -44,5 +44,16 @@
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://stantly001@github.com/stantly001/hostel.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/stantly001/hostel/issues"
+  },
+  "homepage": "https://github.com/stantly001/hostel#readme"
 }
