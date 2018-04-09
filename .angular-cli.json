@@ -19,9 +19,21 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/css/bootstrap.css",
+        "assets/css/style.css",
+        "assets/css/main.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/js/jquery-1.11.1.min.js",
+        "assets/js/jquery-ui.js",
+        "assets/js/bootstrap.js",
+        "assets/js/jquery.chocolat.js",
+        "assets/js/jquery.flexslider.js",
+        "assets/js/responsiveslides.min.js",
+        "assets/js/move-top.js",
+        "assets/js/easing.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
