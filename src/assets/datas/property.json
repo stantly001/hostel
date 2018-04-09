@@ -1,0 +1,26 @@
+[
+    {
+        "propertyId":1,
+        "propertyName":"All property types"
+    },
+    {
+        "propertyId":2,
+        "propertyName":"Hostels"
+    },
+    {
+        "propertyId":3,
+        "propertyName":"Bed & Breakfasts"
+    },
+    {
+        "propertyId":4,
+        "propertyName":"Hotels"
+    },
+    {
+        "propertyId":5,
+        "propertyName":"Appartments"
+    },
+    {
+        "propertyId":6,
+        "propertyName":"Campsites"
+    }
+]

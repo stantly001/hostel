@@ -1,0 +1,42 @@
+[
+    {
+        "facilityId":1,
+        "faciliytyName":"24 Hour Reception"
+    },
+    {
+        "facilityId":2,
+        "faciliytyName":"24 Hour Security"
+    },
+    {
+        "facilityId":3,
+        "faciliytyName":"Air Conditioning"
+    },
+    {
+        "facilityId":4,
+        "faciliytyName":"Bar"
+    },
+    {
+        "facilityId":5,
+        "faciliytyName":"Common Room"
+    },
+    {
+        "facilityId":6,
+        "faciliytyName":"Free Breakfast"
+    },
+    {
+        "facilityId":7,
+        "faciliytyName":"Free WiFi"
+    },
+    {
+        "facilityId":8,
+        "faciliytyName":"Internet Access"
+    },
+    {
+        "facilityId":9,
+        "faciliytyName":"Language Storage"
+    },
+    {
+        "facilityId":10,
+        "faciliytyName":"Restaurant"
+    }
+]
