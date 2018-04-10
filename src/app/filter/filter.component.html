@@ -4,28 +4,32 @@
 		<div class="search-grids">
 			<div class="col-md-3 search-grid-left">
 				<div class="single-star-bottom">
+					<a (click)="isCategoey=!isCategory">
+						<i class="fa" [class.fa-plus]="isCategory==true" [class.fa-minus]="isCategory==false"></i>
+					</a>
 					<h3 class="sear-head">Filter Results</h3>
-					<input type="checkbox" id="nike1" value="">
-					<label for="nike1">
-						<span></span>
-						show full availability
-					</label>
-
+					<div>
+						<input type="checkbox" id="nike1" value="">
+						<label for="nike1">
+							<span></span>
+							show full availability
+						</label>
+					</div>
 				</div>
 
 				<div class="range">
 					<h3 class="sear-head">Price</h3>
 					<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
-
+					<label for="" class="hostel-label">Range From Rs.100 to 200</label>
 				</div>
 				<div class="range">
-						<h3 class="sear-head">Rating</h3>
-						<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
-	
-					</div>
+					<h3 class="sear-head">Rating</h3>
+					<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
+					<label for="" class="hostel-label">Range From 0% to 100%</label>
+				</div>
 				<div class="single-star-bottom">
 					<h3 class="sear-head">property Type</h3>
-					<input type="checkbox" id="nike2" value="">
+					<input type="checkbox" name="nike2" value="">
 					<label for="nike2">
 						<span></span>
 						All Property types
@@ -35,7 +39,7 @@
 					<input type="checkbox" id="nike3" value="">
 					<label for="nike3">
 						<span></span>
-					Hostels
+						Hostels
 					</label>
 
 
@@ -44,109 +48,147 @@
 						<span></span>
 						Bed And BreakFast
 					</label>
+					<input type="checkbox" id="nike5" value="">
+					<label for="nike5">
+						<span></span>
+						Apartments
+					</label>
 
-					<ul class="dropdown-menu5">
-						<li>
-
-							<div id="slider-range1"></div>
-							<input type="text" id="amount1" style="border: 0; color: #ffffff; font-weight: normal;" />
-						</li>
-					</ul>
 					<!---->
 
 				</div>
 				<div class="single-star-bottom">
-					<h3 class="sear-head">Star rating</h3>
+					<h3 class="sear-head">Room Type</h3>
+					<input type="checkbox" id="nike6" value="">
+					<label for="nike6">
+						<span></span>
+						All Property types
+					</label>
 
 
+					<input type="checkbox" id="nike8" value="">
+					<label for="nike8">
+						<span></span>
+						Hostels
+					</label>
 
 
+					<input type="checkbox" id="nike9" value="">
+					<label for="nike9">
+						<span></span>
+						Bed And BreakFast
+					</label>
+					<input type="checkbox" id="nike10" value="">
+					<label for="nike5">
+						<span></span>
+						Apartments
+					</label>
 
 
-				
-
-				</div>
-
-				<div class="menu-grid">
-					<ul class="menu_drop">
-						<li class="item1">
-							<a href="#">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Features</a>
-							<ul>
-								<li class="subitem1">
-									<a href="#">Roll-in shower </a>
-								</li>
-								<li class="subitem2">
-									<a href="#">Comfortable bathroom</a>
-								</li>
-								<li class="subitem3">
-									<a href="#">WI-FI facility</a>
-								</li>
-							</ul>
-						</li>
-						<li class="item2">
-							<a href="#">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Facilities</a>
-							<ul>
-								<li class="subitem1">
-									<a href="#">Childcare </a>
-								</li>
-								<li class="subitem2">
-									<a href="#">Gym</a>
-								</li>
-								<li class="subitem3">
-									<a href="#">Bar</a>
-								</li>
-							</ul>
-						</li>
-						<li class="item3">
-							<a href="#">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Accommodation type</a>
-							<ul>
-								<li class="subitem1">
-									<a href="#">Resort</a>
-								</li>
-								<li class="subitem2">
-									<a href="#">Hostel</a>
-								</li>
-								<li class="subitem3">
-									<a href="#">Apartment</a>
-								</li>
-							</ul>
-						</li>
-						<li class="item4">
-							<a href="#">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Landmarks</a>
-							<ul>
-								<li class="subitem1">
-									<a href="#">Mexican City</a>
-								</li>
-								<li class="subitem2">
-									<a href="#">Park View Center</a>
-								</li>
-								<li class="subitem3">
-									<a href="#">Land Park Center</a>
-								</li>
-							</ul>
-						</li>
-						<li class="item5">
-							<a href="#">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Neighbourhood</a>
-							<ul>
-								<li class="subitem1">
-									<a href="#">Diamond Park Colony</a>
-								</li>
-								<li class="subitem2">
-									<a href="#">E Park Road</a>
-								</li>
-								<li class="subitem3">
-									<a href="#">lake View Center</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
+					<!---->
 
 				</div>
+				<div class="single-star-bottom">
+					<h3 class="sear-head">Facilities</h3>
+					<input type="checkbox" id="nike6" value="">
+					<label for="nike6">
+						<span></span>
+						All Property types
+					</label>
+
+
+					<input type="checkbox" id="nike8" value="">
+					<label for="nike8">
+						<span></span>
+						Hostels
+					</label>
+
+
+					<input type="checkbox" id="nike9" value="">
+					<label for="nike9">
+						<span></span>
+						Bed And BreakFast
+					</label>
+					<input type="checkbox" id="nike10" value="">
+					<label for="nike5">
+						<span></span>
+						Apartments
+					</label>
+
+
+					<!---->
+
+				</div>
+				<div class="single-star-bottom">
+					<h3 class="sear-head">Location</h3>
+
+					<div class="sel">
+
+						<select name="" class="sel form-control">
+							<option value="">Any Distance</option>
+							<option value="">1</option>
+							<option value="">2</option>
+							<option value="">3</option>
+						</select>
+					</div>
+					<div>
+						<label>From</label>
+						<select name=""  class="sel form-control">
+							<option value="">City Center</option>
+							<option value="">1</option>
+							<option value="">2</option>
+							<option value="">3</option>
+						</select>
+					</div>
+				<div>
+					<input type="radio" name="Km">
+					<label>Kilometer</label>
+				</div>
+				<div>
+						<input type="radio" name="Km">
+						<label>Miles</label>
+				</div>
+
+
+
+
+
+
+				</div>
+				<div class="single-star-bottom">
+						<h3 class="sear-head">Payment Type</h3>
+						<input type="checkbox" id="nike6" value="">
+						<label for="nike6">
+							<span></span>
+							All Payment types
+						</label>
+	
+	
+						<input type="checkbox" id="nike8" value="">
+						<label for="nike8">
+							<span></span>
+							Credit Card
+						</label>
+	
+	
+						<input type="checkbox" id="nike9" value="">
+						<label for="nike9">
+							<span></span>
+							Debit Caerd
+						</label>
+						<input type="checkbox" id="nike10" value="">
+						<label for="nike5">
+							<span></span>
+							Paypal
+						</label>
+	
+	
+						<!---->
+	
+					</div>
+					<div class="single-star-bottom">
+						<button type="submit" class="btn btn-danger">Clear All</button>
+					</div>
 			</div>
 			<div class="col-md-9 search-grid-right">
 				<div class="hotel-rooms">
