@@ -1,420 +1,216 @@
-<!--search-->
-<div class="search-page">
-	<div class="container">
-		<div class="search-grids">
-			<div class="col-md-3 search-grid-left">
-				<div class="single-star-bottom">
-					<a (click)="isCategoey=!isCategory">
-						<i class="fa" [class.fa-plus]="isCategory==true" [class.fa-minus]="isCategory==false"></i>
-					</a>
-					<h3 class="sear-head">Filter Results</h3>
-					<div>
-						<input type="checkbox" id="nike1" value="">
-						<label for="nike1">
-							<span></span>
-							show full availability
-						</label>
-					</div>
-				</div>
-
-				<div class="range">
-					<h3 class="sear-head">Price</h3>
-					<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
-					<label for="" class="hostel-label">Range From Rs.100 to 200</label>
-				</div>
-				<div class="range">
-					<h3 class="sear-head">Rating</h3>
-					<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
-					<label for="" class="hostel-label">Range From 0% to 100%</label>
-				</div>
-				<div class="single-star-bottom">
-					<h3 class="sear-head">property Type</h3>
-					<input type="checkbox" name="nike2" value="">
-					<label for="nike2">
-						<span></span>
-						All Property types
-					</label>
-
-
-					<input type="checkbox" id="nike3" value="">
-					<label for="nike3">
-						<span></span>
-						Hostels
-					</label>
-
-
-					<input type="checkbox" id="nike4" value="">
-					<label for="nike4">
-						<span></span>
-						Bed And BreakFast
-					</label>
-					<input type="checkbox" id="nike5" value="">
-					<label for="nike5">
-						<span></span>
-						Apartments
-					</label>
-
-					<!---->
-
-				</div>
-				<div class="single-star-bottom">
-					<h3 class="sear-head">Room Type</h3>
-					<input type="checkbox" id="nike6" value="">
-					<label for="nike6">
-						<span></span>
-						All Property types
-					</label>
-
-
-					<input type="checkbox" id="nike8" value="">
-					<label for="nike8">
-						<span></span>
-						Hostels
-					</label>
-
-
-					<input type="checkbox" id="nike9" value="">
-					<label for="nike9">
-						<span></span>
-						Bed And BreakFast
-					</label>
-					<input type="checkbox" id="nike10" value="">
-					<label for="nike5">
-						<span></span>
-						Apartments
-					</label>
-
-
-					<!---->
-
-				</div>
-				<div class="single-star-bottom">
-					<h3 class="sear-head">Facilities</h3>
-					<input type="checkbox" id="nike6" value="">
-					<label for="nike6">
-						<span></span>
-						All Property types
-					</label>
-
-
-					<input type="checkbox" id="nike8" value="">
-					<label for="nike8">
-						<span></span>
-						Hostels
-					</label>
-
-
-					<input type="checkbox" id="nike9" value="">
-					<label for="nike9">
-						<span></span>
-						Bed And BreakFast
-					</label>
-					<input type="checkbox" id="nike10" value="">
-					<label for="nike5">
-						<span></span>
-						Apartments
-					</label>
-
-
-					<!---->
-
-				</div>
-				<div class="single-star-bottom">
-					<h3 class="sear-head">Location</h3>
-
-					<div class="sel">
-
-						<select name="" class="sel form-control">
-							<option value="">Any Distance</option>
-							<option value="">1</option>
-							<option value="">2</option>
-							<option value="">3</option>
-						</select>
-					</div>
-					<div>
-						<label>From</label>
-						<select name=""  class="sel form-control">
-							<option value="">City Center</option>
-							<option value="">1</option>
-							<option value="">2</option>
-							<option value="">3</option>
-						</select>
-					</div>
-				<div>
-					<input type="radio" name="Km">
-					<label>Kilometer</label>
-				</div>
-				<div>
-						<input type="radio" name="Km">
-						<label>Miles</label>
-				</div>
-
-
-
-
-
-
-				</div>
-				<div class="single-star-bottom">
-						<h3 class="sear-head">Payment Type</h3>
-						<input type="checkbox" id="nike6" value="">
-						<label for="nike6">
-							<span></span>
-							All Payment types
-						</label>
-	
-	
-						<input type="checkbox" id="nike8" value="">
-						<label for="nike8">
-							<span></span>
-							Credit Card
-						</label>
-	
-	
-						<input type="checkbox" id="nike9" value="">
-						<label for="nike9">
-							<span></span>
-							Debit Caerd
-						</label>
-						<input type="checkbox" id="nike10" value="">
-						<label for="nike5">
-							<span></span>
-							Paypal
-						</label>
-	
-	
-						<!---->
-	
-					</div>
-					<div class="single-star-bottom">
-						<button type="submit" class="btn btn-danger">Clear All</button>
-					</div>
-			</div>
-			<div class="col-md-9 search-grid-right">
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Grand Park Hyatt</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/21.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$8,750</span> $4,850</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Royal Taj Coromandel</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/22.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$3,350</span> $1,450</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Crowne Plaza</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/23.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$9,750</span> $5,700</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Modern Hilton Park</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/24.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$9,750</span> $6,800</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Grand park Hotel</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/25.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$8,750</span> $4,850</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html">
-							<span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Royal Park Hyatt</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html">
-									<img src="images/26.jpg" alt="" />
-								</a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html">
-									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis
-									<span> 2.6 km to sit voluptatem</span>
-								</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4>
-							<span>$4,650</span> $2,650</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
+<div class="col-md-3 search-grid-left">
+	<div class="single-star-bottom" role="tablist" aria-multiselectable="true">
+		<a class="pull-left" (click)="availability=!availability">
+			<i class="fa" [class.fa-plus]="availability==true" [class.fa-minus]="availability==false"></i>
+		</a>
+		<h3 class="sear-head">Availability</h3>
+		<div class="panel-collapse" [class.collapse]="availability==true">
+			<input type="checkbox" id="nike1" value="">
+			<label for="nike1">
+				<span></span>
+				show full availability
+			</label>
 		</div>
 	</div>
-</div>
-<!-- smooth scrolling -->
 
-<a href="#" id="toTop" style="display: block;">
-	<span id="toTopHover" style="opacity: 1;"> </span>
-</a>
-<!-- //smooth scrolling -->
+	<div class="range">
+		<a class="pull-left" (click)="isPrice=!isPrice">
+			<i class="fa" [class.fa-plus]="isPrice==true" [class.fa-minus]="isPrice==false"></i>
+		</a>
+		<h3 class="sear-head">Price</h3>
+		<div class="panel-collapse" [class.collapse]="isPrice==true">
+			<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From Rs.100 to 200</label>
+		</div>
+	</div>
+	<div class="range">
+		<a class="pull-left" (click)="isRating=!isRating">
+			<i class="fa" [class.fa-plus]="isRating==true" [class.fa-minus]="isRating==false"></i>
+		</a>
+		<h3 class="sear-head">Rating</h3>
+		<div class="panel-collapse" [class.collapse]="isRating==true">
+			<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From 0% to 100%</label>
+		</div>
+	</div>
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isProperty=!isProperty">
+			<i class="fa" [class.fa-plus]="isProperty==true" [class.fa-minus]="isProperty==false"></i>
+		</a>
+		<h3 class="sear-head">property Type</h3>
+		<div class="panel-collapse" [class.collapse]="isProperty==true">
+			<input type="checkbox" name="nike2" value="">
+			<label for="nike2">
+				<span></span>
+				All Property types
+			</label>
+
+
+			<input type="checkbox" id="nike3" value="">
+			<label for="nike3">
+				<span></span>
+				Hostels
+			</label>
+
+
+			<input type="checkbox" id="nike4" value="">
+			<label for="nike4">
+				<span></span>
+				Bed And BreakFast
+			</label>
+			<input type="checkbox" id="nike5" value="">
+			<label for="nike5">
+				<span></span>
+				Apartments
+			</label>
+
+		</div>
+	</div>
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isRoom=!isRoom">
+			<i class="fa" [class.fa-plus]="isRoom==true" [class.fa-minus]="isRoom==false"></i>
+		</a>
+		<h3 class="sear-head">Room Type</h3>
+		<div class="panel-collapse" [class.collapse]="isRoom==true">
+			<input type="checkbox" id="nike6" value="">
+			<label for="nike6">
+				<span></span>
+				All Property types
+			</label>
+
+
+			<input type="checkbox" id="nike8" value="">
+			<label for="nike8">
+				<span></span>
+				Hostels
+			</label>
+
+
+			<input type="checkbox" id="nike9" value="">
+			<label for="nike9">
+				<span></span>
+				Bed And BreakFast
+			</label>
+			<input type="checkbox" id="nike10" value="">
+			<label for="nike5">
+				<span></span>
+				Apartments
+			</label>
+
+		</div>
+		<!---->
+
+	</div>
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isFacilities=!isFacilities">
+			<i class="fa" [class.fa-plus]="isFacilities==true" [class.fa-minus]="isFacilities==false"></i>
+		</a>
+		<h3 class="sear-head">Facilities</h3>
+		<div class="panel-collapse" [class.collapse]="isFacilities==true">
+			<input type="checkbox" id="nike6" value="">
+			<label for="nike6">
+				<span></span>
+				All Property types
+			</label>
+
+
+			<input type="checkbox" id="nike8" value="">
+			<label for="nike8">
+				<span></span>
+				Hostels
+			</label>
+
+
+			<input type="checkbox" id="nike9" value="">
+			<label for="nike9">
+				<span></span>
+				Bed And BreakFast
+			</label>
+			<input type="checkbox" id="nike10" value="">
+			<label for="nike5">
+				<span></span>
+				Apartments
+			</label>
+
+		</div>
+		<!---->
+
+	</div>
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isLocation=!isLocation">
+			<i class="fa" [class.fa-plus]="isLocation==true" [class.fa-minus]="isLocation==false"></i>
+		</a>
+		<h3 class="sear-head">Location</h3>
+		<div class="panel-collapse" [class.collapse]="isLocation==true">
+			<div class="sel">
+
+				<select name="" class="sel form-control">
+					<option value="">Any Distance</option>
+					<option value="">1</option>
+					<option value="">2</option>
+					<option value="">3</option>
+				</select>
+			</div>
+			<div>
+				<label>From</label>
+				<select name="" class="sel form-control">
+					<option value="">City Center</option>
+					<option value="">1</option>
+					<option value="">2</option>
+					<option value="">3</option>
+				</select>
+			</div>
+			<div>
+				<input type="radio" name="Km">
+				<label>Kilometer</label>
+			</div>
+			<div>
+				<input type="radio" name="Km">
+				<label>Miles</label>
+			</div>
+
+
+
+		</div>
+
+
+	</div>
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isPayment=!isPayment">
+			<i class="fa" [class.fa-plus]="isPayment==true" [class.fa-minus]="isPayment==false"></i>
+		</a>
+		<h3 class="sear-head">Payment Type</h3>
+		<div class="panel-collapse" [class.collapse]="isPayment==true">
+			<input type="checkbox" id="nike6" value="">
+			<label for="nike6">
+				<span></span>
+				All Payment types
+			</label>
+
+
+			<input type="checkbox" id="nike8" value="">
+			<label for="nike8">
+				<span></span>
+				Credit Card
+			</label>
+
+
+			<input type="checkbox" id="nike9" value="">
+			<label for="nike9">
+				<span></span>
+				Debit Caerd
+			</label>
+			<input type="checkbox" id="nike10" value="">
+			<label for="nike5">
+				<span></span>
+				Paypal
+			</label>
+
+		</div>
+		<!---->
+
+	</div>
+	<div class="single-star-bottom">
+		<button type="submit" class="btn btn-danger">Clear All</button>
+	</div>
+</div>

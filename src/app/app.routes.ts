@@ -1,20 +1,18 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeSectionComponent } from './home-section/home-section.component';
-import { FilterComponent } from './filter/filter.component';
-
+import { ViewComponent } from './view/view.component';
 export const Approute: Routes = [
 
     {
-        path: "Hostel",
+        path: "hostel",
         component: HomeSectionComponent,
     }, {
-        path: "Hostel/search",
-        component: FilterComponent,
+        path: "hostel/search",
+        component: ViewComponent,
     },
     {
         path: '',
-        redirectTo: 'Hostel',
+        redirectTo: 'hostel',
         pathMatch: 'full',
     }
 ]

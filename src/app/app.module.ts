@@ -14,6 +14,10 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
 import { HomeSectionComponent } from './home-section/home-section.component';
+import { ViewComponent } from './view/view.component';
+import { ListComponent } from './list/list.component';
+import { ListContentComponent } from './list-content/list-content.component';
+import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { HomeSectionComponent } from './home-section/home-section.component';
     FooterComponent,
     DashboardComponent,
     FilterComponent,
-    HomeSectionComponent
+    HomeSectionComponent,
+    ViewComponent,
+    ListComponent,
+    ListContentComponent,
+    ListReviewsComponent
   ],
   imports: [
     BrowserModule,
