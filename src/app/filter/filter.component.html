@@ -15,13 +15,15 @@
 				
 				<div class="range">
 					<h3 class="sear-head">Average nightly rate</h3>
-							<ul class="dropdown-menu6">
-								<li>
+							<!-- <ul class="dropdown-menu6">
+								<li> -->
+										<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
+
 									                
-									<div id="slider-range"></div>							
+									<!-- <div id="slider-range"></div>							
 										<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
-									</li>			
-							</ul>
+									</li>			 -->
+							<!-- </ul> -->
 							<!---->
 					
 							
