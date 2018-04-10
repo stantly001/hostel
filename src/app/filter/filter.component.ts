@@ -8,13 +8,35 @@ import { NouisliderModule } from 'ng2-nouislider';
 })
 
 export class FilterComponent implements OnInit {
-  someRange=[3,7];
+  isPayment: boolean;
+  isLocation: boolean;
+  isFacilities: boolean;
+  isRoom: boolean;
+  isProperty: boolean;
+  isPrice: boolean;
+  isRating: boolean;
+  availability: boolean;
+  priceRange:number[]=[3,7];
+  ratingRange:number[]=[3,7];
   constructor() {
     
    }
 
   ngOnInit() {
-    
+    this.availability=false;
+    this.isPrice=false;
+    this.isRating=false;
+    this.isProperty=true;
+    this.isRoom=true;
+    this.isFacilities=true;
+    this.isLocation=true;
+    this.isPayment=true;
+  }
+  priceChange(event){
+    console.log("event",event);
+  }
+  ratingChange(event){
+    console.log("rating",event)
   }
 
 }
