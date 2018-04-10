@@ -13,6 +13,7 @@ import { BredcrumbComponent } from './bredcrumb/bredcrumb.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
+import { HomeSectionComponent } from './home-section/home-section.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FilterComponent } from './filter/filter.component';
     BredcrumbComponent,
     FooterComponent,
     DashboardComponent,
-    FilterComponent
+    FilterComponent,
+    HomeSectionComponent
   ],
   imports: [
     BrowserModule,
