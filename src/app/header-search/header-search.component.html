@@ -1,25 +1,35 @@
 <div class="banner-bottom">
   <div class="droop-down">
     <div class="droop">
+      <label>Choose your Destination</label>
       <div class="sort-by">
         <select class="sel">
-          <option value="">CHOOSE YOUR HOTEL</option>
-          <option value="">TAJ CLUB HOUSE</option>
-          <option value="">TRIDENT GRAND</option>
-          <option value="">THE PARK POD</option>   
+          <option value="">Which Country?</option>
+          <option value="">India</option>
+          <option value="">Pakistan</option>
+          <option value="">U.S.A</option>
         </select>
-      </div>
+          <select class="sel">
+            <option value="">Which City?</option>
+            <option value="">chennai</option>
+            <option value="">Bangalore</option>
+            <option value="">Mumbai</option>
+          </select>
+        </div>
     </div>
     <div class="radio-btns">
-      <div class="swit">								
-        <div class="check_box"> <div class="radio"> <label><input type="radio" name="radio" checked=""><i></i>Daily</label> </div></div>
-                    <div class="check_box"> <div class="radio"> <label><input type="radio" name="radio"><i></i>Hourly</label> </div></div>							    
+      <div class="swit">
+       <label for="" class="form-control">CheckIn</label>
+       
+       
+       
+       <label for="" class="form-control">CheckOut</label>
       </div>
     </div>
     <div class="search">
-        <form>
-          <input type="submit" value="search" [routerLink]="['Hostel/search']">
-        </form>	
+      <form>
+        <input type="submit" value="search" [routerLink]="['Hostel/search']">
+      </form>
     </div>
     <div class="clearfix"></div>
   </div>
