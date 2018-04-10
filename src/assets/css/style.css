@@ -323,7 +323,7 @@ background-size:cover;
 -o-background-size: cover;
 -ms-background-size: cover;
 -moz-background-size: cover;
-min-height: 855px;
+min-height: 350px;
 }
 /*-- //banner --*/
 /*-- Effect 11 --*/
@@ -467,9 +467,9 @@ float:right;
 }
 /*-- //header --*/
 .banner-bottom {
-  margin-top: 30px;
   background: #ECCA69;
-  padding: 25px;
+	padding: 25px;
+	position: relative;
 }
 .banner-info {
   margin-top: 200px;
@@ -511,12 +511,12 @@ background:#000;
 /*-- drop-down --*/
 .droop{
 float:left;
-width:55%;
+/* width:55%; */
 }
 .radio-btns {
-  float: left;
+  /* float: left;
   width: 20%;
-  margin: 7px 0 0 35px;
+  margin: 7px 0 0 35px; */
 }
 .radio-btns label {
   font-size: 14px;
@@ -3451,3 +3451,6 @@ font-weight:bold;
   font-size: 14px;
 }
 /*-- //responsive media queries --*/
+.droop-down {
+	padding-left: 12%;
+}
