@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { NouisliderModule } from 'ng2-nouislider';
 
 import { Approute } from './app.routes';
 
@@ -28,6 +28,7 @@ import { FilterComponent } from './filter/filter.component';
   ],
   imports: [
     BrowserModule,
+    NouisliderModule,
     RouterModule.forRoot(Approute)
   ],
   providers: [],
