@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { Approute } from './app.routes';
 
@@ -13,6 +14,11 @@ import { BredcrumbComponent } from './bredcrumb/bredcrumb.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
+import { HomeSectionComponent } from './home-section/home-section.component';
+import { ViewComponent } from './view/view.component';
+import { ListComponent } from './list/list.component';
+import { ListContentComponent } from './list-content/list-content.component';
+import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 
 
 @NgModule({
@@ -24,11 +30,17 @@ import { FilterComponent } from './filter/filter.component';
     BredcrumbComponent,
     FooterComponent,
     DashboardComponent,
-    FilterComponent
+    FilterComponent,
+    HomeSectionComponent,
+    ViewComponent,
+    ListComponent,
+    ListContentComponent,
+    ListReviewsComponent
   ],
   imports: [
     BrowserModule,
     NouisliderModule,
+    NgDatepickerModule,
     RouterModule.forRoot(Approute)
   ],
   providers: [],
