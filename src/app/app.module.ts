@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgDatepickerModule } from 'ng2-datepicker';
@@ -21,6 +22,8 @@ import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 import { DetailviewComponent } from './detailview/detailview.component';
 
+import { DefaultsService } from './services/defaults.service';
+
 
 @NgModule({
   declarations: [
@@ -41,11 +44,12 @@ import { DetailviewComponent } from './detailview/detailview.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NouisliderModule,
     NgDatepickerModule,
     RouterModule.forRoot(Approute)
   ],
-  providers: [],
+  providers: [DefaultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
