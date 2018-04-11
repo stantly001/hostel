@@ -1,0 +1,19 @@
+.rating{
+    color: #fff;
+    font-size: 1.4rem;
+    width: 3.4rem;
+    font-weight: bold;
+    padding: .2rem .3rem;
+    min-width: 2.6rem;
+}
+.hwta-rating-factors-icon{
+position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.hwta-page-property .hwta-rating-factors {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: .25rem;
+    margin-top: 0;
+}

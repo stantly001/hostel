@@ -19,6 +19,7 @@ import { ViewComponent } from './view/view.component';
 import { ListComponent } from './list/list.component';
 import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
+import { DetailviewComponent } from './detailview/detailview.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ListReviewsComponent } from './list-reviews/list-reviews.component';
     ViewComponent,
     ListComponent,
     ListContentComponent,
-    ListReviewsComponent
+    ListReviewsComponent,
+    DetailviewComponent
   ],
   imports: [
     BrowserModule,

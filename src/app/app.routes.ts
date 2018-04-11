@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeSectionComponent } from './home-section/home-section.component';
 import { ViewComponent } from './view/view.component';
+import { DetailviewComponent } from './detailview/detailview.component';
 export const Approute: Routes = [
 
     {
@@ -9,6 +10,9 @@ export const Approute: Routes = [
     }, {
         path: "hostel/search",
         component: ViewComponent,
+    },{
+        path: "hostel/detailView",
+        component: DetailviewComponent,
     },
     {
         path: '',
