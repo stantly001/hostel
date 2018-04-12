@@ -20,10 +20,11 @@ import { ViewComponent } from './view/view.component';
 import { ListComponent } from './list/list.component';
 import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
-import { DetailviewComponent } from './detailview/detailview.component';
+
 
 import { DefaultsService } from './services/defaults.service';
-
+import {NgxGalleryModule} from 'ngx-gallery'
+import { DetailviewComponent } from './detailview/detailview.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DefaultsService } from './services/defaults.service';
     HttpClientModule,
     NouisliderModule,
     NgDatepickerModule,
-    RouterModule.forRoot(Approute)
+    RouterModule.forRoot(Approute),
+    NgxGalleryModule
   ],
   providers: [DefaultsService],
   bootstrap: [AppComponent]
