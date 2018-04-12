@@ -34,7 +34,7 @@
 	<div class="range">
 		<a class="pull-left" (click)="isRating=!isRating">
 			<i class="fa" [class.fa-plus]="isRating==true" [class.fa-minus]="isRating==false"></i>
-		</a>
+		</a> 
 		<h3 class="sear-head">Rating</h3>
 		<div class="panel-collapse" [class.collapse]="isRating==true">
 			<nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>

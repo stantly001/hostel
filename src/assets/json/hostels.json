@@ -8,6 +8,9 @@
    "breakFast":true,
    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
    "price":8000,
+   "reviews":"Excellent Location",
+   "street":"9th Street kumaran colony",
+   "place":"vadapalani",
    "images":[{
                 "url":""
             },{
@@ -25,6 +28,9 @@
     "breakFast":true,
     "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
     "price":8000,
+    "street":"9th Street kumaran colony",
+   "place":"vadapalani",
+    "reviews":"Excellent Location",
     "images":[{
         "url":""
     },{
@@ -42,6 +48,9 @@
     "breakFast":true,
     "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
     "price":8000,
+    "street":"9th Street kumaran colony",
+   "place":"vadapalani",
+    "reviews":"Excellent Location",
     "images":[{
         "url":""
     },{
