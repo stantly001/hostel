@@ -18,7 +18,7 @@ import { ViewComponent } from './view/view.component';
 import { ListComponent } from './list/list.component';
 import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
-
+import {NgxGalleryModule} from 'ngx-gallery'
 
 @NgModule({
   declarations: [
@@ -34,12 +34,13 @@ import { ListReviewsComponent } from './list-reviews/list-reviews.component';
     ViewComponent,
     ListComponent,
     ListContentComponent,
-    ListReviewsComponent
+    ListReviewsComponent,
   ],
   imports: [
     BrowserModule,
     NouisliderModule,
-    RouterModule.forRoot(Approute)
+    RouterModule.forRoot(Approute),
+    NgxGalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
