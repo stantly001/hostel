@@ -5,137 +5,107 @@
 		</a>
 		<h3 class="sear-head">Availability</h3>
 		<div class="panel-collapse" [class.collapse]="availability==true">
-			<input type="checkbox" id="nike1" value="">
-			<label for="nike1">
-				<span></span>
-				show full availability
-			</label>
+			<div *ngFor="let availability of availabilities">
+				<input type="checkbox" id="{{availability.availabilityFieldName}}" value="">
+				<label for="{{availability.availabilityFieldName}}">
+					<span></span>
+					{{availability.availabilityDisplayName}}
+				</label>
+			</div>
+			<!--ngFor -->
 		</div>
+		<!-- panel-collapse -->
 	</div>
+	<!-- single-start-bottom -->
 
+	<!-- Price Filter -->
 	<div class="range">
 		<a class="pull-left" (click)="isPrice=!isPrice">
 			<i class="fa" [class.fa-plus]="isPrice==true" [class.fa-minus]="isPrice==false"></i>
 		</a>
 		<h3 class="sear-head">Price</h3>
 		<div class="panel-collapse" [class.collapse]="isPrice==true">
-			<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
-			<label for="" class="hostel-label">Range From Rs.100 to 200</label>
+			<nouislider [connect]="true" [min]="0" [max]="1000" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From Rs.{{prices.rangeFrom}} to Rs.{{prices.rangeTo}}</label>
 		</div>
 	</div>
+
+	<!-- Rating Filter -->
 	<div class="range">
 		<a class="pull-left" (click)="isRating=!isRating">
 			<i class="fa" [class.fa-plus]="isRating==true" [class.fa-minus]="isRating==false"></i>
-		</a>
+		</a> 
 		<h3 class="sear-head">Rating</h3>
 		<div class="panel-collapse" [class.collapse]="isRating==true">
-			<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>
-			<label for="" class="hostel-label">Range From 0% to 100%</label>
+			<nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From {{ratings.ratingFrom}}% to {{ratings.ratingTo}}%</label>
 		</div>
 	</div>
+
+	<!-- Property Filter -->
 	<div class="single-star-bottom">
 		<a class="pull-left" (click)="isProperty=!isProperty">
 			<i class="fa" [class.fa-plus]="isProperty==true" [class.fa-minus]="isProperty==false"></i>
 		</a>
 		<h3 class="sear-head">property Type</h3>
 		<div class="panel-collapse" [class.collapse]="isProperty==true">
-			<input type="checkbox" name="nike2" value="">
-			<label for="nike2">
-				<span></span>
-				All Property types
-			</label>
-
-
-			<input type="checkbox" id="nike3" value="">
-			<label for="nike3">
-				<span></span>
-				Hostels
-			</label>
-
-
-			<input type="checkbox" id="nike4" value="">
-			<label for="nike4">
-				<span></span>
-				Bed And BreakFast
-			</label>
-			<input type="checkbox" id="nike5" value="">
-			<label for="nike5">
-				<span></span>
-				Apartments
-			</label>
-
+			<div *ngFor="let property of properties">
+				<input type="checkbox" name="{{property.propertyFieldName}}" value="">
+				<label for="{{property.propertyFieldName}}">
+					<span></span>
+					{{property.propertyDisplayName}}
+				</label>
+			</div>
+			<!-- ngFor -->
 		</div>
+		<!-- panel-collapse -->
 	</div>
+	<!-- single-start-bottom -->
+
+	<!-- RoomTypes Filter -->
 	<div class="single-star-bottom">
 		<a class="pull-left" (click)="isRoom=!isRoom">
 			<i class="fa" [class.fa-plus]="isRoom==true" [class.fa-minus]="isRoom==false"></i>
 		</a>
 		<h3 class="sear-head">Room Type</h3>
 		<div class="panel-collapse" [class.collapse]="isRoom==true">
-			<input type="checkbox" id="nike6" value="">
-			<label for="nike6">
-				<span></span>
-				All Property types
-			</label>
-
-
-			<input type="checkbox" id="nike8" value="">
-			<label for="nike8">
-				<span></span>
-				Hostels
-			</label>
-
-
-			<input type="checkbox" id="nike9" value="">
-			<label for="nike9">
-				<span></span>
-				Bed And BreakFast
-			</label>
-			<input type="checkbox" id="nike10" value="">
-			<label for="nike5">
-				<span></span>
-				Apartments
-			</label>
-
+			<div *ngFor="let roomType of roomTypes">
+				<div class="room-category-name">{{roomType.category}}</div>
+				<div class="room-types" *ngFor="let type of roomType.types">
+					<input type="checkbox" id="{{type.roomFieldName}}" value="">
+					<label for="{{type.roomFieldName}}">
+						<span></span>
+						{{type.roomDisplayName}}
+					</label>
+				</div>
+			</div>
+			<!-- ngfor-->
 		</div>
-		<!---->
-
+		<!-- panel-collapse -->
 	</div>
+	<!-- single-start-bottom -->
+
+	<!-- Facilities Filter -->
 	<div class="single-star-bottom">
 		<a class="pull-left" (click)="isFacilities=!isFacilities">
 			<i class="fa" [class.fa-plus]="isFacilities==true" [class.fa-minus]="isFacilities==false"></i>
 		</a>
 		<h3 class="sear-head">Facilities</h3>
 		<div class="panel-collapse" [class.collapse]="isFacilities==true">
-			<input type="checkbox" id="nike6" value="">
-			<label for="nike6">
-				<span></span>
-				All Property types
-			</label>
-
-
-			<input type="checkbox" id="nike8" value="">
-			<label for="nike8">
-				<span></span>
-				Hostels
-			</label>
-
-
-			<input type="checkbox" id="nike9" value="">
-			<label for="nike9">
-				<span></span>
-				Bed And BreakFast
-			</label>
-			<input type="checkbox" id="nike10" value="">
-			<label for="nike5">
-				<span></span>
-				Apartments
-			</label>
-
+			<div *ngFor="let facility of facilities">
+				<input type="checkbox" id="{{facility.facilityFieldName}}" value="">
+				<label for="{{facility.facilityFieldName}}">
+					<span></span>
+					{{facility.facilityDisplayName}}
+				</label>
+			</div>
+			<!-- ngFor -->
 		</div>
-		<!---->
-
+		<!-- panel-collapse -->
 	</div>
+	<!-- single-star-bottom -->
+
+	<!-- Distance Filter -->
 	<div class="single-star-bottom">
 		<a class="pull-left" (click)="isLocation=!isLocation">
 			<i class="fa" [class.fa-plus]="isLocation==true" [class.fa-minus]="isLocation==false"></i>
@@ -143,73 +113,55 @@
 		<h3 class="sear-head">Location</h3>
 		<div class="panel-collapse" [class.collapse]="isLocation==true">
 			<div class="sel">
-
 				<select name="" class="sel form-control">
 					<option value="">Any Distance</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
+					<option *ngFor="let location of locations" value="{{location.locationName}}">
+						{{location.locationName}}
+					</option>
 				</select>
 			</div>
+			<!--sel-->
 			<div>
 				<label>From</label>
 				<select name="" class="sel form-control">
 					<option value="">City Center</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
 				</select>
 			</div>
+			<!-- city center -->
 			<div>
 				<input type="radio" name="Km">
 				<label>Kilometer</label>
 			</div>
+			<!-- kilometer -->
 			<div>
 				<input type="radio" name="Km">
 				<label>Miles</label>
 			</div>
-
-
-
+			<!-- miles -->
 		</div>
-
-
 	</div>
+	<!-- single-star-bottom -->
+
+	<!-- PaymentType filter -->
 	<div class="single-star-bottom">
 		<a class="pull-left" (click)="isPayment=!isPayment">
 			<i class="fa" [class.fa-plus]="isPayment==true" [class.fa-minus]="isPayment==false"></i>
 		</a>
 		<h3 class="sear-head">Payment Type</h3>
 		<div class="panel-collapse" [class.collapse]="isPayment==true">
-			<input type="checkbox" id="nike6" value="">
-			<label for="nike6">
-				<span></span>
-				All Payment types
-			</label>
-
-
-			<input type="checkbox" id="nike8" value="">
-			<label for="nike8">
-				<span></span>
-				Credit Card
-			</label>
-
-
-			<input type="checkbox" id="nike9" value="">
-			<label for="nike9">
-				<span></span>
-				Debit Caerd
-			</label>
-			<input type="checkbox" id="nike10" value="">
-			<label for="nike5">
-				<span></span>
-				Paypal
-			</label>
-
+			<div *ngFor="let payment of payments">
+				<input type="checkbox" id="{{payment.paymentFieldType}}" value="">
+				<label for="{{payment.paymentFieldType}}">
+					<span></span>
+					{{payment.paymentDisplayType}}
+				</label>
+			</div>
+			<!-- ngFor -->
 		</div>
-		<!---->
-
+		<!-- panel-collapse -->
 	</div>
+	<!-- single-start-bottom -->
+
 	<div class="single-star-bottom">
 		<button type="submit" class="btn btn-danger">Clear All</button>
 	</div>

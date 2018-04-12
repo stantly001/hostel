@@ -1,0 +1,62 @@
+.rating{
+    color: #fff;
+    font-size: 1.4rem;
+    width: 3.4rem;
+    font-weight: bold;
+    padding: .2rem .3rem;
+    min-width: 2.6rem;
+}
+.hwta-rating-factors-icon{
+position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.hwta-page-property .hwta-rating-factors {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: .25rem;
+    margin-top: 0;
+}
+
+/*
+    * - Flag code
+*/
+.container-row {
+    background: url(https://icd.hwstatic.com/static/images/3.57.2.0/header_3107.png)center center no-repeat #f4f4f4;
+        background-size: auto auto;
+    background-size: cover;
+}
+
+
+flag.flag-au {
+    background-image: url(http://icd.hwstatic.com/static/images/3.57.2.0/flags/au.svg);
+    margin-top: 4%;
+    width: 68px;
+    height: 58px;
+    background-size: cover;
+}
+
+.columns.small-6.medium-4.large-2 {
+    float: left;
+    padding: 4%;
+    border-left: 1px solid #ccc9;
+    width: 16%;
+    margin: 2% 0%;
+}
+
+.country-name {
+    padding: 9% 0%;
+}
+
+.triangle {
+
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 25px solid #ededed;
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin-left: 48%;
+    margin-top: -2px;
+
+}

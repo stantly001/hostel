@@ -8,3 +8,6 @@
     font-size: 13px;
     margin: 20px 0 0 0;
 }
+.ngx-datepicker-calendar-container.ngx-datepicker-position-bottom-right {
+    z-index: 999;
+}

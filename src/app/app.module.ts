@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { Approute } from './app.routes';
 
@@ -18,7 +20,11 @@ import { ViewComponent } from './view/view.component';
 import { ListComponent } from './list/list.component';
 import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
+
+
+import { DefaultsService } from './services/defaults.service';
 import {NgxGalleryModule} from 'ngx-gallery'
+import { DetailviewComponent } from './detailview/detailview.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +41,17 @@ import {NgxGalleryModule} from 'ngx-gallery'
     ListComponent,
     ListContentComponent,
     ListReviewsComponent,
+    DetailviewComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NouisliderModule,
+    NgDatepickerModule,
     RouterModule.forRoot(Approute),
     NgxGalleryModule
   ],
-  providers: [],
+  providers: [DefaultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

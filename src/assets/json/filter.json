@@ -1,0 +1,345 @@
+{
+    "availability": [
+        {
+            "availabilityDisplayName": "Show Full Availability Only",
+            "availabilityFieldName": "showFulAvailabilityOnly"
+        }
+    ],
+    "country": [
+        {
+            "countryDisplayName": "India",
+            "countryFieldName": "ind",
+            "cities": [
+                {
+                    "cityDisplayName": "Chennai",
+                    "cityFieldName": "chennai"
+                },
+                {
+                    "cityDisplayName": "Mumbai",
+                    "cityFieldName": "mumbai"
+                },
+                {
+                    "cityDisplayName": "Delhi",
+                    "cityFieldName": "delhi"
+                },
+                {
+                    "cityDisplayName": "Bangalore",
+                    "cityFieldName": "bangalore"
+                },
+                {
+                    "cityDisplayName": "Hydreabad",
+                    "cityFieldName": "hydreabad"
+                },
+                {
+                    "cityDisplayName": "Kolkata",
+                    "cityFieldName": "kolkata"
+                },
+                {
+                    "cityDisplayName": "Pune",
+                    "cityFieldName": "pune"
+                }
+            ]
+        },
+        {
+            "countryDisplayName": "United States",
+            "countryFieldName": "us",
+            "cities": [
+                {
+                    "cityDisplayName": "New York",
+                    "cityFieldName": "newYork"
+                },
+                {
+                    "cityDisplayName": "Los Angels",
+                    "cityFieldName": "losAngels"
+                },
+                {
+                    "cityDisplayName": "Chicago",
+                    "cityFieldName": "chicago"
+                },
+                {
+                    "cityDisplayName": "Dallas",
+                    "cityFieldName": "dallas"
+                },
+                {
+                    "cityDisplayName": "Austin",
+                    "cityFieldName": "austin"
+                },
+                {
+                    "cityDisplayName": "Columbus",
+                    "cityFieldName": "columbus"
+                },
+                {
+                    "cityDisplayName": "Seattle",
+                    "cityFieldName": "seattle"
+                },
+                {
+                    "cityDisplayName": "Boston",
+                    "cityFieldName": "boston"
+                }
+            ]
+        }
+    ],
+    "facilities": [
+        {
+            "facilityDisplayName": "24 Hour Reception",
+            "facilityFieldName": "24HourReception"
+        },
+        {
+            "facilityDisplayName": "24 Hour Security",
+            "facilityFieldName": "24HourSecurity"
+        },
+        {
+            "facilityDisplayName": "Air Conditioning",
+            "facilityFieldName": "airConditioning"
+        },
+        {
+            "facilityDisplayName": "Bar",
+            "facilityFieldName": "bar"
+        },
+        {
+            "facilityDisplayName": "Common Room",
+            "facilityFieldName": "commonRoom"
+        },
+        {
+            "facilityDisplayName": "Free Breakfast",
+            "facilityFieldName": "freeBreakFast"
+        },
+        {
+            "facilityDisplayName": "Free WiFi",
+            "facilityFieldName": "freeWifi"
+        },
+        {
+            "facilityDisplayName": "Internet Access",
+            "facilityFieldName": "internetAccess"
+        },
+        {
+            "facilityDisplayName": "Language Storage",
+            "facilityFieldName": "languageStorage"
+        },
+        {
+            "facilityDisplayName": "Restaurant",
+            "facilityFieldName": "restaurant"
+        }
+    ],
+    "guests": [
+        {
+            "guestNo": 1
+        },
+        {
+            "guestNo": 2
+        },
+        {
+            "guestNo": 3
+        },
+        {
+            "guestNo": 4
+        },
+        {
+            "guestNo": 5
+        },
+        {
+            "guestNo": 6
+        },
+        {
+            "guestNo": 7
+        },
+        {
+            "guestNo": 8
+        },
+        {
+            "guestNo": 9
+        },
+        {
+            "guestNo": 10
+        },
+        {
+            "guestNo": 11
+        },
+        {
+            "guestNo": 12
+        },
+        {
+            "guestNo": 13
+        },
+        {
+            "guestNo": 14
+        },
+        {
+            "guestNo": 15
+        },
+        {
+            "guestNo": 16
+        },
+        {
+            "guestNo": 17
+        },
+        {
+            "guestNo": 18
+        },
+        {
+            "guestNo": 19
+        },
+        {
+            "guestNo": 20
+        },
+        {
+            "guestNo": 21
+        },
+        {
+            "guestNo": 22
+        },
+        {
+            "guestNo": 23
+        },
+        {
+            "guestNo": 24
+        },
+        {
+            "guestNo": 25
+        },
+        {
+            "guestNo": 26
+        },
+        {
+            "guestNo": 27
+        },
+        {
+            "guestNo": 28
+        },
+        {
+            "guestNo": 29
+        },
+        {
+            "guestNo": 30
+        }
+    ],
+    "location": [
+        {
+            "locationName": 0.5
+        },
+        {
+            "locationName": 1
+        },
+        {
+            "locationName": 2
+        },
+        {
+            "locationName": 5
+        },
+        {
+            "locationName": 10
+        },
+        {
+            "locationName": 25
+        }
+    ],
+    "payment": [
+        {
+            "paymentDisplayType": "All Payment Types",
+            "paymentFieldType": "allPaymentTypes"
+        },
+        {
+            "paymentDisplayType": "Credit Card",
+            "paymentFieldType": "creditCard"
+        },
+        {
+            "paymentDisplayType": "Debit Card",
+            "paymentFieldType": "debitCard"
+        },
+        {
+            "paymentDisplayType": "Paypal",
+            "paymentFieldType": "paypal"
+        }
+    ],
+    "price": [
+        {
+            "rangeFrom": 100,
+            "rangeTo": 1000
+        }
+    ],
+    "property": [
+        {
+            "propertyDisplayName": "All property types",
+            "propertyFieldName": "allPropertyTypes"
+        },
+        {
+            "propertyDisplayName": "Hostels",
+            "propertyFieldName": "hostels"
+        },
+        {
+            "propertyDisplayName": "Bed & Breakfasts",
+            "propertyFieldName": "bedAndBreakFasts"
+        },
+        {
+            "propertyDisplayName": "Hotels",
+            "propertyFieldName": "hotels"
+        },
+        {
+            "propertyDisplayName": "Appartments",
+            "propertyFieldName": "appartments"
+        },
+        {
+            "propertyDisplayName": "Campsites",
+            "propertyFieldName": "campsites"
+        }
+    ],
+    "rating": [
+        {
+            "ratingFrom": 34,
+            "ratingTo": 100
+        }
+    ],
+    "roomType": [
+        {
+            "category": "Private",
+            "types": [
+                {
+                    "roomDisplayName": "Single Room",
+                    "roomFieldName":"singleRoom"
+                },
+                {
+                    "roomDisplayName": "Twin Room",
+                    "roomFieldName":"twinRoom"
+                },
+                {
+                    "roomDisplayName": "Double Room",
+                    "roomFieldName":"doubleRoom"
+                },
+                {
+                    "roomDisplayName": "Triple Room",
+                    "roomFieldName":"tripleRoom"
+                },
+                {
+                    "roomDisplayName": "Family Room",
+                    "roomFieldName":"familyRoom"
+                }
+            ]
+        },
+        {
+            "category": "Dorm",
+            "types": [
+                {
+                    "roomDisplayName": "Mixed Room",
+                    "roomFieldName":"mixedRoom"
+                },
+                {
+                    "roomDisplayName": "Male Room",
+                    "roomFieldName":"maleRoom"
+                },
+                {
+                    "roomDisplayName": "Female Room",
+                    "roomFieldName":"femaleRoom"
+                }
+            ]
+        },
+        {
+            "category": "Others",
+            "types": [
+                {
+                    "roomDisplayName": "Ensuite Room",
+                    "roomFieldName":"ensuiteRoom"
+                }
+            ]
+        }
+    ]
+}
