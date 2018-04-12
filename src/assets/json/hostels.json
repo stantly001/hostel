@@ -3,7 +3,7 @@
    "name":"saravana Hostel",
    "city":"chennai",
    "region":"India",
-   "rating":3,
+   "rating":"9.0",
    "wifi":true,
    "breakFast":true,
    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
@@ -37,11 +37,11 @@
     "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg"
   }]
 },{
-    "id":1,
-    "name":"saravana Hostel",
+    "id":2,
+    "name":"Murugan Hostel",
     "city":"chennai",
     "region":"India",
-    "rating":3,
+    "rating":"7.0",
     "wifi":true,
     "breakFast":true,
     "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
@@ -75,11 +75,11 @@
         "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg"
       }]
  },{
-    "id":1,
-    "name":"saravana Hostel",
+    "id":3,
+    "name":"Catheral Hostel",
     "city":"chennai",
     "region":"India",
-    "rating":3,
+    "rating":"8.0",
     "wifi":true,
     "breakFast":true,
     "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",

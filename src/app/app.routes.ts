@@ -11,7 +11,7 @@ export const Approute: Routes = [
         path: "hostel/search",
         component: ViewComponent,
     },{
-        path: "hostel/detailView",
+        path: "hostel/:hostelId",
         component: DetailviewComponent,
     },
     {

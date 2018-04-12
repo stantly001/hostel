@@ -13,6 +13,9 @@ export class ListContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    /**
+     * galleryOptions
+     */
     this.galleryOptions = [
       {
         width : '257px',
