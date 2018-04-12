@@ -1,0 +1,52 @@
+[{
+   "id":1,
+   "name":"saravana Hostel",
+   "city":"chennai",
+   "region":"India",
+   "rating":3,
+   "wifi":true,
+   "breakFast":true,
+   "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+   "price":8000,
+   "images":[{
+                "url":""
+            },{
+                "url":""
+            },{
+                "url":""
+            }]
+},{
+    "id":1,
+    "name":"saravana Hostel",
+    "city":"chennai",
+    "region":"India",
+    "rating":3,
+    "wifi":true,
+    "breakFast":true,
+    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+    "price":8000,
+    "images":[{
+        "url":""
+    },{
+        "url":""
+    },{
+        "url":""
+    }]
+ },{
+    "id":1,
+    "name":"saravana Hostel",
+    "city":"chennai",
+    "region":"India",
+    "rating":3,
+    "wifi":true,
+    "breakFast":true,
+    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+    "price":8000,
+    "images":[{
+        "url":""
+    },{
+        "url":""
+    },{
+        "url":""
+    }]
+ }]
