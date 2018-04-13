@@ -3,26 +3,8 @@
 	<div class="container">
 		<app-header-navigation></app-header-navigation>
 		<div class="banner-info">
-			<script>
-				// You can also use "$(window).load(function() {"
-				$(function () {
-					// Slideshow 4
-					$("#slider3").responsiveSlides({
-						auto: true,
-						pager: false,
-						nav: false,
-						speed: 500,
-						namespace: "callbacks",
-						before: function () {
-							$('.events').append("<li>before event fired.</li>");
-						},
-						after: function () {
-							$('.events').append("<li>after event fired.</li>");
-						}
-					});
-				});
-			</script>
-			<div id="top" class="callbacks_container">
+			
+			<div  id="top" class="callbacks_container">
 				<ul class="rslides" id="slider3">
 					<li>
 						<div class="banner-text">
