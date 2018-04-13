@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { HomeSectionComponent } from './home-section/home-section.component';
+import { ViewComponent } from './view/view.component';
+import { DetailviewComponent } from './detailview/detailview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
 import { AdminComponent } from './admin/admin.component';
@@ -7,15 +10,18 @@ import { HostelComponent } from './hostel/hostel.component';
 export const Approute: Routes = [
 
     {
-        path: "Hostel",
-        component: DashboardComponent,
+        path: "hostel",
+        component: HomeSectionComponent,
     }, {
-        path: "Hostel/search",
-        component: FilterComponent,
+        path: "hostel/search",
+        component: ViewComponent,
+    },{
+        path: "hostel/:hostelId",
+        component: DetailviewComponent,
     },
     {
         path: '',
-        redirectTo: 'Hostel',
+        redirectTo: 'hostel',
         pathMatch: 'full',
     },
     {

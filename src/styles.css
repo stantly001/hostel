@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.noUi-connect {
+    background: #DF1E1C !important;
+}
+.hostel-label{
+    line-height: 1.8em;
+    color: #000;
+    font-size: 13px;
+    margin: 20px 0 0 0;
+}
+.ngx-datepicker-calendar-container.ngx-datepicker-position-bottom-right {
+    z-index: 999;
+}

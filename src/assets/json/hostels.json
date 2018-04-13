@@ -1,0 +1,115 @@
+[{
+   "id":1,
+   "name":"saravana Hostel",
+   "city":"chennai",
+   "region":"India",
+   "rating":"9.0",
+   "wifi":true,
+   "breakFast":true,
+   "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+   "price":8000,
+   "reviews":"Excellent Location",
+   "street":"9th Street kumaran colony",
+   "place":"vadapalani",
+   "images":[{
+    "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-small.jpeg",
+    "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-medium.jpeg",
+    "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-big.jpeg"
+  },
+  {
+    "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-small.jpeg",
+    "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg",
+    "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-big.jpeg"
+  },
+  {
+    "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-small.jpeg",
+    "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-medium.jpeg",
+    "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-big.jpeg"
+  },
+  {
+    "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-small.jpeg",
+    "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-medium.jpeg",
+    "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-big.jpeg"
+  },
+  {
+    "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-small.jpeg",
+    "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-medium.jpeg",
+    "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg"
+  }]
+},{
+    "id":2,
+    "name":"Murugan Hostel",
+    "city":"chennai",
+    "region":"India",
+    "rating":"7.0",
+    "wifi":true,
+    "breakFast":true,
+    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+    "price":8000,
+    "street":"9th Street kumaran colony",
+   "place":"vadapalani",
+    "reviews":"Excellent Location",
+    "images":[{
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg"
+      }]
+ },{
+    "id":3,
+    "name":"Catheral Hostel",
+    "city":"chennai",
+    "region":"India",
+    "rating":"8.0",
+    "wifi":true,
+    "breakFast":true,
+    "description":"We would like to introduce SIU Mansion Lodge as a well esteemed and unsurpassed hospitality providing a valuable service to the customers",
+    "price":8000,
+    "street":"9th Street kumaran colony",
+   "place":"vadapalani",
+    "reviews":"Excellent Location",
+    "images":[{
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-big.jpeg"
+      },
+      {
+        "small": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-small.jpeg",
+        "medium": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-medium.jpeg",
+        "big": "https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg"
+      }]
+ }]

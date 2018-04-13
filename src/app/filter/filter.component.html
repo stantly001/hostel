@@ -1,297 +1,168 @@
-
-
-<!--search-->
-<div class="search-page">
-	<div class="container">	
-		<div class="search-grids">
-			<div class="col-md-3 search-grid-left">
-				<div class="search-hotel">
-					<h3 class="sear-head">Name contains</h3>
-					<form>
-						<input type="text" value="Hotel name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hotel name...';}" required="">
-						<input type="submit" value=" ">
-					</form>
-				</div>
-				
-				<div class="range">
-					<h3 class="sear-head">Average nightly rate</h3>
-							<ul class="dropdown-menu6">
-								<li>
-									                
-									<div id="slider-range"></div>							
-										<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
-									</li>			
-							</ul>
-							<!---->
-					
-							
-				</div>
-				<div class="range-two">
-					<h3 class="sear-head">Distance from</h3>
-						<select class="sel">
-							<option value="">Enter City Center</option>
-							<option value="">Park View Center</option>
-							<option value="">E Park Road</option>
-							<option value="">Silver City</option>   
-						</select>
-
-							<ul class="dropdown-menu5">
-								<li>
-									               
-									<div id="slider-range1"></div>							
-										<input type="text" id="amount1" style="border: 0; color: #ffffff; font-weight: normal;" />
-									</li>			
-							</ul>
-							<!---->
-						
-				</div>
-				<div class="single-star-bottom">
-					<h3 class="sear-head">Star rating</h3>
-						
-							<input type="checkbox"  id="nike" value="">
-							<label for="nike"><span></span><b><img src="images/st2.png" alt="" /></b></label>
-						
-						
-							<input type="checkbox"  id="nike1" value="">
-							<label for="nike1"><span></span> <b><img src="images/st3.png" alt="" /></b></label>
-					
-					
-							<input type="checkbox"  id="nike2" value="">
-							<label for="nike2"><span></span><b><img src="images/st4.png" alt="" /></b></label>
-				
-				
-							<input type="checkbox"  id="nike3" value="">
-							<label for="nike3"><span></span> <b><img src="images/st5.png" alt="" /></b></label>
-				
-						
-							<input type="checkbox"  id="nike4" value="">
-							<label for="nike4"><span></span><b><img src="images/st.png" alt="" /></b></label>
-						
-				</div>
-				
-				<div class="menu-grid">
-					<ul class="menu_drop">
-						<li class="item1"><a href="#"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Features</a>
-							<ul>
-								<li class="subitem1"><a href="#">Roll-in shower </a></li>
-								<li class="subitem2"><a href="#">Comfortable bathroom</a></li>
-								<li class="subitem3"><a href="#">WI-FI facility</a></li>
-							</ul>
-						</li>
-						<li class="item2"><a href="#"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Facilities</a>
-							<ul>
-								<li class="subitem1"><a href="#">Childcare </a></li>
-								<li class="subitem2"><a href="#">Gym</a></li>
-								<li class="subitem3"><a href="#">Bar</a></li>
-							</ul>
-						</li>
-						<li class="item3"><a href="#"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Accommodation type</a>
-							<ul>
-								<li class="subitem1"><a href="#">Resort</a></li>
-								<li class="subitem2"><a href="#">Hostel</a></li>
-								<li class="subitem3"><a href="#">Apartment</a></li>
-							</ul>
-						</li>
-						<li class="item4"><a href="#"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Landmarks</a>
-							<ul>
-								<li class="subitem1"><a href="#">Mexican City</a></li>
-								<li class="subitem2"><a href="#">Park View Center</a></li>
-								<li class="subitem3"><a href="#">Land Park Center</a></li>
-							</ul>
-						</li>
-						<li class="item5"><a href="#"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>Neighbourhood</a>
-							<ul>
-								<li class="subitem1"><a href="#">Diamond Park Colony</a></li>
-								<li class="subitem2"><a href="#">E Park Road</a></li>
-								<li class="subitem3"><a href="#">lake View Center</a></li>
-							</ul>
-						</li>
-					</ul>
-					
-				</div>
+<div class="col-md-3 search-grid-left">
+	<div class="single-star-bottom" role="tablist" aria-multiselectable="true">
+		<a class="pull-left" (click)="availability=!availability">
+			<i class="fa" [class.fa-plus]="availability==true" [class.fa-minus]="availability==false"></i>
+		</a>
+		<h3 class="sear-head">Availability</h3>
+		<div class="panel-collapse" [class.collapse]="availability==true">
+			<div *ngFor="let availability of availabilities">
+				<input type="checkbox" id="{{availability.availabilityFieldName}}" value="">
+				<label for="{{availability.availabilityFieldName}}">
+					<span></span>
+					{{availability.availabilityDisplayName}}
+				</label>
 			</div>
-			<div class="col-md-9 search-grid-right">
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Grand Park Hyatt</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/21.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$8,750</span> $4,850</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Royal Taj Coromandel</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/22.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$3,350</span> $1,450</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Crowne Plaza</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/23.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$9,750</span> $5,700</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Modern Hilton Park</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/24.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$9,750</span> $6,800</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Grand park Hotel</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/25.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$8,750</span> $4,850</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="hotel-rooms">
-					<div class="hotel-left">
-						<a href="single.html"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>Royal Park Hyatt</a>
-						<p>Jl. Pahlawan VII No.247-D Sidoarjo-Surabaya-Indonesia</p>
-						<div class="hotel-left-grids">
-							<div class="hotel-left-one">
-								<a href="single.html"><img src="images/26.jpg" alt="" /></a>
-							</div>
-							<div class="hotel-left-two">
-								<div class="rating text-left">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div>
-								<a href="single.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Diamond Street</a>
-								<p>2.5 km to Sed ut perspiciatis <span> 2.6 km to sit voluptatem</span></p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="hotel-right text-right">
-						<h4><span>$4,650</span> $2,650</h4>
-						<p>Best price</p>
-						<a href="single.html">Continue</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
+			<!--ngFor -->
+		</div>
+		<!-- panel-collapse -->
+	</div>
+	<!-- single-start-bottom -->
+
+	<!-- Price Filter -->
+	<div class="range">
+		<a class="pull-left" (click)="isPrice=!isPrice">
+			<i class="fa" [class.fa-plus]="isPrice==true" [class.fa-minus]="isPrice==false"></i>
+		</a>
+		<h3 class="sear-head">Price</h3>
+		<div class="panel-collapse" [class.collapse]="isPrice==true">
+			<nouislider [connect]="true" [min]="0" [max]="1000" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From Rs.{{prices.rangeFrom}} to Rs.{{prices.rangeTo}}</label>
 		</div>
 	</div>
+
+	<!-- Rating Filter -->
+	<div class="range">
+		<a class="pull-left" (click)="isRating=!isRating">
+			<i class="fa" [class.fa-plus]="isRating==true" [class.fa-minus]="isRating==false"></i>
+		</a> 
+		<h3 class="sear-head">Rating</h3>
+		<div class="panel-collapse" [class.collapse]="isRating==true">
+			<nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From {{ratings.ratingFrom}}% to {{ratings.ratingTo}}%</label>
+		</div>
+	</div>
+
+	<!-- Property Filter -->
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isProperty=!isProperty">
+			<i class="fa" [class.fa-plus]="isProperty==true" [class.fa-minus]="isProperty==false"></i>
+		</a>
+		<h3 class="sear-head">property Type</h3>
+		<div class="panel-collapse" [class.collapse]="isProperty==true">
+			<div *ngFor="let property of properties">
+				<input type="checkbox" name="{{property.propertyFieldName}}" value="">
+				<label for="{{property.propertyFieldName}}">
+					<span></span>
+					{{property.propertyDisplayName}}
+				</label>
+			</div>
+			<!-- ngFor -->
+		</div>
+		<!-- panel-collapse -->
+	</div>
+	<!-- single-start-bottom -->
+
+	<!-- RoomTypes Filter -->
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isRoom=!isRoom">
+			<i class="fa" [class.fa-plus]="isRoom==true" [class.fa-minus]="isRoom==false"></i>
+		</a>
+		<h3 class="sear-head">Room Type</h3>
+		<div class="panel-collapse" [class.collapse]="isRoom==true">
+			<div *ngFor="let roomType of roomTypes">
+				<div class="room-category-name">{{roomType.category}}</div>
+				<div class="room-types" *ngFor="let type of roomType.types">
+					<input type="checkbox" id="{{type.roomFieldName}}" value="">
+					<label for="{{type.roomFieldName}}">
+						<span></span>
+						{{type.roomDisplayName}}
+					</label>
+				</div>
+			</div>
+			<!-- ngfor-->
+		</div>
+		<!-- panel-collapse -->
+	</div>
+	<!-- single-start-bottom -->
+
+	<!-- Facilities Filter -->
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isFacilities=!isFacilities">
+			<i class="fa" [class.fa-plus]="isFacilities==true" [class.fa-minus]="isFacilities==false"></i>
+		</a>
+		<h3 class="sear-head">Facilities</h3>
+		<div class="panel-collapse" [class.collapse]="isFacilities==true">
+			<div *ngFor="let facility of facilities">
+				<input type="checkbox" id="{{facility.facilityFieldName}}" value="">
+				<label for="{{facility.facilityFieldName}}">
+					<span></span>
+					{{facility.facilityDisplayName}}
+				</label>
+			</div>
+			<!-- ngFor -->
+		</div>
+		<!-- panel-collapse -->
+	</div>
+	<!-- single-star-bottom -->
+
+	<!-- Distance Filter -->
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isLocation=!isLocation">
+			<i class="fa" [class.fa-plus]="isLocation==true" [class.fa-minus]="isLocation==false"></i>
+		</a>
+		<h3 class="sear-head">Location</h3>
+		<div class="panel-collapse" [class.collapse]="isLocation==true">
+			<div class="sel">
+				<select name="" class="sel form-control">
+					<option value="">Any Distance</option>
+					<option *ngFor="let location of locations" value="{{location.locationName}}">
+						{{location.locationName}}
+					</option>
+				</select>
+			</div>
+			<!--sel-->
+			<div>
+				<label>From</label>
+				<select name="" class="sel form-control">
+					<option value="">City Center</option>
+				</select>
+			</div>
+			<!-- city center -->
+			<div>
+				<input type="radio" name="Km">
+				<label>Kilometer</label>
+			</div>
+			<!-- kilometer -->
+			<div>
+				<input type="radio" name="Km">
+				<label>Miles</label>
+			</div>
+			<!-- miles -->
+		</div>
+	</div>
+	<!-- single-star-bottom -->
+
+	<!-- PaymentType filter -->
+	<div class="single-star-bottom">
+		<a class="pull-left" (click)="isPayment=!isPayment">
+			<i class="fa" [class.fa-plus]="isPayment==true" [class.fa-minus]="isPayment==false"></i>
+		</a>
+		<h3 class="sear-head">Payment Type</h3>
+		<div class="panel-collapse" [class.collapse]="isPayment==true">
+			<div *ngFor="let payment of payments">
+				<input type="checkbox" id="{{payment.paymentFieldType}}" value="">
+				<label for="{{payment.paymentFieldType}}">
+					<span></span>
+					{{payment.paymentDisplayType}}
+				</label>
+			</div>
+			<!-- ngFor -->
+		</div>
+		<!-- panel-collapse -->
+	</div>
+	<!-- single-start-bottom -->
+
+	<div class="single-star-bottom">
+		<button type="submit" class="btn btn-danger">Clear All</button>
+	</div>
 </div>
-<!-- smooth scrolling -->
-
-	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- //smooth scrolling -->
-

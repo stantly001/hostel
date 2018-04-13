@@ -1,0 +1,7 @@
+<div class="col-md-9 search-grid-right">
+  <div class="hotel-rooms" *ngFor="let hostel of hostels">
+    <app-list-content [hostelData]="hostel"></app-list-content>
+    <app-list-reviews [hostelData]="hostel"></app-list-reviews>
+    <div class="clearfix"></div>
+  </div>
+</div>

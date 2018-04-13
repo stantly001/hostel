@@ -45,29 +45,3 @@ $(function () {
     });
 
 });
-$(window).load(function () {
-    $("#slider-range").slider({
-        range: true,
-        min: 0,
-        max: 9000,
-        values: [50, 6000],
-        slide: function (event, ui) {
-            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-        }
-    });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
-});//]]>  
-$(window).load(function () {
-    $("#slider-range1").slider({
-        range: true,
-        min: 0,
-        max: 6000,
-        values: [50, 5000],
-        slide: function (event, ui) {
-            $("#amount1").val("KM-" + ui.values[0] + " - KM-" + ui.values[1]);
-        }
-    });
-    $("#amount1").val("KM-" + $("#slider-range1").slider("values", 0) + " - KM-" + $("#slider-range1").slider("values", 1));
-
-});//]]>

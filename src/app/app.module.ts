@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NouisliderModule } from 'ng2-nouislider';
+import { NgDatepickerModule } from 'ng2-datepicker';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -14,10 +17,19 @@ import { BredcrumbComponent } from './bredcrumb/bredcrumb.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
+import { HomeSectionComponent } from './home-section/home-section.component';
+import { ViewComponent } from './view/view.component';
+import { ListComponent } from './list/list.component';
+import { ListContentComponent } from './list-content/list-content.component';
+import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 import { HostelComponent } from './hostel/hostel.component';
 import { AdminComponent } from './admin/admin.component';
 // import {HttpdataService} from './service/httpdata.service';
 
+
+import { DefaultsService } from './services/defaults.service';
+import {NgxGalleryModule} from 'ngx-gallery'
+import { DetailviewComponent } from './detailview/detailview.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +41,19 @@ import { AdminComponent } from './admin/admin.component';
     FooterComponent,
     DashboardComponent,
     FilterComponent,
-    HostelComponent,
-    AdminComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(Approute),
-    HttpClientModule,
-    FormsModule
+    HomeSectionComponent,
+    ViewComponent,
+    ListComponent,
+    ListContentComponent,
+    ListReviewsComponent,
+    DetailviewComponent
+    HostelComponent,
+    AdminComponent
   ],
-  providers: [],
+  providers: [DefaultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
