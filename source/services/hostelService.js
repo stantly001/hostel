@@ -46,6 +46,7 @@ function getAllHostel(req, res) {
  */
 function filterHostelModel(res) {
     var post = new hostel({
+        _id: val._id,
         name: res.name,
         country: res.country,
         city: res.city,
@@ -93,6 +94,7 @@ function filterHostelModel(res) {
 
 function filterHostelVisualsModel(res) {
     var hostelVisualObj = new hostelVisuals({
+        _id: val._id,
         name: val.name,
         url: val.url,
         hostelId: post._id
@@ -227,6 +229,13 @@ function updateHostelById(id, hostelData, res) {
                 message: "Note not found with id " + req.params.noteId
             });
         }
+
+        hostelData.images.forEach(function (val, k) {
+            var hostelVisualObj = filterHostelVisualsModel(res)
+            hostelVisuals.findByIdAndUpdate(id, hostelVisualObj, { new: true })
+            post.images.push(hostelVisualObj)
+        })
+        hostel.save()
         return res.json(data)
     }).catch(err => {
         if (err.kind === 'ObjectId') {
@@ -255,7 +264,7 @@ function removeHostelById(id, res) {
         else {
             var returnHostelImg = getAllImagesByHostelId(id);
             returnHostelImg.forEach(function (val, key) {
-                removeHostelImgById(val.id)
+                removeHostelImgById(val._id)
             })
             res.json({ 'success': 'Successfully removed', 'data': data });
         }

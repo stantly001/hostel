@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 // Define collection and schema for Hostel Items
 var Hostel = new Schema({
+  _id: Schema.Types.ObjectId,
   name: {
     type: String
   },
