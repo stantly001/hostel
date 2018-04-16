@@ -32,6 +32,11 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  deleteHosteldata(hostel: Hostel): Observable<Hostel> {
+    return this.http.delete(this.baseUrl + "/hostel/removeHostel/"+hostel._id)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
   /**
    * 
    * @param file 

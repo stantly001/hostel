@@ -83,4 +83,16 @@ export class HostelComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
+  delete = (x,index) =>{
+    console.log(x);
+    this._httpDataService.deleteHosteldata(x).subscribe(
+      data => {
+        this.hostels.splice(index,1);
+        // console.log(x)
+      },
+      error => this.errorMessage = <any>error)
+    //  this.hostels.splice(i,1);
+    //  console.log(i);
+  }
+
 }

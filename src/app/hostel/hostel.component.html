@@ -26,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let x of hostels">
+              <tr *ngFor="let x of hostels;let i=index;">
                 <td>{{x.name}}</td>
                 <td>{{x.country}}</td>
                 <td>{{x.city}}</td>
@@ -35,7 +35,7 @@
                 <td>{{x.email}}</td>
                 <td>
                   <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm" (click)="delete()">Delete</button>
+                  <button class="btn btn-danger btn-sm" (click)="delete(x,i)">Delete</button>
                 </td>
               </tr>
             </tbody>

@@ -70,7 +70,7 @@ function updateHostelById(req, res) {
  * Remove Hostel Obj By Id from hostel Collection And Remove ref Collection of hostelImg 
  */
 function removeHostelById(req, res) {
-    return hostelService.removeHostelById(req.params.id)
+    return hostelService.removeHostelById(req.params.hostelId, res)
 }
 
 var hostelController = {
