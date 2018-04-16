@@ -51,7 +51,7 @@ function getAllImagesAndVideos(req, res) {
  * Get Hostel Details By Hostel Id
  */
 function getHostelById(req, res) {
-    return hostelService.getHostelById(req.params.hostelId)
+    return hostelService.getHostelById(req.params.hostelId, res)
 }
 
 /**
@@ -61,7 +61,7 @@ function getHostelById(req, res) {
  * Update Hostel Detail By HostelId
  */
 function updateHostelById(req, res) {
-    return hostelService.updateHostelById(req.params.hostelId, req.body)
+    return hostelService.updateHostelById(req.params.hostelId, req.body, res)
 }
 
 var hostelController = { getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos, getHostelById, updateHostelById };

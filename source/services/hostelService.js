@@ -199,9 +199,10 @@ function getAllImagesByHostelId(hostelId) {
 /**
  * 
  * @param {*} id 
+ * @param {*} res 
  * Get Hostel Details By hostelId
  */
-function getHostelById(id) {
+function getHostelById(id, res) {
     hostel.findById(id, function (err, data) {
         if (err) {
             return res.send(err);
@@ -216,9 +217,10 @@ function getHostelById(id) {
  * 
  * @param {*} id 
  * @param {*} hostelData 
- * Update hostelData by HostelId
+ * @param {*} res 
+ *  Update hostelData by HostelId
  */
-function updateHostelById(id, hostelData) {
+function updateHostelById(id, hostelData, res) {
     var updateData = filterHostelModel(hostelData)
     hostel.findByIdAndUpdate(id, updateData, { new: true }).then(data => {
         if (!data) {
