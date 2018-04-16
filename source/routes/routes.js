@@ -9,4 +9,5 @@ routes.route('/hostel/writeByUploadFile').post(hostelControllers.onUploadFile)
 routes.route('/hostel/visuals').get(hostelControllers.getAllImagesAndVideos)
 routes.route('/hostel/getHostelById/:hostelId').get(hostelControllers.getHostelById)
 routes.route('/hostel/update/:hostelId').put(hostelControllers.updateHostelById)
+routes.route('/hostel/removeHostel/:hostelId').get(hostelControllers.removeHostelById)
 module.exports = routes;

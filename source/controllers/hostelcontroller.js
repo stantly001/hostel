@@ -8,7 +8,6 @@ var hostelService = require('../services/hostelService')
  * Get All Hostel Data
  */
 function getAllHostel(req, res) {
-    console.log("Data ==>")
     return hostelService.getAllHostel(req, res)
 }
 
@@ -64,6 +63,19 @@ function updateHostelById(req, res) {
     return hostelService.updateHostelById(req.params.hostelId, req.body, res)
 }
 
-var hostelController = { getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos, getHostelById, updateHostelById };
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Remove Hostel Obj By Id from hostel Collection And Remove ref Collection of hostelImg 
+ */
+function removeHostelById(req, res) {
+    return hostelService.removeHostelById(req.params.id)
+}
+
+var hostelController = {
+    getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos,
+    getHostelById, updateHostelById, removeHostelById
+};
 
 module.exports = hostelController;

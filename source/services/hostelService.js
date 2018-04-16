@@ -24,7 +24,6 @@ function getAllHostel(req, res) {
             console.log(err);
         }
         else {
-            console.log(data)
             //res.send(data)
             return res.json(data);
         }
@@ -241,8 +240,42 @@ function updateHostelById(id, hostelData, res) {
     })
 }
 
-var hostelService = { getAllHostel, addHostel, 
-    onUploadFile, getAllImagesAndVideos, 
-    getHostelById, updateHostelById };
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} res
+ * Remove Hostel Obj By Id from hostel Collection And Remove ref Collection of hostelImg 
+ */
+function removeHostelById(id, res) {
+    hostel.findByIdAndRemove({ _id: id }, function (err, data) {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            var returnHostelImg = getAllImagesByHostelId(id);
+            returnHostelImg.forEach(function (val, key) {
+                removeHostelImgById(val.id)
+            })
+            res.json({ 'success': 'Successfully removed', 'data': data });
+        }
+    });
+}
+
+/**
+ * 
+ * @param {*} hostelImgId
+ * Remove HostelImg By HostelImg Id
+ */
+function removeHostelImgById(hostelImgId) {
+    hostel.findByIdAndRemove({ _id: id }, function (err, data) {
+        return res.json({ 'success': 'Successfully removed', 'data': data });
+    })
+}
+
+var hostelService = {
+    getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos,
+    getHostelById, updateHostelById, removeHostelById
+};
 
 module.exports = hostelService;
