@@ -1,12 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var hostelService = express.Router();
+var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller')
 
-hostelService.route('/hostel').get(hostelControllers.getAllHostel);
-hostelService.route('/hostel/add').post(hostelControllers.addHostel);
-hostelService.route('/hostel/writeByUploadFile').post(hostelControllers.onUploadFile)
-hostelService.route('/hostel/visuals').get(hostelControllers.getAllImagesAndVideos)
-
-
-module.exports = hostelService;
+routes.route('/hostel').get(hostelControllers.getAllHostel);
+routes.route('/hostel/add').post(hostelControllers.addHostel);
+routes.route('/hostel/writeByUploadFile').post(hostelControllers.onUploadFile)
+routes.route('/hostel/visuals').get(hostelControllers.getAllImagesAndVideos)
+routes.route('/hostel/getHostelById/:hostelId').get(hostelControllers.getHostelById)
+routes.route('/hostel/update/:hostelId').put(hostelControllers.updateHostelById)
+module.exports = routes;

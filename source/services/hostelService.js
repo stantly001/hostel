@@ -5,7 +5,7 @@ var randomstring = require("randomstring");
 
 //Mongoose Models
 var hostel = require('../models/hostel');
-var hostelImg = require('../models/hostelImg');
+var hostelVisuals = require('../models/hostelImg');
 
 //File Path
 const imgFilePath = "../hmsDoc/visuals";
@@ -25,6 +25,7 @@ function getAllHostel(req, res) {
         }
         else {
             console.log(data)
+            //res.send(data)
             return res.json(data);
         }
     })
@@ -91,6 +92,15 @@ function filterHostelModel(res) {
     return post
 }
 
+function filterHostelVisualsModel(res) {
+    var hostelVisualObj = new hostelVisuals({
+        name: val.name,
+        url: val.url,
+        hostelId: post._id
+    })
+    return hostelVisualObj
+}
+
 
 /**
  * 
@@ -100,37 +110,14 @@ function filterHostelModel(res) {
  */
 function addHostel(req, res) {
     var post = filterHostelModel(req.body)
-
-    // post.save(function (err) {
-    //     if (err) return handleError(err);
-
-    //     var hostelImgObj = new hostelImg({
-    //         name: req.body.images.name,
-    //         url: req.body.images.url,
-    //         hostelId: post._id
-    //     })
-
-    //     hostelImgObj.save(function (err) {
-    //         if (err) return handleError(err);
-    //         // thats it!
-    //     });
-    //     //then add story to person
-    //     post.images = hostelImgObj
-    //     // aaron.stories.push(story1);
-    //     post.save();
-    // });
     post.save()
         .then(item => {
             req.body.images.forEach(function (val, k) {
-                var hostelImgObj = new hostelImg({
-                    name: val.name,
-                    url: val.url,
-                    hostelId: post._id
-                })
-                hostelImgObj.save(function (err) {
+                var hostelVisualObj = filterHostelVisualsModel(res)
+                hostelVisualObj.save(function (err) {
                     if (err) return handleError(err);
                 })
-                post.images.push(hostelImgObj)
+                post.images.push(hostelVisualObj)
             })
             post.save()
             return res.status(200).json({ 'success': 'Hostel added successfully', 'data': post });
@@ -173,12 +160,14 @@ function onUploadFile(req, res) {
     });
 }
 
-
 /**
+ * 
+ * @param {*} req 
+ * @param {*} res 
  * Get All Images and Videos
  */
 function getAllImagesAndVideos(req, res) {
-    hostelImg.find().populate("hostelId").exec(function (err, data) {
+    hostelVisuals.find().populate("hostelId").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
@@ -188,24 +177,70 @@ function getAllImagesAndVideos(req, res) {
     })
 }
 
+
+/**
+ * 
+ * @param {*} hostelId 
+ * Get All Images And Videos By HostelId from HostelImg Collection
+ */
 function getAllImagesByHostelId(hostelId) {
     console.log(hostelId)
-    hostelImg.findById({ hostelId: hostelId }, function (err, data) {
+    hostelVisuals.findById({ hostelId: hostelId }, function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
             return res.json(data);
         }
-        // author.save(function(err) {
-        //     if (err) throw err;
-
-        //     console.log('Author updated successfully');
-        // });
     });
 }
 
 
-var hostelService = { getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos };
+/**
+ * 
+ * @param {*} id 
+ * Get Hostel Details By hostelId
+ */
+function getHostelById(id) {
+    hostel.findById(id, function (err, data) {
+        if (err) {
+            return res.send(err);
+        } else {
+            return res.json(data);
+        }
+    });
+}
+
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} hostelData 
+ * Update hostelData by HostelId
+ */
+function updateHostelById(id, hostelData) {
+    var updateData = filterHostelModel(hostelData)
+    hostel.findByIdAndUpdate(id, updateData, { new: true }).then(data => {
+        if (!data) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.noteId
+            });
+        }
+        return res.json(data)
+    }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.noteId
+            });
+        }
+        return res.status(500).send({
+            message: "Error updating note with id " + req.params.noteId
+        });
+    })
+}
+
+var hostelService = { getAllHostel, addHostel, 
+    onUploadFile, getAllImagesAndVideos, 
+    getHostelById, updateHostelById };
 
 module.exports = hostelService;

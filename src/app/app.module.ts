@@ -4,7 +4,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgDatepickerModule } from 'ng2-datepicker';
-import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { Approute } from './app.routes';
@@ -41,17 +40,22 @@ import { DetailviewComponent } from './detailview/detailview.component';
     FooterComponent,
     DashboardComponent,
     FilterComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HomeSectionComponent,
+HomeSectionComponent,
     ViewComponent,
     ListComponent,
     ListContentComponent,
     ListReviewsComponent,
-    DetailviewComponent
+    DetailviewComponent,
     HostelComponent,
     AdminComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    NouisliderModule,
+    NgDatepickerModule,
+    RouterModule.forRoot(Approute),
+    NgxGalleryModule
   ],
   providers: [DefaultsService],
   bootstrap: [AppComponent]
