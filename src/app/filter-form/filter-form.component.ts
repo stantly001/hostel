@@ -10,6 +10,7 @@ export class FilterFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("Form --FIlter")
   }
 
 }

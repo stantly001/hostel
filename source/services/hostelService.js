@@ -46,7 +46,7 @@ function getAllHostel(req, res) {
  */
 function filterHostelModel(res) {
     var post = new hostel({
-        _id: val._id,
+        // _id: res._id,
         name: res.name,
         country: res.country,
         city: res.city,
@@ -92,11 +92,11 @@ function filterHostelModel(res) {
     return post
 }
 
-function filterHostelVisualsModel(res) {
+function filterHostelVisualsModel(res, post) {
     var hostelVisualObj = new hostelVisuals({
-        _id: val._id,
-        name: val.name,
-        url: val.url,
+        // _id: res._id,
+        name: res.name,
+        url: res.url,
         hostelId: post._id
     })
     return hostelVisualObj
@@ -114,7 +114,7 @@ function addHostel(req, res) {
     post.save()
         .then(item => {
             req.body.images.forEach(function (val, k) {
-                var hostelVisualObj = filterHostelVisualsModel(res)
+                var hostelVisualObj = filterHostelVisualsModel(val, post)
                 hostelVisualObj.save(function (err) {
                     if (err) return handleError(err);
                 })
