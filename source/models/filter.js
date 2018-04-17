@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 var filter = new Schema({
-    _id: Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
     filter: [{
         fieldName: {
             type: String
@@ -14,13 +14,20 @@ var filter = new Schema({
         type: {
             type: String
         },
+        viewType:{
+            type: String
+        },
         filterTypes: [{
             fieldName: {
                 type: String
             },
             dispName: {
                 type: String
-            }
+            },
+            start:{
+                type: Number
+            },
+            end: Number
         }]
     }],
     created_date: {

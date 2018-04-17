@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterComponent } from './filter/filter.component';
 import { AdminComponent } from './admin/admin.component';
 import { HostelComponent } from './hostel/hostel.component';
+import { FilterFormComponent } from './filter-form/filter-form.component';
 
 export const Approute: Routes = [
 
@@ -15,7 +16,7 @@ export const Approute: Routes = [
     }, {
         path: "hostel/search",
         component: ViewComponent,
-    },{
+    }, {
         path: "hostel/:hostelId",
         component: DetailviewComponent,
     },
@@ -27,15 +28,18 @@ export const Approute: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'addHostel',
-                pathMatch: 'full'
-            },
+        children: [            
             {
                 path: 'addHostel',
                 component: HostelComponent
+            },
+            {
+                path: 'filter',
+                component: FilterFormComponent
+            },{
+                path: '',
+                redirectTo: 'addHostel',
+                pathMatch: 'full'
             }
         ]
     },
