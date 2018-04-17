@@ -37,6 +37,13 @@ export class HttpdataService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+
+  // updateHosteldata(hostel: Hostel): Observable<Hostel> {
+  //   return this.http.put(this.baseUrl + "/hostel/update/"+hostel._id)
+  //     .map(this.extractData)
+  //     .catch(this.handleErrorObservable);
+  // }
+
   /**
    * 
    * @param file 

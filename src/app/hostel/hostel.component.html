@@ -2,14 +2,15 @@
     {{hostel | json }}
   </div> -->
 
-<form novalidate class="form-horizontal">
+<form novalidate>
+
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-
       </div>
       <div class="col-sm-9">
-        <div class="pull-right" [hidden]="clicked">
+
+        <div class="pull-right add-button" [hidden]="clicked">
           <button class="btn btn-primary btn-sm" (click)="clicked=!clicked">Add</button>
         </div>
         <div class="table table-responsive" [hidden]="clicked">
@@ -34,298 +35,274 @@
                 <td>{{x.street}}</td>
                 <td>{{x.email}}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Edit</button>
+                  <button class="btn btn-primary btn-sm" click=update()>Edit</button>
                   <button class="btn btn-danger btn-sm" (click)="delete(x,i)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <br>
 
-        <div *ngIf="clicked">
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Name</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.name" name="name">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Country</label>
-            <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="hostel.country" name="country">
-                <option *ngFor="let country of countries" [ngValue]="country.fieldName">{{country.dispName}}</option>
-                <!-- <option value="">Please select a country</option> -->
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">City</label>
-            <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="hostel.city" name="city">
-                <option *ngFor="let city of cities" [ngValue]="city.fieldName">{{city.dispName}}</option>
-                <!-- <option value="">Please select a city</option> -->
-              </select>
-            </div>
-          </div>
+        <div *ngIf="clicked add-form">
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">State</label>
-            <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="hostel.state" name="state">
-                <!-- <option value="">Please select a state</option> -->
-                <option *ngFor="let state of states" [ngValue]="state.fieldName">{{state.dispName}}</option>
-              </select>
-            </div>
-          </div>
+          <div class="form-row row">
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Street</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street">
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" [(ngModel)]="hostel.name" name="name">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Country</label>
+                <select class="form-control" [(ngModel)]="hostel.country" name="country">
+                  <option *ngFor="let country of countries" [ngValue]="country.fieldName">{{country.dispName}}</option>
+                  <!-- <option value="">Please select a country</option> -->
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>City</label>
+                <select class="form-control" [(ngModel)]="hostel.city" name="city">
+                  <option *ngFor="let city of cities" [ngValue]="city.fieldName">{{city.dispName}}</option>
+                  <!-- <option value="">Please select a city</option> -->
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Property Type</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type">
-            </div>
-          </div>
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>State</label>
+                <select class="form-control" [(ngModel)]="hostel.state" name="state">
+                  <!-- <option value="">Please select a state</option> -->
+                  <option *ngFor="let state of states" [ngValue]="state.fieldName">{{state.dispName}}</option>
+                </select>
+              </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Wheel Chair Accomadate</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.wheel_chair_accomadate" name="wheel_chair_accomadate">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">Breakfast Included</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.breakfast_included" name="breakfast_included">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label">travel_desk</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.travel_desk" name="travel_desk">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> hr_checkin</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.hr_checkin" name="hr_checkin">
-            </div>
-          </div>
+              <div class="col-md-4 mb-3">
+                <label>Street</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street">
+              </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> air_conditioning</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.air_conditioning" name="air_conditioning">
+              <div class="col-md-4 mb-3">
+                <label>Property Type</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> internet_access</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.internet_access" name="internet_access">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> laundry_service</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.laundry_service" name="laundry_service">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> card_payment_accepted</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.card_payment_accepted" name="card_payment_accepted">
-            </div>
-          </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> locker</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.locker" name="locker">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> hot_water</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.hot_water" name="hot_water">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> water_dispenser</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.water_dispenser" name="water_dispenser">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> common_hangout_area</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.common_hangout_area" name="common_hangout_area">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> common_television</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.common_television" name="common_television">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> free_breakfast</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.free_breakfast" name="free_breakfast">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> shower</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.shower" name="shower">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> free_parking</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.free_parking" name="free_parking">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> reading_light</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.reading_light" name="reading_light">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> celing_fan</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.celing_fan" name="celing_fan">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> washing_machine</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.washing_machine" name="washing_machine">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> house_keeping</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.house_keeping" name="house_keeping">
-            </div>
-          </div>
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label> Email</label>
+                <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email">
+              </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> email</label>
-            <div class="col-sm-9">
-              <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email">
+              <div class="col-md-4 mb-3">
+                <label> Url</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label> Cancellation Policy</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> url</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> things_to_note</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.things_to_note" name="things_to_note">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> cancellation_policy</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> longitude</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> latitude</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude">
-            </div>
-          </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> language</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language">
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Longitude</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Latitude</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Language</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> default_currency</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> property_description</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.property_description" name="property_description">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> policy</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> city_rating</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.city_rating" name="city_rating">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> state_rating</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> national_rating</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating">
-            </div>
-          </div>
 
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> world_rating</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating">
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Default Currency</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label> City Rating</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.city_rating" name="city_rating">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>State Rating</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating">
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> checkin_24hrs</label>
-            <div class="col-sm-9">
-              <input type="checkbox" [(ngModel)]="hostel.checkin_24hrs" name="checkin_24hrs">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="col-sm-3 control-label"> Upload Image</label>
-            <div class="col-sm-9">
-              <input style="display: none" type="file" (change)="onFileSelected($event)" #uploadImageFile>
-              <button (click)="uploadImageFile.click()">Pick File</button>
-            </div>
-            <div class="col-sm-3">
-              <button (click)="onUploadFile(hostel)">Upload</button>
-            </div>
-            <div *ngFor="let hostelImg of hostel.images">
-              {{hostelImg}}
-            </div>
-          </div>
-          <button class="btn btn-primary" (click)="save(hostel)">Submit</button>
 
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>National Rating</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>World Rating</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Property Description</label>
+                <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3"></textarea>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label> Things to Note</label>
+                <textarea name="things_to_note" class="form-control" [(ngModel)]="hostel.things_to_note" cols="30" rows="3"></textarea>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Policy</label>
+                <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3"></textarea>
+                <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Wheel Chair Accomadate</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.wheel_chair_accomadate" name="wheel_chair_accomadate">
+              </div>
+
+
+              <div class="col-md-4 mb-3">
+                <label>Breakfast Included</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.breakfast_included" name="breakfast_included">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Travel Desk</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.travel_desk" name="travel_desk">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Hr Checkin</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hr_checkin" name="hr_checkin">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Air Conditioning</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.air_conditioning" name="air_conditioning">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Internet Access</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.internet_access" name="internet_access">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label>Laundry Service</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.laundry_service" name="laundry_service">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Card Payment Accepted</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.card_payment_accepted" name="card_payment_accepted">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Locker</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.locker" name="locker">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label> Hot Water</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hot_water" name="hot_water">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Water Dispenser</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.water_dispenser" name="water_dispenser">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Common Hangout Area</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_hangout_area" name="common_hangout_area">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label> Common Television</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_television" name="common_television">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Free Breakfast</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_breakfast" name="free_breakfast">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Shower</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.shower" name="shower">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label> Free Parking</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_parking" name="free_parking">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Reading Light</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.reading_light" name="reading_light">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label> Celing Fan</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.celing_fan" name="celing_fan">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-4 mb-3">
+                <label> Washing Machine</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.washing_machine" name="washing_machine">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> House Keeping</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.house_keeping" name="house_keeping">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Checkin 24hrs</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.checkin_24hrs" name="checkin_24hrs">
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-12 mb-3">
+                <label> Upload Image</label>
+                <input style="display: none" type="file" (change)="onFileSelected($event)" #uploadImageFile>
+                <button (click)="uploadImageFile.click()">Pick File</button>
+                <button (click)="onUploadFile(hostel)">Upload</button>
+                <div *ngFor="let hostelImg of hostel.images">
+                  {{hostelImg}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-12 mb-3">
+                <button class="btn btn-primary" (click)="save(hostel)">Submit</button>
+              </div>
+            </div>
+
+          </div>
         </div>
+
 
       </div>
     </div>
   </div>
+
 </form>

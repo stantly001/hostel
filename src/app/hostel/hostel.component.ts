@@ -95,4 +95,16 @@ export class HostelComponent implements OnInit {
     //  console.log(i);
   }
 
+  // update = (x,index) =>{
+  //   console.log(x);
+  //   this._httpDataService.updateHosteldata(x).subscribe(
+  //     data => {
+  //       this.hostels=index;
+  //       // console.log(x)
+  //     },
+  //     error => this.errorMessage = <any>error)
+  //   //  this.hostels.splice(i,1);
+  //   //  console.log(i);
+  // }
+
 }
