@@ -5,23 +5,23 @@ var Schema = mongoose.Schema;
 var filter = new Schema({
     // _id: Schema.Types.ObjectId,
     filter: [{
-        fieldName: {
+        field_name: {
             type: String
         },
-        dispName: {
+        disp_name: {
             type: String
         },
-        type: {
+        sub_title: {
             type: String
         },
-        viewType:{
+        view_type:{
             type: String
         },
-        filterTypes: [{
-            fieldName: {
+        filter_types: [{
+            field_name: {
                 type: String
             },
-            dispName: {
+            disp_name: {
                 type: String
             },
             start:{
