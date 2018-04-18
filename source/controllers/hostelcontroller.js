@@ -74,9 +74,13 @@ function removeHostelById(req, res) {
     return hostelService.removeHostelById(req.params.hostelId, res)
 }
 
+function getImageFromDirectory(req, res){
+   return hostelService.convertImageUrlTOBase64(req.query.imgUrl, res)    
+}
+
 var hostelController = {
     getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos,
-    getHostelById, updateHostelById, removeHostelById
+    getHostelById, updateHostelById, removeHostelById, getImageFromDirectory
 };
 
 module.exports = hostelController;
