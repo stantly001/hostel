@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-sm-3">
           <ul id="sidebar" class="nav nav-stacked ">
-              <li><a href="#" class="menu-item">Admin</a></li>
-              <li><a href="#" class="menu-item">Filter</a></li>
+              <li><a routerLink="../../admin/addHostel" data-hover="Filter" class="menu-item">Admin</a></li>
+              <li><a routerLink="../../admin/filter" data-hover="Filter" class="menu-item">Filter</a></li>
           </ul>
       </div>
       <div class="col-sm-9 add-form">
@@ -13,14 +13,14 @@
           <label class="col-sm-2">Title</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" 
-            placeholder="File Name" [(ngModel)]="filter.field_name" name="fileName">
+            placeholder="Title" [(ngModel)]="filter.field_name" name="fieldname">
           </div>
         </div>
 
-        <!-- <input type="checkbox" [(ngModel)]="subtitle"> -->
-
-        <div class="form-group">
-          <label class="col-sm-2">Subtitle</label>
+        <input #textbox type="checkbox" [(ngModel)]="subtitle" unchecked>
+        
+        <div class="form-group" *ngIf="textbox.checked">
+          <label class="col-sm-2">Subtitle</label> 
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Subtitle"  [(ngModel)]="filter.sub_title" name="subtitle">
           </div>

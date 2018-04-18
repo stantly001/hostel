@@ -31,6 +31,7 @@ export class FilterFormComponent implements OnInit {
     this.filter.filter_types.push({filter_name:''})
   }
   
+ 
 filterOne=<any>[];
   
   save = (filter) => {
