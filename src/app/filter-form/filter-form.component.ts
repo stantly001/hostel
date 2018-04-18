@@ -35,9 +35,8 @@ filterOne=<any>[];
   
   save = (filter) => {
     console.log(filter);
-    this.filterOne.push({filter})
-    console.log("filter-->",this.filterOne);
-    this._httpDataService.addFilterdata(this.filterOne).subscribe(
+    
+    this._httpDataService.addFilterdata(filter).subscribe(
       data => {
         this.getData()
       },
