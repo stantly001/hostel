@@ -29,12 +29,12 @@
         <div class="form-group">
           <label class="col-sm-2">Filter UI Type</label>
           <div class="col-sm-10">
-            <input type="checkbox"  [(ngModel)]="filter.textbox" name="textbox">Textbox
-            <input type="checkbox"  [(ngModel)]="filter.slider" name="slider">Slider
-            <input type="checkbox"  [(ngModel)]="filter.datePicker" name="datePicker">Date Picker
-            <input type="checkbox"  [(ngModel)]="filter.checkbox" name="checkbox">Checkbox
-            <input type="checkbox"  [(ngModel)]="filter.radioButton" name="radiobutton">Radio Button
-            <input type="checkbox"  [(ngModel)]="filter.selectbox" name="selectbox"> Select Box
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
+            <input type="checkbox"  [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
           </div>
         </div>
 
@@ -43,12 +43,12 @@
         <br/>
 
         <table>
-          <tr *ngFor="let filter of filters">
+          <tr *ngFor="let filter_type of filter.filter_types">
             <td>
-              <input type="text" class="form-control" placeholder="Filter Name">
+              <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
             </td>&nbsp;&nbsp;
             <td>
-              <button class="btn btn-primary btn-sm">Edit</button>
+              <!-- <button class="btn btn-primary btn-sm">Edit</button> -->
               <button class="btn btn-danger btn-sm">Delete</button>
             </td><br><br/> 
           </tr>

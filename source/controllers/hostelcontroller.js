@@ -8,7 +8,8 @@ var hostelService = require('../services/hostelService')
  * Get All Hostel Data
  */
 function getAllHostel(req, res) {
-    return hostelService.getAllHostel(req, res)
+    var returnHostelData = hostelService.getAllHostel(req, res)
+    return returnHostelData;
 }
 
 /**

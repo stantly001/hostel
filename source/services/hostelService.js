@@ -2,7 +2,7 @@ var multer = require('multer')
 var path = require('path');
 var bodyParser = require('body-parser');
 var randomstring = require("randomstring");
-
+var fs = require('fs');
 //Mongoose Models
 var hostel = require('../models/hostel');
 var hostelVisuals = require('../models/hostelImg');
@@ -25,18 +25,48 @@ function getAllHostel(req, res) {
         }
         else {
             //res.send(data)
+            data.forEach(function (val, k) {
+                val.images.forEach(function (img, k) {
+                    img.encodeImg = converImageUrlTOBase64(img)
+                    console.log(converImageUrlTOBase64(img))
+                    //res.send(img.url);
+                })
+            })
             return res.json(data);
         }
     })
-    // hostel.find(function (err, data) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         return res.json(data);
-    //     }
-    // })
 }
+function converImageUrlTOBase64(img) {
+    // var url = "test"
+    // var url = fs.readFile(img.url, (err, data) => {
+
+    //     //error handle
+    //     if (err) res.status(500).send(err);
+
+    //     //get image file extension name
+    //     let extensionName = path.extname(img.url);
+
+    //     //convert image file to base64-encoded string
+    //     let base64Image = new Buffer(data, 'binary').toString('base64');
+
+    //     //combine all strings
+    //     let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
+    //     // console.log(imgSrcString)
+    //   return  url = imgSrcString
+    //     //send image src string into jade compiler
+    //     //res.render('index', {imgSrcString});
+    // })
+    // return url
+}
+// hostel.find(function (err, data) {
+//     if (err) {
+//         console.log(err);
+//     }
+//     else {
+//         return res.json(data);
+//     }
+// })
+
 
 
 /**
