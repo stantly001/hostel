@@ -39,7 +39,7 @@
                 <td>{{x.street}}</td>
                 <td>{{x.email}}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm" click=update()>Edit</button>
+                  <button class="btn btn-primary btn-sm" (click)="update(x,i);clicked=true">Edit</button>
                   <button class="btn btn-danger btn-sm" (click)="delete(x,i)">Delete</button>
                 </td>
               </tr>
