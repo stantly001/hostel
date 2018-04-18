@@ -15,6 +15,8 @@ routes.route('/hostel/visuals').get(hostelControllers.getAllImagesAndVideos);
 routes.route('/hostel/getHostelById/:hostelId').get(hostelControllers.getHostelById);
 routes.route('/hostel/update/:hostelId').put(hostelControllers.updateHostelById);
 routes.route('/hostel/removeHostel/:hostelId').delete(hostelControllers.removeHostelById);
+routes.route('/hostel/imageUrl').get(hostelControllers.getImageFromDirectory)
+//http://localhost:4000/hms/hostel/imageUrl?imgUrl=../hmsDoc/visuals/image_G0oXcNHMaaquGxf73Ousw0LRrwr4lFBk_images.jpeg
 
 /**
  * Filter Routes
