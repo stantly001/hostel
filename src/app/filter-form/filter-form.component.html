@@ -1,3 +1,62 @@
-<p>
-  filter-form works!
-</p>
+<form novalidate class="form-horizontal">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+          <ul id="sidebar" class="nav nav-stacked ">
+              <li><a href="#" class="menu-item">Admin</a></li>
+              <li><a href="#" class="menu-item">Filter</a></li>
+          </ul>
+      </div>
+      <div class="col-sm-9 add-form">
+        <div class="form-group">
+          <label class="col-sm-2">Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" 
+            placeholder="File Name" [(ngModel)]="filter.field_name" name="fileName">
+          </div>
+        </div>
+
+        <!-- <input type="checkbox" [(ngModel)]="subtitle"> -->
+
+        <div class="form-group">
+          <label class="col-sm-2">Subtitle</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Subtitle"  [(ngModel)]="filter.sub_title" name="subtitle">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2">Filter UI Type</label>
+          <div class="col-sm-10">
+            <input type="checkbox"  [(ngModel)]="filter.textbox" name="textbox">Textbox
+            <input type="checkbox"  [(ngModel)]="filter.slider" name="slider">Slider
+            <input type="checkbox"  [(ngModel)]="filter.datePicker" name="datePicker">Date Picker
+            <input type="checkbox"  [(ngModel)]="filter.checkbox" name="checkbox">Checkbox
+            <input type="checkbox"  [(ngModel)]="filter.radioButton" name="radiobutton">Radio Button
+            <input type="checkbox"  [(ngModel)]="filter.selectbox" name="selectbox"> Select Box
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-sm" (click)="addFilter()">+</button>
+        <br>
+        <br/>
+
+        <table>
+          <tr *ngFor="let filter of filters">
+            <td>
+              <input type="text" class="form-control" placeholder="Filter Name">
+            </td>&nbsp;&nbsp;
+            <td>
+              <button class="btn btn-primary btn-sm">Edit</button>
+              <button class="btn btn-danger btn-sm">Delete</button>
+            </td><br><br/> 
+          </tr>
+        </table>
+
+        <button class="btn btn-success btn-save" (click)="save(filter)">Save</button>
+
+      </div>
+    </div>
+  </div>
+</form>

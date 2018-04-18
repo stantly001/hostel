@@ -30,7 +30,7 @@ function getAllFilters(req, res) {
  */
 function addFilter(req, res) {
     var filterData = new filter(req.body);
-    filterData.post()
+    filterData.save()
         .then(data => {
             return res.status('200').json({ 'message': 'Hostel added successfully', 'data': data })
         })

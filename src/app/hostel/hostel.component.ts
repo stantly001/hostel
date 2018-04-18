@@ -51,11 +51,14 @@ export class HostelComponent implements OnInit {
     console.log(this._globals.baseAppUrl)
   }
 
+  
   getData(): void {
     this._httpDataService.getAllHostelData().subscribe(
       data => this.hostels = data,
       error => this.errorMessage = <any>error)
+      console.log(this.hostels);
   }
+  
 
   onFileSelected = (event) => {
     this.selectedFile = <File>event.target.files[0];
@@ -75,9 +78,35 @@ export class HostelComponent implements OnInit {
   save = (hostel) => {
     this._httpDataService.addHosteldata(hostel).subscribe(
       data => {
-        // this.getData()
+        this.getData()
       },
       error => this.errorMessage = <any>error)
   }
+
+  delete = (x,index) =>{
+    console.log(x);
+    this._httpDataService.deleteHosteldata(x).subscribe(
+      data => {
+        this.hostels.splice(index,1);
+        // console.log(x)
+      },
+      error => this.errorMessage = <any>error)
+    //  this.hostels.splice(i,1);
+    //  console.log(i);
+  }
+
+  // update = (x,index) =>{
+  //   console.log(x);
+  //   this._httpDataService.updateHosteldata(x).subscribe(
+  //     data => {
+  //       this.hostels=index;
+  //       // console.log(x)
+  //     },
+  //     error => this.errorMessage = <any>error)
+  //   //  this.hostels.splice(i,1);
+  //   //  console.log(i);
+  // }
+
+
 
 }

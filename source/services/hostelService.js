@@ -293,9 +293,11 @@ function removeHostelById(id, res) {
         }
         else {
             var returnHostelImg = getAllImagesByHostelId(id);
-            returnHostelImg.forEach(function (val, key) {
-                removeHostelImgById(val._id)
-            })
+            if (returnHostelImg) {
+                returnHostelImg.forEach(function (val, key) {
+                    removeHostelImgById(val._id)
+                })
+            }
             res.json({ 'success': 'Successfully removed', 'data': data });
         }
     });

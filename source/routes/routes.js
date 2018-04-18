@@ -14,15 +14,15 @@ routes.route('/hostel/writeByUploadFile').post(hostelControllers.onUploadFile);
 routes.route('/hostel/visuals').get(hostelControllers.getAllImagesAndVideos);
 routes.route('/hostel/getHostelById/:hostelId').get(hostelControllers.getHostelById);
 routes.route('/hostel/update/:hostelId').put(hostelControllers.updateHostelById);
-routes.route('/hostel/removeHostel/:hostelId').get(hostelControllers.removeHostelById);
+routes.route('/hostel/removeHostel/:hostelId').delete(hostelControllers.removeHostelById);
 
 /**
  * Filter Routes
  */
 routes.route('/filter').get(filterController.getAllFilters);
-routes.route('/filter/add').get(filterController.addFilter)
-routes.route('/filter/update/:filterId').get(filterController.updateFilterById);
-routes.route('/filter/remove/:filterId').get(filterController.removeFilterById);
+routes.route('/filter/add').post(filterController.addFilter)
+routes.route('/filter/update/:filterId').put(filterController.updateFilterById);
+routes.route('/filter/remove/:filterId').delete(filterController.removeFilterById);
 
 
 
