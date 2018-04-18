@@ -17,9 +17,9 @@
           </div>
         </div>
 
-        <!-- <input type="checkbox" [(ngModel)]="subtitle"> -->
+        <input #textbox type="checkbox" [(ngModel)]="subtitle" unchecked>
 
-        <div class="form-group">
+        <div class="form-group" *ngIf="textbox.checked">
           <label class="col-sm-2">Subtitle</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Subtitle"  [(ngModel)]="filter.sub_title" name="subtitle">
