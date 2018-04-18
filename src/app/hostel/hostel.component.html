@@ -7,6 +7,10 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
+          <ul id="sidebar" class="nav nav-stacked ">
+              <li><a href="#" class="menu-item">Admin</a></li>
+              <li><a href="#" class="menu-item">Filter</a></li>
+          </ul>
       </div>
       <div class="col-sm-9">
 
@@ -43,7 +47,13 @@
           </table>
         </div>
 
-        <div *ngIf="clicked add-form">
+        <div *ngIf="clicked" class="add-form">
+
+          <div class="col-md-12">
+            <div class="pull-right">
+              <button class="btn btn-primary btn-sm" (click)="back =!back">Back</button>
+            </div>
+          </div>
 
           <div class="form-row row">
 
@@ -79,85 +89,85 @@
 
               <div class="col-md-4 mb-3">
                 <label>Street</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street">
+                <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street" placeholder="Street">
               </div>
 
               <div class="col-md-4 mb-3">
                 <label>Property Type</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type">
+                <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type" placeholder="Property Type">
               </div>
             </div>
 
             <div class="col-md-12">
               <div class="col-md-4 mb-3">
                 <label> Email</label>
-                <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email">
+                <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email" placeholder="Email">
               </div>
 
               <div class="col-md-4 mb-3">
                 <label> Url</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url">
+                <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url" placeholder="Url">
               </div>
               <div class="col-md-4 mb-3">
                 <label> Cancellation Policy</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy">
+                <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy" placeholder="Cancellation Policy">
               </div>
             </div>
 
             <div class="col-md-12">
               <div class="col-md-4 mb-3">
                 <label>Longitude</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude">
+                <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude" placeholder="Longitude">
               </div>
               <div class="col-md-4 mb-3">
                 <label>Latitude</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude">
+                <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude" placeholder="Latitude">
               </div>
               <div class="col-md-4 mb-3">
                 <label>Language</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language">
+                <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language" placeholder="Language">
               </div>
             </div>
 
             <div class="col-md-12">
               <div class="col-md-4 mb-3">
                 <label>Default Currency</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency">
+                <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
               </div>
               <div class="col-md-4 mb-3">
                 <label> City Rating</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.city_rating" name="city_rating">
+                <input type="text" class="form-control" [(ngModel)]="hostel.city_rating" name="city_rating" placeholder="City Rating">
               </div>
               <div class="col-md-4 mb-3">
                 <label>State Rating</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating">
+                <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating" placeholder="State Rating">
               </div>
             </div>
 
             <div class="col-md-12">
               <div class="col-md-4 mb-3">
                 <label>National Rating</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating">
+                <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating" placeholder="National Rating">
               </div>
 
               <div class="col-md-4 mb-3">
                 <label>World Rating</label>
-                <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating">
+                <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating" placeholder="World Rating">
               </div>
             </div>
 
             <div class="col-md-12">
               <div class="col-md-4 mb-3">
                 <label>Property Description</label>
-                <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3"></textarea>
+                <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3" placeholder="Property Description"></textarea>
               </div>
               <div class="col-md-4 mb-3">
                 <label> Things to Note</label>
-                <textarea name="things_to_note" class="form-control" [(ngModel)]="hostel.things_to_note" cols="30" rows="3"></textarea>
+                <textarea name="things_to_note" class="form-control" [(ngModel)]="hostel.things_to_note" cols="30" rows="3" placeholder="Things to Note"></textarea>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Policy</label>
-                <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3"></textarea>
+                <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3" placeholder="Policy"></textarea>
                 <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
               </div>
             </div>
@@ -293,7 +303,7 @@
             </div>
             <div class="col-md-12">
               <div class="col-md-12 mb-3">
-                <button class="btn btn-primary" (click)="save(hostel)">Submit</button>
+                <button class="btn btn-success" (click)="save(hostel)">Submit</button>
               </div>
             </div>
 

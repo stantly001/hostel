@@ -107,4 +107,6 @@ export class HostelComponent implements OnInit {
   //   //  console.log(i);
   // }
 
+
+
 }

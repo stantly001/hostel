@@ -32,6 +32,17 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  addFilterdata(filter: Hostel): Observable<Hostel> {
+    return this.http.post(this.baseUrl + "/filter/add", filter)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  // addFilterdata(filter: Filter): Observable<Filter> {
+  //   return this.http.post(this.baseUrl + "/filter/add", filter)
+  //     .map(this.extractData)
+  //     .catch(this.handleErrorObservable);
+  // }
+
   deleteHosteldata(hostel: Hostel): Observable<Hostel> {
     return this.http.delete(this.baseUrl + "/hostel/removeHostel/"+hostel._id)
       .map(this.extractData)
