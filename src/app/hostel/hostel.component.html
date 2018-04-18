@@ -31,16 +31,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let x of hostels;let i=index;">
-                <td>{{x.name}}</td>
-                <td>{{x.country}}</td>
-                <td>{{x.city}}</td>
-                <td>{{x.state}}</td>
-                <td>{{x.street}}</td>
-                <td>{{x.email}}</td>
+              <tr *ngFor="let user of hostels;let i=index;">
+                <td>{{user.name}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.state}}</td>
+                <td>{{user.street}}</td>
+                <td>{{user.email}}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm" (click)="update(x,i);clicked=true">Edit</button>
-                  <button class="btn btn-danger btn-sm" (click)="delete(x,i)">Delete</button>
+                  <button class="btn btn-primary btn-sm" (click)="update(user,i);clicked=true">Edit</button>
+                  <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -303,7 +303,7 @@
             </div>
             <div class="col-md-12">
               <div class="col-md-12 mb-3">
-                <button class="btn btn-success" (click)="save(hostel)">Submit</button>
+                <button class="btn btn-success" (click)="save(hostel);clicked=false;">Submit</button>
               </div>
             </div>
 
