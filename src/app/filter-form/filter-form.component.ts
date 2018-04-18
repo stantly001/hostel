@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Globals } from '../utils/globals';
-
 import { HttpdataService } from '../service/httpdata.service';
 
 @Component({
@@ -11,9 +9,10 @@ import { HttpdataService } from '../service/httpdata.service';
   providers: [Globals, HttpdataService]
 })
 export class FilterFormComponent implements OnInit {
+  filters: any[];
   subtitle: boolean;
   errorMessage: string;
-  filter={};
+  filter={filter_types:[]};
   constructor(private _globals: Globals, private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
@@ -28,9 +27,8 @@ export class FilterFormComponent implements OnInit {
       console.log(this.filters);
   }
 
-  filters=[];
   addFilter(){
-    this.filters.push({name:"arun"})
+    this.filter.filter_types.push({filter_name:''})
   }
   
 filterOne=<any>[];

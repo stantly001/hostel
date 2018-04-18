@@ -32,7 +32,7 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
-  addFilterdata(filter: Hostel): Observable<Hostel> {
+  addFilterdata(filter: any): Observable<any> {
     return this.http.post(this.baseUrl + "/filter/add", filter)
       .map(this.extractData)
       .catch(this.handleErrorObservable);

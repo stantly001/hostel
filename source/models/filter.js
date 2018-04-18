@@ -4,32 +4,32 @@ var Schema = mongoose.Schema;
 
 var filter = new Schema({
     // _id: Schema.Types.ObjectId,
-    filter: [{
-        field_name: {
+    // filter: [{
+    field_name: {
+        type: String
+    },
+    disp_name: {
+        type: String
+    },
+    sub_title: {
+        type: String
+    },
+    view_type: {
+        type: String
+    },
+    filter_types: [{
+        filter_name: {
             type: String
         },
         disp_name: {
             type: String
         },
-        sub_title: {
-            type: String
+        start: {
+            type: Number
         },
-        view_type:{
-            type: String
-        },
-        filter_types: [{
-            field_name: {
-                type: String
-            },
-            disp_name: {
-                type: String
-            },
-            start:{
-                type: Number
-            },
-            end: Number
-        }]
+        end: Number
     }],
+    // }],
     created_date: {
         type: Date,
         default: Date.now
