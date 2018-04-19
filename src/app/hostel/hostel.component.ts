@@ -76,16 +76,25 @@ export class HostelComponent implements OnInit {
   }
 
   save = (hostel) => {
-    this._httpDataService.addHosteldata(hostel).subscribe(
-      data => {
-        this.getData()
-      },
-      error => this.errorMessage = <any>error)
+    if (hostel._id) {
+      this._httpDataService.updateHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    } else {
+      this._httpDataService.addHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    }
   }
 
-  delete = (x, index) => {
-    console.log(x);
-    this._httpDataService.deleteHosteldata(x).subscribe(
+  delete = (user, index) => {
+    console.log(user);
+    console.log(index);
+    this._httpDataService.deleteHosteldata(user).subscribe(
       data => {
         this.hostels.splice(index, 1);
         // console.log(x)
@@ -95,12 +104,9 @@ export class HostelComponent implements OnInit {
     //  console.log(i);
   }
 
-//   update(x,index) {
-//     this._httpDataService.updateHosteldata(x).subscribe(
-//       data => {
-//         this.hostel = index;
-//       },
-//       error => this.errorMessage = <any>error)
-// }
+  update(user, index) {
+    this.hostel = user;
+    console.log(user);
+  }
 
 }
