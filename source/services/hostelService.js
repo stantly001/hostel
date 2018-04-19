@@ -23,13 +23,13 @@ function getAllHostel(req, res) {
         if (err) {
             console.log(err);
         }
-        else {            
+        else {
             return res.json(data);
         }
     })
 }
 function convertImageUrlTOBase64(imgUrl, res) {
-console.log(imgUrl)
+    console.log(imgUrl)
 
     var url = fs.readFile(imgUrl, (err, data) => {
 
@@ -232,30 +232,33 @@ function getHostelById(id, res) {
  * @param {*} res 
  *  Update hostelData by HostelId
  */
-function updateHostelById(id, hostelData, res) {
+function updateHostelById(id, req, res) {
+    let hostelData = req.body
     var updateData = filterHostelModel(hostelData)
+    console.log(id)
     hostel.findByIdAndUpdate(id, updateData, { new: true }).then(data => {
         if (!data) {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.noteId
+                message: "Note not found with id " + req.params.hostelId
             });
         }
-
-        hostelData.images.forEach(function (val, k) {
-            var hostelVisualObj = filterHostelVisualsModel(res)
-            hostelVisuals.findByIdAndUpdate(id, hostelVisualObj, { new: true })
-            post.images.push(hostelVisualObj)
-        })
+        if (hostelData.images) {
+            hostelData.images.forEach(function (val, k) {
+                var hostelVisualObj = filterHostelVisualsModel(res)
+                hostelVisuals.findByIdAndUpdate(id, hostelVisualObj, { new: true })
+                post.images.push(hostelVisualObj)
+            })
+        }
         hostel.save()
         return res.json(data)
     }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.noteId
+                message: "Note not found with id " + req.params.hostelId
             });
         }
         return res.status(500).send({
-            message: "Error updating note with id " + req.params.noteId
+            message: "Error updating note with id " + req.params.hostelId
         });
     })
 }

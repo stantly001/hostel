@@ -50,6 +50,7 @@ export class HttpdataService {
   }
 
   updateHosteldata(hostel: Hostel): Observable<Hostel> {
+    console.log(hostel)
     return this.http.put(this.baseUrl + "/hostel/update/"+hostel._id, hostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);

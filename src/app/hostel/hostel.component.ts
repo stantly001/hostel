@@ -76,12 +76,19 @@ export class HostelComponent implements OnInit {
   }
 
   save = (hostel) => {
-    console.log(hostel);
-    this._httpDataService.addHosteldata(hostel).subscribe(
-      data => {
-        this.getData()
-      },
-      error => this.errorMessage = <any>error)
+    if (hostel._id) {
+      this._httpDataService.updateHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    } else {
+      this._httpDataService.addHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    }
   }
 
   delete = (user, index) => {
