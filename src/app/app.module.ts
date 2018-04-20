@@ -30,7 +30,8 @@ import { ViewComponent } from './view/view.component';
 
 
 import { DefaultsService } from './services/defaults.service';
-import { NgxGalleryModule } from 'ngx-gallery'
+import { NgxGalleryModule } from 'ngx-gallery';
+import { RegisterComponent } from './register/register.component'
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NgxGalleryModule } from 'ngx-gallery'
     ListComponent,
     ListContentComponent,
     ListReviewsComponent,
-    ViewComponent
+    ViewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

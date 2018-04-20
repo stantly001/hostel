@@ -3,58 +3,101 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-          <ul id="sidebar" class="nav nav-stacked ">
-              <li><a routerLink="../../admin/addHostel" data-hover="ADMIN" class="menu-item">Admin</a></li>
-              <li><a routerLink="../../admin/filter" data-hover="Filter" class="menu-item">Filter</a></li>
-          </ul>
+        <ul id="sidebar" class="nav nav-stacked ">
+          <li>
+            <a routerLink="../../admin/addHostel" data-hover="ADMIN" class="menu-item">Admin</a>
+          </li>
+          <li>
+            <a routerLink="../../admin/filter" data-hover="Filter" class="menu-item">Filter</a>
+          </li>
+        </ul>
       </div>
       <div class="col-sm-9 add-form">
-        <div class="form-group">
-          <label class="col-sm-2">Title</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" 
-            placeholder="File Name" [(ngModel)]="filter.field_name" name="fileName">
-          </div> 
+
+        <div class="pull-right add-button" [hidden]="clicked">
+          <button class="btn btn-primary btn-sm" (click)="clicked=true">Add</button>
+        </div>
+        <div class="table table-responsive" [hidden]="clicked">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Filter UI Type</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filter;let i=index;">
+                <td>{{user.field_name}}</td>
+                <td>{{user.sub_title}}</td>
+                <td>{{user.view_type}}</td>
+                <td>
+                  <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true">Edit</button>
+                  <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <input #textbox type="checkbox" [(ngModel)]="subtitle" unchecked>
-
-        <div class="form-group" *ngIf="textbox.checked">
-          <label class="col-sm-2">Subtitle</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Subtitle"  [(ngModel)]="filter.sub_title" name="subtitle">
+        <div *ngIf="clicked">
+          <div class="add-form">
+            <div class="col-md-12">
+              <div class="pull-right">
+                <button class="btn btn-primary btn-sm" (click)="clicked=false">Back</button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="col-sm-2">Filter UI Type</label>
-          <div class="col-sm-10">
-            <input type="radio"  [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
-            <input type="radio"  [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
-            <input type="radio"  [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
-            <input type="radio"  [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
-            <input type="radio"  [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
-            <input type="radio"  [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
+          <div class="form-group">
+            <label class="col-sm-2">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="File Name" [(ngModel)]="filter.field_name" name="fileName">
+            </div>
           </div>
+
+          <input #textbox type="checkbox" [(ngModel)]="subtitle" unchecked>
+
+          <div class="form-group" *ngIf="textbox.checked">
+            <label class="col-sm-2">Subtitle</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Subtitle" [(ngModel)]="filter.sub_title" name="subtitle">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2">Filter UI Type</label>
+            <div class="col-sm-10">
+              <input type="radio" [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
+              <input type="radio" [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
+              <input type="radio" [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
+              <input type="radio" [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
+              <input type="radio" [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
+              <input type="radio" [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-sm" (click)="addFilter()">+</button>
+          <br>
+          <br/>
+
+          <table>
+            <tr *ngFor="let filter_type of filter.filter_types">
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
+              </td>&nbsp;&nbsp;
+              <td>
+                <!-- <button class="btn btn-primary btn-sm">Edit</button> -->
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </td>
+              <br>
+              <br/>
+            </tr>
+          </table>
+
+          <button class="btn btn-success btn-save" (click)="save(filter);clicked=false;">Save</button>
         </div>
-
-        <button class="btn btn-primary btn-sm" (click)="addFilter()">+</button>
-        <br>
-        <br/>
-
-        <table>
-          <tr *ngFor="let filter_type of filter.filter_types">
-            <td>
-              <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
-            </td>&nbsp;&nbsp;
-            <td>
-              <!-- <button class="btn btn-primary btn-sm">Edit</button> -->
-              <button class="btn btn-danger btn-sm">Delete</button>
-            </td><br><br/> 
-          </tr>
-        </table>
-
-        <button class="btn btn-success btn-save" (click)="save(filter)">Save</button>
 
       </div>
     </div>

@@ -32,26 +32,15 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
-  addFilterdata(filter: any): Observable<any> {
-    return this.http.post(this.baseUrl + "/filter/add", filter)
-      .map(this.extractData)
-      .catch(this.handleErrorObservable);
-  }
-  // addFilterdata(filter: Filter): Observable<Filter> {
-  //   return this.http.post(this.baseUrl + "/filter/add", filter)
-  //     .map(this.extractData)
-  //     .catch(this.handleErrorObservable);
-  // }
-
   deleteHosteldata(hostel: Hostel): Observable<Hostel> {
-    return this.http.delete(this.baseUrl + "/hostel/removeHostel/"+hostel._id)
+    return this.http.delete(this.baseUrl + "/hostel/removeHostel/" + hostel._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
   updateHosteldata(hostel: Hostel): Observable<Hostel> {
     console.log(hostel)
-    return this.http.put(this.baseUrl + "/hostel/update/"+hostel._id, hostel)
+    return this.http.put(this.baseUrl + "/hostel/update/" + hostel._id, hostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -66,6 +55,42 @@ export class HttpdataService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+
+  //Filters
+
+  addFilterdata(filter: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/filter/add", filter)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  deleteFilterdata(filter: any): Observable<Hostel> {
+    return this.http.delete(this.baseUrl + "/filter/remove/" + filter._id)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  updateFilterdata(filter: any): Observable<any> {
+    console.log(filter)
+    return this.http.put(this.baseUrl + "/filter/update/" + filter._id, filter)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+
+  getAllRegisterData(): Observable<Hostel[]> {
+    return this.http.get(this.baseUrl + "/register")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  addRegisterdata(register: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/register/add", register)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+
 
   private extractData(res: Response) {
     let body = res;

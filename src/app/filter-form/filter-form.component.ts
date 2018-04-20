@@ -12,7 +12,7 @@ export class FilterFormComponent implements OnInit {
   filters: any[];
   subtitle: boolean;
   errorMessage: string;
-  filter={filter_types:[]};
+  filter = { filter_types: [] };
   constructor(private _globals: Globals, private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
@@ -24,24 +24,35 @@ export class FilterFormComponent implements OnInit {
     this._httpDataService.getAllHostelData().subscribe(
       data => this.filters = data,
       error => this.errorMessage = <any>error)
-      console.log(this.filters);
+    console.log(this.filters);
   }
 
-  addFilter(){
-    this.filter.filter_types.push({filter_name:''})
+  addFilter() {
+    this.filter.filter_types.push({ filter_name: '' })
   }
-  
- 
-filterOne=<any>[];
-  
+
+  // filterOne = <any>[];
   save = (filter) => {
     console.log(filter);
-    
     this._httpDataService.addFilterdata(filter).subscribe(
       data => {
         this.getData()
       },
       error => this.errorMessage = <any>error)
+      
   }
-  
+
+  delete = (user, index) => {
+    this._httpDataService.deleteFilterdata(user).subscribe(
+      data => {
+        this.filters.splice(index, 1);
+      },
+      error => this.errorMessage = <any>error)
+  }
+
+  update(user, index) {
+    this.filter = user;
+    console.log(user);
+  }
+
 }
