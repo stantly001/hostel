@@ -11,3 +11,15 @@
 .ngx-datepicker-calendar-container.ngx-datepicker-position-bottom-right {
     z-index: 999;
 }
+.add-button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.add-form{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.menu-item{
+    color:black;
+}

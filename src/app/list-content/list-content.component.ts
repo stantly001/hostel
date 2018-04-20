@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {NgxGalleryOptions, NgxGalleryImage} from 'ngx-gallery';
 
 @Component({
@@ -7,11 +7,15 @@ import {NgxGalleryOptions, NgxGalleryImage} from 'ngx-gallery';
   styleUrls: ['./list-content.component.css']
 })
 export class ListContentComponent implements OnInit {
+  @Input('hostelData') hostelObj;
   galleryOptions : NgxGalleryOptions[];
   galleryImages : NgxGalleryImage[];
   constructor() { }
 
   ngOnInit() {
+    /**
+     * galleryOptions
+     */
     this.galleryOptions = [
       {
         width : '257px',
@@ -20,33 +24,7 @@ export class ListContentComponent implements OnInit {
         imageArrows : true
       }
     ];
-    this.galleryImages = [
-      {
-        small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-small.jpeg',
-        medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-medium.jpeg',
-        big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/1-big.jpeg'
-      },
-      {
-        small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-small.jpeg',
-        medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
-        big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-big.jpeg'
-      },
-      {
-        small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-small.jpeg',
-        medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-medium.jpeg',
-        big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/3-big.jpeg'
-      },
-      {
-        small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-small.jpeg',
-        medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-medium.jpeg',
-        big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/4-big.jpeg'
-      },
-      {
-        small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-small.jpeg',
-        medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-medium.jpeg',
-        big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg'
-      }
-    ]
+   
   }
 
 }

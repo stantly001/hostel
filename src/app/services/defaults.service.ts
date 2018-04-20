@@ -11,4 +11,9 @@ export class DefaultsService {
   getFilters():any {
     return this.http.get(this.BASE_URL+"filter.json").map((response:Response)=>response);
   }
+
+  getHostels():any{
+    let hostelUrl=""
+    return this.http.get(this.BASE_URL+"hostels.json").map((response:Response)=>response);
+  }
 }
