@@ -23,49 +23,30 @@ function getAllHostel(req, res) {
         if (err) {
             console.log(err);
         }
-        else {
-            //res.send(data)
-            data.forEach(function (val, k) {
-                val.images.forEach(function (img, k) {
-                    img.encodeImg = converImageUrlTOBase64(img)
-                    console.log(converImageUrlTOBase64(img))
-                    //res.send(img.url);
-                })
-            })
+        else {            
             return res.json(data);
         }
     })
 }
-function converImageUrlTOBase64(img) {
-    // var url = "test"
-    // var url = fs.readFile(img.url, (err, data) => {
+function convertImageUrlTOBase64(imgUrl, res) {
+console.log(imgUrl)
 
-    //     //error handle
-    //     if (err) res.status(500).send(err);
+    var url = fs.readFile(imgUrl, (err, data) => {
 
-    //     //get image file extension name
-    //     let extensionName = path.extname(img.url);
+        //error handle
+        if (err) res.status(500).send(err);
 
-    //     //convert image file to base64-encoded string
-    //     let base64Image = new Buffer(data, 'binary').toString('base64');
+        //get image file extension name
+        let extensionName = path.extname(imgUrl);
 
-    //     //combine all strings
-    //     let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
-    //     // console.log(imgSrcString)
-    //   return  url = imgSrcString
-    //     //send image src string into jade compiler
-    //     //res.render('index', {imgSrcString});
-    // })
-    // return url
+        //convert image file to base64-encoded string
+        let base64Image = new Buffer(data, 'binary').toString('base64');
+
+        //combine all strings
+        let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
+        res.send(imgSrcString)
+    })
 }
-// hostel.find(function (err, data) {
-//     if (err) {
-//         console.log(err);
-//     }
-//     else {
-//         return res.json(data);
-//     }
-// })
 
 
 
@@ -316,7 +297,7 @@ function removeHostelImgById(hostelImgId) {
 
 var hostelService = {
     getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos,
-    getHostelById, updateHostelById, removeHostelById
+    getHostelById, updateHostelById, removeHostelById, convertImageUrlTOBase64
 };
 
 module.exports = hostelService;

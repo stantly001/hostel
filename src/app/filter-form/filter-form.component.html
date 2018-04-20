@@ -4,37 +4,36 @@
     <div class="row">
       <div class="col-sm-3">
           <ul id="sidebar" class="nav nav-stacked ">
-              <li><a href="#" class="menu-item">Admin</a></li>
-              <li><a href="#" class="menu-item">Filter</a></li>
+              <li><a routerLink="../../admin/addHostel" data-hover="ADMIN" class="menu-item">Admin</a></li>
+              <li><a routerLink="../../admin/filter" data-hover="FILTER" class="menu-item">Filter</a></li>
           </ul>
       </div>
       <div class="col-sm-9 add-form">
         <div class="form-group">
           <label class="col-sm-2">Title</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" 
-            placeholder="File Name" [(ngModel)]="filter.field_name" name="fileName">
-          </div>
-        </div>
-
-        <!-- <input type="checkbox" [(ngModel)]="subtitle"> -->
+            <input type="text" class="form-control" [(ngModel)]="filter.field_name" name="field_name" placeholder="Title" >
+          </div> 
+        </div>        
 
         <div class="form-group">
           <label class="col-sm-2">Subtitle</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Subtitle"  [(ngModel)]="filter.sub_title" name="subtitle">
+          <input #subTitle type="checkbox" [(ngModel)]="subtitle" name="subtitle" unchecked>
+          <div class="col-sm-10" *ngIf="subTitle.checked">
+            <input type="text" class="form-control" placeholder="Subtitle" 
+             [(ngModel)]="filter.sub_title" name="sub_title">
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2">Filter UI Type</label>
           <div class="col-sm-10">
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
-            <input type="checkbox"  [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
+            <input type="radio"  [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
+            <input type="radio"  [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
+            <input type="radio"  [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
+            <input type="radio"  [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
+            <input type="radio"  [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
+            <input type="radio"  [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
           </div>
         </div>
 
@@ -43,7 +42,7 @@
         <br/>
 
         <table>
-          <tr *ngFor="let filter_type of filter.filter_types">
+          <tr *ngFor="let filter_type of filter.filter_types; let i = index">
             <td>
               <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
             </td>&nbsp;&nbsp;
@@ -53,9 +52,7 @@
             </td><br><br/> 
           </tr>
         </table>
-
         <button class="btn btn-success btn-save" (click)="save(filter)">Save</button>
-
       </div>
     </div>
   </div>

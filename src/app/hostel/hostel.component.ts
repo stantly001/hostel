@@ -13,7 +13,7 @@ import { HttpdataService } from '../service/httpdata.service';
 export class HostelComponent implements OnInit {
   errorMessage: string;
   hostels: Hostel[];
-  hostel = {images:[]};
+  hostel = { images: [] };
   uploadedPath = {}
   selectedFile: File = null;
   countries = [
@@ -51,14 +51,14 @@ export class HostelComponent implements OnInit {
     console.log(this._globals.baseAppUrl)
   }
 
-  
+
   getData(): void {
     this._httpDataService.getAllHostelData().subscribe(
       data => this.hostels = data,
       error => this.errorMessage = <any>error)
-      console.log(this.hostels);
+    console.log(this.hostels);
   }
-  
+
 
   onFileSelected = (event) => {
     this.selectedFile = <File>event.target.files[0];
@@ -83,11 +83,11 @@ export class HostelComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
-  delete = (x,index) =>{
+  delete = (x, index) => {
     console.log(x);
     this._httpDataService.deleteHosteldata(x).subscribe(
       data => {
-        this.hostels.splice(index,1);
+        this.hostels.splice(index, 1);
         // console.log(x)
       },
       error => this.errorMessage = <any>error)
@@ -95,18 +95,12 @@ export class HostelComponent implements OnInit {
     //  console.log(i);
   }
 
-  // update = (x,index) =>{
-  //   console.log(x);
-  //   this._httpDataService.updateHosteldata(x).subscribe(
-  //     data => {
-  //       this.hostels=index;
-  //       // console.log(x)
-  //     },
-  //     error => this.errorMessage = <any>error)
-  //   //  this.hostels.splice(i,1);
-  //   //  console.log(i);
-  // }
-
-
+//   update(x,index) {
+//     this._httpDataService.updateHosteldata(x).subscribe(
+//       data => {
+//         this.hostel = index;
+//       },
+//       error => this.errorMessage = <any>error)
+// }
 
 }
