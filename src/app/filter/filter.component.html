@@ -1,25 +1,52 @@
 <div class="col-md-3 search-grid-left">
-	<div class="single-star-bottom" role="tablist" aria-multiselectable="true">
-		<a class="pull-left" (click)="availability=!availability">
-			<i class="fa" [class.fa-plus]="availability==true" [class.fa-minus]="availability==false"></i>
+	<div class="single-star-bottom" role="tablist" aria-multiselectable="true" *ngFor="let filterObj of filters">
+		<a class="pull-left" (click)="filterObj.isFilter=!filterObj.isFilter">
+			<i class="fa" [class.fa-plus]="filterObj.isFilter==true" [class.fa-minus]="filterObj.isFilter==false||!filterObj.isFilter"></i>
 		</a>
-		<h3 class="sear-head">Availability</h3>
-		<div class="panel-collapse" [class.collapse]="availability==true">
+		<h3 class="sear-head">{{filterObj.field_name}}</h3>
+		<div *ngIf="filterObj.view_type=='slider'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">
+			<nouislider [connect]="true" [min]="0" [max]="1000" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
+			<label for="" class="hostel-label">Range From Rs.{{prices?.rangeFrom}} to Rs.{{prices?.rangeTo}}</label>
+		</div>
+
+		<div *ngIf="filterObj.view_type=='checkBox'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">
+			<div class="room-category-name">{{filterObj.sub_title}}</div>
+			<div class="room-types" *ngFor="let type of filterObj.filter_types">
+				<input type="checkbox" id="{{type.filter_name}}" value="">
+				<label for="{{type.filter_name}}">
+					<span></span>
+					{{type.filter_name}}
+				</label>
+			</div>
+		</div>
+		<div *ngIf="filterObj.view_type=='selectBox'" class="panel-collapse" [class.collapse]="isLocation==true">
+			<div class="sel">
+				<select name="" class="sel form-control">
+					<option value="">Any Distance</option>
+					<option *ngFor="let location of locations" value="{{location.locationName}}">
+						{{location.locationName}}
+					</option>
+				</select>
+			</div>
+		</div>
+
+
+		<!-- <div class="panel-collapse" [class.collapse]="availability==true">
 			<div *ngFor="let availability of availabilities">
 				<input type="checkbox" id="{{availability.availabilityFieldName}}" value="">
 				<label for="{{availability.availabilityFieldName}}">
 					<span></span>
 					{{availability.availabilityDisplayName}}
 				</label>
-			</div>
-			<!--ngFor -->
-		</div>
+			</div> -->
+		<!--ngFor -->
+		<!-- </div> -->
 		<!-- panel-collapse -->
 	</div>
 	<!-- single-start-bottom -->
 
 	<!-- Price Filter -->
-	<div class="range">
+	<!-- <div class="range">
 		<a class="pull-left" (click)="isPrice=!isPrice">
 			<i class="fa" [class.fa-plus]="isPrice==true" [class.fa-minus]="isPrice==false"></i>
 		</a>
@@ -28,10 +55,10 @@
 			<nouislider [connect]="true" [min]="0" [max]="1000" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
 			<label for="" class="hostel-label">Range From Rs.{{prices.rangeFrom}} to Rs.{{prices.rangeTo}}</label>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Rating Filter -->
-	<div class="range">
+	<!-- <div class="range">
 		<a class="pull-left" (click)="isRating=!isRating">
 			<i class="fa" [class.fa-plus]="isRating==true" [class.fa-minus]="isRating==false"></i>
 		</a> 
@@ -40,10 +67,10 @@
 			<nouislider [connect]="true" [min]="0" [max]="100" [step]="1" [(ngModel)]="ratingRange" (change)="ratingChange($event)"></nouislider>
 			<label for="" class="hostel-label">Range From {{ratings.ratingFrom}}% to {{ratings.ratingTo}}%</label>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Property Filter -->
-	<div class="single-star-bottom">
+	<!-- <div class="single-star-bottom">
 		<a class="pull-left" (click)="isProperty=!isProperty">
 			<i class="fa" [class.fa-plus]="isProperty==true" [class.fa-minus]="isProperty==false"></i>
 		</a>
@@ -55,15 +82,15 @@
 					<span></span>
 					{{property.propertyDisplayName}}
 				</label>
-			</div>
-			<!-- ngFor -->
-		</div>
-		<!-- panel-collapse -->
-	</div>
+			</div> -->
+	<!-- ngFor -->
+	<!-- </div> -->
+	<!-- panel-collapse -->
+	<!-- </div> -->
 	<!-- single-start-bottom -->
 
 	<!-- RoomTypes Filter -->
-	<div class="single-star-bottom">
+	<!-- <div class="single-star-bottom">
 		<a class="pull-left" (click)="isRoom=!isRoom">
 			<i class="fa" [class.fa-plus]="isRoom==true" [class.fa-minus]="isRoom==false"></i>
 		</a>
@@ -78,15 +105,15 @@
 						{{type.roomDisplayName}}
 					</label>
 				</div>
-			</div>
-			<!-- ngfor-->
-		</div>
-		<!-- panel-collapse -->
-	</div>
+			</div> -->
+	<!-- ngfor-->
+	<!-- </div> -->
+	<!-- panel-collapse -->
+	<!-- </div> -->
 	<!-- single-start-bottom -->
 
 	<!-- Facilities Filter -->
-	<div class="single-star-bottom">
+	<!-- <div class="single-star-bottom">
 		<a class="pull-left" (click)="isFacilities=!isFacilities">
 			<i class="fa" [class.fa-plus]="isFacilities==true" [class.fa-minus]="isFacilities==false"></i>
 		</a>
@@ -98,15 +125,15 @@
 					<span></span>
 					{{facility.facilityDisplayName}}
 				</label>
-			</div>
-			<!-- ngFor -->
-		</div>
-		<!-- panel-collapse -->
-	</div>
+			</div> -->
+	<!-- ngFor -->
+	<!-- </div> -->
+	<!-- panel-collapse -->
+	<!-- </div> -->
 	<!-- single-star-bottom -->
 
 	<!-- Distance Filter -->
-	<div class="single-star-bottom">
+	<!-- <div class="single-star-bottom">
 		<a class="pull-left" (click)="isLocation=!isLocation">
 			<i class="fa" [class.fa-plus]="isLocation==true" [class.fa-minus]="isLocation==false"></i>
 		</a>
@@ -119,31 +146,31 @@
 						{{location.locationName}}
 					</option>
 				</select>
-			</div>
-			<!--sel-->
-			<div>
+			</div> -->
+	<!--sel-->
+	<!-- <div>
 				<label>From</label>
 				<select name="" class="sel form-control">
 					<option value="">City Center</option>
 				</select>
-			</div>
-			<!-- city center -->
-			<div>
+			</div> -->
+	<!-- city center -->
+	<!-- <div>
 				<input type="radio" name="Km">
 				<label>Kilometer</label>
-			</div>
-			<!-- kilometer -->
-			<div>
+			</div> -->
+	<!-- kilometer -->
+	<!-- <div>
 				<input type="radio" name="Km">
 				<label>Miles</label>
-			</div>
-			<!-- miles -->
-		</div>
-	</div>
+			</div> -->
+	<!-- miles -->
+	<!-- </div> -->
+	<!-- </div> -->
 	<!-- single-star-bottom -->
 
 	<!-- PaymentType filter -->
-	<div class="single-star-bottom">
+	<!-- <div class="single-star-bottom">
 		<a class="pull-left" (click)="isPayment=!isPayment">
 			<i class="fa" [class.fa-plus]="isPayment==true" [class.fa-minus]="isPayment==false"></i>
 		</a>
@@ -155,11 +182,11 @@
 					<span></span>
 					{{payment.paymentDisplayType}}
 				</label>
-			</div>
-			<!-- ngFor -->
-		</div>
-		<!-- panel-collapse -->
-	</div>
+			</div> -->
+	<!-- ngFor -->
+	<!-- </div> -->
+	<!-- panel-collapse -->
+	<!-- </div> -->
 	<!-- single-start-bottom -->
 
 	<div class="single-star-bottom">

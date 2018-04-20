@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Globals } from '../utils/globals';
+import Globals  from '../utils/globals';
 import { Hostel } from '../model/hostel';
 // import { HttpEventType } from '@angular/common/http';
 import { HttpdataService } from '../service/httpdata.service';
@@ -8,7 +8,7 @@ import { HttpdataService } from '../service/httpdata.service';
   selector: 'app-hostel',
   templateUrl: './hostel.component.html',
   styleUrls: ['./hostel.component.css'],
-  providers: [Globals, HttpdataService]
+  providers: [HttpdataService]
 })
 export class HostelComponent implements OnInit {
   errorMessage: string;
@@ -41,14 +41,14 @@ export class HostelComponent implements OnInit {
     { dispName: 'Rajasthan', fieldName: 'rajasthan' },
     { dispName: 'Bihar', fieldName: 'bihar' }
   ]
-  constructor(private _globals: Globals, private _httpDataService: HttpdataService) {
+  constructor(private _httpDataService: HttpdataService) {
 
   }
 
   ngOnInit() {
     this.getData()
     console.log(this.hostels)
-    console.log(this._globals.baseAppUrl)
+    console.log(Globals.baseAppUrl)
   }
 
 
