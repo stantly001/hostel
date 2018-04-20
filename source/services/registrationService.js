@@ -1,5 +1,3 @@
-
-
 var multer = require('multer')
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -15,14 +13,16 @@ var user = require('../models/user');
  * @param {*} res 
  * Set User Data
  */
-function setUserData(res){
-var post=new user({
-    user_name:res.user_name,
-    email:res.email,
-    primary_phone:res.primary_phone,
-    secondary_phone:res.secondary_phone,
-    password:res.password
-})
+function setUserData(res) {
+    var post = new user({
+        user_name: res.user_name,
+        email: res.email,
+        primary_phone: res.primary_phone,
+        secondary_phone: res.secondary_phone,
+        password: res.password,
+        gender: res.gender
+    })
+    return post;
 }
 
 /**
@@ -32,11 +32,42 @@ var post=new user({
  * Save User Data
  */
 function saveUser(req, res) {
-    var post =setUserData(res)
-    post.save().then(item => {
-        return res.status(200).json({ 'success': 'user added successfully', 'data': post });
+    var newUser = setUserData(req.body);
+    newUser.save().then(item => {
+        return res.status(200).json({ 'success': 'user added successfully', 'data': item });
     })
-    .catch(err => {
-        return res.status(400).send("unable to save to database");
-    });
+        .catch(err => {
+            return res.status(400).send("unable to save to database");
+        });
 }
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res
+ * Get User Details 
+ */
+function getUserDetails(req, res) {
+    user.find(function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            return res.json(data);
+        }
+    })
+    // user.find().then(function (err, data) {
+    //     console.log("data",data)
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         return res.json(data);
+    //     }
+    // })
+}
+var registrationService = {
+    saveUser, getUserDetails
+};
+
+module.exports = registrationService;

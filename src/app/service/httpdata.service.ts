@@ -6,6 +6,7 @@ import Globals from '../utils/globals';
 import { Observable } from 'rxjs/Rx';
 import { Hostel } from '../model/hostel';
 
+
 @Injectable()
 export class HttpdataService {
   baseUrl: any;
@@ -90,14 +91,14 @@ export class HttpdataService {
   }
 
 
-  getAllRegisterData(): Observable<Hostel[]> {
-    return this.http.get(this.baseUrl + "/register")
+  getAllRegisterData() {
+    return this.http.get(this.baseUrl + "/user")
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
   addRegisterdata(register: any): Observable<any> {
-    return this.http.post(this.baseUrl + "/register/add", register)
+    return this.http.post(this.baseUrl + "/user/registration", register)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
