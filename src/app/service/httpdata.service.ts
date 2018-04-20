@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Globals } from '../utils/globals';
+import Globals from '../utils/globals';
+// import Utils from './utils'
 // import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { Hostel } from '../model/hostel';
 
 @Injectable()
 export class HttpdataService {
+  baseUrl: any;
+  constructor(private http: HttpClient) {
+    this.baseUrl = Globals.baseAppUrl;
+  }
 
-  constructor(private http: HttpClient, private _globals: Globals) { }
-  readonly baseUrl = this._globals.baseAppUrl;
 
   /**
    * @param 
@@ -44,7 +47,7 @@ export class HttpdataService {
   // }
 
   deleteHosteldata(hostel: Hostel): Observable<Hostel> {
-    return this.http.delete(this.baseUrl + "/hostel/removeHostel/"+hostel._id)
+    return this.http.delete(this.baseUrl + "/hostel/removeHostel/" + hostel._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -66,6 +69,16 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  /**
+ * get All Filters
+ */
+  getAllFilters() {
+    console.log("getFilters----->")
+    return this.http.get(this.baseUrl + "/filter")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   private extractData(res: Response) {
     let body = res;
     console.log(body)
@@ -76,6 +89,8 @@ export class HttpdataService {
     console.error(error.message || error);
     return Observable.throw(error.message || error);
   }
+
+
 
 }
 

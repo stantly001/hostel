@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DefaultsService } from '../services/defaults.service';
+import { HttpdataService } from '../service/httpdata.service';
 
 @Component({
   selector: 'app-detailview',
@@ -9,9 +10,10 @@ import { DefaultsService } from '../services/defaults.service';
 })
 export class DetailviewComponent implements OnInit {
 
+  errorMessage: any;
   hostelViewObject: {};
   hostelId: any;
-  constructor(private activateRoute: ActivatedRoute, private defaultsService: DefaultsService) { }
+  constructor(private activateRoute: ActivatedRoute, private defaultsService: DefaultsService,private _httpDataService:HttpdataService) { }
 
   ngOnInit() {
     /**
@@ -33,10 +35,13 @@ export class DetailviewComponent implements OnInit {
      * get hostel object By hostelId
      */
   getHostelObjectByHostelId() {
-    this.defaultsService.getHostels().subscribe(response => {
-     this.hostelViewObject=response.filter(res=>res.id==this.hostelId)[0];
-     console.log("hostelView",this.hostelViewObject);
-     });
+    this._httpDataService.getAllHostelData().subscribe(
+      data => this.hostelViewObject = data.filter(res=>res._id==this.hostelId)[0],
+      error => this.errorMessage = <any>error)
+    // this.defaultsService.getHostels().subscribe(response => {
+    //  this.hostelViewObject=response.filter(res=>res.id==this.hostelId)[0];
+    //  console.log("hostelView",this.hostelViewObject);
+    //  });
 
     
 

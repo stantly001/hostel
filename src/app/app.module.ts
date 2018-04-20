@@ -26,7 +26,7 @@ import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 import { ViewComponent } from './view/view.component';
 
-// import {HttpdataService} from './service/httpdata.service';
+import {HttpdataService} from './service/httpdata.service';
 
 
 import { DefaultsService } from './services/defaults.service';
@@ -60,7 +60,7 @@ import { NgxGalleryModule } from 'ngx-gallery'
     RouterModule.forRoot(Approute),
     NgxGalleryModule
   ],
-  providers: [DefaultsService],
+  providers: [DefaultsService,HttpdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Globals } from '../utils/globals';
+// import Globals from '../utils/globals';
 import { HttpdataService } from '../service/httpdata.service';
 
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html',
   styleUrls: ['./filter-form.component.css'],
-  providers: [Globals, HttpdataService]
+  providers: [HttpdataService]
 })
 export class FilterFormComponent implements OnInit {
   filters: any[];
   subtitle: boolean;
   errorMessage: string;
   filter = { filter_types: [] };
-  constructor(private _globals: Globals, private _httpDataService: HttpdataService) { }
+  constructor(private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
     this.getData();
