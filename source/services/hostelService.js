@@ -56,7 +56,7 @@ function convertImageUrlTOBase64(imgUrl, res) {
  * Filter By hostel obj
  */
 function filterHostelModel(res) {
-    var post = new hostel({
+    var hostel = {
         // _id: res._id,
         name: res.name,
         country: res.country,
@@ -99,18 +99,18 @@ function filterHostelModel(res) {
         national_rating: res.national_rating,
         world_rating: res.world_rating,
         checkin_24hrs: res.checkin_24hrs
-    });
-    return post
+    };
+    return hostel;
 }
 
 function filterHostelVisualsModel(res, post) {
+    console.log("Hostel Id ====> ", post._id)
     var hostelVisualObj = new hostelVisuals({
-        // _id: res._id,
         name: res.name,
         url: res.url,
         hostelId: post._id
-    })
-    return hostelVisualObj
+    });
+    return hostelVisualObj;
 }
 
 
@@ -121,7 +121,7 @@ function filterHostelVisualsModel(res, post) {
  *Save  New Hostel Details and Images
  */
 function addHostel(req, res) {
-    var post = filterHostelModel(req.body)
+    var post = new hostel(filterHostelModel(req.body))
     post.save()
         .then(item => {
             req.body.images.forEach(function (val, k) {
@@ -131,8 +131,8 @@ function addHostel(req, res) {
                 })
                 post.images.push(hostelVisualObj)
             })
-            post.save()
-            return res.status(200).json({ 'success': 'Hostel added successfully', 'data': post });
+            post.save();
+            return res.status(200).json({ 'message': 'Hostel added successfully', 'data': post });
         })
         .catch(err => {
             return res.status(400).send("unable to save to database");
@@ -141,15 +141,15 @@ function addHostel(req, res) {
 
 
 //Image and Video Storage
-var imgObj = {}
+var imgObj = {};
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, imgFilePath);
     },
     filename: function (req, file, callback) {
-        var imgFileName = file.fieldname + "_" + randomstring.generate() + "_" + file.originalname
+        var imgFileName = file.fieldname + "_" + randomstring.generate() + "_" + file.originalname;
         imgObj.name = file.originalname;
-        imgObj.url = imgFilePath + '/' + imgFileName
+        imgObj.url = imgFilePath + '/' + imgFileName;
         callback(null, imgFileName);
     }
 });
@@ -165,7 +165,7 @@ var upload = multer({ storage: Storage }).array("image", 3);
 function onUploadFile(req, res) {
     upload(req, res, function (err) {
         if (err) {
-            console.log(err)
+            console.log(err);
             return res.end("Something went wrong!");
         }
         return res.status(200).json({ "success": "File uploaded sucessfully!.", data: imgObj });
@@ -196,13 +196,12 @@ function getAllImagesAndVideos(req, res) {
  * Get All Images And Videos By HostelId from HostelImg Collection
  */
 function getAllImagesByHostelId(hostelId) {
-    console.log(hostelId)
     hostelVisuals.findById({ hostelId: hostelId }, function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
-            return res.json(data);
+            return data;
         }
     });
 }
@@ -224,43 +223,85 @@ function getHostelById(id, res) {
     });
 }
 
+function updateFilterHostelDetail(data, res) {
+    // var updateFilterHostel = {
+    data.name = res.name,
+        data.country = res.country,
+        data.city = res.city,
+        data.state = res.state,
+        data.street = res.street,
+        data.property_type = res.property_type,
+        data.wheel_chair_accomadate = res.wheel_chair_accomadate,
+        data.breakfast_included = res.breakfast_included,
+        data.travel_desk = res.travel_desk,
+        data.hr_checkin = res.hr_checkin,
+        data.air_conditioning = res.air_conditioning,
+        data.internet_acces = res.internet_acces,
+        data.laundry_service = res.laundry_service,
+        data.card_payment_accepted = res.card_payment_accepted,
+        data.locker = res.locker,
+        data.hot_water = res.hot_water,
+        data.water_dispenser = res.water_dispenser,
+        data.common_hangout_area = res.common_hangout_area,
+        data.common_television = res.common_television,
+        data.free_breakfast = res.free_breakfast,
+        data.shower = res.shower,
+        data.free_parking = res.free_parking,
+        data.reading_light = res.reading_light,
+        data.celing_fan = res.celing_fan,
+        data.washing_machine = res.washing_machine,
+        data.house_keeping = res.house_keeping,
+        data.email = res.email,
+        data.url = res.url,
+        data.things_to_note = res.things_to_note,
+        data.cancellation_policy = res.cancellation_policy,
+        data.longitude = res.longitude,
+        data.latitude = res.latitude,
+        data.language = res.language,
+        data.default_currency = res.default_currency,
+        data.property_description = res.property_description,
+        data.policy = res.policy,
+        data.city_rating = res.city_rating,
+        data.state_rating = res.state_rating,
+        data.national_rating = res.national_rating,
+        data.world_rating = res.world_rating,
+        data.checkin_24hrs = res.checkin_24hrs
+    // }
+
+    return data
+}
 
 /**
  * 
- * @param {*} id 
- * @param {*} hostelData 
+ * @param {*} req 
  * @param {*} res 
  *  Update hostelData by HostelId
  */
-function updateHostelById(id, req, res) {
-    let hostelData = req.body
-    var updateData = filterHostelModel(hostelData)
-    console.log(id)
-    hostel.findByIdAndUpdate(id, updateData, { new: true }).then(data => {
-        if (!data) {
-            return res.status(404).send({
-                message: "Note not found with id " + req.params.hostelId
-            });
-        }
-        if (hostelData.images) {
+function updateHostelById(req, res, id) {
+    let hostelData = req.body;
+
+    hostel.findById(id, function (err, data) {
+        if (!data)
+            return next(new Error('Could not load Document'));
+        else {
+            data = updateFilterHostelDetail(data, hostelData);
             hostelData.images.forEach(function (val, k) {
-                var hostelVisualObj = filterHostelVisualsModel(res)
-                hostelVisuals.findByIdAndUpdate(id, hostelVisualObj, { new: true })
-                post.images.push(hostelVisualObj)
+                var hostelVisualObj = filterHostelVisualsModel(val, hostelData)
+                if (val._id) {
+                    hostelVisuals.update({ _id: val._id }, hostelVisualObj)
+                } else {
+                    hostelVisualObj.save()
+                }
+                data.images.push(hostelVisualObj)
             })
+            data.save().then(coin => {
+                res.json({ 'message': 'Update complete', 'data': data });
+            })
+                .catch(err => {
+                    res.status(400).send("unable to update the database");
+                });
         }
-        hostel.save()
-        return res.json(data)
-    }).catch(err => {
-        if (err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Note not found with id " + req.params.hostelId
-            });
-        }
-        return res.status(500).send({
-            message: "Error updating note with id " + req.params.hostelId
-        });
-    })
+    });
 }
 
 

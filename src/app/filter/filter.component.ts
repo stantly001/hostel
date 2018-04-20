@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NouisliderModule } from 'ng2-nouislider';
+import { Globals } from '../utils/globals';
 import { DefaultsService } from '../services/defaults.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
+  providers:[Globals, DefaultsService]
 })
 
 export class FilterComponent implements OnInit {
@@ -44,22 +46,22 @@ export class FilterComponent implements OnInit {
     this.isPayment = true;
 
 
-    this.defaultsService.getFilters().subscribe(response => {
+    // this.defaultsService.getFilters().subscribe(response => {
 
-      this.availabilities = response.availability;
-      this.countries = response.countries;
-      this.facilities = response.facilities;
-      this.guests = response.guests;
-      this.locations = response.location;
-      this.payments = response.payment;
-      this.prices = response.price[0];
-      this.priceRange = [this.prices['rangeFrom'], this.prices['rangeTo']];
-      this.properties = response.property;
-      this.ratings = response.rating[0];
-      this.ratingRange = [this.ratings['ratingFrom'], this.ratings['ratingTo']];
-      this.roomTypes = response.roomType;
-      console.log("--->", this.roomTypes);
-    });
+    //   this.availabilities = response.availability;
+    //   this.countries = response.countries;
+    //   this.facilities = response.facilities;
+    //   this.guests = response.guests;
+    //   this.locations = response.location;
+    //   this.payments = response.payment;
+    //   this.prices = response.price[0];
+    //   this.priceRange = [this.prices['rangeFrom'], this.prices['rangeTo']];
+    //   this.properties = response.property;
+    //   this.ratings = response.rating[0];
+    //   this.ratingRange = [this.ratings['ratingFrom'], this.ratings['ratingTo']];
+    //   this.roomTypes = response.roomType;
+    //   console.log("--->", this.roomTypes);
+    // });
 
   }
 
