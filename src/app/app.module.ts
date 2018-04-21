@@ -31,7 +31,10 @@ import {HttpdataService} from './service/httpdata.service';
 
 import { DefaultsService } from './services/defaults.service';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { RegisterComponent } from './register/register.component'
+import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
+import { ServicesComponent } from './services/services.component';
+import { RoomsComponent } from './rooms/rooms.component'
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { RegisterComponent } from './register/register.component'
     ListContentComponent,
     ListReviewsComponent,
     ViewComponent,
+    ViewRoomsComponent,
+    ServicesComponent,
+    RoomsComponent,
     RegisterComponent
   ],
   imports: [

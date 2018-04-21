@@ -1,0 +1,37 @@
+<section class="panel">
+  <div class="panel-heading">
+    <button class="btn btn-success btn-xs pull-right new-btn" (click)="addService()">Add</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sl.No</th>
+          <th>Service</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services; let i=index">
+          <td>{{i+1}}</td>
+          <td>
+            <div [hidden]="!service.isEdit">
+              <input type="text" class="form-control" [(ngModel)]="service.name">
+            </div>
+            <div [hidden]="service.isEdit">{{service.name}}</div>
+          </td>
+          <td>
+            <div [hidden]="!service.isEdit">
+              <button class="btn btn-success btn-xs" (click)="service.isEdit=false; service.id=i+1">Save</button>
+              <button class="btn btn-danger btn-xs" (click)="cancelEdit(i,service)">Cancel</button>
+            </div>
+            <div [hidden]="service.isEdit">
+              <button class="btn btn-success btn-xs" (click)="service.isEdit=true">Edit</button>
+              <button class="btn btn-danger btn-xs" (click)="deleteService(i)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
