@@ -107,12 +107,10 @@ export class HttpdataService {
 
   private extractData(res: Response) {
     let body = res;
-    console.log(body)
     return body || {};
   }
 
   private handleErrorObservable(error: Response | any) {
-    console.error(error.message || error);
     return Observable.throw(error.message || error);
   }
 

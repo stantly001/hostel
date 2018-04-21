@@ -1,8 +1,7 @@
 var multer = require('multer')
 var path = require('path');
 var bodyParser = require('body-parser');
-var randomstring = require("randomstring");
-var fs = require('fs');
+
 //Mongoose Models
 var user = require('../models/user');
 
@@ -57,18 +56,18 @@ function getUserDetails(req, res) {
             return res.json(data);
         }
     })
-    // user.find().then(function (err, data) {
-    //     console.log("data",data)
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         return res.json(data);
-    //     }
-    // })
 }
+
+function getUserByUserName(userName) {
+    user.findOne({ user_name: userName }).then(result => {
+        console.log(result)
+        return result
+    })
+}
+
+
 var registrationService = {
-    saveUser, getUserDetails
+    saveUser, getUserDetails, getUserByUserName
 };
 
 module.exports = registrationService;

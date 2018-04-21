@@ -22,9 +22,15 @@ function getUserDetails(req, res) {
     return registrationService.getUserDetails(req, res);
 }
 
+function getUserByUserName(req, res) {
+    var returnData = registrationController.getUserDetails(req.query.userName)
+
+    return res.json(returnData)
+}
+
 
 var registrationController = {
-    saveUser, getUserDetails
+    saveUser, getUserDetails, getUserByUserName
 };
 
 module.exports = registrationController;

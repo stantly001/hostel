@@ -32,4 +32,5 @@ routes.route('/filter/remove/:filterId').delete(filterController.removeFilterByI
  */
 routes.route('/user/registration').post(registrationController.saveUser);
 routes.route('/user').get(registrationController.getUserDetails);
+routes.route('/user/getUserByUsername').get(registrationController.getUserByUserName)
 module.exports = routes;
