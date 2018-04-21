@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
+var registrationController = require('../controllers/registrationController');
 
 
 /**
@@ -26,7 +27,9 @@ routes.route('/filter/add').post(filterController.addFilter)
 routes.route('/filter/update/:filterId').put(filterController.updateFilterById);
 routes.route('/filter/remove/:filterId').delete(filterController.removeFilterById);
 
-
-
-
+/**
+ * User Registration
+ */
+routes.route('/user/registration').post(registrationController.saveUser);
+routes.route('/user').get(registrationController.getUserDetails);
 module.exports = routes;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DefaultsService } from '../services/defaults.service';
+import { HttpdataService } from '../service/httpdata.service';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -8,14 +9,18 @@ import { DefaultsService } from '../services/defaults.service';
 export class ListComponent implements OnInit {
 
   
+  errorMessage: any;
   hostels: any;
-  constructor(private defaultsService:DefaultsService) { }
+  constructor(private defaultsService:DefaultsService,private _httpDataService:HttpdataService) { }
 
   ngOnInit() {
-    this.defaultsService.getHostels().subscribe(response => {
-      console.log("Hostel",response)
-      this.hostels=response;
-    })
+    // this.defaultsService.getHostels().subscribe(response => {
+    //   console.log("Hostel",response)
+    //   this.hostels=response;
+    // })
+    this._httpDataService.getAllHostelData().subscribe(
+      data => this.hostels = data,
+      error => this.errorMessage = <any>error)
 
   }
 
