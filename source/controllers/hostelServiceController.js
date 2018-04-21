@@ -33,11 +33,17 @@ function updateService(req,res){
     return hostelServicesService.updateService(req.params.serviceId, req.body, res);
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Remove Service
+ */
 function removeServiceById(req, res) {
     return hostelServicesService.removeServiceById(req.params.serviceId, res);
 }
 
-var serviceController={
+var hostelServiceController={
     saveService,getAllServices,updateService,removeServiceById
 }
-module.exports=serviceController
+module.exports=hostelServiceController

@@ -4,7 +4,7 @@ var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
-var serviceController=require('../controllers/serviceController')
+var hostelServiceController=require('../controllers/hostelServiceController')
 
 
 /**
@@ -39,8 +39,8 @@ routes.route('/user/getUserByUsername').get(registrationController.getUserByUser
 /**
  * Service
  */
-routes.route('/service/saveService').post(serviceController.saveService);
-routes.route('/service').get(serviceController.getAllServices);
-routes.route('/service/update/:serviceId').put(serviceController.updateService);
-routes.route('/service/remove/:serviceId').delete(serviceController.removeServiceById);
+routes.route('/service/saveService').post(hostelServiceController.saveService);
+routes.route('/service').get(hostelServiceController.getAllServices);
+routes.route('/service/update/:serviceId').put(hostelServiceController.updateService);
+routes.route('/service/remove/:serviceId').delete(hostelServiceController.removeServiceById);
 module.exports = routes;
