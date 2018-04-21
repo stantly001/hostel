@@ -61,7 +61,7 @@ function getHostelById(req, res) {
  * Update Hostel Detail By HostelId
  */
 function updateHostelById(req, res) {
-    return hostelService.updateHostelById(req.params.hostelId, req.body, res)
+    return hostelService.updateHostelById(req, res, req.params.hostelId)
 }
 
 /**

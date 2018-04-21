@@ -10,6 +10,7 @@ import { FilterFormComponent } from './filter-form/filter-form.component';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
 import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { RegisterComponent } from './register/register.component';
 
 export const Approute: Routes = [
 
@@ -42,6 +43,10 @@ export const Approute: Routes = [
             {
                 path: 'filter',
                 component: FilterFormComponent
+            },
+            {
+                path: 'register',
+                component: RegisterComponent
             },{
                 path: '',
                 redirectTo: 'addHostel',

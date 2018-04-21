@@ -26,7 +26,7 @@ import { ListContentComponent } from './list-content/list-content.component';
 import { ListReviewsComponent } from './list-reviews/list-reviews.component';
 import { ViewComponent } from './view/view.component';
 
-// import {HttpdataService} from './service/httpdata.service';
+import {HttpdataService} from './service/httpdata.service';
 
 
 import { DefaultsService } from './services/defaults.service';
@@ -34,6 +34,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
 import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component'
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { RoomsComponent } from './rooms/rooms.component'
     ViewComponent,
     ViewRoomsComponent,
     ServicesComponent,
-    RoomsComponent
+    RoomsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,7 @@ import { RoomsComponent } from './rooms/rooms.component'
     RouterModule.forRoot(Approute),
     NgxGalleryModule
   ],
-  providers: [DefaultsService],
+  providers: [DefaultsService,HttpdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,17 +1,4 @@
-<!-- <div *ngFor="let hostel of hostels">
-    {{hostel | json }}
-  </div> -->
 
-<form novalidate>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-          <ul id="sidebar" class="nav nav-stacked ">
-              <li><a routerLink="../../admin/addHostel" data-hover="Filter" class="menu-item">Admin</a></li>
-              <li><a routerLink="../../admin/filter" data-hover="Filter" class="menu-item">Filter</a></li>
-          </ul>
-      </div>
       <div class="col-sm-9">
 
         <div class="pull-right add-button" [hidden]="clicked">
@@ -31,16 +18,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let x of hostels;let i=index;">
-                <td>{{x.name}}</td>
-                <td>{{x.country}}</td>
-                <td>{{x.city}}</td>
-                <td>{{x.state}}</td>
-                <td>{{x.street}}</td>
-                <td>{{x.email}}</td>
+              <tr *ngFor="let user of hostels;let i=index;">
+                <td>{{user.name}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.state}}</td>
+                <td>{{user.street}}</td>
+                <td>{{user.email}}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm" (click)="update(x,i);clicked=true">Edit</button>
-                  <button class="btn btn-danger btn-sm" (click)="delete(x,i)">Delete</button>
+                  <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true">Edit</button>
+                  <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -57,7 +44,7 @@
 
           <div class="form-row row">
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Name</label>
                 <input type="text" class="form-control" placeholder="Name" [(ngModel)]="hostel.name" name="name">
@@ -78,7 +65,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>State</label>
                 <select class="form-control" [(ngModel)]="hostel.state" name="state">
@@ -98,7 +85,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label> Email</label>
                 <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email" placeholder="Email">
@@ -114,7 +101,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Longitude</label>
                 <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude" placeholder="Longitude">
@@ -129,7 +116,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Default Currency</label>
                 <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
@@ -144,7 +131,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>National Rating</label>
                 <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating" placeholder="National Rating">
@@ -156,7 +143,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Property Description</label>
                 <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3" placeholder="Property Description"></textarea>
@@ -172,7 +159,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Wheel Chair Accomadate</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.wheel_chair_accomadate" name="wheel_chair_accomadate">
@@ -189,7 +176,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Hr Checkin</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hr_checkin" name="hr_checkin">
@@ -206,7 +193,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label>Laundry Service</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.laundry_service" name="laundry_service">
@@ -223,7 +210,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label> Hot Water</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hot_water" name="hot_water">
@@ -240,7 +227,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label> Common Television</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_television" name="common_television">
@@ -257,7 +244,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label> Free Parking</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_parking" name="free_parking">
@@ -273,7 +260,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
                 <label> Washing Machine</label>
                 <input type="checkbox" class="pull-right" [(ngModel)]="hostel.washing_machine" name="washing_machine">
@@ -290,7 +277,7 @@
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-12 mb-3">
                 <label> Upload Image</label>
                 <input style="display: none" type="file" (change)="onFileSelected($event)" #uploadImageFile>
@@ -301,9 +288,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb">
               <div class="col-md-12 mb-3">
-                <button class="btn btn-success" (click)="save(hostel)">Submit</button>
+                <button class="btn btn-success" (click)="save(hostel,user);clicked=false;">Submit</button>
               </div>
             </div>
 
@@ -312,7 +299,4 @@
 
 
       </div>
-    </div>
-  </div>
-
-</form>
+   

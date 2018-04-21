@@ -1,59 +1,104 @@
-<form novalidate class="form-horizontal">
+<div class="col-sm-9 add-form">
+  <div class="pull-right add-button" [hidden]="clicked">
+    <button class="btn btn-primary btn-sm" (click)="clicked=true">Add</button>
+  </div>
+  <div class="table table-responsive" [hidden]="clicked">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Filter Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let filter_type of filters">
+        <tr *ngFor="let filter of filter_type.filter_types">
+          <td>
+            {{filter.filter_name}}
+          </td>
+          <td>
+            <button class="btn btn-info btn-sm">Edit</button>
+            <button class="btn btn-danger btn-sm">Delete</button>
+          </td>
+          <br>
+          <br/>
+        </tr>
+      </tbody>
+      <!-- <tbody>
+        <tr *ngFor="let user of filter;let i=index;">
+          <td>{{user.field_name}}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
+          </td>
+        </tr>
+      </tbody> -->
+    </table>
+  </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-          <ul id="sidebar" class="nav nav-stacked ">
-              <li><a routerLink="../../admin/addHostel" data-hover="ADMIN" class="menu-item">Admin</a></li>
-              <li><a routerLink="../../admin/filter" data-hover="FILTER" class="menu-item">Filter</a></li>
-          </ul>
-      </div>
-      <div class="col-sm-9 add-form">
-        <div class="form-group">
-          <label class="col-sm-2">Title</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="filter.field_name" name="field_name" placeholder="Title" >
-          </div> 
-        </div>        
-
-        <div class="form-group">
-          <label class="col-sm-2">Subtitle</label>
-          <input #subTitle type="checkbox" [(ngModel)]="subtitle" name="subtitle" unchecked>
-          <div class="col-sm-10" *ngIf="subTitle.checked">
-            <input type="text" class="form-control" placeholder="Subtitle" 
-             [(ngModel)]="filter.sub_title" name="sub_title">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-sm-2">Filter UI Type</label>
-          <div class="col-sm-10">
-            <input type="radio"  [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
-            <input type="radio"  [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
-            <input type="radio"  [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
-            <input type="radio"  [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
-            <input type="radio"  [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
-            <input type="radio"  [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-sm" (click)="addFilter()">+</button>
-        <br>
-        <br/>
-
-        <table>
-          <tr *ngFor="let filter_type of filter.filter_types; let i = index">
-            <td>
-              <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
-            </td>&nbsp;&nbsp;
-            <td>
-              <!-- <button class="btn btn-primary btn-sm">Edit</button> -->
-              <button class="btn btn-danger btn-sm">Delete</button>
-            </td><br><br/> 
-          </tr>
-        </table>
-        <button class="btn btn-success btn-save" (click)="save(filter)">Save</button>
+  <div *ngIf="clicked">
+    <div class="form-group">
+      <label class="col-sm-2">Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="filter.field_name" name="field_name" placeholder="Title">
       </div>
     </div>
+
+    <input #subTitle type="checkbox" [(ngModel)]="subtitle" name="subtitle" unchecked>
+
+    <div class="form-group" *ngIf="subTitle.checked">
+      <label class="col-sm-2">Subtitle</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Subtitle" [(ngModel)]="filter.sub_title" name="sub_title">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Filter UI Type</label>
+      <div class="col-sm-10">
+        <input type="radio" [(ngModel)]="filter.view_type" value="textBox" name="view_type">Textbox
+        <input type="radio" [(ngModel)]="filter.view_type" value="slider" name="view_type">Slider
+        <input type="radio" [(ngModel)]="filter.view_type" value="datePicker" name="view_type">Date Picker
+        <input type="radio" [(ngModel)]="filter.view_type" value="checkBox" name="view_type">Checkbox
+        <input type="radio" [(ngModel)]="filter.view_type" value="radioButton" name="view_type">Radio Button
+        <input type="radio" [(ngModel)]="filter.view_type" value="selectBox" name="view_type"> Select Box
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm" (click)="addFilter()">+</button>
+    <br>
+    <br/>
+
+    <!-- <table>
+    <tr *ngFor="let filter_type of filters.filter_types">
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
+      </td>&nbsp;&nbsp;
+      <td>
+        <button class="btn btn-danger btn-sm">Delete</button>
+      </td>
+      <br>
+      <br/>
+    </tr>
+  </table> -->
+
+    <table>
+      <tbody *ngFor="let filter_type of filters">
+        <tr *ngFor="let filter of filter_type.filter_types">
+          {{filter.filter_name}}
+
+          <td>
+            <input type="text" class="form-control" [(ngModel)]="filter.filter_name" name="filter_name" placeholder="Filter Name">
+          </td>&nbsp;&nbsp;
+          <td>
+            <button class="btn btn-danger btn-sm">Delete</button>
+          </td>
+          <br>
+          <br/>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-success btn-save" (click)="save(filter);clicked=false;">Save</button>
   </div>
-</form>
+</div>

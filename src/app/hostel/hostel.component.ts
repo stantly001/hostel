@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Globals } from '../utils/globals';
+import Globals  from '../utils/globals';
 import { Hostel } from '../model/hostel';
 // import { HttpEventType } from '@angular/common/http';
 import { HttpdataService } from '../service/httpdata.service';
@@ -8,7 +8,7 @@ import { HttpdataService } from '../service/httpdata.service';
   selector: 'app-hostel',
   templateUrl: './hostel.component.html',
   styleUrls: ['./hostel.component.css'],
-  providers: [Globals, HttpdataService]
+  providers: [HttpdataService]
 })
 export class HostelComponent implements OnInit {
   errorMessage: string;
@@ -41,14 +41,14 @@ export class HostelComponent implements OnInit {
     { dispName: 'Rajasthan', fieldName: 'rajasthan' },
     { dispName: 'Bihar', fieldName: 'bihar' }
   ]
-  constructor(private _globals: Globals, private _httpDataService: HttpdataService) {
+  constructor(private _httpDataService: HttpdataService) {
 
   }
 
   ngOnInit() {
     this.getData()
     console.log(this.hostels)
-    console.log(this._globals.baseAppUrl)
+    console.log(Globals.baseAppUrl)
   }
 
 
@@ -76,16 +76,25 @@ export class HostelComponent implements OnInit {
   }
 
   save = (hostel) => {
-    this._httpDataService.addHosteldata(hostel).subscribe(
-      data => {
-        this.getData()
-      },
-      error => this.errorMessage = <any>error)
+    if (hostel._id) {
+      this._httpDataService.updateHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    } else {
+      this._httpDataService.addHosteldata(hostel).subscribe(
+        data => {
+          this.getData()
+        },
+        error => this.errorMessage = <any>error)
+    }
   }
 
-  delete = (x, index) => {
-    console.log(x);
-    this._httpDataService.deleteHosteldata(x).subscribe(
+  delete = (user, index) => {
+    console.log(user);
+    console.log(index);
+    this._httpDataService.deleteHosteldata(user).subscribe(
       data => {
         this.hostels.splice(index, 1);
         // console.log(x)
@@ -95,12 +104,9 @@ export class HostelComponent implements OnInit {
     //  console.log(i);
   }
 
-//   update(x,index) {
-//     this._httpDataService.updateHosteldata(x).subscribe(
-//       data => {
-//         this.hostel = index;
-//       },
-//       error => this.errorMessage = <any>error)
-// }
+  update(user, index) {
+    this.hostel = user;
+    console.log(user);
+  }
 
 }

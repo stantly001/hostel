@@ -1,7 +1,13 @@
-import { Injectable } from '@angular/core';
 
-@Injectable()
-export class Globals {
-    readonly baseAppUrl: string = 'http://localhost:4000/hms';
+
+
+export default class Globals {
+    static baseAppUrl: string = 'http://localhost:4000/hms';
     // readonly baseAPIUrl: string = 'https://api.github.com/';
 }
+
+
+// export default class Utils {
+//     static doSomething(val: string) { return val; }
+//     static doSomethingElse(val: string) { return val; }
+// }

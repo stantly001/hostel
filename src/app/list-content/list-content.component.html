@@ -1,12 +1,12 @@
 <div class="hotel-left">
   <a href="#">
-    <span class="glyphicon glyphicon-bed" aria-hidden="true"></span>{{hostelObj.name}}</a>
-  <p>{{hostelObj.place}}</p>
+    <span class="glyphicon glyphicon-bed" aria-hidden="true"></span>{{hostelObj?.name}}</a>
+  <p>{{hostelObj?.place}}</p>
   <div class="hotel-left-grids">
     <div class="hotel-left-one">
       <!-- <a href="single.html"> -->
         <!-- <img src="images/21.jpg" alt="" /> -->
-        <ngx-gallery [options]= "galleryOptions" [images] = "hostelObj.images" ></ngx-gallery>
+        <!-- <ngx-gallery [options]= "galleryOptions" [images] = "hostelObj?.images" ></ngx-gallery> -->
       <!-- </a> -->
     </div>
     <div class="hotel-left-two">
@@ -18,7 +18,7 @@
         <span>☆</span>
       </div>
       <a href="#">
-        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{hostelObj.street}}</a>
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{hostelObj?.street}}</a>
       <p>2.5 km to Sed ut perspiciatis
         <span> 2.6 km to sit voluptatem</span>
       </p>
