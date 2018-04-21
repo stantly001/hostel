@@ -8,17 +8,22 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class ViewRoomsComponent implements OnInit {
   @ViewChild('myCanvas') canvasRef: ElementRef;
   @ViewChild('myCanvasUpper') canvasRefUpper: ElementRef;
+  @ViewChild('myCanvasMiddle') canvasRefMiddle: ElementRef;
   rectsSelected: Array<any>;
   ctx: CanvasRenderingContext2D;
   noOfBerths: number;
   ctxUpper: CanvasRenderingContext2D;
+  ctxMiddle : CanvasRenderingContext2D;
   event: MouseEvent;
   eventUpper: MouseEvent;
+  eventMiddle: MouseEvent;
   rooms: Array<any>
   offsetX = 0;
   offsetY = 0;
   offsetXUpper = 0;
   offsetYUpper = 0;
+  offsetXMiddle = 0;
+  offsetYMiddle = 0;
   rects: Array<any>;
   constructor() { }
   onEvent(event: MouseEvent) {
@@ -65,6 +70,28 @@ export class ViewRoomsComponent implements OnInit {
     });
   }
 
+  onEventMiddle(event: MouseEvent) {
+    this.eventMiddle = event;
+    this.offsetXMiddle = event.offsetX;
+    this.offsetYMiddle = event.offsetY;
+    this.rects.forEach(rect => {
+      let clickedRectangle = this.isInside(this.offsetXMiddle, this.offsetYMiddle, rect);
+      if (clickedRectangle && clickedRectangle.berth === "middle") {
+        if (!this.rectsSelected.find(rec => rec.id === clickedRectangle.id)) {
+          this.rectsSelected.push(clickedRectangle);
+          this.ctxMiddle.fillStyle = "#F08080";
+          this.ctxMiddle.fillRect(rect.x, rect.y, rect.w, rect.h);
+        } else {
+          this.rectsSelected.splice(this.rectsSelected.indexOf(clickedRectangle), 1);
+          this.ctxMiddle.fillStyle = "#7CFC00";
+          this.ctxMiddle.fillRect(rect.x, rect.y, rect.w, rect.h);
+        }
+        console.log("Rects", this.rectsSelected);
+        console.log("Clicked on Rectangle" + clickedRectangle.id);
+      }
+    });
+  }
+
   isInside(x, y, rectangle) {
     let z1 = rectangle.x;
     let z2 = rectangle.y;
@@ -82,27 +109,11 @@ export class ViewRoomsComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.noOfBerths = 2;
+    this.noOfBerths = 3;
     this.ctx = this.canvasRef.nativeElement.getContext('2d');
     this.ctxUpper = this.canvasRefUpper.nativeElement.getContext('2d');
+    this.ctxMiddle = this.canvasRefMiddle.nativeElement.getContext('2d');
     this.rectsSelected = [];
-    /*this.rooms = [
-      {
-        id : 1,
-        bedsCount : 3,
-        berths : 2
-      },
-      {
-        id : 2,
-        bedsCount : 2,
-        berths : 3
-      }, 
-      {
-        id: 3,
-        bedsCount : 3,
-        berths : 1
-      }
-    ];*/
     this.rects = [
       {
         id: 1,
@@ -166,6 +177,23 @@ export class ViewRoomsComponent implements OnInit {
         h: 25,
         //color: "#7CFC00",
         berth: "upper"
+      },{
+        id: 8,
+        x: 550,
+        y: 100,
+        w: 50,
+        h: 25,
+        //color: "#7CFC00",
+        berth: "middle"
+      },
+      {
+        id: 9,
+        x: 550,
+        y: 150,
+        w: 50,
+        h: 25,
+        //color: "#7CFC00",
+        berth: "middle"
       }
     ];
 
@@ -186,6 +214,15 @@ export class ViewRoomsComponent implements OnInit {
       if (rect.berth === "upper") {
         this.ctxUpper.fillStyle = "#7CFC00";
         this.ctxUpper.fillRect(rect.x, rect.y, rect.w, rect.h);
+      }
+    });
+    this.ctxMiddle.beginPath();
+    this.ctxMiddle.rect(500, 50, 300, 200);
+    this.ctxMiddle.stroke();
+    this.rects.forEach(rect => {
+      if (rect.berth === "middle") {
+        this.ctxMiddle.fillStyle = "#7CFC00";
+        this.ctxMiddle.fillRect(rect.x, rect.y, rect.w, rect.h);
       }
     });
   }

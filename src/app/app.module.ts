@@ -31,7 +31,9 @@ import { ViewComponent } from './view/view.component';
 
 import { DefaultsService } from './services/defaults.service';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
+import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
+import { ServicesComponent } from './services/services.component';
+import { RoomsComponent } from './rooms/rooms.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
     ListContentComponent,
     ListReviewsComponent,
     ViewComponent,
-    ViewRoomsComponent
+    ViewRoomsComponent,
+    ServicesComponent,
+    RoomsComponent
   ],
   imports: [
     BrowserModule,

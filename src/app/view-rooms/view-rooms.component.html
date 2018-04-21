@@ -14,6 +14,11 @@
   <canvas #myCanvasUpper width="1000" height="300" on-click="onEventUpper($event)">
   </canvas>
 </div>
+<div [hidden]="noOfBerths<3">
+  <h4>Middle Berth</h4>
+  <canvas #myCanvasMiddle width="1000" height="300" on-click="onEventMiddle($event)">
+  </canvas>
+</div>
 <!-- <p>offsetX{{offsetX}} offsetY{{offsetY}}</p>
 <p>offsetXUpper{{offsetXUpper}} offsetYUpper{{offsetYUpper}}</p> -->
 <!-- </p> -->
