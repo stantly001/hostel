@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var bcrypt = require('bcrypt');
 // Define collection and schema for Hostel Items
 var UserSchema = new Schema({
     // _id: Schema.Types.ObjectId,
@@ -35,14 +35,5 @@ var UserSchema = new Schema({
 
 
 
-//   UserSchema.pre('save', function (next) {
-//     var user = this;
-//     bcrypt.hash(user.password, 10, function (err, hash){
-//       if (err) {
-//         return next(err);
-//       }
-//       user.password = hash;
-//       next();
-//     })
-//   });
+
 module.exports = mongoose.model('user', UserSchema);

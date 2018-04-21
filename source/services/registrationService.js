@@ -22,6 +22,7 @@ function setUserData(res) {
         password: res.password,
         gender: res.gender
     })
+    
     return post;
 }
 
