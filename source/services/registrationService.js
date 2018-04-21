@@ -57,10 +57,9 @@ function getUserDetails(req, res) {
     })
 }
 
-function getUserByUserName(userName) {
+function getUserByUserName(userName, res) {
     user.findOne({ user_name: userName }).then(result => {
-        console.log(result)
-        return result
+        return res.json(result)
     })
 }
 

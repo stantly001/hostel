@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var registrationService = require('../services/registrationService')
 
 
@@ -23,9 +24,9 @@ function getUserDetails(req, res) {
 }
 
 function getUserByUserName(req, res) {
-    var returnData = registrationController.getUserDetails(req.query.userName)
-
-    return res.json(returnData)
+    var returnData = registrationService.getUserByUserName(req.query.userName, res)
+    console.log(returnData)
+    return returnData
 }
 
 
