@@ -37,8 +37,9 @@ export class FilterFormComponent implements OnInit {
       error => this.errorMessage = <any>error)   
   }
 
-  delete = (user, index) => {
-    this._httpDataService.deleteFilterdata(user).subscribe(
+  delete = (filter_type, index) => {
+    console.log(filter_type);
+    this._httpDataService.deleteFilterdata(filter_type).subscribe(
       data => {
         this.filters.splice(index, 1);
       },

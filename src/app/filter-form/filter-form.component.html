@@ -10,14 +10,14 @@
           <th></th>
         </tr>
       </thead>
-      <tbody *ngFor="let filter_type of filters">
-        <tr *ngFor="let filter of filter_type.filter_types">
+      <tbody *ngFor="let filter_type of filters;">
+        <tr *ngFor="let filter of filter_type.filter_types;let i=index;">
           <td>
             {{filter.filter_name}}
           </td>
           <td>
-            <button class="btn btn-info btn-sm">Edit</button>
-            <button class="btn btn-danger btn-sm">Delete</button>
+            <button class="btn btn-info btn-sm" >Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="delete(filter_type,i)">Delete</button>
           </td>
           <br>
           <br/>
@@ -69,7 +69,7 @@
     <br>
     <br/>
 
-    <!-- <table>
+    <table>
     <tr *ngFor="let filter_type of filters.filter_types">
       <td>
         <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
@@ -80,9 +80,9 @@
       <br>
       <br/>
     </tr>
-  </table> -->
+  </table>
 
-    <table>
+    <!-- <table>
       <tbody *ngFor="let filter_type of filters">
         <tr *ngFor="let filter of filter_type.filter_types">
           {{filter.filter_name}}
@@ -97,7 +97,7 @@
           <br/>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
     <button class="btn btn-success btn-save" (click)="save(filter);clicked=false;">Save</button>
   </div>
