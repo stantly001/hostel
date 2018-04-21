@@ -18,10 +18,9 @@ function setUserData(res) {
         email: res.email,
         primary_phone: res.primary_phone,
         secondary_phone: res.secondary_phone,
-        password: res.password,
         gender: res.gender
     })
-    
+    post.password = post.generateHash(res.password);
     return post;
 }
 
