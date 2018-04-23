@@ -15,7 +15,15 @@ export const Approute: Routes = [
     {
         path: "hostel",
         component: HomeSectionComponent,
-    }, {
+    },
+    {
+        path: 'hostel/login',
+        component: LoginComponent,
+    }, 
+    {
+        path: 'hostel/register',
+        component: RegisterComponent
+    },{
         path: "hostel/search",
         component: ViewComponent,
     }, {
@@ -27,6 +35,7 @@ export const Approute: Routes = [
         redirectTo: 'hostel',
         pathMatch: 'full',
     },
+    
     {
         path: 'admin',
         component: AdminComponent,
@@ -40,13 +49,6 @@ export const Approute: Routes = [
                 component: FilterFormComponent
             },
             {
-                path: 'register',
-                component: RegisterComponent
-            },
-            {
-                path: 'login',
-                component: LoginComponent
-            },{
                 path: '',
                 redirectTo: 'addHostel',
                 pathMatch: 'full'

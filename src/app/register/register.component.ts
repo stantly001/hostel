@@ -30,8 +30,6 @@ export class RegisterComponent implements OnInit {
           this.getData()
         },
         error => this.errorMessage = <any>error)
-
     }
   }
-
 }
