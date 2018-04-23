@@ -102,8 +102,47 @@ export class HttpdataService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+  /**
+   * Get Services
+   */
+  getAllServices() {
+    return this.http.get(this.baseUrl + "/service")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  /**
+   * 
+   * @param service 
+   * Save Services
+   */
+  saveService(service: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/service/saveService", service)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
 
+  /**
+   * 
+   * @param service 
+   * Update Service
+   */
+  updateService(service: any): Observable<any>{
+    console.log("ser",service)
+    return this.http.put(this.baseUrl + "/service/update/" + service._id, service)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
 
+  /**
+   * 
+   * @param service 
+   * Delete Service
+   */
+  deleteService(service){
+    return this.http.delete(this.baseUrl + "/service/remove/" + service._id)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
 
   private extractData(res: Response) {
     let body = res;

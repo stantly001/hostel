@@ -16,18 +16,18 @@
           <td>{{i+1}}</td>
           <td>
             <div [hidden]="!service.isEdit">
-              <input type="text" class="form-control" [(ngModel)]="service.name">
+              <input type="text" class="form-control" [(ngModel)]="service.service_name">
             </div>
-            <div [hidden]="service.isEdit">{{service.name}}</div>
+            <div [hidden]="service.isEdit">{{service.service_name}}</div>
           </td>
           <td>
             <div [hidden]="!service.isEdit">
-              <button class="btn btn-success btn-xs" (click)="service.isEdit=false; service.id=i+1">Save</button>
+              <button class="btn btn-success btn-xs" (click)="saveService(service);service.isEdit=false;">Save</button>
               <button class="btn btn-danger btn-xs" (click)="cancelEdit(i,service)">Cancel</button>
             </div>
             <div [hidden]="service.isEdit">
               <button class="btn btn-success btn-xs" (click)="service.isEdit=true">Edit</button>
-              <button class="btn btn-danger btn-xs" (click)="deleteService(i)">Delete</button>
+              <button class="btn btn-danger btn-xs" (click)="deleteService(i,service)">Delete</button>
             </div>
           </td>
         </tr>

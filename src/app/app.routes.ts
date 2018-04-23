@@ -8,9 +8,9 @@ import { AdminComponent } from './admin/admin.component';
 import { HostelComponent } from './hostel/hostel.component';
 import { FilterFormComponent } from './filter-form/filter-form.component';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
-import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { RegisterComponent } from './register/register.component';
+import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 
 export const Approute: Routes = [
 
@@ -20,6 +20,9 @@ export const Approute: Routes = [
     }, {
         path: "hostel/search",
         component: ViewComponent,
+    },{
+        path: "hostel/registration",
+        component: RegisterComponent,
     }, {
         path: "hostel/:hostelId",
         component: DetailviewComponent,
@@ -53,7 +56,7 @@ export const Approute: Routes = [
                 pathMatch: 'full'
             },{
                 path: "services",
-                component: ServicesComponent
+                component: HostelServiceComponent
             },{
                 path: "rooms",
                 component: RoomsComponent
