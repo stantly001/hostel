@@ -16,20 +16,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  getData(): void {
-    this._httpDataService.getAllLoginData().subscribe(
-      data => this.loginForms = data,
-      error => this.errorMessage = <any>error)
-  }
-
-  save(login) {
+  /**
+   * 
+   * @param login 
+   */
+  authSubmit(login) {
     if (login) {
-      this._httpDataService.addLogindata(login).subscribe(
+      this._httpDataService.authUserLogin(login).subscribe(
         data => {
-          this.getData()
+         console.log(data)
         },
         error => this.errorMessage = <any>error)
-
     }
   }
 }

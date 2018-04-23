@@ -1,7 +1,11 @@
 var userRegSer = require('./registrationService');
 var bcrypt = require('bcrypt');
 
-
+/**
+ * 
+ * @param {*} userAuth 
+ * @param {*} res 
+ */
 function authentication(userAuth, res) {
     var user_name = userAuth.user_name;
     var password = userAuth.password;
@@ -13,10 +17,7 @@ function authentication(userAuth, res) {
         } else if (!auth) {
             res.json({ message: 'User Not Found', data: userAuth })
         } else {
-            console.log(password)
-            console.log(auth.password)
             ifPasTrue = bcrypt.compareSync(password, auth.password)
-            //    console.log(bcrypt.compareSync(password, auth.password))
             if (ifPasTrue == true) {
                 res.json({ message: 'Login Success !!!', data: auth })
             }else{

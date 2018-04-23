@@ -57,7 +57,6 @@ function getUserDetails(req, res) {
     })
 }
 
-
 /**
  * 
  * @param {*} userName 
