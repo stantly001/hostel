@@ -62,18 +62,12 @@ function getUserDetails(req, res) {
  * 
  * @param {*} userName 
  * @param {*} cb 
+ * Return Match User Object
  */
-function getUserByUserName(userName,cb) {
-    user.findOne({ user_name: userName }, function(err, data){
+function getUserByUserName(userName, cb) {
+    user.findOne({ user_name: userName }, function (err, data) {
         return cb(err, data)
     })
-    
-    
-    
-    // .then(result => {
-    //     cb(null, result)
-    //     return result
-    // })
 }
 
 
