@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NouisliderModule } from 'ng2-nouislider';
-import { DefaultsService } from '../services/defaults.service';
 import { HttpdataService } from '../service/httpdata.service';
 
 @Component({
@@ -33,7 +32,7 @@ export class FilterComponent implements OnInit {
   // properties: Array<any> = [];
   // ratings: Array<any> = [];
   // roomTypes: Array<any> = [];
-  constructor(private defaultsService: DefaultsService, private _httpDataService: HttpdataService) {
+  constructor(private _httpDataService: HttpdataService) {
 
 
   }

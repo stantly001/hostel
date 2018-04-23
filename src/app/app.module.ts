@@ -29,8 +29,10 @@ import { ViewComponent } from './view/view.component';
 import {HttpdataService} from './service/httpdata.service';
 
 
-import { DefaultsService } from './services/defaults.service';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
+import { RoomsComponent } from './rooms/rooms.component'
+import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component'
 
@@ -53,6 +55,9 @@ import { LoginComponent } from './login/login.component'
     ListContentComponent,
     ListReviewsComponent,
     ViewComponent,
+    ViewRoomsComponent,
+    RoomsComponent,
+    HostelServiceComponent,
     RegisterComponent,
     LoginComponent
   ],
@@ -64,7 +69,7 @@ import { LoginComponent } from './login/login.component'
     RouterModule.forRoot(Approute),
     NgxGalleryModule
   ],
-  providers: [DefaultsService,HttpdataService],
+  providers: [HttpdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

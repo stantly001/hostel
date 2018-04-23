@@ -7,7 +7,10 @@ import { FilterComponent } from './filter/filter.component';
 import { AdminComponent } from './admin/admin.component';
 import { HostelComponent } from './hostel/hostel.component';
 import { FilterFormComponent } from './filter-form/filter-form.component';
+import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
+import { RoomsComponent } from './rooms/rooms.component';
 import { RegisterComponent } from './register/register.component';
+import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 import { LoginComponent } from './login/login.component';
 
 export const Approute: Routes = [
@@ -21,21 +24,23 @@ export const Approute: Routes = [
         component: LoginComponent,
     }, 
     {
-        path: 'hostel/register',
-        component: RegisterComponent
-    },{
         path: "hostel/search",
         component: ViewComponent,
+    },{
+        path: "hostel/registration",
+        component: RegisterComponent,
     }, {
         path: "hostel/:hostelId",
         component: DetailviewComponent,
+    }, {
+        path: "viewRooms",
+        component: ViewRoomsComponent
     },
     {
         path: '',
         redirectTo: 'hostel',
         pathMatch: 'full',
-    },
-    
+    }, 
     {
         path: 'admin',
         component: AdminComponent,
@@ -52,6 +57,12 @@ export const Approute: Routes = [
                 path: '',
                 redirectTo: 'addHostel',
                 pathMatch: 'full'
+            },{
+                path: "services",
+                component: HostelServiceComponent
+            },{
+                path: "rooms",
+                component: RoomsComponent
             }
         ]
     },

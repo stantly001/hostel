@@ -1,4 +1,3 @@
-var express = require('express');
 var hostelService = require('../services/hostelService')
 
 /**
@@ -61,7 +60,7 @@ function getHostelById(req, res) {
  * Update Hostel Detail By HostelId
  */
 function updateHostelById(req, res) {
-    return hostelService.updateHostelById(req.params.hostelId, req, res)
+    return hostelService.updateHostelById(req, res, req.params.hostelId)
 }
 
 /**

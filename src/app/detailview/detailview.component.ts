@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DefaultsService } from '../services/defaults.service';
 import { HttpdataService } from '../service/httpdata.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class DetailviewComponent implements OnInit {
   errorMessage: any;
   hostelViewObject: {};
   hostelId: any;
-  constructor(private activateRoute: ActivatedRoute, private defaultsService: DefaultsService,private _httpDataService:HttpdataService) { }
+  constructor(private activateRoute: ActivatedRoute,private _httpDataService:HttpdataService) { }
 
   ngOnInit() {
     /**

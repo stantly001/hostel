@@ -6,6 +6,7 @@ import Globals from '../utils/globals';
 import { Observable } from 'rxjs/Rx';
 import { Hostel } from '../model/hostel';
 
+
 @Injectable()
 export class HttpdataService {
   baseUrl: any;
@@ -90,20 +91,60 @@ export class HttpdataService {
   }
 
 
-  getAllRegisterData(): Observable<Hostel[]> {
-    return this.http.get(this.baseUrl + "/register")
+  getAllRegisterData() {
+    return this.http.get(this.baseUrl + "/user")
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
   addRegisterdata(register: any): Observable<any> {
-    return this.http.post(this.baseUrl + "/register/add", register)
+    return this.http.post(this.baseUrl + "/user/registration", register)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  /**
+   * Get Services
+   */
+  getAllServices() {
+    return this.http.get(this.baseUrl + "/service")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  /**
+   * 
+   * @param service 
+   * Save Services
+   */
+  saveService(service: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/service/saveService", service)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param service 
+   * Update Service
+   */
+  updateService(service: any): Observable<any>{
+    console.log("ser",service)
+    return this.http.put(this.baseUrl + "/service/update/" + service._id, service)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
 
-  getAllLoginData(): Observable<Hostel[]> {
+  /**
+   * 
+   * @param service 
+   * Delete Service
+   */
+  deleteService(service){
+    return this.http.delete(this.baseUrl + "/service/remove/" + service._id)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
+
+getAllLoginData(): Observable<Hostel[]> {
     return this.http.get(this.baseUrl + "/login")
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -115,14 +156,13 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+
   private extractData(res: Response) {
     let body = res;
-    console.log(body)
     return body || {};
   }
 
   private handleErrorObservable(error: Response | any) {
-    console.error(error.message || error);
     return Observable.throw(error.message || error);
   }
 
