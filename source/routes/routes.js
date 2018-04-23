@@ -5,6 +5,7 @@ var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
 var hostelServiceController=require('../controllers/hostelServiceController')
+var authServiceCtrl = require('../controllers/authController');
 
 
 /**
@@ -44,3 +45,8 @@ routes.route('/service').get(hostelServiceController.getAllServices);
 routes.route('/service/update/:serviceId').put(hostelServiceController.updateService);
 routes.route('/service/remove/:serviceId').delete(hostelServiceController.removeServiceById);
 module.exports = routes;
+
+/**
+ * User Login
+ */
+routes.route('/auth/user').get(authServiceCtrl.authentication)
