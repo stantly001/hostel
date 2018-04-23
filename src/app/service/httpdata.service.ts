@@ -144,6 +144,19 @@ export class HttpdataService {
     .catch(this.handleErrorObservable);
   }
 
+getAllLoginData(): Observable<Hostel[]> {
+    return this.http.get(this.baseUrl + "/login")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  addLogindata(register: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/login/add", register)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+
   private extractData(res: Response) {
     let body = res;
     return body || {};

@@ -11,13 +11,19 @@ import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
 import { RoomsComponent } from './rooms/rooms.component';
 import { RegisterComponent } from './register/register.component';
 import { HostelServiceComponent } from './hostel-service/hostel-service.component';
+import { LoginComponent } from './login/login.component';
 
 export const Approute: Routes = [
 
     {
         path: "hostel",
         component: HomeSectionComponent,
-    }, {
+    },
+    {
+        path: 'hostel/login',
+        component: LoginComponent,
+    }, 
+    {
         path: "hostel/search",
         component: ViewComponent,
     },{
@@ -48,9 +54,6 @@ export const Approute: Routes = [
                 component: FilterFormComponent
             },
             {
-                path: 'register',
-                component: RegisterComponent
-            },{
                 path: '',
                 redirectTo: 'addHostel',
                 pathMatch: 'full'

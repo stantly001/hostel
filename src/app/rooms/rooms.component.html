@@ -1,25 +1,23 @@
 <!-- <p>
   rooms works!
 </p> -->
-<div class="row">
-  <div class="col-md-12">
-    <section class="panel">
-      <div class="col-md-4">
-        <label>Hostel</label>
-        <select class="form-control" >
-          <option *ngFor="let hostel of hostels">{{hostel.name}}</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-        <label>Floors</label>
-        <select class="form-control" >
-          <option *ngFor="let hostel of hostels">{{hostel.floors}}</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-          <label>No Of Rooms</label>
-          <input type="text" class="form-control">
-      </div>
-    </section>
-  </div>
+<div class="col-md-12 add-form">
+  <section>
+    <div class="col-md-4">
+      <label>Hostel</label>
+      <select class="form-control">
+        <option *ngFor="let hostel of hostels">{{hostel.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Floors</label>
+      <select class="form-control">
+        <option *ngFor="let hostel of hostels">{{hostel.floors}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>No Of Rooms</label>
+      <input type="text" class="form-control">
+    </div>
+  </section>
 </div>

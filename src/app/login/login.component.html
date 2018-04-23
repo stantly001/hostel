@@ -1,0 +1,42 @@
+<div class="welcome">
+  <div class="container">
+
+    <form class="form-horizontal">
+
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="well login-form">
+          <div class="form-group">
+            <label class="col-sm-3">Email</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" [(ngModel)]="login.email" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3">Password</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" [(ngModel)]="login.password" placeholder="Password">
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-danger btn-sm" (click)="save(login)">Login</button>
+          </div>
+          <div>
+            <input type="checkbox"> Remember Me
+            <span class="pull-right">
+              <a href="#">Forget Password?</a>
+            </span>
+          </div>
+          <div class="clearfix">
+          <div class="pull-right">
+            Not a Member?
+            <a routerLink="../../hostel/register" data-hover="Sign Up">Sign Up Here</a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

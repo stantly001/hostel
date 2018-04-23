@@ -1,6 +1,6 @@
 <section class="panel">
   <div class="panel-heading">
-    <button class="btn btn-success btn-xs pull-right new-btn" (click)="addService()">Add</button>
+    <button class="btn btn-primary btn-sm pull-right" (click)="addService()">Add</button>
   </div>
   <div class="table-responsive">
     <table class="table table-striped">
@@ -22,12 +22,12 @@
           </td>
           <td>
             <div [hidden]="!service.isEdit">
-              <button class="btn btn-success btn-xs" (click)="saveService(service);service.isEdit=false;">Save</button>
-              <button class="btn btn-danger btn-xs" (click)="cancelEdit(i,service)">Cancel</button>
+              <button class="btn btn-success btn-sm" (click)="saveService(service);service.isEdit=false;">Save</button>
+              <button class="btn btn-danger btn-sm" (click)="cancelEdit(i,service)">Cancel</button>
             </div>
             <div [hidden]="service.isEdit">
-              <button class="btn btn-success btn-xs" (click)="service.isEdit=true">Edit</button>
-              <button class="btn btn-danger btn-xs" (click)="deleteService(i,service)">Delete</button>
+              <button class="btn btn-success btn-sm" (click)="service.isEdit=true">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteService(i,service)">Delete</button>
             </div>
           </td>
         </tr>

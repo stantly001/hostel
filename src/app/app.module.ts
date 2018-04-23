@@ -32,8 +32,9 @@ import {HttpdataService} from './service/httpdata.service';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
 import { RoomsComponent } from './rooms/rooms.component'
-import { RegisterComponent } from './register/register.component';
 import { HostelServiceComponent } from './hostel-service/hostel-service.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
@@ -56,8 +57,9 @@ import { HostelServiceComponent } from './hostel-service/hostel-service.componen
     ViewComponent,
     ViewRoomsComponent,
     RoomsComponent,
+    HostelServiceComponent,
     RegisterComponent,
-    HostelServiceComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
