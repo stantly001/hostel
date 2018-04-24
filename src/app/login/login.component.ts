@@ -8,7 +8,7 @@ import { HttpdataService } from '../service/httpdata.service';
   providers: [HttpdataService]
 })
 export class LoginComponent implements OnInit {
-  login={};
+  login:any;
   loginForms: any[];
   errorMessage: string;
   constructor(private _httpDataService: HttpdataService) { }

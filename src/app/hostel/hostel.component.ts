@@ -13,6 +13,7 @@ import { HttpdataService } from '../service/httpdata.service';
 export class HostelComponent implements OnInit {
   errorMessage: string;
   hostels: Hostel[];
+  clicked: boolean;
   hostel = { images: [] };
   uploadedPath = {}
   selectedFile: File = null;
