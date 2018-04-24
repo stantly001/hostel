@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { FormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { Approute } from './app.routes';
 
@@ -65,6 +66,7 @@ import { HostelServiceComponent } from './hostel-service/hostel-service.componen
     NouisliderModule,
     NgDatepickerModule,
     RouterModule.forRoot(Approute),
+    NgMultiSelectDropDownModule.forRoot(),
     NgxGalleryModule
   ],
   providers: [HttpdataService],

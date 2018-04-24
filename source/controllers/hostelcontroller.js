@@ -19,6 +19,7 @@ function getAllHostel(req, res) {
  * Post New Hostel Data
  */
 function addHostel(req, res) {
+    console.log("save",req.body)
     return hostelService.addHostel(req, res)
 }
 

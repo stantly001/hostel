@@ -31,6 +31,7 @@ export class HttpdataService {
    * Save New Hostel Details
    */
   addHosteldata(hostel: Hostel): Observable<Hostel> {
+    console.log(hostel)
     return this.http.post(this.baseUrl + "/hostel/add", hostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);

@@ -6,6 +6,7 @@ var fs = require('fs');
 //Mongoose Models
 var hostel = require('../models/hostel');
 var hostelVisuals = require('../models/hostelImg');
+var service = require('../models/service');
 
 //File Path
 const imgFilePath = "../hmsDoc/visuals";
@@ -19,10 +20,14 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
-    hostel.find().populate("images").exec(function (err, data) {
+    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
         if (err) {
             console.log(err);
         } else {
+            data.forEach(function(val){
+                console.log(val.hostelServices)
+            })
+           
             return res.json(data);
         }
     })
@@ -98,7 +103,8 @@ function filterHostelModel(res) {
         state_rating: res.state_rating,
         national_rating: res.national_rating,
         world_rating: res.world_rating,
-        checkin_24hrs: res.checkin_24hrs
+        checkin_24hrs: res.checkin_24hrs,
+        hostelServices:res.hostelServices
     };
     return hostel;
 }

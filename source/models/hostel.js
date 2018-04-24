@@ -138,6 +138,14 @@ var Hostel = new Schema({
   images: [{
     type: Schema.Types.ObjectId,
     ref: 'HostelImg'
+  }],
+  hostelServices: [{
+    amount: Number,
+    free_service: Boolean,
+    service: {
+      type: Schema.Types.ObjectId,
+      ref: 'Service'
+    }
   }]
 }, {
     versionKey: false,
