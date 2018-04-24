@@ -32,21 +32,24 @@ function getAllHostel(req, res) {
         }
     })
 }
+
+/**
+ * 
+ * @param {*} imgUrl 
+ * @param {*} res 
+ * Image Response
+ */
 function convertImageUrlTOBase64(imgUrl, res) {
     console.log(imgUrl)
 
     var url = fs.readFile(imgUrl, (err, data) => {
-
         //error handle
         if (err)
             res.status(500).send(err);
-
         //get image file extension name
         let extensionName = path.extname(imgUrl);
-
         //convert image file to base64-encoded string
         let base64Image = new Buffer(data, 'binary').toString('base64');
-
         //combine all strings
         let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
         res.send(imgSrcString)
@@ -109,6 +112,12 @@ function filterHostelModel(res) {
     return hostel;
 }
 
+/**
+ * 
+ * @param {*} res 
+ * @param {*} post 
+ * Filter By Hostel Visuals
+ */
 function filterHostelVisualsModel(res, post) {
     console.log("Hostel Id ====> ", post._id)
     var hostelVisualObj = new hostelVisuals({
@@ -128,6 +137,7 @@ function filterHostelVisualsModel(res, post) {
  */
 function addHostel(req, res) {
     var post = new hostel(filterHostelModel(req.body))
+    console.log(post)
     post.save()
             .then(item => {
                 req.body.images.forEach(function (val, k) {
