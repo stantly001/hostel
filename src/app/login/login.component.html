@@ -1,26 +1,27 @@
 <div class="welcome">
   <div class="container">
 
-    <form class="form-horizontal">
-
+    <form class="form-horizontal" name="hostelLogin" (ngSubmit)="authSubmit(login)">
       <div class="col-sm-6 col-sm-offset-3">
         <div class="well login-form">
           <div class="form-group">
-            <label class="col-sm-3">Email</label>
+            <label class="col-sm-3">User Name</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="login.email" placeholder="Email">
+              <input type="text" class="form-control" [(ngModel)]="login.user_name" 
+              name="user_name"
+              placeholder="User Name">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-sm-3">Password</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" [(ngModel)]="login.password" placeholder="Password">
+              <input type="password" class="form-control" [(ngModel)]="login.password" 
+              name="password"
+              placeholder="Password">
             </div>
           </div>
-
           <div class="text-center">
-            <button class="btn btn-danger btn-sm" (click)="save(login)">Login</button>
+            <button type="submit" class="btn btn-danger btn-sm">Login</button>
           </div>
           <div>
             <input type="checkbox"> Remember Me
@@ -37,6 +38,5 @@
         </div>
       </div>
     </form>
-
   </div>
 </div>

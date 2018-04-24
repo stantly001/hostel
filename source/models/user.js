@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 // Define collection and schema for Hostel Items
-var UserSchema = new Schema({
+var User = new Schema({
     // _id: Schema.Types.ObjectId,
     user_name: {
         type: String,
@@ -34,13 +34,13 @@ var UserSchema = new Schema({
     });
 
 
-    UserSchema.methods.generateHash = function (password) {
+    User.methods.generateHash = function (password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     };
     
     // checking if password is valid
-    UserSchema.methods.validPassword = function (password) {
+    User.methods.validPassword = function (password) {
         return bcrypt.compareSync(password, this.password);
     };
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', User);

@@ -12,6 +12,7 @@ export class FilterFormComponent implements OnInit {
   filters: any[];
   subtitle: boolean;
   errorMessage: string;
+  clicked: boolean;
   filter = { filter_types: [] };
   constructor(private _httpDataService: HttpdataService) { }
 

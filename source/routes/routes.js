@@ -36,7 +36,6 @@ routes.route('/user/registration').post(registrationController.saveUser);
 routes.route('/user').get(registrationController.getUserDetails);
 routes.route('/user/getUserByUsername').get(registrationController.getUserByUserName)
 
-
 /**
  * Service
  */
@@ -44,9 +43,11 @@ routes.route('/service/saveService').post(hostelServiceController.saveService);
 routes.route('/service').get(hostelServiceController.getAllServices);
 routes.route('/service/update/:serviceId').put(hostelServiceController.updateService);
 routes.route('/service/remove/:serviceId').delete(hostelServiceController.removeServiceById);
-module.exports = routes;
 
 /**
  * User Login
  */
-routes.route('/auth/user').get(authServiceCtrl.authentication)
+routes.route('/auth/user').post(authServiceCtrl.authentication)
+
+
+module.exports = routes;

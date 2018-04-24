@@ -25,7 +25,7 @@
           <td>{{user.street}}</td>
           <td>{{user.email}}</td>
           <td>
-            <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true">Edit</button>
+            <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true;isService=true;">Edit</button>
             <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
           </td>
         </tr>
@@ -157,124 +157,188 @@
           <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
         </div>
       </div>
-
       <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
-          <label>Wheel Chair Accomadate</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.wheel_chair_accomadate" name="wheel_chair_accomadate">
-        </div>
-
-
-        <div class="col-md-4 mb-3">
-          <label>Breakfast Included</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.breakfast_included" name="breakfast_included">
-        </div>
-        <div class="col-md-4 mb-3">
-          <label>Travel Desk</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.travel_desk" name="travel_desk">
+          <label for="">Add Services</label>
         </div>
       </div>
-
       <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
-          <label>Hr Checkin</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hr_checkin" name="hr_checkin">
-        </div>
+          <label for="">Select Service</label>
+          <ng-multiselect-dropdown #multiselect [placeholder]="'Select Service'" [data]="services" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)">
+          </ng-multiselect-dropdown>
+          <!-- <select [(ngModel)]="selectedValue">
+            <option *ngFor="let service of services" value="service">{{service.service_name}}</option>
+          </select>` -->
 
-        <div class="col-md-4 mb-3">
-          <label>Air Conditioning</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.air_conditioning" name="air_conditioning">
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <label>Internet Access</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.internet_access" name="internet_access">
         </div>
       </div>
+      <div class="col-md-12 mb-3" *ngIf="isService">
+        <div class="col-md-12 mb-3">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  Service Name
+                </th>
+                <th>
+                  Amount
+                </th>
+                <th>
+                  Free Service
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hostelService of hostel.hostelServices">
+                <td>
+                  <label for="">{{hostelService?.service_name}}</label>
+                </td>
+                <td>
+                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                </td>
+                <td>
+                  <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">
+                </td>
+                <td>
+                  <button class="btn btn-xs btn-danger">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label>Laundry Service</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.laundry_service" name="laundry_service">
+
         </div>
 
-        <div class="col-md-4 mb-3">
-          <label>Card Payment Accepted</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.card_payment_accepted" name="card_payment_accepted">
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <label>Locker</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.locker" name="locker">
-        </div>
       </div>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label> Hot Water</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hot_water" name="hot_water">
-        </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Water Dispenser</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.water_dispenser" name="water_dispenser">
-        </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Common Hangout Area</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_hangout_area" name="common_hangout_area">
-        </div>
-      </div>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label> Common Television</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_television" name="common_television">
-        </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Free Breakfast</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_breakfast" name="free_breakfast">
-        </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Shower</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.shower" name="shower">
-        </div>
-      </div>
+      <!-- 
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label>Wheel Chair Accomadate</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.wheel_chair_accomadate" name="wheel_chair_accomadate">
+              </div>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label> Free Parking</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_parking" name="free_parking">
-        </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Reading Light</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.reading_light" name="reading_light">
-        </div>
-        <div class="col-md-4 mb-3">
-          <label> Celing Fan</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.celing_fan" name="celing_fan">
-        </div>
-      </div>
+              <div class="col-md-4 mb-3">
+                <label>Breakfast Included</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.breakfast_included" name="breakfast_included">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Travel Desk</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.travel_desk" name="travel_desk">
+              </div>
+            </div>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label> Washing Machine</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.washing_machine" name="washing_machine">
-        </div>
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label>Hr Checkin</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hr_checkin" name="hr_checkin">
+              </div>
 
-        <div class="col-md-4 mb-3">
-          <label> House Keeping</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.house_keeping" name="house_keeping">
-        </div>
+              <div class="col-md-4 mb-3">
+                <label>Air Conditioning</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.air_conditioning" name="air_conditioning">
+              </div>
 
-        <div class="col-md-4 mb-3">
-          <label> Checkin 24hrs</label>
-          <input type="checkbox" class="pull-right" [(ngModel)]="hostel.checkin_24hrs" name="checkin_24hrs">
-        </div>
-      </div>
+              <div class="col-md-4 mb-3">
+                <label>Internet Access</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.internet_access" name="internet_access">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label>Laundry Service</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.laundry_service" name="laundry_service">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Card Payment Accepted</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.card_payment_accepted" name="card_payment_accepted">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label>Locker</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.locker" name="locker">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label> Hot Water</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.hot_water" name="hot_water">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Water Dispenser</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.water_dispenser" name="water_dispenser">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Common Hangout Area</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_hangout_area" name="common_hangout_area">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label> Common Television</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.common_television" name="common_television">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Free Breakfast</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_breakfast" name="free_breakfast">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Shower</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.shower" name="shower">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label> Free Parking</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.free_parking" name="free_parking">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Reading Light</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.reading_light" name="reading_light">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label> Celing Fan</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.celing_fan" name="celing_fan">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+                <label> Washing Machine</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.washing_machine" name="washing_machine">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> House Keeping</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.house_keeping" name="house_keeping">
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label> Checkin 24hrs</label>
+                <input type="checkbox" class="pull-right" [(ngModel)]="hostel.checkin_24hrs" name="checkin_24hrs">
+              </div>
+            </div> -->
 
       <div class="col-md-12 mb">
         <div class="col-md-12 mb-3">

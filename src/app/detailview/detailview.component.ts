@@ -10,7 +10,7 @@ import { HttpdataService } from '../service/httpdata.service';
 export class DetailviewComponent implements OnInit {
 
   errorMessage: any;
-  hostelViewObject: {};
+  hostelViewObject: any;
   hostelId: any;
   constructor(private activateRoute: ActivatedRoute,private _httpDataService:HttpdataService) { }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpdataService } from '../service/httpdata.service';
+import { Router, ActivatedRoute, Route } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,25 +12,23 @@ export class LoginComponent implements OnInit {
   login={};
   loginForms: any[];
   errorMessage: string;
-  constructor(private _httpDataService: HttpdataService) { }
+  constructor(private _httpDataService: HttpdataService,private activatedRoute:ActivatedRoute,private route:Router) { }
 
   ngOnInit() {
   }
 
-  getData(): void {
-    this._httpDataService.getAllLoginData().subscribe(
-      data => this.loginForms = data,
-      error => this.errorMessage = <any>error)
-  }
-
-  save(login) {
+  /**
+   * 
+   * @param login 
+   */
+  authSubmit(login) {
     if (login) {
-      this._httpDataService.addLogindata(login).subscribe(
+      this._httpDataService.authUserLogin(login).subscribe(
         data => {
-          this.getData()
+          this.route.navigate(["/hostel"]);
+         console.log(data)
         },
         error => this.errorMessage = <any>error)
-
     }
   }
 }

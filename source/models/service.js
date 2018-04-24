@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // Define collection and schema for Service Items
-var ServiceSchema = new Schema({
+var Service = new Schema({
     service_name: {
         type: String
     }
@@ -13,4 +13,4 @@ var ServiceSchema = new Schema({
 
 
 
-module.exports = mongoose.model('service', ServiceSchema);
+module.exports = mongoose.model('Service', Service);
