@@ -35,6 +35,8 @@ import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
 import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component'
 import { RegisterComponent } from './register/register.component';
+import { ImageUploadModule} from 'ng2-imageupload'
+import { DropdownModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { RegisterComponent } from './register/register.component';
     NouisliderModule,
     NgDatepickerModule,
     RouterModule.forRoot(Approute),
-    NgxGalleryModule
+    NgxGalleryModule,
+    ImageUploadModule,
+    DropdownModule
   ],
   providers: [DefaultsService,HttpdataService],
   bootstrap: [AppComponent]

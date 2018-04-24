@@ -4,22 +4,91 @@
 <div class="row">
   <div class="col-md-12">
     <section class="panel">
-      <div class="col-md-4">
-        <label>Hostel</label>
-        <select class="form-control" >
-          <option *ngFor="let hostel of hostels">{{hostel.name}}</option>
-        </select>
+      <div class="panel-heading col-md-12 pull-right">
+        <button class="btn btn-success btn-sm pull-right" (click)="addHostel()">Add</button>
       </div>
-      <div class="col-md-4">
-        <label>Floors</label>
-        <select class="form-control" >
-          <option *ngFor="let hostel of hostels">{{hostel.floors}}</option>
-        </select>
-      </div>
-      <div class="col-md-4">
+      <!-- <div *ngFor="let hostel of hostels; let i=index"> -->
+      <div [hidden]="!newHostel">
+        <div class="col-md-4">
+          <label>Hostel</label>
+          <select class="form-control" [(ngModel)]=hostel.name>
+            <option *ngFor="let hostelList of hostelsList">{{hostelList.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label>Floors</label>
+          <select class="form-control" [(ngModel)]="hostel.floor">
+            <option *ngFor="let floor of floors">{{floor}}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
           <label>No Of Rooms</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" [(ngModel)]="hostel.noOfRooms" (input)="generateRooms($event.target.value,hostel)">
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Rooms</th>
+              <th>Service</th>
+              <th>No Of Beds</th>
+              <th>View Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of hostel.rooms; let i= index">
+              <td>{{i+1}}</td>
+              <td>
+                <select class="form-control" [(ngModel)]=room.service>
+                  <option *ngFor="let service of services">{{service.name}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="room.noOfBeds">
+                  <option *ngFor="let noOfBed of noOfBeds">{{noOfBed}}</option>
+                </select>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{room.viewTypeImage ? room.viewTypeImage : viewTypes[0].img}}"> {{room.viewTypeLabel ? room.viewTypeLabel : viewTypes[0].label}}
+                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let viewType of viewTypes">
+                      <a title="Select this card" (click)="selectViewType(viewType,room)">
+                        <img src="{{viewType.img}}">{{viewType.label}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-success btn-sm pull-right" (click)="saveHostel(hostel); newHostel=false">Save</button>
+        <button class="btn btn-danger btn-sm pull-right" (click)="cancelEdit(hostel)">Cancel</button>
       </div>
+      <div [hidden]="newHostel">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Hostel Name</th>
+              <th>No Of Floors</th>
+              <th>No Of Rooms</th>
+              <th>Action</th>
+            </tr>
+            <tr *ngFor="let hostel of hostels">
+              <td>{{hostel.name}}</td>
+              <td>{{hostel.floor}}</td>
+              <td>{{hostel.noOfRooms}}</td>
+              <td>
+                <button class="btn btn-success btn-xs" (click)="editHostel(hostel)">Edit</button>
+                <button class="btn btn-danger btn-xs" (click)="deleteHostel(i)">Delete</button>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <!-- </div> -->
     </section>
   </div>
 </div>
