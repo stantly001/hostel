@@ -19,6 +19,7 @@ export class HostelComponent implements OnInit {
   services: any;
   errorMessage: string;
   hostels: Hostel[];
+  clicked: boolean;
   hostel = { images: [],hostelServices:[]};
   uploadedPath = {}
   selectedFile: File = null;

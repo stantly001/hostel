@@ -37,12 +37,23 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param hostel 
+   * Delete Hostel By Hostel Id
+   */
   deleteHosteldata(hostel: Hostel): Observable<Hostel> {
     return this.http.delete(this.baseUrl + "/hostel/removeHostel/" + hostel._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
+
+  /**
+   * 
+   * @param hostel 
+   * Update Hostel By Hostel Id
+   */
   updateHosteldata(hostel: Hostel): Observable<Hostel> {
     console.log(hostel)
     return this.http.put(this.baseUrl + "/hostel/update/" + hostel._id, hostel)
@@ -70,20 +81,34 @@ export class HttpdataService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
-  //Filters
 
+  /**
+   * 
+   * @param filter 
+   * Add Filter
+   */
   addFilterdata(filter: any): Observable<any> {
     return this.http.post(this.baseUrl + "/filter/add", filter)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param filter 
+   * Delete Filter By Filter id
+   */
   deleteFilterdata(filter: any): Observable<Hostel> {
     return this.http.delete(this.baseUrl + "/filter/remove/" + filter._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param filter 
+   * Update Filter By Filter Id
+   */
   updateFilterdata(filter: any): Observable<any> {
     console.log(filter)
     return this.http.put(this.baseUrl + "/filter/update/" + filter._id, filter)
@@ -91,13 +116,20 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
-
+  /**
+   * Get All Register Data
+   */
   getAllRegisterData() {
     return this.http.get(this.baseUrl + "/user")
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param register
+   * Add Register
+   */
   addRegisterdata(register: any): Observable<any> {
     return this.http.post(this.baseUrl + "/user/registration", register)
       .map(this.extractData)
@@ -127,11 +159,11 @@ export class HttpdataService {
    * @param service 
    * Update Service
    */
-  updateService(service: any): Observable<any>{
-    console.log("ser",service)
+  updateService(service: any): Observable<any> {
+    console.log("ser", service)
     return this.http.put(this.baseUrl + "/service/update/" + service._id, service)
-    .map(this.extractData)
-    .catch(this.handleErrorObservable);
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 
   /**
@@ -139,11 +171,24 @@ export class HttpdataService {
    * @param service 
    * Delete Service
    */
-  deleteService(service){
+  deleteService(service) {
     return this.http.delete(this.baseUrl + "/service/remove/" + service._id)
-    .map(this.extractData)
-    .catch(this.handleErrorObservable);
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
+
+  
+  /**
+   * 
+   * @param register 
+   * Auth Login
+   */
+  authUserLogin(register: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/auth/user", register)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
 
   private extractData(res: Response) {
     let body = res;

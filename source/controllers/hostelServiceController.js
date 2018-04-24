@@ -1,4 +1,3 @@
-var express = require('express');
 var bodyParser = require('body-parser');
 var hostelServicesService = require('../services/hostelServicesService')
 
