@@ -37,6 +37,8 @@ import { HostelServiceComponent } from './hostel-service/hostel-service.componen
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component'
 
+import {AgmCoreModule} from '@agm/core';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -69,7 +71,10 @@ import { LoginComponent } from './login/login.component'
     NgDatepickerModule,
     RouterModule.forRoot(Approute),
     NgMultiSelectDropDownModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAu9mbH6VTDT1B2iFZbcgLWT7bjTb6QguI'
+    })
   ],
   providers: [HttpdataService],
   bootstrap: [AppComponent]

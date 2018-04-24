@@ -95,27 +95,97 @@
           <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url" placeholder="Url">
         </div>
         <div class="col-md-4 mb-3">
-          <label> Cancellation Policy</label>
-          <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy" placeholder="Cancellation Policy">
+          <label>Default Currency</label>
+          <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
         </div>
+        
       </div>
 
       <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
+        <!-- <div class="col-md-4 mb-3">
           <label>Longitude</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude" placeholder="Longitude">
-        </div>
-        <div class="col-md-4 mb-3">
+        </div> -->
+        <!-- <div class="col-md-4 mb-3">
           <label>Latitude</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude" placeholder="Latitude">
-        </div>
+        </div> -->
+
         <div class="col-md-4 mb-3">
+          <label>Longitude</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Longitude" [(ngModel)]="hostel.longitude">
+            <div id="longitude" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Longitude</h4>
+                  </div>
+                  <div class="modal-body map-body">
+                    <div id="startLocationMap" style="height: 450px;"></div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">ok</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-group-btn">
+              <button class="btn btn-default" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#longitude">
+                <i class="fa fa-map-marker"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Latitude</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Latitude" [(ngModel)]="hostel.latitude">
+            <div id="latitude" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Start Location</h4>
+                  </div>
+                  <div class="modal-body map-body">
+                    <!-- <agm-map [latitude]="lat" [longitude]="lng"></agm-map> -->
+                    <agm-map [latitude]="lat" [longitude]="lng">
+                      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearMap()">Close</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="selectStartLocation()">ok</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-group-btn">
+              <button class="btn btn-default" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#latitude">
+                <i class="fa fa-map-marker"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- <div class="col-md-4 mb-3">
           <label>Language</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language" placeholder="Language">
-        </div>
+        </div> -->
       </div>
 
-      <div class="col-md-12 mb">
+      <!-- <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
           <label>Default Currency</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
@@ -128,9 +198,9 @@
           <label>State Rating</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating" placeholder="State Rating">
         </div>
-      </div>
+      </div> -->
 
-      <div class="col-md-12 mb">
+      <!-- <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
           <label>National Rating</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating" placeholder="National Rating">
@@ -140,7 +210,7 @@
           <label>World Rating</label>
           <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating" placeholder="World Rating">
         </div>
-      </div>
+      </div> -->
 
       <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
@@ -157,6 +227,14 @@
           <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
         </div>
       </div>
+      <div class="col-md-12 mb">
+      <div class="col-md-4 mb-3">
+        <label> Cancellation Policy</label>
+        <textarea name="cancellation_policy" class="form-control" [(ngModel)]="hostel.cancellation_policy" cols="30" rows="3" placeholder="Cancellation Policy"></textarea>
+        <!-- <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy" placeholder="Cancellation Policy"> -->
+      </div>
+      </div>
+
       <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
           <label for="">Add Services</label>

@@ -1,8 +1,11 @@
 import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import Globals from '../utils/globals';
 import { Hostel } from '../model/hostel';
+import { AgmCoreModule } from '@agm/core';
 // import { HttpEventType } from '@angular/common/http';
 import { HttpdataService } from '../service/httpdata.service';
+
+
 
 
 @Component({
@@ -12,6 +15,10 @@ import { HttpdataService } from '../service/httpdata.service';
   providers: [HttpdataService]
 })
 export class HostelComponent implements OnInit {
+
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
   isService: boolean;
   hostelServices: Array<any>;
   dropdownSettings = {};
@@ -20,7 +27,7 @@ export class HostelComponent implements OnInit {
   errorMessage: string;
   hostels: Hostel[];
   clicked: boolean;
-  hostel = { images: [],hostelServices:[]};
+  hostel = { images: [],hostelServices:[],country:'india',city:'chennai',state:'tamilNadu'};
   uploadedPath = {}
   selectedFile: File = null;
   countries = [

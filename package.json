@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -21,6 +22,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@ngui/map": "^0.20.2",
+    "@types/googlemaps": "^3.30.8",
     "@zeitiger/elevatezoom": "^2.5.4",
     "bcrypt": "^2.0.0",
     "body-parser": "^1.18.2",

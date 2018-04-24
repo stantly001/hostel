@@ -34,7 +34,8 @@
         "assets/js/responsiveslides.min.js",
         "assets/js/move-top.js",
         "assets/js/easing.js",
-        "assets/js/custom.js"
+        "assets/js/custom.js",
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAu9mbH6VTDT1B2iFZbcgLWT7bjTb6QguI &libraries=places"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
