@@ -107,6 +107,7 @@ function filterHostelModel(res) {
         national_rating: res.national_rating,
         world_rating: res.world_rating,
         checkin_24hrs: res.checkin_24hrs,
+        floors:res.floors,
         hostelServices:res.hostelServices
     };
     return hostel;
@@ -281,6 +282,7 @@ function updateFilterHostelDetail(data, res) {
     data.national_rating = res.national_rating;
     data.world_rating = res.world_rating;
     data.checkin_24hrs = res.checkin_24hrs;
+    floors:res.floors
     // }
 
     return data;

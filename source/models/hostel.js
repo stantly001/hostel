@@ -135,12 +135,17 @@ var Hostel = new Schema({
   checkin_24hrs: {
     type: Boolean
   },
+  floors: {
+    type: Number
+  },
   images: [{
     type: Schema.Types.ObjectId,
     ref: 'HostelImg'
   }],
   hostelServices: [{
-    amount: Number,
+    amountPerMonth: Number,
+    amountPerDay: Number,
+    amountPerWeek: Number,
     free_service: Boolean,
     service: {
       type: Schema.Types.ObjectId,

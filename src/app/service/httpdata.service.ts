@@ -177,6 +177,37 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+/**
+   * Get Rooms
+   */
+  getAllRooms() {
+    return this.http.get(this.baseUrl + "/room")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  /**
+   * 
+   * @param room 
+   * Save Room
+   */
+  saveRoom(room: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/room/saveRoom", room)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  /**
+   * 
+   * @param room 
+   * Update Room
+   */
+  updateRoom(room: any): Observable<any> {
+    console.log("room", room)
+    return this.http.put(this.baseUrl + "/room/update/" + room._id, room)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   
   /**
    * 

@@ -156,6 +156,11 @@
           <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3" placeholder="Policy"></textarea>
           <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
         </div>
+        <div class="col-md-4 mb-3">
+            <label>No. Of Floors</label>
+            
+            <input type="text" class="form-control" [(ngModel)]="hostel.floors" name="policy">
+          </div>
       </div>
       <div class="col-md-12 mb">
         <div class="col-md-4 mb-3">
@@ -183,7 +188,13 @@
                   Service Name
                 </th>
                 <th>
-                  Amount
+                    Amount/Month
+                </th>
+                <th>
+                    Amount/Day
+                </th>
+                <th>
+                    Amount/Week
                 </th>
                 <th>
                   Free Service
@@ -197,7 +208,13 @@
                   <label for="">{{hostelService?.service_name}}</label>
                 </td>
                 <td>
-                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerMonth" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                </td>
+                <td>
+                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerDay" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                </td>
+                <td>
+                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerWeek" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
                 </td>
                 <td>
                   <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">

@@ -36,3 +36,7 @@
 .register-form{
     background-color: #ECCA69 !important;
 }
+
+.dropdown:hover {
+    cursor: pointer;
+}

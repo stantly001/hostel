@@ -5,6 +5,8 @@
         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Hostel</a>
     </h1>
   </div>
+  <!--logo -->
+
   <div class="navigation">
     <span class="menu">
       <img src="assets/images/menu.png" alt="" />
@@ -27,21 +29,26 @@
         <li>
           <a routerLink="../admin/addHostel" data-hover="ADMIN">Admin</a>
         </li>
-        <li>
+        <!-- <li>
           <a routerLink="viewRooms" data-hover="View Rooms">View Rooms</a>
-        </li>
-        <li>
-          <a routerLink="../admin/rooms" data-hover="Rooms">Rooms</a>
-        </li>
-        <li>
-          <a routerLink="../admin/filter" data-hover="FILTER">Filter</a>
-        </li>
-        <li>
-          <a routerLink="../hostel/registration" data-hover="SIGN UP">Sign Up</a>
-        </li>
-        <li>
+        </li> -->
+        <li *ngIf="!user">
           <a routerLink="../hostel/login" data-hover="LOGIN">Login</a>
         </li>
+        <li *ngIf="user" class="dropdown">
+            
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+             <label>{{user}}</label>
+              <i class="fa fa-user"></i>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <button type="submit" class="btn btn-link btn-logout" (click)="userLogout()">Logout</button>
+    
+              </li>
+            </ul>
+          </li>
       </ul>
     </nav>
   </div>
@@ -59,11 +66,8 @@
       <li>
         <a href="#" class="f4"></a>
       </li>
-    </ul>
-  </div>
-  <div class="clearfix"></div>
-  <div>
-     
+      
+      </ul>
   </div>
   <div class="clearfix"></div>
 </div>
