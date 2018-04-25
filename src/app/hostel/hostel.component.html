@@ -123,8 +123,9 @@
                     <h4 class="modal-title">Longitude</h4>
                   </div>
                   <div class="modal-body map-body">
-                    <div id="startLocationMap" style="height: 450px;"></div>
-
+                    <agm-map [latitude]="lat" [longitude]="lng">
+                      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map>
                   </div>
                   <div class="modal-footer">
                     <div class="col-sm-8"></div>
@@ -153,7 +154,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Start Location</h4>
+                    <h4 class="modal-title">Latitude</h4>
                   </div>
                   <div class="modal-body map-body">
                     <!-- <agm-map [latitude]="lat" [longitude]="lng"></agm-map> -->
