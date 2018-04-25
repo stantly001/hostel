@@ -20,14 +20,11 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
-    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
+//    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
+    hostel.find().populate("images").populate('hostelServices.service').exec(function (err, data) {
         if (err) {
             console.log(err);
-        } else {
-            data.forEach(function(val){
-                console.log(val.hostelServices)
-            })
-           
+        } else {                     
             return res.json(data);
         }
     })

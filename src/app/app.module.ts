@@ -35,7 +35,8 @@ import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
 import { RoomsComponent } from './rooms/rooms.component'
 import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { HostelViewComponent } from './hostel-view/hostel-view.component'
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoginComponent } from './login/login.component'
     RoomsComponent,
     HostelServiceComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HostelViewComponent
   ],
   imports: [
     BrowserModule,

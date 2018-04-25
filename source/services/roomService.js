@@ -13,12 +13,11 @@ var room = require('../models/room');
  * Set Room Data
  */
 function setRoomData(res) {
-    var roomData = new user({
-        floor_no: res.floor_no,
+    var roomData = new room({
+        hostel_list: res.hostel_list,
+        floor: res.floor,
         no_of_rooms: res.no_of_rooms,
-        no_of_beds: res.no_of_beds,
-        view_type: res.view_type,
-        services: res.services
+        rooms:res.rooms
     })
     return roomData;
 }
@@ -31,8 +30,10 @@ function setRoomData(res) {
  */
 function saveRoom(req, res) {
     var newRoom = setRoomData(req.body);
+    console.log("newRoom",newRoom)
     newRoom.save().then(item => {
-        return res.status(200).json({ 'success': 'user added successfully', 'data': item });
+        console.log("item",item)
+        return res.status(200).json({ 'success': 'Room added successfully', 'data': item });
     })
         .catch(err => {
             return res.status(400).send("unable to save to database");
@@ -46,7 +47,7 @@ function saveRoom(req, res) {
  * Get Room Details 
  */
 function getRoomDetails(req, res) {
-    room.find().populate("services").exec(function (err, data) {
+    room.find().populate("hostel_list").populate("rooms.services").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
