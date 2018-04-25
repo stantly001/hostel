@@ -56,6 +56,10 @@ export const Approute: Routes = [
                     }, {
                         path: 'viewRooms',
                         component: RoomsComponent
+                    },{
+                        path: '',
+                        redirectTo: 'addHostel',
+                        pathMatch: 'full',
                     }
                 ]
             },
