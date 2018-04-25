@@ -9,6 +9,7 @@ var roomService = require('../services/roomService')
  * Save Rooms
  */
 function saveRoom(req, res) {
+    console.log("room-->",req.body)
     return roomService.saveRoom(req, res);
 }
 
