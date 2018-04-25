@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { FormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { Approute } from './app.routes';
 
@@ -29,14 +30,13 @@ import { ViewComponent } from './view/view.component';
 import {HttpdataService} from './service/httpdata.service';
 
 
-import { DefaultsService } from './services/defaults.service';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component';
-import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component'
+import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 import { RegisterComponent } from './register/register.component';
-import { ImageUploadModule} from 'ng2-imageupload'
-import { DropdownModule } from 'primeng/primeng';
+import { LoginComponent } from './login/login.component';
+import { HostelViewComponent } from './hostel-view/hostel-view.component'
 
 @NgModule({
   declarations: [
@@ -58,9 +58,11 @@ import { DropdownModule } from 'primeng/primeng';
     ListReviewsComponent,
     ViewComponent,
     ViewRoomsComponent,
-    ServicesComponent,
     RoomsComponent,
-    RegisterComponent
+    HostelServiceComponent,
+    RegisterComponent,
+    LoginComponent,
+    HostelViewComponent
   ],
   imports: [
     BrowserModule,
@@ -68,11 +70,10 @@ import { DropdownModule } from 'primeng/primeng';
     NouisliderModule,
     NgDatepickerModule,
     RouterModule.forRoot(Approute),
-    NgxGalleryModule,
-    ImageUploadModule,
-    DropdownModule
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxGalleryModule
   ],
-  providers: [DefaultsService,HttpdataService],
+  providers: [HttpdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DefaultsService } from '../services/defaults.service';
 import { HttpdataService } from '../service/httpdata.service';
 @Component({
   selector: 'app-list',
@@ -11,7 +10,7 @@ export class ListComponent implements OnInit {
   
   errorMessage: any;
   hostels: any;
-  constructor(private defaultsService:DefaultsService,private _httpDataService:HttpdataService) { }
+  constructor(private _httpDataService:HttpdataService) { }
 
   ngOnInit() {
     // this.defaultsService.getHostels().subscribe(response => {

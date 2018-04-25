@@ -11,7 +11,7 @@ import { HttpdataService } from '../service/httpdata.service';
 export class RegisterComponent implements OnInit {
   registers: any[];
   errorMessage: string;
-  register = {};
+  register={}
   constructor(private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
@@ -30,8 +30,6 @@ export class RegisterComponent implements OnInit {
           this.getData()
         },
         error => this.errorMessage = <any>error)
-
     }
   }
-
 }

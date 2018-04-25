@@ -18,9 +18,9 @@ function setUserData(res) {
         email: res.email,
         primary_phone: res.primary_phone,
         secondary_phone: res.secondary_phone,
-        password: res.password,
         gender: res.gender
     })
+    post.password = post.generateHash(res.password);
     return post;
 }
 
@@ -57,10 +57,15 @@ function getUserDetails(req, res) {
     })
 }
 
-function getUserByUserName(userName) {
-    user.findOne({ user_name: userName }).then(result => {
-        console.log(result)
-        return result
+/**
+ * 
+ * @param {*} userName 
+ * @param {*} cb 
+ * Return Match User Object
+ */
+function getUserByUserName(userName, cb) {
+    user.findOne({ user_name: userName }, function (err, data) {
+        return cb(err, data)
     })
 }
 

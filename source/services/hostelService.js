@@ -6,6 +6,7 @@ var fs = require('fs');
 //Mongoose Models
 var hostel = require('../models/hostel');
 var hostelVisuals = require('../models/hostelImg');
+var service = require('../models/service');
 
 //File Path
 const imgFilePath = "../hmsDoc/visuals";
@@ -19,29 +20,36 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
-    hostel.find().populate("images").exec(function (err, data) {
+    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
         if (err) {
             console.log(err);
         } else {
+            data.forEach(function(val){
+                console.log(val.hostelServices)
+            })
+           
             return res.json(data);
         }
     })
 }
+
+/**
+ * 
+ * @param {*} imgUrl 
+ * @param {*} res 
+ * Image Response
+ */
 function convertImageUrlTOBase64(imgUrl, res) {
     console.log(imgUrl)
 
     var url = fs.readFile(imgUrl, (err, data) => {
-
         //error handle
         if (err)
             res.status(500).send(err);
-
         //get image file extension name
         let extensionName = path.extname(imgUrl);
-
         //convert image file to base64-encoded string
         let base64Image = new Buffer(data, 'binary').toString('base64');
-
         //combine all strings
         let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
         res.send(imgSrcString)
@@ -98,11 +106,18 @@ function filterHostelModel(res) {
         state_rating: res.state_rating,
         national_rating: res.national_rating,
         world_rating: res.world_rating,
-        checkin_24hrs: res.checkin_24hrs
+        checkin_24hrs: res.checkin_24hrs,
+        hostelServices:res.hostelServices
     };
     return hostel;
 }
 
+/**
+ * 
+ * @param {*} res 
+ * @param {*} post 
+ * Filter By Hostel Visuals
+ */
 function filterHostelVisualsModel(res, post) {
     console.log("Hostel Id ====> ", post._id)
     var hostelVisualObj = new hostelVisuals({
@@ -122,6 +137,7 @@ function filterHostelVisualsModel(res, post) {
  */
 function addHostel(req, res) {
     var post = new hostel(filterHostelModel(req.body))
+    console.log(post)
     post.save()
             .then(item => {
                 req.body.images.forEach(function (val, k) {

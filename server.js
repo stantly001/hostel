@@ -3,22 +3,35 @@ const express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
-    mongoose = require('mongoose'),
-    config = require('./source/config/db'),
-    hostelService = require('./source/routes/routes');
+    appRoutes = require('./source/routes/routes'),
+    // session = require('express-session'),
+    // MongoStore = require('connect-mongo')(session),
+    dbConnection = require('./source/config/config');
 
-mongoose.Promise = global.Promise;
-mongoose.connect(config.db).then(
-    () => { console.log('Database is connected') },
-    err => { console.log('Can not connect to the database' + err) }
-);
+var sessionDb = dbConnection.connection;
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+// sessionDb.on('error', console.error.bind(console, 'connection error:'));
+// sessionDb.once('open', function () {
+//     console.log("Connection Success !")
+// });
+// app.use(session({
+//     secret: 'work hard',
+//     resave: true,
+//     saveUninitialized: false,
+//     store: new MongoStore({
+//         mongooseConnection: sessionDb
+//     })
+// }));
+
+
+
 const port = process.env.PORT || 4000;
 
-app.use('/hms', hostelService);
+app.use('/hms', appRoutes);
 
 
 const server = app.listen(port, function () {

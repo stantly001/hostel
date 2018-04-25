@@ -1,7 +1,8 @@
-<div class="container">
-  <form class="form-horizontal">
-    <div class="col-sm-12 add-form">
-      <div class="form-row row">
+<div class="welcome">
+  <div class="container">
+    <form class="form-horizontal">
+      <div class="col-sm-12 well register-form">
+        <div class="form-row row">
 
         <div class="col-md-12 mb">
           <div class="col-md-6 mb-3 mb">
@@ -34,11 +35,18 @@
             <input type="radio" placeholder="Gender" [(ngModel)]="register.gender" name="gender" value="female">Female
           </div>
 
-          <div class="col-md-12">
-            <button class="btn btn-success btn-sm" (click)="save(register)">Submit</button>
+            <div class="col-md-12 text-center">
+              <button class="btn btn-danger btn-sm" (click)="save(register)">Submit</button>
+            </div>
+
           </div>
+          
         </div>
+        <div class="container">
+            If you registered
+            <a routerLink="../../hostel/login" data-hover="Login">Login Here</a>
+          </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

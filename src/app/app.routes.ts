@@ -8,18 +8,28 @@ import { AdminComponent } from './admin/admin.component';
 import { HostelComponent } from './hostel/hostel.component';
 import { FilterFormComponent } from './filter-form/filter-form.component';
 import { ViewRoomsComponent } from './view-rooms/view-rooms.component'
-import { ServicesComponent } from './services/services.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { RegisterComponent } from './register/register.component';
+import { HostelServiceComponent } from './hostel-service/hostel-service.component';
+import { LoginComponent } from './login/login.component';
+import { HostelViewComponent } from './hostel-view/hostel-view.component';
 
 export const Approute: Routes = [
 
     {
         path: "hostel",
         component: HomeSectionComponent,
-    }, {
+    },
+    {
+        path: 'hostel/login',
+        component: LoginComponent,
+    }, 
+    {
         path: "hostel/search",
         component: ViewComponent,
+    },{
+        path: "hostel/registration",
+        component: RegisterComponent,
     }, {
         path: "hostel/:hostelId",
         component: DetailviewComponent,
@@ -37,23 +47,29 @@ export const Approute: Routes = [
         component: AdminComponent,
         children: [            
             {
-                path: 'addHostel',
-                component: HostelComponent
+                path: 'hostelView',
+                component: HostelViewComponent,
+                children: [
+                    {
+                        path: 'addHostel',
+                        component: HostelComponent
+                    }, {
+                        path: 'viewRooms',
+                        component: RoomsComponent
+                    }
+                ]
             },
             {
                 path: 'filter',
                 component: FilterFormComponent
             },
             {
-                path: 'register',
-                component: RegisterComponent
-            },{
                 path: '',
-                redirectTo: 'addHostel',
+                redirectTo: 'hostelView',
                 pathMatch: 'full'
             },{
                 path: "services",
-                component: ServicesComponent
+                component: HostelServiceComponent
             },{
                 path: "rooms",
                 component: RoomsComponent
