@@ -29,10 +29,13 @@
 
 .login-form{
     background-color: #ECCA69 !important;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .register-form{
     background-color: #ECCA69 !important;
+}
+
+.navigation ul {
+    top: 54px !important;
+    z-index: 0 !important;
 }

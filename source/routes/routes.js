@@ -48,6 +48,8 @@ routes.route('/service/remove/:serviceId').delete(hostelServiceController.remove
  * User Login
  */
 routes.route('/auth/user').post(authServiceCtrl.authentication)
+routes.route('/auth/logout').get(authServiceCtrl.logout)
+
 
 
 module.exports = routes;

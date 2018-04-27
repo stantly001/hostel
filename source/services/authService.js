@@ -5,29 +5,81 @@ var bcrypt = require('bcrypt');
  * 
  * @param {*} userAuth 
  * @param {*} res 
+ * Find Login User
  */
-function authentication(userAuth, res) {
-    var user_name = userAuth.user_name;
-    var password = userAuth.password;
+function authentication(userAuth, cb) {
+    var user_name = userAuth.session.user_name;
+    var password = userAuth.session.password;
     var ifPasTrue = false;
+    var returnRes = ''
     userRegSer.getUserByUserName(user_name, function (err, auth) {
         if (err) {
-            return err
-            console.log(err)
+            return cb(err)
         } else if (!auth) {
-            res.json({ message: 'User Not Found', data: userAuth })
+            returnRes = { message: 'User Not Found', data: userAuth.session }
+            return cb(err, returnRes)
         } else {
             ifPasTrue = bcrypt.compareSync(password, auth.password)
             if (ifPasTrue == true) {
-                res.json({ message: 'Login Success !!!', data: auth })
-            }else{
-                res.json({message: 'Invalid Password', data: userAuth})
+                returnRes = { message: 'Login Success !!!', data: auth }
+                return cb(err, returnRes)
+            } else {
+                returnRes = { message: 'Invalid Password', data: userAuth.session }
+                return cb(err, returnRes)
             }
         }
     })
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * User Login
+ */
+function userLogin(req, res) {
+    var sessionAuth = authSession(req);
+    authentication(sessionAuth, function (err, data) {
+        console.log(data)
+        if (err) {
+            return cb(err)
+        } else {
+            res.json(data)
+        }
+    })
+}
 
-var auth = { authentication }
+/**
+ * 
+ * @param {*} req 
+ * set session
+ */
+function authSession(req) {
+    var authUser = req.body;
+    req.session.user_name = authUser.user_name;
+    req.session.password = authUser.password;
+    return req
+}
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Logout
+ */
+function logout(req, res) {
+    if (req.session) {
+        req.session.destroy(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/');
+            }
+        });
+    }
+}
+
+
+var auth = { userLogin, logout }
 
 module.exports = auth;

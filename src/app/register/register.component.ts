@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   }
 
   save(register) {
+    this.register='';
     if (register) {
       this._httpDataService.addRegisterdata(register).subscribe(
         data => {
