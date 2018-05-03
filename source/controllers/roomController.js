@@ -34,10 +34,21 @@ function updateRoom(req,res){
 
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * get RoomDetails ByHostelId
+ */
+function getRoomDetailsByHostelId(req, res) {
+    console.log("params",req.params.hostelId)
+    return roomService.getRoomDetailsByHostelId(req.params.hostelId,req, res);
+}
+
 
 
 var roomController = {
-    saveRoom, getRoomDetails,updateRoom
+    saveRoom, getRoomDetails,updateRoom,getRoomDetailsByHostelId
 };
 
 module.exports = roomController;

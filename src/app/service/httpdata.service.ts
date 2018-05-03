@@ -37,6 +37,19 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+
+  /**
+   * 
+   * @param hostelId 
+   * Get HostelDetail By HostelId
+   */
+  getRoomDetailsByHostelId(hostelId){
+    console.log("hostelId",hostelId)
+    return this.http.get(this.baseUrl + "/room/"+hostelId)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
+
   /**
    * 
    * @param hostel 

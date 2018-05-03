@@ -14,10 +14,9 @@ var room = require('../models/room');
  */
 function setRoomData(res) {
     var roomData = new room({
-        hostel_list: res.hostel_list,
-        floor: res.floor,
-        no_of_rooms: res.no_of_rooms,
-        rooms:res.rooms
+        hostel_id: res.hostel_id,
+        floors:res.floors,
+        created_by:res.created_by
     })
     return roomData;
 }
@@ -47,7 +46,7 @@ function saveRoom(req, res) {
  * Get Room Details 
  */
 function getRoomDetails(req, res) {
-    room.find().populate("hostel_list").populate("rooms.services").exec(function (err, data) {
+    room.find().populate("hostel_id").populate("floors.rooms.services").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
@@ -59,13 +58,37 @@ function getRoomDetails(req, res) {
 
 /**
  * 
+ * @param {*} hostelId 
+ * @param {*} req 
+ * @param {*} res 
+ * Get RoomDetails ByHostelId
+ */
+function getRoomDetailsByHostelId(hostelId,req, res) {
+    console.log("hostelId-->",hostelId)
+    room.findOne({hostel_id:hostelId}).populate("hostel_id").populate("floors.rooms.room_services.service").exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            return res.json(data);
+        }
+    })
+}
+
+
+
+
+
+
+/**
+ * 
  * @param {*} id 
  * @param {*} roomData 
  * @param {*} res 
  * update Room
  */
 function updateRoom(id, roomData, res) {
-    service.findByIdAndUpdate(id, roomData, { new: true })
+    room.findByIdAndUpdate(id, roomData, { new: true })
         .then(data => {
             res.json(data)
         })
@@ -75,7 +98,7 @@ function updateRoom(id, roomData, res) {
 }
 
 var roomService = {
-    saveRoom, getRoomDetails, updateRoom
+    saveRoom, getRoomDetails, updateRoom,getRoomDetailsByHostelId
 };
 
 module.exports = roomService;

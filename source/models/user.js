@@ -26,7 +26,15 @@ var User = new Schema({
     },
     gender: {
         type: String
-    }
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    last_updated: {
+        type: Date,
+        default: Date.now
+    },
 
 }, {
         versionKey: false,

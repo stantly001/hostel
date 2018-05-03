@@ -5,23 +5,23 @@
   <div class="col-md-12">
     <section class="panel">
       <!-- <div *ngFor="let hostel of hostels; let i=index"> -->
-      <div [hidden]="!newHostel">
+      <div>
         <div class="col-md-3">
           <label>Hostels</label>
-          <select class="form-control" [(ngModel)]="hostel.hostel_list" (change)="setFloor(hostel)">
+          <select class="form-control" [(ngModel)]="hostel.hostel_id" (change)="setFloor(hostel)">
             <option value="" selected hidden>Select Hostel</option>
             <option *ngFor="let hostel_list of hostelLists" [ngValue]="hostel_list">{{hostel_list.name}}</option>
           </select>
         </div>
         <div class="col-md-3">
           <label>Floors</label>
-          <select class="form-control" [(ngModel)]="hostel.floor">
-            <option *ngFor="let floor of floors">{{floor}}</option>
+          <select class="form-control" [(ngModel)]="floor.floor_no" (change)="selectFloor($event.target.value)">
+            <option *ngFor="let floorList of floorsList">{{floorList}}</option>
           </select>
         </div>
         <div class="col-md-3">
           <label>No Of Rooms</label>
-          <input type="text" class="form-control" [(ngModel)]="hostel.no_of_rooms">
+          <input type="text" class="form-control" [(ngModel)]="floor.no_of_rooms">
         </div>
         <div class="col-md-3">
           <label>Services</label>
@@ -30,33 +30,31 @@
           </ng-multiselect-dropdown>
         </div>
         <div class="panel-heading col-md-12 pull-right">
-          <button class="btn btn-success btn-sm pull-right" (click)="createRooms(hostel)">Create Rooms</button>
+          <button class="btn btn-success btn-sm pull-right" (click)="createRooms(floor)">Create Rooms</button>
         </div>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>S.No</th>
               <th>Room No</th>
-              <th>Service</th>
               <th>No Of Beds</th>
               <th>View Type</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let room of hostel.rooms; let i= index">
-              <td>{{i+1}}</td>
+          <tbody *ngFor="let room of floor.rooms; let i= index">
+            <tr>
               <td>
                 <input class="form-control" [(ngModel)]="room.room_number">
               </td>
-              <td>
-                <!-- <select class="form-control" [(ngModel)]=room.service>
+              <!-- <td> -->
+              <!-- <select class="form-control" [(ngModel)]=room.service>
                   <option *ngFor="let service of services">{{service.name}}</option>
                 </select> -->
-                <ng-multiselect-dropdown [placeholder]="'Select Services'" [data]="services" [(ngModel)]="room.services" [settings]="dropdownSettings"
+              <!-- <ng-multiselect-dropdown [placeholder]="'Select Services'" [data]="services" [(ngModel)]="room.services" [settings]="dropdownSettings"
                   (onSelect)="onRoomServiceSelect($event,room)" (onSelectAll)="onRoomSelectAll($event,room)">
-                </ng-multiselect-dropdown>
-              </td>
+                </ng-multiselect-dropdown> -->
+              <!-- </td> -->
               <td>
                 <select class="form-control" [(ngModel)]="room.no_of_beds">
                   <option *ngFor="let noOfBed of noOfBeds">{{noOfBed}}</option>
@@ -65,7 +63,7 @@
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{room.viewTypeImage ? room.viewTypeImage : null}}"> {{room.viewTypeLabel ? room.viewTypeLabel : null}}
+                    <img src="{{room.view_type ? room.view_type.img : null}}"> {{room.view_type ? room.view_type.label : null}}
                     <span class="glyphicon glyphicon-chevron-down pull-right"></span>
                   </button>
                   <ul class="dropdown-menu">
@@ -82,28 +80,87 @@
                   <span class="slider round"></span>
                 </label>
               </td>
+              <td>
+                <button class="btn btn-success btn-sm" (click)="showService=i">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5">             
+                 <div [class.collapse]="showService!=i">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        Service Name
+                      </th>
+                      <th>
+                        Amount/Month
+                      </th>
+                      <th>
+                        Amount/Day
+                      </th>
+                      <th>
+                        Amount/Week
+                      </th>
+                      <th>
+                        Free Service
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let roomService of room.room_services">
+                      <td>
+                          <ng-select [items]="services" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false">
+                            </ng-select>
+                      </td>
+                      <td>
+                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_month" *ngIf="roomService.free_service==false||!(roomService.free_service)">
+                      </td>
+                      <td>
+                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_day" *ngIf="roomService.free_service==false||!(roomService.free_service)">
+                      </td>
+                      <td>
+                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_week" *ngIf="roomService.free_service==false||!(roomService.free_service)">
+                      </td>
+                      <td>
+                        <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="roomService.free_service">
+                      </td>
+                      <td>
+                        <button class="btn btn-xs btn-danger">
+                          <i class="fa fa-close"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </td>
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-success btn-sm pull-right" (click)="saveHostel(hostel); newHostel=false">Save</button>
+        <button class="btn btn-success" (click)="applyFloor(hostel,floor)">Apply</button>
+        <button class="btn btn-success btn-sm pull-right" (click)="saveHostel(hostel,floor); newHostel=false">Save</button>
         <button class="btn btn-danger btn-sm pull-right" (click)="cancelEdit(hostel)">Cancel</button>
       </div>
-      <div [hidden]="newHostel">
+      <!-- <div [hidden]="newHostel">
         <table class="table table-stripped">
           <thead>
             <tr>
                 <th>S.No</th>
                 <th>Room No</th>
                 <th>No Of Beds</th>
-                <!-- <th>View Type</th> -->
-                <!-- <th>Status</th> -->
+                 <th>View Type</th>
+                 <th>Status</th>
             </tr>
             <tr *ngFor="let room of hostelRooms?.rooms; let i= index">
               <td>{{i+1}}</td>
               <td>{{room.room_number}}</td>
               <td>{{room.no_of_beds}}</td>
-              <!-- <td>{{room.view_type.label}}</td> -->
-              <!-- <td>{{room.isActive ==true ? Active : Inactive}}</td> -->
+              <td>{{room.view_type.label}}</td>
+              <td>{{room.isActive ==true ? Active : Inactive}}</td> 
               <td>
                 <button class="btn btn-success btn-xs" (click)="editHostel(hostel)">Edit</button>
                 <button class="btn btn-danger btn-xs" (click)="deleteHostel(i)">Delete</button>
@@ -111,7 +168,7 @@
             </tr>
           </thead>
         </table>
-      </div>
+      </div> -->
       <!-- </div> -->
     </section>
   </div>

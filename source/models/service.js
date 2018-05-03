@@ -5,7 +5,15 @@ var Schema = mongoose.Schema;
 var Service = new Schema({
     service_name: {
         type: String
-    }
+    }, 
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    last_updated: {
+        type: Date,
+        default: Date.now
+    },
 }, {
         versionKey: false,
         collection: 'service'

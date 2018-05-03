@@ -50,7 +50,8 @@ routes.route('/service/remove/:serviceId').delete(hostelServiceController.remove
  */
 routes.route('/room/saveRoom').post(roomController.saveRoom);
 routes.route('/room').get(roomController.getRoomDetails);
-// routes.route('/room/update/:roomId').put(roomController.updateRoom);
+routes.route('/room/:hostelId').get(roomController.getRoomDetailsByHostelId);
+routes.route('/room/update/:roomId').put(roomController.updateRoom);
 
 
 /**

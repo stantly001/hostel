@@ -23,7 +23,8 @@
         "assets/css/bootstrap.css",
         "assets/css/style.css",
         "assets/css/main.css",
-        "assets/css/nouislider.css"
+        "assets/css/nouislider.css",
+        "../node_modules/@ng-select/ng-select/themes/default.theme.css"
       ],
       "scripts": [
         "assets/js/jquery-1.11.1.min.js",

@@ -60,3 +60,9 @@ body { padding: 40px; }
   .slider.round:before {
     border-radius: 50%;
   }
+  .ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+    width: 205px
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 // import Globals from '../utils/globals';
 import { HttpdataService } from '../service/httpdata.service';
 
@@ -14,9 +14,11 @@ export class FilterFormComponent implements OnInit {
   errorMessage: string;
   clicked: boolean;
   filter = { filter_types: [] };
+  services: Array<any>;
   constructor(private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
+    this.getServices();
     this.getData();
   }
 
@@ -29,8 +31,22 @@ export class FilterFormComponent implements OnInit {
   addFilter() {
     this.filter.filter_types.push({})
   }
+  
+  getServices() {
+    this._httpDataService.getAllServices().subscribe(
+      data => {
+        this.services = data;
+        console.log("service", this.services);
+      }),
+      error => { this.errorMessage = <any>error };
+  }
+
+  selectService(value, filter_type) {
+    filter_type.filter_name = value.service_name;
+  }
 
   save = (filter) => {
+    console.log("filter",filter)
     this._httpDataService.addFilterdata(filter).subscribe(
       data => {
         this.getData()

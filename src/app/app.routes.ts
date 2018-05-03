@@ -34,7 +34,7 @@ export const Approute: Routes = [
         path: "hostel/:hostelId",
         component: DetailviewComponent,
     }, {
-        path: "viewRooms",
+        path: "rooms",
         component: ViewRoomsComponent
     },
     {
@@ -74,9 +74,6 @@ export const Approute: Routes = [
             },{
                 path: "services",
                 component: HostelServiceComponent
-            },{
-                path: "rooms",
-                component: RoomsComponent
             }
         ]
     },

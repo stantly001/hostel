@@ -124,95 +124,101 @@
             </div>
           </div>
 
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label>Property Description</label>
-          <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3" placeholder="Property Description"></textarea>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label> Things to Note</label>
-          <textarea name="things_to_note" class="form-control" [(ngModel)]="hostel.things_to_note" cols="30" rows="3" placeholder="Things to Note"></textarea>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label>Policy</label>
-          <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3" placeholder="Policy"></textarea>
-          <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
-        </div>
-        <div class="col-md-4 mb-3">
-            <label>No. Of Floors</label>
-            
-            <input type="text" class="form-control" [(ngModel)]="hostel.floors" name="policy">
+          <div class="col-md-12 mb">
+            <div class="col-md-4 mb-3">
+              <label>Property Description</label>
+              <textarea name="property_description" class="form-control" [(ngModel)]="hostel.property_description" cols="30" rows="3" placeholder="Property Description"></textarea>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label> Things to Note</label>
+              <textarea name="things_to_note" class="form-control" [(ngModel)]="hostel.things_to_note" cols="30" rows="3" placeholder="Things to Note"></textarea>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label>Policy</label>
+              <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3" placeholder="Policy"></textarea>
+              <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
+            </div>
+            <div class="col-md-4 mb-3">
+              <label>No. Of Floors</label>
+
+              <input type="text" class="form-control" [(ngModel)]="hostel.floors" name="policy">
+            </div>
           </div>
-      </div>
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label for="">Add Services</label>
-        </div>
-      </div>
-      <div class="col-md-12 mb">
-        <div class="col-md-4 mb-3">
-          <label for="">Select Service</label>
-          <ng-multiselect-dropdown #multiselect [placeholder]="'Select Service'" [data]="services" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
-            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)">
-          </ng-multiselect-dropdown>
-          <!-- <select [(ngModel)]="selectedValue">
+          <div class="col-md-12 mb">
+            <div class="col-md-4 mb-3">
+              <label for="">Add Services</label>
+            </div>
+          </div>
+          <div class="col-md-12 mb">
+            <div class="col-md-4 mb-3">
+              <label for="">Select Service</label>
+              <ng-multiselect-dropdown #multiselect [placeholder]="'Select Service'" [data]="services" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+              <!-- <select [(ngModel)]="selectedValue">
             <option *ngFor="let service of services" value="service">{{service.service_name}}</option>
           </select>` -->
 
-        </div>
-      </div>
-      <div class="col-md-12 mb-3" *ngIf="isService">
-        <div class="col-md-12 mb-3">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  Service Name
-                </th>
-                <th>
-                    Amount/Month
-                </th>
-                <th>
-                    Amount/Day
-                </th>
-                <th>
-                    Amount/Week
-                </th>
-                <th>
-                  Free Service
-                </th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let hostelService of hostel.hostelServices">
-                <td>
-                  <label for="">{{hostelService?.service_name}}</label>
-                </td>
-                <td>
-                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerMonth" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                </td>
-                <td>
-                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerDay" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                </td>
-                <td>
-                  <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amountPerWeek" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                </td>
-                <td>
-                  <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">
-                </td>
-                <td>
-                  <button class="btn btn-xs btn-danger">
-                    <i class="fa fa-close"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3" *ngIf="isService">
+            <div class="col-md-12 mb-3">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                      Service Name
+                    </th>
+                    <th>
+                      Amount/Month
+                    </th>
+                    <th>
+                      Amount/Day
+                    </th>
+                    <th>
+                      Amount/Week
+                    </th>
+                    <th>
+                      Free Service
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hostelService of hostel.hostel_services">
+                    <td>
+                      <label for="">{{hostelService?.service_name}}</label>
+                    </td>
+                    <td>
+                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_month" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    </td>
+                    <td>
+                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_day" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    </td>
+                    <td>
+                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_week" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    </td>
+                    <td>
+                      <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">
+                    </td>
+                    <td>
+                      <button class="btn btn-xs btn-danger">
+                        <i class="fa fa-close"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
 
             </div>
 
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3">
+              <a routerLink="../viewRooms" [queryParams]="{id:hostel._id}">Add Rooms</a>
+              <!-- <button class="btn btn-success" (click)="setParams(hostel)">Add Room</button> -->
+            </div>
           </div>
 
 

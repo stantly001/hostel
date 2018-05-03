@@ -16,7 +16,7 @@
             {{filter.filter_name}}
           </td>
           <td>
-            <button class="btn btn-info btn-sm" >Edit</button>
+            <button class="btn btn-info btn-sm">Edit</button>
             <button class="btn btn-danger btn-sm" (click)="delete(filter_type,i)">Delete</button>
           </td>
         </tr>
@@ -59,17 +59,20 @@
     <br/>
 
     <table>
-    <tr *ngFor="let filter_type of filters.filter_types">
-      <td>
-        <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name">
-      </td>&nbsp;&nbsp;
-      <td>
-        <button class="btn btn-danger btn-sm">Delete</button>
-      </td>
-      <br>
-      <br/>
-    </tr>
-  </table>
+      <tr *ngFor="let filter_type of filter.filter_types">
+        <td>
+          <!-- <input type="text" class="form-control" [(ngModel)]="filter_type.filter_name" name="filter_name" placeholder="Filter Name"> -->
+          <ng-select [items]="services" class="custom" [addTag]="true" bindLabel="service_name" (add)="selectService($event, filter_type)" [loading]="false">
+          </ng-select>
+          {{filter_type.filter_name}}
+        </td>&nbsp;&nbsp;
+        <td>
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </td>
+        <br>
+        <br/>
+      </tr>
+    </table>
 
     <!-- <table>
       <tbody *ngFor="let filter_type of filters">

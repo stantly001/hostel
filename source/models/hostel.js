@@ -15,6 +15,10 @@ var Hostel = new Schema({
     type: Date,
     default: Date.now
   },
+  created_by: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   country: {
     type: String
   },
@@ -142,10 +146,10 @@ var Hostel = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'HostelImg'
   }],
-  hostelServices: [{
-    amountPerMonth: Number,
-    amountPerDay: Number,
-    amountPerWeek: Number,
+  hostel_services: [{
+    amount_per_month: Number,
+    amount_per_day: Number,
+    amount_per_week: Number,
     free_service: Boolean,
     service: {
       type: Schema.Types.ObjectId,
