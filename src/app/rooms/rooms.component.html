@@ -21,16 +21,16 @@
         </div>
         <div class="col-md-3">
           <label>No Of Rooms</label>
-          <input type="text" class="form-control" [(ngModel)]="floor.no_of_rooms">
+          <input type="text" class="form-control" [(ngModel)]="floor.no_of_rooms" (keyup)="checkRoom(floor)">
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
           <label>Services</label>
           <ng-multiselect-dropdown [placeholder]="'Select Services'" [data]="services" [(ngModel)]="selectedServices" [settings]="dropdownSettings"
             (onSelect)="onServiceSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
-        </div>
-        <div class="panel-heading col-md-12 pull-right">
-          <button class="btn btn-success btn-sm pull-right" (click)="createRooms(floor)">Create Rooms</button>
+        </div> -->
+        <div class="panel-heading col-md-3">
+          <button class="btn btn-success btn-sm" (click)="createRooms(floor)">Create Rooms</button>
         </div>
         <table class="table table-striped">
           <thead>
@@ -42,7 +42,7 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody *ngFor="let room of floor.rooms; let i= index">
+          <tbody *ngFor="let room of floor.rooms; let floorIndex= index">
             <tr>
               <td>
                 <input class="form-control" [(ngModel)]="room.room_number">
@@ -107,33 +107,38 @@
                       <th>
                         Free Service
                       </th>
-                      <th></th>
+                      <th><button class="btn btn-xs btn-success" (click)="addService(room)"><span><i class="fa fa-plus"></i></span></button></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let roomService of room.room_services">ss
-                      <td>
-                          <ng-select [items]="services" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false">
-                            </ng-select>
-                      </td>
-                      <td>
-                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_month" *ngIf="roomService.free_service==false||!(roomService.free_service)">
-                      </td>
-                      <td>
-                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_day" *ngIf="roomService.free_service==false||!(roomService.free_service)">
-                      </td>
-                      <td>
-                        <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.amount_per_week" *ngIf="roomService.free_service==false||!(roomService.free_service)">
-                      </td>
-                      <td>
-                        <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="roomService.free_service">
-                      </td>
-                      <td>
-                        <button class="btn btn-xs btn-danger">
-                          <i class="fa fa-close"></i>
-                        </button>
-                      </td>
-                    </tr>
+                      <tr *ngFor="let roomService of room.room_services; let roomIndex=index;">
+                          <td>
+                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false">
+                                </ng-select>
+                          </td>
+                          <td>
+                            <input type="text" class="form-control"   [(ngModel)]="roomService.amount_per_month">
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" name="amount_per_day"  
+                            [(ngModel)]="roomService.amount_per_day" 
+                            *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" name="amount_per_week"  
+                            [(ngModel)]="roomService.amount_per_week"
+                             *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                          </td>
+                          <td>
+                            <input type="checkbox"  class="checkbox" name="free_service" 
+                            [(ngModel)]="roomService.free_service">
+                          </td>
+                          <td>
+                            <button class="btn btn-xs btn-danger" (click)="deleteService(room,roomIndex)">
+                              <i class="fa fa-close"></i>
+                            </button>
+                          </td>
+                        </tr>
                   </tbody>
                 </table>
               </div>
@@ -141,7 +146,7 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-success" (click)="applyFloor(hostel,floor)">Apply</button>
+        <button class="btn btn-success" (click)="applyFloor(hostel,floor)">Apply&Continue</button>
         <button class="btn btn-success btn-sm pull-right" (click)="saveHostel(hostel,floor); newHostel=false">Save</button>
         <button class="btn btn-danger btn-sm pull-right" (click)="cancelEdit(hostel)">Cancel</button>
       </div>

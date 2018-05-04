@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.css']
+  styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent implements OnInit {
   isRoom: boolean;
@@ -94,14 +94,7 @@ export class RoomsComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
-  /**
-   * get All Rooms
-   */
-  // getAllRooms(){
-  //   this._httpDataService.getAllRooms().subscribe(
-  //     data => this.hostelRooms = data,
-  //     error => this.errorMessage = <any>error)
-  // }
+  
 
   /**
    * 
@@ -123,7 +116,11 @@ export class RoomsComponent implements OnInit {
   }
 
 
-
+/**
+ * 
+ * @param value 
+ * Select Floor
+ */
   selectFloor(value) {
     this.floor = {};
     console.log("Floors", this.hostel.floors);
@@ -175,9 +172,10 @@ export class RoomsComponent implements OnInit {
           let roomNumber = this.pad(i, 3);
           floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
           this.hostel.hostel_id.hostel_services.forEach(element => {
-            floor.rooms[i].room_services=this.hostel.hostel_id.hostel_services;
+            let tempObj = Object.assign({}, element)
+            floor.rooms[i].room_services.push(tempObj);
           });
-          console.log("room Services",floor.rooms[i].room_services)
+          console.log("room Services", floor.rooms[i].room_services, "i--->", i)
           // this.selectedServices.forEach((service) => {
           //   floor.rooms[i].services.push(service);
           // });
@@ -189,25 +187,47 @@ export class RoomsComponent implements OnInit {
     }
   }
 
-  onServiceSelect(service: any) {
-    this.selectedServices.push(service);
+
+  /**
+   * 
+   * @param room 
+   * @param roomIndex 
+   * Delete Room Service
+   */
+  deleteService(room, roomIndex) {
+    room.room_services.splice(roomIndex, 1)
   }
 
-  onSelectAll(services: any) {
-    this.selectedServices = [];
-    this.selectedServices.push(services);
+
+  /**
+   * 
+   * @param floor 
+   * Add Additional Rooms
+   */
+  checkRoom(floor) {
+    console.log("floor",floor.no_of_rooms);
+    console.log("floorslength",floor.rooms.length)
+    if (floor.rooms!="") {
+      let no_of_rooms=parseInt(floor.no_of_rooms);
+      let newRooms=no_of_rooms-floor.rooms.length;
+      if (!isNaN(newRooms)) {
+        for (let i = newRooms; i < no_of_rooms; i++) {
+          let roomNumber = this.pad(i, 3);
+          floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
+          this.hostel.hostel_id.hostel_services.forEach(element => {
+            let tempObj = Object.assign({}, element)
+            floor.rooms[i].room_services.push(tempObj);
+          });
+        }
+
+      }
+    }
   }
 
-  onRoomServiceSelect(service: any, room) {
-    //this.selectedServices.push(service);
-    room.services.push(service)
-  }
 
-  onRoomSelectAll(services: any, room) {
-    room.services = [];
-    room.services.push(services);
-    console.log("Services", services);
-  }
+
+
+ 
 
   /**
    * Apply changes to selected floor
@@ -221,12 +241,28 @@ export class RoomsComponent implements OnInit {
       temp = newFloor;
       this.floor = {};
     }
-    console.log("hostel-->",hostel)
+    console.log("hostel-->", hostel)
   }
 
+
   /**
-   * Save Hostel
+   * 
+   * @param room 
+   * Add Service
    */
+  addService(room) {
+    room.room_services.push({})
+  }
+
+
+
+
+ /**
+  * 
+  * @param hostel 
+  * @param floor 
+  * Save Hostel
+  */
   saveHostel(hostel, floor) {
     // this.applyFloor(hostel, floor);
     console.log("Hostel", hostel);
@@ -251,41 +287,10 @@ export class RoomsComponent implements OnInit {
   }
 
   /**
-   * @param index
-   * Delete Hostel
-   */
-  deleteHostel(index) {
-
-  }
-
-  /**
-   * 
-   * @param hostel 
-   * Edit Hostel
-   */
-  editHostel(hostel) {
-
-  }
-
-  /**
-   * 
-   * @param index 
-   * @param hostel 
-   * Cancels The Edit Operation
-   */
-  cancelEdit(index, hostel) {
-    // if (hostel.id) {
-    //   hostel.isEdit = false;
-    // } else {
-    //   this.hostels.splice(index, 1);
-    // }
-  }
-
-  /**
    * 
    * @param viewType 
    * @param room 
-   * Assigning selected view Type to room object
+   * Assigning selected view Type to room
    */
   selectViewType(viewType, room) {
 
@@ -293,6 +298,12 @@ export class RoomsComponent implements OnInit {
     console.log("RoomType", room);
   }
 
+  /**
+   * 
+   * @param number 
+   * @param length 
+   * Add Room Number
+   */
   pad(number, length) {
     var str = '' + number;
     while (str.length < length) {
@@ -300,6 +311,7 @@ export class RoomsComponent implements OnInit {
     }
     return str;
   }
+
 
 
 
