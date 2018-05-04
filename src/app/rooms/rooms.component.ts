@@ -205,15 +205,10 @@ export class RoomsComponent implements OnInit {
    * Add Additional Rooms
    */
   checkRoom(floor) {
-    console.log("floor",floor)
-    console.log("floorRooms",floor.no_of_rooms);
-    console.log("floorslength",floor.rooms.length)
     if (floor.rooms!="") {
       let no_of_rooms=parseInt(floor.no_of_rooms);
-      console.log("no_of_rooms",no_of_rooms)
       let roomsLength=floor.rooms.length
       let newRooms=roomsLength-no_of_rooms;
-      console.log("newRooms",newRooms)
       if(no_of_rooms<roomsLength){
         this.createRooms(floor);
       }else{
@@ -233,9 +228,6 @@ export class RoomsComponent implements OnInit {
   }
 
 
-
-
- 
 
   /**
    * Apply changes to selected floor

@@ -57,7 +57,8 @@ function getAllHostel(req, res) {
                         default_currency: items.default_currency,
                         property_description: items.property_description,
                         policy: items.policy,
-                        checkin_24hrs: items.checkin_24hrs
+                        checkin_24hrs: items.checkin_24hrs,
+                        floors:items.floors
                     }
                 })
                 return res.json(returnData);

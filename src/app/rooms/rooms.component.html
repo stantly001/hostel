@@ -140,7 +140,7 @@
         </table>
         <button class="btn btn-success" (click)="applyFloor(hostel,floor)">Apply&Continue</button>
         <button class="btn btn-success btn-sm pull-right" (click)="saveHostel(hostel,floor); newHostel=false">Save</button>
-        <button class="btn btn-danger btn-sm pull-right" (click)="cancelEdit(hostel)">Cancel</button>
+        <button class="btn btn-danger btn-sm pull-right" routerLink="../addHostel">Cancel</button>
       </div>
       <!-- <div [hidden]="newHostel">
         <table class="table table-stripped">
