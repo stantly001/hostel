@@ -39,6 +39,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HostelViewComponent } from './hostel-view/hostel-view.component'
 
+import {AgmCoreModule} from '@agm/core';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -73,6 +75,9 @@ import { HostelViewComponent } from './hostel-view/hostel-view.component'
     RouterModule.forRoot(Approute),
     NgMultiSelectDropDownModule.forRoot(),
     NgxGalleryModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAu9mbH6VTDT1B2iFZbcgLWT7bjTb6QguI'
+    }),
     NgSelectModule
   ],
   providers: [HttpdataService],

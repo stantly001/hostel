@@ -16,7 +16,7 @@ function authentication(userAuth, cb) {
         if (err) {
             return cb(err)
         } else if (!auth) {
-            returnRes = { message: 'User Not Found', data: userAuth }
+            returnRes = { message: 'User Not Found', data: userAuth.session }
             return cb(err, returnRes)
         } else {
             ifPasTrue = bcrypt.compareSync(password, auth.password)
@@ -24,7 +24,7 @@ function authentication(userAuth, cb) {
                 returnRes = { message: 'Login Success !!!', data: auth }
                 return cb(err, returnRes)
             } else {
-                returnRes = { message: 'Invalid Password', data: userAuth }
+                returnRes = { message: 'Invalid Password', data: userAuth.session }
                 return cb(err, returnRes)
             }
         }

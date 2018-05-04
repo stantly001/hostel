@@ -205,13 +205,20 @@ export class RoomsComponent implements OnInit {
    * Add Additional Rooms
    */
   checkRoom(floor) {
-    console.log("floor",floor.no_of_rooms);
+    console.log("floor",floor)
+    console.log("floorRooms",floor.no_of_rooms);
     console.log("floorslength",floor.rooms.length)
     if (floor.rooms!="") {
       let no_of_rooms=parseInt(floor.no_of_rooms);
-      let newRooms=no_of_rooms-floor.rooms.length;
+      console.log("no_of_rooms",no_of_rooms)
+      let roomsLength=floor.rooms.length
+      let newRooms=roomsLength-no_of_rooms;
+      console.log("newRooms",newRooms)
+      if(no_of_rooms<roomsLength){
+        this.createRooms(floor);
+      }else{
       if (!isNaN(newRooms)) {
-        for (let i = newRooms; i < no_of_rooms; i++) {
+        for (let i = roomsLength; i < no_of_rooms; i++) {
           let roomNumber = this.pad(i, 3);
           floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
           this.hostel.hostel_id.hostel_services.forEach(element => {
@@ -221,6 +228,7 @@ export class RoomsComponent implements OnInit {
         }
 
       }
+    }
     }
   }
 

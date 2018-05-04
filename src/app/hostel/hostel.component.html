@@ -1,4 +1,4 @@
-<div class="col-sm-9">
+<div class="col-sm-12">
   <!-- <ul class="nav nav-tabs">
     <li class="active">
       <a data-toggle="tab" href="#hostel">Hostel</a>
@@ -36,6 +36,10 @@
               <td>
                 <button class="btn btn-info btn-sm" (click)="update(user,i);clicked=true;isService=true;">Edit</button>
                 <button class="btn btn-danger btn-sm" (click)="delete(user,i)">Delete</button>
+                <div class="col-md-12 mb-3">
+                    <a routerLink="../viewRooms" [queryParams]="{id:user._id}">Add Rooms</a>
+                    <!-- <button class="btn btn-success" (click)="setParams(hostel)">Add Room</button> -->
+                  </div>
               </td>
             </tr>
           </tbody>
@@ -83,18 +87,6 @@
             </div>
 
             <div class="col-md-4 mb-3">
-              <label>Street</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street" placeholder="Street">
-            </div>
-
-            <div class="col-md-4 mb-3">
-              <label>Property Type</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type" placeholder="Property Type">
-            </div>
-          </div>
-
-          <div class="col-md-12 mb">
-            <div class="col-md-4 mb-3">
               <label> Email</label>
               <input type="email" class="form-control" [(ngModel)]="hostel.email" name="email" placeholder="Email">
             </div>
@@ -103,14 +95,100 @@
               <label> Url</label>
               <input type="text" class="form-control" [(ngModel)]="hostel.url" name="url" placeholder="Url">
             </div>
+
+            <!-- <div class="col-md-4 mb-3">
+              <label>Street</label>
+              <input type="text" class="form-control" [(ngModel)]="hostel.street" name="street" placeholder="Street">
+            </div>
+
             <div class="col-md-4 mb-3">
+              <label>Property Type</label>
+              <input type="text" class="form-control" [(ngModel)]="hostel.property_type" name="property_type" placeholder="Property Type">
+            </div> -->
+          </div>
+
+          <!-- <div class="col-md-12 mb">
+             <div class="col-md-4 mb-3">
               <label> Cancellation Policy</label>
               <input type="text" class="form-control" [(ngModel)]="hostel.cancellation_policy" name="cancellation_policy" placeholder="Cancellation Policy">
-            </div>
-          </div>
+            </div> 
+          </div> -->
 
           <div class="col-md-12 mb">
             <div class="col-md-4 mb-3">
+              <label>Longitude</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Longitude" [(ngModel)]="hostel.longitude">
+                <div id="longitude" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Longitude</h4>
+                      </div>
+                      <div class="modal-body map-body">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">ok</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group-btn">
+                  <button class="btn btn-default" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#longitude">
+                    <i class="fa fa-map-marker"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label>Latitude</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Latitude" [(ngModel)]="hostel.latitude">
+                <div id="latitude" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Latitude</h4>
+                      </div>
+                      <div class="modal-body map-body">
+                        <!-- <agm-map [latitude]="lat" [longitude]="lng"></agm-map> -->
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearMap()">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="selectStartLocation()">ok</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group-btn">
+                  <button class="btn btn-default" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#latitude">
+                    <i class="fa fa-map-marker"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Default Currency</label>
+                <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
+              </div>
+            <!-- <div class="col-md-4 mb-3">
               <label>Longitude</label>
               <input type="text" class="form-control" [(ngModel)]="hostel.longitude" name="longitude" placeholder="Longitude">
             </div>
@@ -118,10 +196,10 @@
               <label>Latitude</label>
               <input type="text" class="form-control" [(ngModel)]="hostel.latitude" name="latitude" placeholder="Latitude">
             </div>
-            <div class="col-md-4 mb-3">
+             <div class="col-md-4 mb-3">
               <label>Language</label>
               <input type="text" class="form-control" [(ngModel)]="hostel.language" name="language" placeholder="Language">
-            </div>
+            </div>  -->
           </div>
 
           <div class="col-md-12 mb">
@@ -144,6 +222,14 @@
               <input type="text" class="form-control" [(ngModel)]="hostel.floors" name="policy">
             </div>
           </div>
+
+          <div class="col-md-12 mb">
+              <div class="col-md-4 mb-3">
+               <label> Cancellation Policy</label>
+               <textarea name="cancellation_policy" class="form-control" [(ngModel)]="hostel.cancellation_policy" cols="30" rows="3" placeholder="Cancellation Policy"></textarea>
+              </div> 
+           </div>
+
           <div class="col-md-12 mb">
             <div class="col-md-4 mb-3">
               <label for="">Add Services</label>
@@ -187,19 +273,29 @@
                 <tbody>
                   <tr *ngFor="let hostelService of hostel.hostel_services">
                     <td>
-                      <label for="">{{hostelService?.service_name}}</label>
+                      <label for="">{{hostelService?.service.service_name}}</label>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_month" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    <span  *ngIf="hostelService.free_service == true">Free</span>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_day" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                      <span *ngIf="hostelService.free_service == true">Free</span>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_week" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                      <span  *ngIf="hostelService.free_service == true">Free</span>
                     </td>
                     <td>
-                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_month" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                    </td>
-                    <td>
-                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_day" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                    </td>
-                    <td>
-                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount_per_week" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
-                    </td>
-                    <td>
-                      <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">
+                      <input type="checkbox" name="" id="" class="checkbox" 
+                      [(ngModel)]="hostelService.free_service">
                     </td>
                     <td>
                       <button class="btn btn-xs btn-danger">
@@ -209,23 +305,14 @@
                   </tr>
                 </tbody>
               </table>
-
-
             </div>
-
           </div>
-          <div class="col-md-12 mb-3">
+          <div class="col-md-12 mb-3" *ngIf="hostel?._id">
             <div class="col-md-12 mb-3">
               <a routerLink="../viewRooms" [queryParams]="{id:hostel._id}">Add Rooms</a>
               <!-- <button class="btn btn-success" (click)="setParams(hostel)">Add Room</button> -->
             </div>
           </div>
-
-
-
-
-
-
           <!-- 
             <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">

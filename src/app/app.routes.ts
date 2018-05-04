@@ -20,17 +20,19 @@ export const Approute: Routes = [
         path: "hostel",
         component: HomeSectionComponent,
     },
-    {
-        path: 'hostel/login',
-        component: LoginComponent,
-    }, 
+    // {
+    //     path: 'hostel/login',
+    //     component: LoginComponent,
+    // }, 
     {
         path: "hostel/search",
         component: ViewComponent,
-    },{
-        path: "hostel/registration",
-        component: RegisterComponent,
-    }, {
+    },
+    // {
+    //     path: "hostel/registration",
+    //     component: RegisterComponent,
+    // }, 
+    {
         path: "hostel/:hostelId",
         component: DetailviewComponent,
     }, {

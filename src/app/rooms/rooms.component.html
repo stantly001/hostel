@@ -39,7 +39,7 @@
               <th>No Of Beds</th>
               <th>View Type</th>
               <th>Status</th>
-              <th>Action</th>
+              <th>Add Service</th>
             </tr>
           </thead>
           <tbody *ngFor="let room of floor.rooms; let floorIndex= index">
@@ -47,14 +47,6 @@
               <td>
                 <input class="form-control" [(ngModel)]="room.room_number">
               </td>
-              <!-- <td> -->
-              <!-- <select class="form-control" [(ngModel)]=room.service>
-                  <option *ngFor="let service of services">{{service.name}}</option>
-                </select> -->
-              <!-- <ng-multiselect-dropdown [placeholder]="'Select Services'" [data]="services" [(ngModel)]="room.services" [settings]="dropdownSettings"
-                  (onSelect)="onRoomServiceSelect($event,room)" (onSelectAll)="onRoomSelectAll($event,room)">
-                </ng-multiselect-dropdown> -->
-              <!-- </td> -->
               <td>
                 <select class="form-control" [(ngModel)]="room.no_of_beds">
                   <option *ngFor="let noOfBed of noOfBeds">{{noOfBed}}</option>
@@ -81,16 +73,16 @@
                 </label>
               </td>
               <td>
-                <button class="btn btn-success btn-sm" (click)="showService=i">
+                <button class="btn btn-success btn-sm" (click)="showService=floorIndex">
                   <i class="fa fa-plus"></i>
                 </button>
               </td>
             </tr>
             <tr>
               <td colspan="5">             
-                 <div [class.collapse]="showService!=i">
-                <table class="table table-striped">
-                  <thead>
+                 <div [class.collapse]="showService!=floorIndex">
+            <table class="table table-striped">
+                <thead>
                     <tr>
                       <th>
                         Service Name
@@ -176,5 +168,5 @@
       </div> -->
       <!-- </div> -->
     </section>
-  </div>
+</div>
 </div>

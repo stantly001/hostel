@@ -33,7 +33,8 @@
           <a routerLink="viewRooms" data-hover="View Rooms">View Rooms</a>
         </li> -->
         <li *ngIf="!user">
-          <a routerLink="../hostel/login" data-hover="LOGIN">Login</a>
+            <a href="" data-hover="SIGNIN" data-toggle="modal" data-target="#login">SIGNIN</a>
+          <!--<a routerLink="../hostel/login" data-hover="LOGIN">Login</a>-->
         </li>
         <li *ngIf="user" class="dropdown">
             
@@ -70,4 +71,26 @@
       </ul>
   </div>
   <div class="clearfix"></div>
+
+
+
+  <div id="login" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">
+            <strong>Login</strong>
+          </h4>
+        </div> -->
+        <div class="modal-body login-form">
+            <app-login></app-login>
+          <!-- <form class="form-horizontal" *ngIf="clicked">
+            <app-register></app-register>
+          </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
