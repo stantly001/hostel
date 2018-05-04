@@ -37,6 +37,19 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+
+  /**
+   * 
+   * @param hostelId 
+   * Get HostelDetail By HostelId
+   */
+  getRoomDetailsByHostelId(hostelId){
+    console.log("hostelId",hostelId)
+    return this.http.get(this.baseUrl + "/room/"+hostelId)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
+
   /**
    * 
    * @param hostel 
@@ -173,6 +186,37 @@ export class HttpdataService {
    */
   deleteService(service) {
     return this.http.delete(this.baseUrl + "/service/remove/" + service._id)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+/**
+   * Get Rooms
+   */
+  getAllRooms() {
+    return this.http.get(this.baseUrl + "/room")
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+  /**
+   * 
+   * @param room 
+   * Save Room
+   */
+  saveRoom(room: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/room/saveRoom", room)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  /**
+   * 
+   * @param room 
+   * Update Room
+   */
+  updateRoom(room: any): Observable<any> {
+    console.log("room", room)
+    return this.http.put(this.baseUrl + "/room/update/" + room._id, room)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

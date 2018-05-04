@@ -4,8 +4,7 @@ import { Hostel } from '../model/hostel';
 import { AgmCoreModule } from '@agm/core';
 // import { HttpEventType } from '@angular/common/http';
 import { HttpdataService } from '../service/httpdata.service';
-
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,14 +19,14 @@ export class HostelComponent implements OnInit {
   lng: number = 7.809007;
 
   isService: boolean;
-  hostelServices: Array<any>;
+  hostel_services: Array<any>;
   dropdownSettings = {};
   dropdownList = [];
   services: any;
   errorMessage: string;
   hostels: Hostel[];
   clicked: boolean;
-  hostel = { images: [],hostelServices:[],country:'india',city:'chennai',state:'tamilNadu'};
+  hostel = { images: [],hostel_services:[]};
   uploadedPath = {}
   selectedFile: File = null;
   countries = [
@@ -56,7 +55,7 @@ export class HostelComponent implements OnInit {
     { dispName: 'Bihar', fieldName: 'bihar' }
   ]
   @ViewChild('multiselect') multiselect: any;
-  constructor(private _httpDataService: HttpdataService) {
+  constructor(private _httpDataService: HttpdataService, private router: Router) {
 
   }
 
@@ -158,6 +157,20 @@ export class HostelComponent implements OnInit {
   }
 
   /**
+   * 
+   * @param hostel 
+   * Set Routing Params For Rooms
+   */
+  setParams(hostel) {
+    // if(hostel) {
+    //   this.router.navigate(['/viewRooms'], { queryParams: { id: hostel._id} });
+    // } else {
+      this.router.navigate(['../viewRooms']);
+    // }
+    
+  }
+
+  /**
    * Get All Services
    */
   getAllServices() {
@@ -171,23 +184,23 @@ export class HostelComponent implements OnInit {
     console.log("item", item)
     console.log("Native Element", this.multiselect)
     this.isService = true;
-    this.hostel.hostelServices.push(item);
-    console.log("ss",this.hostel.hostelServices)
+    this.hostel.hostel_services.push(item);
+    console.log("ss",this.hostel.hostel_services)
   }
   onSelectAll(items: any) {
     this.isService = true;
-    this.hostel.hostelServices = items;
+    this.hostel.hostel_services = items;
   }
   onDeSelect(item: any) {
-    this.hostel.hostelServices.forEach(element => {
+    this.hostel.hostel_services.forEach(element => {
       if (element._id == item._id) {
-        var index = this.hostel.hostelServices.indexOf(element._id)
-        this.hostel.hostelServices.splice(index, 1)
+        var index = this.hostel.hostel_services.indexOf(element._id)
+        this.hostel.hostel_services.splice(index, 1)
       }
     });
 
   }
   onDeSelectAll(items: any) {
-    this.hostel.hostelServices = items;
+    this.hostel.hostel_services = items;
   }
 }

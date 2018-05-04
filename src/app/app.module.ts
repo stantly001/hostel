@@ -6,6 +6,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { Approute } from './app.routes';
 
@@ -76,7 +77,8 @@ import {AgmCoreModule} from '@agm/core';
     NgxGalleryModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAu9mbH6VTDT1B2iFZbcgLWT7bjTb6QguI'
-    })
+    }),
+    NgSelectModule
   ],
   providers: [HttpdataService],
   bootstrap: [AppComponent]

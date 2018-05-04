@@ -1,0 +1,12 @@
+.ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+    width: 302px
+}
+/* .ng-select.custom .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 0;
+}  */
+
+/* @import "~@ng-select/ng-select/themes/default.theme.css"; */

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   login={};
   loginForms: any[];
   errorMessage: string;
-  constructor(private _httpDataService: HttpdataService,private activatedRoute:ActivatedRoute,private route:Router) { }
+  constructor(private _httpDataService: HttpdataService, private activatedRoute: ActivatedRoute, private route: Router) { }
 
   ngOnInit() {
   }
@@ -29,9 +29,11 @@ export class LoginComponent implements OnInit {
     if (login) {
       this._httpDataService.authUserLogin(login).subscribe(
         data => {
-          this.route.navigate(["/hostel"]);
-         console.log(data)
-         this.loginUsers = data;//.push(data});
+          sessionStorage.setItem("user", JSON.stringify(data));
+          let userId = data.data._id;
+          this.loginUsers = data;//.push(data});
+          this.route.navigate(["/hostel"], { queryParams: { "userId": userId } });
+          console.log(data)
         },
         
         error => this.errorMessage = <any>error)

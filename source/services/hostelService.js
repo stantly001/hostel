@@ -21,7 +21,9 @@ const imgFilePath = "../hmsDoc/visuals";
  */
 function getAllHostel(req, res) {
 //    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
-    hostel.find().populate("images").populate('hostelServices.service').exec(function (err, data) {
+    hostel.find().populate("images")
+    .populate("created_by")
+    .populate({path: 'hostel_services', populate:[{path: 'service', model: 'Service'}]}).exec(function (err, data) {
         if (err) {
             console.log(err);
         } else {                     
@@ -104,7 +106,9 @@ function filterHostelModel(res) {
         national_rating: res.national_rating,
         world_rating: res.world_rating,
         checkin_24hrs: res.checkin_24hrs,
-        hostelServices:res.hostelServices
+        floors:res.floors,
+        hostel_services:res.hostel_services,
+        created_by:res.created_by
     };
     return hostel;
 }
@@ -278,6 +282,9 @@ function updateFilterHostelDetail(data, res) {
     data.national_rating = res.national_rating;
     data.world_rating = res.world_rating;
     data.checkin_24hrs = res.checkin_24hrs;
+    hostel_services:res.hostel_services;
+    floors:res.floors;
+    created_by:res.created_by
     // }
 
     return data;

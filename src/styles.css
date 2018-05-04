@@ -35,6 +35,9 @@
     background-color: #ECCA69 !important;
 }
 
+.dropdown:hover {
+    cursor: pointer;
+}
 .navigation ul {
     top: 54px !important;
     z-index: 0 !important;

@@ -4,7 +4,8 @@ var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
-var hostelServiceController=require('../controllers/hostelServiceController')
+var hostelServiceController=require('../controllers/hostelServiceController');
+var roomController=require("../controllers/roomController");
 var authServiceCtrl = require('../controllers/authController');
 
 
@@ -45,11 +46,18 @@ routes.route('/service/update/:serviceId').put(hostelServiceController.updateSer
 routes.route('/service/remove/:serviceId').delete(hostelServiceController.removeServiceById);
 
 /**
+ * rooms
+ */
+routes.route('/room/saveRoom').post(roomController.saveRoom);
+routes.route('/room').get(roomController.getRoomDetails);
+routes.route('/room/:hostelId').get(roomController.getRoomDetailsByHostelId);
+routes.route('/room/update/:roomId').put(roomController.updateRoom);
+
+
+/**
  * User Login
  */
 routes.route('/auth/user').post(authServiceCtrl.authentication)
-routes.route('/auth/logout').get(authServiceCtrl.logout)
-
 
 
 module.exports = routes;

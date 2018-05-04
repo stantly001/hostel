@@ -1,0 +1,104 @@
+var multer = require('multer')
+var path = require('path');
+var bodyParser = require('body-parser');
+
+//Mongoose Models
+var room = require('../models/room');
+
+
+
+/**
+ * 
+ * @param {*} res 
+ * Set Room Data
+ */
+function setRoomData(res) {
+    var roomData = new room({
+        hostel_id: res.hostel_id,
+        floors:res.floors,
+        created_by:res.created_by
+    })
+    return roomData;
+}
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Save Room Data
+ */
+function saveRoom(req, res) {
+    var newRoom = setRoomData(req.body);
+    console.log("newRoom",newRoom)
+    newRoom.save().then(item => {
+        console.log("item",item)
+        return res.status(200).json({ 'success': 'Room added successfully', 'data': item });
+    })
+        .catch(err => {
+            return res.status(400).send("unable to save to database");
+        });
+}
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res
+ * Get Room Details 
+ */
+function getRoomDetails(req, res) {
+    room.find().populate("hostel_id").populate("floors.rooms.services").exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            return res.json(data);
+        }
+    })
+}
+
+/**
+ * 
+ * @param {*} hostelId 
+ * @param {*} req 
+ * @param {*} res 
+ * Get RoomDetails ByHostelId
+ */
+function getRoomDetailsByHostelId(hostelId,req, res) {
+    console.log("hostelId-->",hostelId)
+    room.findOne({hostel_id:hostelId}).populate("hostel_id").populate("floors.rooms.room_services.service").exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            return res.json(data);
+        }
+    })
+}
+
+
+
+
+
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} roomData 
+ * @param {*} res 
+ * update Room
+ */
+function updateRoom(id, roomData, res) {
+    room.findByIdAndUpdate(id, roomData, { new: true })
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            return res.status(400).send("unable to save to database");
+        });
+}
+
+var roomService = {
+    saveRoom, getRoomDetails, updateRoom,getRoomDetailsByHostelId
+};
+
+module.exports = roomService;

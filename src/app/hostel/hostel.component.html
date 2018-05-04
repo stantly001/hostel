@@ -198,33 +198,6 @@
             </div>  -->
           </div>
 
-          <!-- <div class="col-md-12 mb">
-             <div class="col-md-4 mb-3">
-              <label>Default Currency</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.default_currency" name="default_currency" placeholder="Default Currency">
-            </div>
-            <div class="col-md-4 mb-3">
-              <label> City Rating</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.city_rating" name="city_rating" placeholder="City Rating">
-            </div>
-            <div class="col-md-4 mb-3">
-              <label>State Rating</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.state_rating" name="state_rating" placeholder="State Rating">
-            </div> 
-          </div> -->
-
-          <!-- <div class="col-md-12 mb">
-            <div class="col-md-4 mb-3">
-              <label>National Rating</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.national_rating" name="national_rating" placeholder="National Rating">
-            </div>
-
-            <div class="col-md-4 mb-3">
-              <label>World Rating</label>
-              <input type="text" class="form-control" [(ngModel)]="hostel.world_rating" name="world_rating" placeholder="World Rating">
-            </div>
-          </div> -->
-
           <div class="col-md-12 mb">
             <div class="col-md-4 mb-3">
               <label>Property Description</label>
@@ -238,6 +211,11 @@
               <label>Policy</label>
               <textarea name="policy" class="form-control" [(ngModel)]="hostel.policy" cols="30" rows="3" placeholder="Policy"></textarea>
               <!-- <input type="text" class="form-control" [(ngModel)]="hostel.policy" name="policy"> -->
+            </div>
+            <div class="col-md-4 mb-3">
+              <label>No. Of Floors</label>
+
+              <input type="text" class="form-control" [(ngModel)]="hostel.floors" name="policy">
             </div>
           </div>
 
@@ -274,7 +252,13 @@
                       Service Name
                     </th>
                     <th>
-                      Amount
+                      Amount/Month
+                    </th>
+                    <th>
+                      Amount/Day
+                    </th>
+                    <th>
+                      Amount/Week
                     </th>
                     <th>
                       Free Service
@@ -283,15 +267,31 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let hostelService of hostel.hostelServices">
+                  <tr *ngFor="let hostelService of hostel.hostel_services">
                     <td>
                       <label for="">{{hostelService?.service_name}}</label>
                     </td>
-                    <td>
-                      <input type="text" name="" id="" class="form-control" [(ngModel)]="hostelService.amount" *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_month" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                    <span  *ngIf="hostelService.free_service == true">Free</span>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_day" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                      <span *ngIf="hostelService.free_service == true">Free</span>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" name="" id="" class="form-control" 
+                      [(ngModel)]="hostelService.amount_per_week" 
+                      *ngIf="hostelService.free_service==false||!(hostelService.free_service)">
+                      <span  *ngIf="hostelService.free_service == true">Free</span>
                     </td>
                     <td>
-                      <input type="checkbox" name="" id="" class="checkbox" [(ngModel)]="hostelService.free_service">
+                      <input type="checkbox" name="" id="" class="checkbox" 
+                      [(ngModel)]="hostelService.free_service">
                     </td>
                     <td>
                       <button class="btn btn-xs btn-danger">
@@ -301,17 +301,14 @@
                   </tr>
                 </tbody>
               </table>
-
-
             </div>
-
           </div>
-
-
-
-
-
-
+          <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3">
+              <a routerLink="../viewRooms" [queryParams]="{id:hostel._id}">Add Rooms</a>
+              <!-- <button class="btn btn-success" (click)="setParams(hostel)">Add Room</button> -->
+            </div>
+          </div>
           <!-- 
             <div class="col-md-12 mb">
               <div class="col-md-4 mb-3">
@@ -456,4 +453,6 @@
       <app-rooms></app-rooms>
     </div>
   </div>
+
+
 </div>
