@@ -23,7 +23,9 @@ function getAllHostel(req, res) {
 //    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
     hostel.find().populate("images")
     .populate("created_by")
-    .populate({path: 'hostel_services', populate:[{path: 'service', model: 'Service'}]}).exec(function (err, data) {
+    .populate("hostel_services.service")
+    .exec(function (err, data) {
+        console.log(data)
         if (err) {
             console.log(err);
         } else {                     
