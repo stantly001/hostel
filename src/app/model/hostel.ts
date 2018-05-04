@@ -38,9 +38,9 @@ export class Hostel {
     default_currency: string
     property_description: string
     policy: string
-    city_rating: number
-    state_rating: number
-    national_rating: number
-    world_rating: number
+    // city_rating: number
+    // state_rating: number
+    // national_rating: number
+    // world_rating: number
     checkin_24hrs: boolean  
 }
