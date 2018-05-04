@@ -10,7 +10,7 @@
           <label>Hostels</label>
           <select class="form-control" [(ngModel)]="hostel.hostel_id" (change)="setFloor(hostel)">
             <option value="" selected hidden>Select Hostel</option>
-            <option *ngFor="let hostel_list of hostelLists" [ngValue]="hostel_list">{{hostel_list.name}}</option>
+            <option *ngFor="let hostel_list of hostelLists" [ngValue]="hostel.hostel_id">{{hostel_list.name}}</option>
           </select>
         </div>
         <div class="col-md-3">
@@ -109,17 +109,20 @@
                                 </ng-select>
                           </td>
                           <td>
-                            <input type="text" class="form-control"   [(ngModel)]="roomService.amount_per_month">
+                            <input type="text" class="form-control"   [(ngModel)]="roomService.amount_per_month" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                            <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
                           </td>
                           <td>
                             <input type="text" class="form-control" name="amount_per_day"  
                             [(ngModel)]="roomService.amount_per_day" 
                             *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                          <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
                           </td>
                           <td>
                             <input type="text" class="form-control" name="amount_per_week"  
                             [(ngModel)]="roomService.amount_per_week"
                              *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                             <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">--</span>
                           </td>
                           <td>
                             <input type="checkbox"  class="checkbox" name="free_service" 
