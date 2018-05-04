@@ -20,18 +20,76 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
-//    hostel.find().populate("images").populate("hostelServices.service").exec(function (err, data) {
     hostel.find().populate("images")
-    .populate("created_by")
-    .populate("hostel_services.service")
-    .exec(function (err, data) {
-        console.log(data)
-        if (err) {
-            console.log(err);
-        } else {                     
-            return res.json(data);
-        }
-    })
+        .populate("created_by")
+        .populate("hostel_services.service")
+        .exec(function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                var returnData = data.map(items => {
+                    return {
+                        images: items.images.map(img => {
+                            return {
+                                url: img.url,
+                                imgBase64: getImgToBase64ByHostel(img.url),
+                                name: img.name,
+                                hostelId: img.hostelId
+                            }
+                        }),
+                        created: items.created,
+                        last_updated: items.last_updated,
+                        hostel_services: items.hostel_services,
+                        _id: items._id,
+                        name: items.name,
+                        country: items.country,
+                        city: items.city,
+                        state: items.state,
+                        street: items.street,
+                        email: items.email,
+                        longitude: items.longitude,
+                        latitude: items.latitude,
+                        language: items.language,
+                        property_type: items.property_type,
+                        url: items.url,
+                        things_to_note: items.things_to_note,
+                        cancellation_policy: items.cancellation_policy,
+                        default_currency: items.default_currency,
+                        property_description: items.property_description,
+                        policy: items.policy,
+                        checkin_24hrs: items.checkin_24hrs
+                    }
+                })
+                return res.json(returnData);
+            }
+        })
+}
+
+
+/**
+ * 
+ * @param {*} imgUrl 
+ */
+function getImgToBase64ByHostel(imgUrl) {
+    var url = fs.readFileSync(imgUrl, 'utf8')
+    let imgSrcString = convertBase64(imgUrl, url)
+    return imgSrcString
+}
+
+
+/**
+ * 
+ * @param {*} imgUrl 
+ * @param {*} url 
+ * Convert Base64
+ */
+function convertBase64(imgUrl, url){
+    let extensionName = path.extname(imgUrl);
+    //convert image file to base64-encoded string
+    let base64Image = new Buffer(url, 'binary').toString('base64');
+    //combine all strings
+    let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
+    return imgSrcString
 }
 
 /**
@@ -41,18 +99,10 @@ function getAllHostel(req, res) {
  * Image Response
  */
 function convertImageUrlTOBase64(imgUrl, res) {
-    console.log(imgUrl)
-
     var url = fs.readFile(imgUrl, (err, data) => {
-        //error handle
         if (err)
             res.status(500).send(err);
-        //get image file extension name
-        let extensionName = path.extname(imgUrl);
-        //convert image file to base64-encoded string
-        let base64Image = new Buffer(data, 'binary').toString('base64');
-        //combine all strings
-        let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
+        let imgSrcString =  convertBase64(imgUrl, url)
         res.send(imgSrcString)
     })
 }
@@ -108,9 +158,9 @@ function filterHostelModel(res) {
         national_rating: res.national_rating,
         world_rating: res.world_rating,
         checkin_24hrs: res.checkin_24hrs,
-        floors:res.floors,
-        hostel_services:res.hostel_services,
-        created_by:res.created_by
+        floors: res.floors,
+        hostel_services: res.hostel_services,
+        created_by: res.created_by
     };
     return hostel;
 }
@@ -142,21 +192,21 @@ function addHostel(req, res) {
     var post = new hostel(filterHostelModel(req.body))
     console.log(post)
     post.save()
-            .then(item => {
-                req.body.images.forEach(function (val, k) {
-                    var hostelVisualObj = filterHostelVisualsModel(val, post)
-                    hostelVisualObj.save(function (err) {
-                        if (err)
-                            return handleError(err);
-                    })
-                    post.images.push(hostelVisualObj)
+        .then(item => {
+            req.body.images.forEach(function (val, k) {
+                var hostelVisualObj = filterHostelVisualsModel(val, post)
+                hostelVisualObj.save(function (err) {
+                    if (err)
+                        return handleError(err);
                 })
-                post.save();
-                return res.status(200).json({'message': 'Hostel added successfully', 'data': post});
+                post.images.push(hostelVisualObj)
             })
-            .catch(err => {
-                return res.status(400).send("unable to save to database");
-            });
+            post.save();
+            return res.status(200).json({ 'message': 'Hostel added successfully', 'data': post });
+        })
+        .catch(err => {
+            return res.status(400).send("unable to save to database");
+        });
 }
 
 
@@ -174,7 +224,7 @@ var Storage = multer.diskStorage({
     }
 });
 
-var upload = multer({storage: Storage}).array("image", 3);
+var upload = multer({ storage: Storage }).array("image", 3);
 
 /**
  * 
@@ -188,7 +238,7 @@ function onUploadFile(req, res) {
             console.log(err);
             return res.end("Something went wrong!");
         }
-        return res.status(200).json({"success": "File uploaded sucessfully!.", data: imgObj});
+        return res.status(200).json({ "success": "File uploaded sucessfully!.", data: imgObj });
     });
 }
 
@@ -215,7 +265,7 @@ function getAllImagesAndVideos(req, res) {
  * Get All Images And Videos By HostelId from HostelImg Collection
  */
 function getAllImagesByHostelId(hostelId) {
-    hostelVisuals.findById({hostelId: hostelId}, function (err, data) {
+    hostelVisuals.findById({ hostelId: hostelId }, function (err, data) {
         if (err) {
             console.log(err);
         } else {
@@ -284,9 +334,9 @@ function updateFilterHostelDetail(data, res) {
     data.national_rating = res.national_rating;
     data.world_rating = res.world_rating;
     data.checkin_24hrs = res.checkin_24hrs;
-    hostel_services:res.hostel_services;
-    floors:res.floors;
-    created_by:res.created_by
+    hostel_services: res.hostel_services;
+    floors: res.floors;
+    created_by: res.created_by
     // }
 
     return data;
@@ -309,18 +359,18 @@ function updateHostelById(req, res, id) {
             hostelData.images.forEach(function (val, k) {
                 var hostelVisualObj = filterHostelVisualsModel(val, hostelData)
                 if (val._id) {
-                    hostelVisuals.update({_id: val._id}, hostelVisualObj)
+                    hostelVisuals.update({ _id: val._id }, hostelVisualObj)
                 } else {
                     hostelVisualObj.save()
                 }
                 data.images.push(hostelVisualObj)
             })
             data.save().then(coin => {
-                res.json({'message': 'Update complete', 'data': data});
+                res.json({ 'message': 'Update complete', 'data': data });
             })
-                    .catch(err => {
-                        res.status(400).send("unable to update the database");
-                    });
+                .catch(err => {
+                    res.status(400).send("unable to update the database");
+                });
         }
     });
 }
@@ -333,7 +383,7 @@ function updateHostelById(req, res, id) {
  * Remove Hostel Obj By Id from hostel Collection And Remove ref Collection of hostelImg 
  */
 function removeHostelById(id, res) {
-    hostel.findByIdAndRemove({_id: id}, function (err, data) {
+    hostel.findByIdAndRemove({ _id: id }, function (err, data) {
         if (err) {
             res.json(err);
         } else {
@@ -343,7 +393,7 @@ function removeHostelById(id, res) {
                     removeHostelImgById(val._id)
                 })
             }
-            res.json({'success': 'Successfully removed', 'data': data});
+            res.json({ 'success': 'Successfully removed', 'data': data });
         }
     });
 }
@@ -354,8 +404,8 @@ function removeHostelById(id, res) {
  * Remove HostelImg By HostelImg Id
  */
 function removeHostelImgById(hostelImgId) {
-    hostel.findByIdAndRemove({_id: id}, function (err, data) {
-        return res.json({'success': 'Successfully removed', 'data': data});
+    hostel.findByIdAndRemove({ _id: id }, function (err, data) {
+        return res.json({ 'success': 'Successfully removed', 'data': data });
     })
 }
 
