@@ -65,11 +65,12 @@ function getRoomDetails(req, res) {
  */
 function getRoomDetailsByHostelId(hostelId,req, res) {
     console.log("hostelId-->",hostelId)
-    room.findOne({hostel_id:hostelId}).populate("hostel_id").populate("floors.rooms.room_services.service").exec(function (err, data) {
+    room.findOne({hostel_id:hostelId}).populate("hostel_id").populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
+            console.log("data-->",data)
             return res.json(data);
         }
     })

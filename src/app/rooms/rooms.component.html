@@ -9,13 +9,14 @@
         <div class="col-md-3">
           <label>Hostels</label>
           <select class="form-control" [(ngModel)]="hostel.hostel_id" (change)="setFloor(hostel)">
-            <option value="" selected hidden>Select Hostel</option>
-            <option *ngFor="let hostel_list of hostelLists" [ngValue]="hostel.hostel_id">{{hostel_list.name}}</option>
+            <option value="" selected aria-hidden>Select Hostel</option>
+            <option *ngFor="let hostel_list of hostelLists" [ngValue]="hostel_list">{{hostel_list.name}}</option>
           </select>
         </div>
         <div class="col-md-3">
           <label>Floors</label>
           <select class="form-control" [(ngModel)]="floor.floor_no" (change)="selectFloor($event.target.value)">
+              <option value="" selected aria-hidden>Select Floor</option>
             <option *ngFor="let floorList of floorsList">{{floorList}}</option>
           </select>
         </div>
