@@ -109,11 +109,29 @@ export class HostelComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
+
+  /**
+   * 
+   * @param hostel 
+   * Remove imgBase64
+   */
+removeBase64(hostel){
+  hostel.images.forEach(element => {
+    if(element.imgBase64){
+    delete element.imgBase64; 
+    }
+  });
+}
+
+
+
+
   /**
    * Save Hostel
    */
   save = (hostel) => {
     console.log("hostel", hostel)
+    this.removeBase64(hostel);
     if (hostel._id) {
       this._httpDataService.updateHosteldata(hostel).subscribe(
         data => {

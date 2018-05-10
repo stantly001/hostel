@@ -358,6 +358,16 @@ function updateFilterHostelDetail(data, res) {
     return data;
 }
 
+function updateHostelVisualsModel(res) {
+    var hostelVisualObj = new hostelVisuals({
+        name: res.name,
+        url: res.url,
+        hostelId: res._id
+    });
+    console.log(hostelVisualObj)
+    return hostelVisualObj;
+}
+
 /**
  * 
  * @param {*} req 
@@ -366,14 +376,14 @@ function updateFilterHostelDetail(data, res) {
  */
 function updateHostelById(req, res, id) {
     let hostelData = req.body;
-
+console.log("Updqatre")
     hostel.findById(id, function (err, data) {
         if (!data)
             return next(new Error('Could not load Document'));
         else {
             data = updateFilterHostelDetail(data, hostelData);
             hostelData.images.forEach(function (val, k) {
-                var hostelVisualObj = filterHostelVisualsModel(val, hostelData)
+                var hostelVisualObj = updateHostelVisualsModel(val)
                 if (val._id) {
                     hostelVisuals.update({ _id: val._id }, hostelVisualObj)
                 } else {
