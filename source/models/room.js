@@ -50,6 +50,9 @@ var Room = new Schema({
             },
             view_type: {
                 type: Object
+            },
+            room_type:{
+                type:Object
             }
         }],
     }]

@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class HostelComponent implements OnInit {
 
+  selectedItems: any;
   lat: number = 51.678418;
   lng: number = 7.809007;
 
@@ -62,6 +63,7 @@ export class HostelComponent implements OnInit {
   ngOnInit() {
     this.isService = false;
     // this.hostelServices = []
+    this.selectedItems=[]
     this.getData()
     this.getAllServices()
     this.dropdownSettings = {
@@ -171,6 +173,10 @@ removeBase64(hostel){
    */
   update(user, index) {
     this.hostel = user;
+    user.hostel_services.forEach(element => {
+      this.selectedItems.push(element.service);
+    });
+    
     console.log("user", user);
   }
 

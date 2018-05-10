@@ -8,7 +8,7 @@
       <div>
         <div class="col-md-3">
           <label>Hostel Name</label>
-            {{hostel.hostel_id?hostel.hostel_id.name:hostel.name}}
+           <p>{{hostel.hostel_id?hostel.hostel_id.name:hostel.name}}</p> 
           <!-- <label>Hostels</label>
           <select class="form-control" [(ngModel)]="hostel.hostel_id" (change)="setFloor(hostel)">
             <option value="" selected aria-hidden>Select Hostel</option>
@@ -41,6 +41,7 @@
               <th>Room No</th>
               <th>No Of Beds</th>
               <th>View Type</th>
+              <th>Room Type</th>
               <th>Status</th>
               <th>Add Service</th>
             </tr>
@@ -68,6 +69,11 @@
                     </li>
                   </ul>
                 </div>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="room.room_type">
+                  <option *ngFor="let room_type of roomTypes">{{room_type.name}}</option>
+                </select>
               </td>
               <td>
                 <label class="switch">

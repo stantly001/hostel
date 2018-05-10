@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent implements OnInit {
+  roomTypes: { id: number; name: string; }[];
   isRoom: boolean;
   hostelRooms: any;
   hostelLists: Array<any>;
@@ -63,6 +64,19 @@ export class RoomsComponent implements OnInit {
         id: 3,
         img: "assets/images/circle.png",
         label: "circle",
+      }
+    ];
+    this.roomTypes = [
+      {
+        id: 1,
+        name: "Single Room",
+
+      }, {
+        id: 2,
+        name: "Twin Room",
+      }, {
+        id: 3,
+        name: "Double Room",
       }
     ];
     this.noOfBeds = [

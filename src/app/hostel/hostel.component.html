@@ -439,7 +439,7 @@
               <button (click)="uploadImageFile.click()">Pick File</button>
               <button (click)="onUploadFile(hostel)">Upload</button>
               <div *ngFor="let hostelImg of hostel.images">
-                {{hostelImg}}
+                {{hostelImg.name}}
               </div>
             </div>
           </div>
