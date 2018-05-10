@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var randomstring = require("randomstring");
 var fs = require('fs');
+var base64Img = require('base64-img');
 //Mongoose Models
 var hostel = require('../models/hostel');
 var hostelVisuals = require('../models/hostelImg');
@@ -33,6 +34,7 @@ console.log("session------>",req.session.id);
                     return {
                         images: items.images.map(img => {
                             return {
+                                _id: img._id,
                                 url: img.url,
                                 imgBase64: getImgToBase64ByHostel(img.url),
                                 name: img.name,
@@ -74,8 +76,8 @@ console.log("session------>",req.session.id);
  * @param {*} imgUrl 
  */
 function getImgToBase64ByHostel(imgUrl) {
-    var url = fs.readFileSync(imgUrl, 'utf8')
-    let imgSrcString = convertBase64(imgUrl, url)
+    
+    let imgSrcString = convertBase64(imgUrl)
     return imgSrcString
 }
 
@@ -86,12 +88,13 @@ function getImgToBase64ByHostel(imgUrl) {
  * @param {*} url 
  * Convert Base64
  */
-function convertBase64(imgUrl, url){
-    let extensionName = path.extname(imgUrl);
-    //convert image file to base64-encoded string
-    let base64Image = new Buffer(url, 'binary').toString('base64');
-    //combine all strings
-    let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
+function convertBase64(imgUrl){
+    var imgSrcString = base64Img.base64Sync(imgUrl);
+    // let extensionName = path.extname(imgUrl);
+    // //convert image file to base64-encoded string
+    // let base64Image = new Buffer(url, 'binary').toString('base64');
+    // //combine all strings
+    // let imgSrcString = `data:image/${extensionName.split('.').pop()};base64,${base64Image}`;
     return imgSrcString
 }
 

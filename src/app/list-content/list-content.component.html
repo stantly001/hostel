@@ -4,10 +4,10 @@
   <p>{{hostelObj?.place}}</p>
   <div class="hotel-left-grids">
     <div class="hotel-left-one">
-      <!-- <a href="single.html"> -->
-        <!-- <img src="images/21.jpg" alt="" /> -->
-        <!-- <ngx-gallery [options]= "galleryOptions" [images] = "hostelObj?.images" ></ngx-gallery> -->
-      <!-- </a> -->
+      <a>
+        <!-- <img *ngIf="t" [src]="domSanitizer.bypassSecurityTrustUrl(t)" alt="" /> -->
+        <ngx-gallery [options]= "galleryOptions" [images]= "hostelObj?.images" ></ngx-gallery>
+      </a>
     </div>
     <div class="hotel-left-two">
       <div class="rating text-left">
