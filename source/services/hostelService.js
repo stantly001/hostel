@@ -20,6 +20,8 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
+console.log("session------>",req.session.id);
+
     hostel.find().populate("images")
         .populate("created_by")
         .populate("hostel_services.service")
@@ -283,13 +285,23 @@ function getAllImagesByHostelId(hostelId) {
  * Get Hostel Details By hostelId
  */
 function getHostelById(id, res) {
-    hostel.findById(id, function (err, data) {
+    // hostel.findById(id, function (err, data) {
+    //     if (err) {
+    //         return res.send(err);
+    //     } else {
+    //         console.log("data",data)
+    //         return res.json(data);
+    //     }
+    // });
+    hostel.findOne({_id:id}).populate("hostel_services.service").exec(function (err, data) {
         if (err) {
-            return res.send(err);
-        } else {
+            console.log(err);
+        }
+        else {
+            console.log("data-->",data)
             return res.json(data);
         }
-    });
+    })
 }
 
 function updateFilterHostelDetail(data, res) {

@@ -24,7 +24,6 @@ export class RoomsComponent implements OnInit {
   viewTypes: Array<any>;
   selectedServices = [];
   dropdownSettings = {};
-
   constructor(private zone: NgZone, private _httpDataService: HttpdataService, private activatedRoute: ActivatedRoute, public router: Router) {
     this.activatedRoute.queryParams.subscribe(res => {
       let hostelId = res.id;
@@ -37,7 +36,7 @@ export class RoomsComponent implements OnInit {
   ngOnInit() {
     this.getServices();
     this.getAllHostels();
-    this.hostel = { floors: [] };
+    this.hostel = { floors: [], hostel_id: [] };
     // this.getAllRooms();
     this.floor = {};
 
@@ -94,7 +93,7 @@ export class RoomsComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
-  
+
 
   /**
    * 
@@ -107,6 +106,12 @@ export class RoomsComponent implements OnInit {
         console.log("DSFSFSFS", data)
         this.setFloor(data);
         this.hostel = data;
+      } else {
+        this._httpDataService.getHostelById(id).subscribe(data => {
+          console.log("data", data)
+          this.hostel.hostel_id = data;
+          this.setFloor(this.hostel);
+        })
       }
       // this.floor = data.floors[0];
       console.log('hostel', data);
@@ -116,11 +121,11 @@ export class RoomsComponent implements OnInit {
   }
 
 
-/**
- * 
- * @param value 
- * Select Floor
- */
+  /**
+   * 
+   * @param value 
+   * Select Floor
+   */
   selectFloor(value) {
     this.floor = {};
     console.log("Floors", this.hostel.floors);
@@ -169,7 +174,7 @@ export class RoomsComponent implements OnInit {
       let parsedValue = Number(floor.no_of_rooms);
       if (!isNaN(parsedValue)) {
         for (let i = 0; i < parsedValue; i++) {
-          let roomNumber = this.pad(i, 3);
+          let roomNumber = this.pad(i, 3, floor);
           floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
           this.hostel.hostel_id.hostel_services.forEach(element => {
             let tempObj = Object.assign({}, element)
@@ -205,25 +210,25 @@ export class RoomsComponent implements OnInit {
    * Add Additional Rooms
    */
   checkRoom(floor) {
-    if (floor.rooms!="") {
-      let no_of_rooms=parseInt(floor.no_of_rooms);
-      let roomsLength=floor.rooms.length
-      let newRooms=roomsLength-no_of_rooms;
-      if(no_of_rooms<roomsLength){
+    if (floor.rooms != "") {
+      let no_of_rooms = parseInt(floor.no_of_rooms);
+      let roomsLength = floor.rooms.length
+      let newRooms = roomsLength - no_of_rooms;
+      if (no_of_rooms < roomsLength) {
         this.createRooms(floor);
-      }else{
-      if (!isNaN(newRooms)) {
-        for (let i = roomsLength; i < no_of_rooms; i++) {
-          let roomNumber = this.pad(i, 3);
-          floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
-          this.hostel.hostel_id.hostel_services.forEach(element => {
-            let tempObj = Object.assign({}, element)
-            floor.rooms[i].room_services.push(tempObj);
-          });
-        }
+      } else {
+        if (!isNaN(newRooms)) {
+          for (let i = roomsLength; i < no_of_rooms; i++) {
+            let roomNumber = this.pad(i, 3, floor);
+            floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
+            this.hostel.hostel_id.hostel_services.forEach(element => {
+              let tempObj = Object.assign({}, element)
+              floor.rooms[i].room_services.push(tempObj);
+            });
+          }
 
+        }
       }
-    }
     }
   }
 
@@ -257,12 +262,12 @@ export class RoomsComponent implements OnInit {
 
 
 
- /**
-  * 
-  * @param hostel 
-  * @param floor 
-  * Save Hostel
-  */
+  /**
+   * 
+   * @param hostel 
+   * @param floor 
+   * Save Hostel
+   */
   saveHostel(hostel, floor) {
     // this.applyFloor(hostel, floor);
     console.log("Hostel", hostel);
@@ -304,10 +309,14 @@ export class RoomsComponent implements OnInit {
    * @param length 
    * Add Room Number
    */
-  pad(number, length) {
-    var str = '' + number;
+  pad(number, length, floor) {
+    var str = '' + floor.floor_no;
     while (str.length < length) {
-      str = '0' + str;
+      if(number<10){
+      str = str+"0"+ number;
+      }else{
+        str = str+ number;
+      }
     }
     return str;
   }

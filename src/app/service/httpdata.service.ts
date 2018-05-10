@@ -64,6 +64,18 @@ export class HttpdataService {
 
   /**
    * 
+   * @param hostelId 
+   * Get Hostel By Id
+   */
+  getHostelById(hostelId){
+    return this.http.get(this.baseUrl + "/hostel/getHostelById/"+hostelId)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
+  }
+
+
+  /**
+   * 
    * @param hostel 
    * Update Hostel By Hostel Id
    */
