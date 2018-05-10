@@ -29,7 +29,6 @@ routes.route('/filter').get(filterController.getAllFilters);
 routes.route('/filter/add').post(filterController.addFilter)
 routes.route('/filter/update/:filterId').put(filterController.updateFilterById);
 routes.route('/filter/remove/:filterId').delete(filterController.removeFilterById);
-
 /**
  * User Registration
  */

@@ -124,6 +124,7 @@ export class HttpdataService {
    * Delete Filter By Filter id
    */
   deleteFilterdata(filter: any): Observable<Hostel> {
+    console.log(filter._id)
     return this.http.delete(this.baseUrl + "/filter/remove/" + filter._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
