@@ -1,13 +1,15 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone,Input,AfterViewInit } from '@angular/core';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload/src/interfaces';
 import { HttpdataService } from '../service/httpdata.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Services } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
+
 export class RoomsComponent implements OnInit {
   roomTypes: { id: number; name: string; }[];
   isRoom: boolean;
@@ -17,7 +19,7 @@ export class RoomsComponent implements OnInit {
   newHostel: boolean = true;
   floor: any;
   // hostelsList: Array<any>;
-  // hostels: Array<any>;
+  hostels: Array<any>;
   hostel: any = { floors: [] };
   floorsList: Array<number>;
   services: Array<any>;
@@ -33,7 +35,7 @@ export class RoomsComponent implements OnInit {
       }
     })
   }
-
+  
   ngOnInit() {
     this.getServices();
     this.getAllHostels();
@@ -83,6 +85,7 @@ export class RoomsComponent implements OnInit {
       1, 2, 3, 4, 5
     ];
   }
+ 
   /**
     * Get All Services
     */

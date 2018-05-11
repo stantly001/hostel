@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild ,AfterViewInit} from '@angular/core';
 import Globals from '../utils/globals';
 import { Hostel } from '../model/hostel';
 import { AgmCoreModule } from '@agm/core';
@@ -75,8 +75,6 @@ export class HostelComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-    console.log(this.hostels)
-    console.log(Globals.baseAppUrl)
   }
 
   /**
@@ -125,7 +123,9 @@ removeBase64(hostel){
   });
 }
 
-
+// ngAfterViewInit(){
+//   console.log("multiselect",this.multiselect.nativeElement)
+// }
 
 
   /**
@@ -225,6 +225,8 @@ removeBase64(hostel){
     });
 
   }
+
+
   onDeSelectAll(items: any) {
     this.hostel.hostel_services = items;
   }
