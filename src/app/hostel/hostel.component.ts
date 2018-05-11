@@ -63,7 +63,7 @@ export class HostelComponent implements OnInit {
   ngOnInit() {
     this.isService = false;
     // this.hostelServices = []
-    this.selectedItems=[]
+    this.selectedItems = []
     this.getData()
     this.getAllServices()
     this.dropdownSettings = {
@@ -117,16 +117,13 @@ export class HostelComponent implements OnInit {
    * @param hostel 
    * Remove imgBase64
    */
-removeBase64(hostel){
-  hostel.images.forEach(element => {
-    if(element.imgBase64){
-    delete element.imgBase64; 
-    }
-  });
-}
-
-
-
+  removeBase64(hostel) {
+    hostel.images.forEach(element => {
+      if (element.imgBase64) {
+        delete element.imgBase64;
+      }
+    });
+  }
 
   /**
    * Save Hostel
@@ -176,7 +173,7 @@ removeBase64(hostel){
     user.hostel_services.forEach(element => {
       this.selectedItems.push(element.service);
     });
-    
+
     console.log("user", user);
   }
 
@@ -206,7 +203,9 @@ removeBase64(hostel){
   //Multiselect Onslect and OnselectAll 
   onItemSelect(item: any) {
     this.isService = true;
-    this.hostel.hostel_services.push({service: item});
+    console.log(item)
+    this.hostel.hostel_services.push({ service: item });
+    console.log(this.hostel)
   }
 
   onSelectAll(items: any) {

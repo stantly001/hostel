@@ -1,8 +1,8 @@
-var multer = require('multer')
+var multer = require('multer');
 var path = require('path');
 var bodyParser = require('body-parser');
 var randomstring = require("randomstring");
-var fs = require('fs');
+// var fs = require('fs');
 var base64Img = require('base64-img');
 //Mongoose Models
 var hostel = require('../models/hostel');
@@ -21,7 +21,7 @@ const imgFilePath = "../hmsDoc/visuals";
  * Get All Hostel Details
  */
 function getAllHostel(req, res) {
-console.log("session------>",req.session.id);
+    console.log("session------>", req.session.id);
 
     hostel.find().populate("images")
         .populate("created_by")
@@ -62,7 +62,7 @@ console.log("session------>",req.session.id);
                         property_description: items.property_description,
                         policy: items.policy,
                         checkin_24hrs: items.checkin_24hrs,
-                        floors:items.floors
+                        floors: items.floors
                     }
                 })
                 return res.json(returnData);
@@ -76,7 +76,7 @@ console.log("session------>",req.session.id);
  * @param {*} imgUrl 
  */
 function getImgToBase64ByHostel(imgUrl) {
-    
+
     let imgSrcString = convertBase64(imgUrl)
     return imgSrcString
 }
@@ -88,8 +88,11 @@ function getImgToBase64ByHostel(imgUrl) {
  * @param {*} url 
  * Convert Base64
  */
-function convertBase64(imgUrl){
-    var imgSrcString = base64Img.base64Sync(imgUrl);
+function convertBase64(imgUrl) {
+    var imgSrcString = ''
+    if (imgUrl) {
+        imgSrcString = base64Img.base64Sync(imgUrl);
+    }
     // let extensionName = path.extname(imgUrl);
     // //convert image file to base64-encoded string
     // let base64Image = new Buffer(url, 'binary').toString('base64');
@@ -105,12 +108,12 @@ function convertBase64(imgUrl){
  * Image Response
  */
 function convertImageUrlTOBase64(imgUrl, res) {
-    var url = fs.readFile(imgUrl, (err, data) => {
-        if (err)
-            res.status(500).send(err);
-        let imgSrcString =  convertBase64(imgUrl, url)
-        res.send(imgSrcString)
-    })
+    // var url = fs.readFile(imgUrl, (err, data) => {
+    //     if (err)
+    //         res.status(500).send(err);
+    let imgSrcString = convertBase64(imgUrl)
+    res.send(imgSrcString)
+    // })
 }
 
 
@@ -178,7 +181,6 @@ function filterHostelModel(res) {
  * Filter By Hostel Visuals
  */
 function filterHostelVisualsModel(res, post) {
-    console.log("Hostel Id ====> ", post._id)
     var hostelVisualObj = new hostelVisuals({
         name: res.name,
         url: res.url,
@@ -196,7 +198,6 @@ function filterHostelVisualsModel(res, post) {
  */
 function addHostel(req, res) {
     var post = new hostel(filterHostelModel(req.body))
-    console.log(post)
     post.save()
         .then(item => {
             req.body.images.forEach(function (val, k) {
@@ -296,12 +297,11 @@ function getHostelById(id, res) {
     //         return res.json(data);
     //     }
     // });
-    hostel.findOne({_id:id}).populate("hostel_services.service").exec(function (err, data) {
+    hostel.findOne({ _id: id }).populate("hostel_services.service").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
-            console.log("data-->",data)
             return res.json(data);
         }
     })
@@ -350,9 +350,9 @@ function updateFilterHostelDetail(data, res) {
     data.national_rating = res.national_rating;
     data.world_rating = res.world_rating;
     data.checkin_24hrs = res.checkin_24hrs;
-    hostel_services: res.hostel_services;
-    floors: res.floors;
-    created_by: res.created_by
+    data.hostel_services = res.hostel_services;
+    data.floors = res.floors;
+    data.created_by = res.created_by
     // }
 
     return data;
@@ -360,11 +360,11 @@ function updateFilterHostelDetail(data, res) {
 
 function updateHostelVisualsModel(res) {
     var hostelVisualObj = new hostelVisuals({
+        _id: res._id,
         name: res.name,
         url: res.url,
-        hostelId: res._id
+        hostelId: res.hostelId
     });
-    console.log(hostelVisualObj)
     return hostelVisualObj;
 }
 
@@ -376,27 +376,33 @@ function updateHostelVisualsModel(res) {
  */
 function updateHostelById(req, res, id) {
     let hostelData = req.body;
-console.log("Updqatre")
     hostel.findById(id, function (err, data) {
         if (!data)
             return next(new Error('Could not load Document'));
         else {
+            var tempImg = []
             data = updateFilterHostelDetail(data, hostelData);
-            hostelData.images.forEach(function (val, k) {
+            data.images = []
+            hostelData.images.map(function (val, k) {
                 var hostelVisualObj = updateHostelVisualsModel(val)
                 if (val._id) {
-                    hostelVisuals.update({ _id: val._id }, hostelVisualObj)
+                    var imgQuery = { '_id': val._id }
+                    hostelVisuals.update(imgQuery, hostelVisualObj, { upsert: true })
                 } else {
                     hostelVisualObj.save()
                 }
-                data.images.push(hostelVisualObj)
+                return hostelVisualObj
+            }).forEach(item => {
+                if (tempImg.indexOf(item._id) == -1) {
+                    tempImg.push(item._id)
+                    data.images.push(item)
+                }
             })
-            data.save().then(coin => {
-                res.json({ 'message': 'Update complete', 'data': data });
+            hostel.findByIdAndUpdate({ '_id': id }, data, { upsert: true }, function (err, doc) {
+                res.send(doc)
             })
-                .catch(err => {
-                    res.status(400).send("unable to update the database");
-                });
+            data.images = [];
+            tempImg = []
         }
     });
 }
