@@ -5,8 +5,9 @@ var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
 var hostelServiceController=require('../controllers/hostelServiceController');
-var roomController=require("../controllers/roomController");
+var roomController=require('../controllers/roomController');
 var authServiceCtrl = require('../controllers/authController');
+var queryService = require('../controllers/queryController');
 
 
 /**
@@ -29,6 +30,7 @@ routes.route('/filter').get(filterController.getAllFilters);
 routes.route('/filter/add').post(filterController.addFilter)
 routes.route('/filter/update/:filterId').put(filterController.updateFilterById);
 routes.route('/filter/remove/:filterId').delete(filterController.removeFilterById);
+
 /**
  * User Registration
  */
@@ -57,6 +59,11 @@ routes.route('/room/update/:roomId').put(roomController.updateRoom);
  * User Login
  */
 routes.route('/auth/user').post(authServiceCtrl.authentication)
+
+/**
+ * Query Params To Find Data
+ */
+routes.route('/query/getFilterData').get(queryService.findSelectedHostelByQuery)
 
 
 module.exports = routes;

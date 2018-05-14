@@ -129,7 +129,6 @@ export class HostelComponent implements OnInit {
    * Save Hostel
    */
   save = (hostel) => {
-    console.log("hostel", hostel)
     this.removeBase64(hostel);
     if (hostel._id) {
       this._httpDataService.updateHosteldata(hostel).subscribe(
