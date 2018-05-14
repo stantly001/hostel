@@ -17,33 +17,22 @@ import { HostelViewComponent } from './hostel-view/hostel-view.component';
 export const Approute: Routes = [
 
     {
-        path: "hostel",
+        path: 'hostel',
         component: HomeSectionComponent,
     },
-    // {
-    //     path: 'hostel/login',
-    //     component: LoginComponent,
-    // }, 
     {
-        path: "hostel/search",
+        path: 'hostel/search',
         component: ViewComponent,
     },
-    // {
-    //     path: "hostel/registration",
-    //     component: RegisterComponent,
-    // }, 
     {
-        path: "hostel/:hostelId",
+        path: 'hostel/:hostelId',
         component: DetailviewComponent,
-    }, {
-        path: "rooms",
+    },
+     {
+        path: 'rooms',
         component: ViewRoomsComponent
     },
-    {
-        path: '',
-        redirectTo: 'hostel',
-        pathMatch: 'full',
-    }, 
+    
     {
         path: 'admin',
         component: AdminComponent,
@@ -59,25 +48,30 @@ export const Approute: Routes = [
                         path: 'viewRooms',
                         component: RoomsComponent
                     },{
-                        path: '',
+                        path: 'hostelView/addHostel',
                         redirectTo: 'addHostel',
-                        pathMatch: 'full',
+                        pathMatch: 'full'
                     }
                 ]
             },
             {
                 path: 'filter',
                 component: FilterFormComponent
-            },
-            {
+            }
+            ,{
+                path: 'services',
+                component: HostelServiceComponent
+            },{
                 path: '',
                 redirectTo: 'hostelView',
                 pathMatch: 'full'
-            },{
-                path: "services",
-                component: HostelServiceComponent
             }
         ]
+    },
+    {
+        path: '',
+        redirectTo: 'hostel',
+        pathMatch: 'full',
     },
 
 ]

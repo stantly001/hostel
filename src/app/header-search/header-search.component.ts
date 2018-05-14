@@ -18,7 +18,6 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-   
   }
   ngAfterViewInit() {
     
