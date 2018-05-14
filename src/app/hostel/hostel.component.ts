@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./hostel.component.css'],
   providers: [HttpdataService]
 })
-export class HostelComponent implements OnInit {
+export class HostelComponent implements OnInit,AfterViewInit {
 
   selectedItems: any;
   lat: number = 51.678418;
@@ -55,15 +55,16 @@ export class HostelComponent implements OnInit {
     { dispName: 'Rajasthan', fieldName: 'rajasthan' },
     { dispName: 'Bihar', fieldName: 'bihar' }
   ]
-  @ViewChild('multiselect') multiselect: any;
+  @ViewChild('multiselect',{read: ElementRef}) multiselect: ElementRef;
   constructor(private _httpDataService: HttpdataService, private router: Router) {
-
+      
   }
 
   ngOnInit() {
+    
     this.isService = false;
     // this.hostelServices = []
-    this.selectedItems=[]
+    this.selectedItems = []
     this.getData()
     this.getAllServices()
     this.dropdownSettings = {
@@ -75,6 +76,8 @@ export class HostelComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    
+    
   }
 
   /**
@@ -123,9 +126,11 @@ removeBase64(hostel){
   });
 }
 
-// ngAfterViewInit(){
-//   console.log("multiselect",this.multiselect.nativeElement)
-// }
+ngAfterViewInit(){
+  if(this.multiselect){
+  console.log("multiselect",this.multiselect.nativeElement)
+  }
+}
 
 
   /**
@@ -133,6 +138,7 @@ removeBase64(hostel){
    */
   save = (hostel) => {
     console.log("hostel", hostel)
+    console.log("multiselect",this.multiselect.nativeElement)
     this.removeBase64(hostel);
     if (hostel._id) {
       this._httpDataService.updateHosteldata(hostel).subscribe(
@@ -176,7 +182,7 @@ removeBase64(hostel){
     user.hostel_services.forEach(element => {
       this.selectedItems.push(element.service);
     });
-    
+
     console.log("user", user);
   }
 
@@ -199,14 +205,25 @@ removeBase64(hostel){
    */
   getAllServices() {
     this._httpDataService.getAllServices().subscribe(
-      data => this.services = data,
+      data =>{ this.services = data;
+        data.forEach(element => {
+          if(element.service_name=="Base Service"){
+            this.isService=true;
+          this.selectedItems.push(element);
+          this.hostel.hostel_services.push( {service: element});
+          }
+        });
+        console.log("hostel",this.hostel)
+      },
       error => this.errorMessage = <any>error)
   }
 
   //Multiselect Onslect and OnselectAll 
   onItemSelect(item: any) {
     this.isService = true;
-    this.hostel.hostel_services.push({service: item});
+    console.log(item)
+    this.hostel.hostel_services.push({ service: item });
+    console.log(this.hostel)
   }
 
   onSelectAll(items: any) {
