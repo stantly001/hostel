@@ -33,7 +33,6 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
 
     this.checkInDate = new Date();
-    console.log(this.checkInDate)
   }
 
   ngOnInit() {
@@ -45,7 +44,6 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
 
   findHostel(search) {
     const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
-    console.log(search)
 
     if (search.search_country) {
       queryParams['country'] = search.search_country
@@ -58,7 +56,7 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
     } else {
       queryParams['city'] = null
     }
-    console.log(queryParams)
+
     this.router.navigate(['hostel'], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
 
   }
