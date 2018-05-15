@@ -72,7 +72,7 @@ import {AgmCoreModule} from '@agm/core';
     HttpClientModule,
     NouisliderModule,
     NgDatepickerModule,
-    RouterModule.forRoot(Approute,{ enableTracing: true }),
+    RouterModule.forRoot(Approute),
     NgMultiSelectDropDownModule.forRoot(),
     NgxGalleryModule,
     AgmCoreModule.forRoot({

@@ -13,8 +13,6 @@ export class HeaderNavigationComponent implements OnInit {
     if (sessionStorage.getItem("user")) {
       let sessionDetails = JSON.parse(sessionStorage.getItem("user"));
       this.user = sessionDetails.data.user_name;
-    } else{
-      this.router.navigate(['hostel'], { relativeTo: this.route }) 
     }
 
     console.log(this.user)
