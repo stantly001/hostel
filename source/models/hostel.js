@@ -155,7 +155,9 @@ var Hostel = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Service'
     }
-  }]
+  }],
+  room_type:[{type_name: String}],
+  available_service:[{service_name: String}]
 }, {
     versionKey: false,
     collection: 'hostel'

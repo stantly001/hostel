@@ -4,50 +4,7 @@ var bodyParser = require('body-parser');
 
 //Mongoose Models
 var room = require('../models/room');
-
-
-// function filterFloorsData(data){
-
-
-// data
-
-
-//     floors: [{
-//         no_of_rooms: {
-//             type: Number
-//         },
-//         floor_no: {
-//             type: Number
-//         },
-//         rooms: [{
-//             room_services: [{
-//                 service: {
-//                     type: Schema.Types.ObjectId,
-//                     ref: 'Service'
-//                 }, 
-//                 amount_per_month: Number,
-//                 amount_per_day: Number,
-//                 amount_per_week: Number,
-//                 free_service: Boolean
-//             }],
-//             is_active: {
-//                 type: Boolean
-//             },
-//             no_of_beds: {
-//                 type: Number
-//             },
-//             room_number: {
-//                 type: String
-//             },
-//             is_active: {
-//                 type: Boolean
-//             },
-//             view_type: {
-//                 type: Object
-//             }
-//         }],
-//     }]
-// }
+var hostel = require('../models/hostel');
 
 /**
  * 
@@ -64,7 +21,7 @@ function setRoomData(res) {
 }
 
 function filterHostelModel(res) {
-    var hostel = {
+    var hostelData = {
         _id: res._id,
         name: res.name,
         country: res.country,
@@ -110,9 +67,11 @@ function filterHostelModel(res) {
         images: hostelImgs(res.images),
         floors: res.floors,
         hostel_services: res.hostel_services,
+        room_type: res.room_type,
+        available_service: res.available_service,
         created_by: res.created_by
     };
-    return hostel;
+    return hostelData;
 }
 
 function hostelImgs(imgs) {
@@ -202,6 +161,34 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
  * update Room
  */
 function updateRoom(id, roomData, res) {
+    var temp_service = [];
+    var temp_room_type = []
+    if (roomData.floors) {
+        roomData.floors.map(room => {
+            return room.rooms.map(service => {
+
+                if (temp_room_type.indexOf(service.room_type) == -1) {
+                    temp_room_type.push(service.room_type)
+                    roomData.hostel_id.room_type.push({ type_name: service.room_type })
+                }
+
+
+                return service.room_services.map(val => {
+                    if (temp_service.indexOf(val.service.service_name) == -1) {
+                        temp_service.push(val.service.service_name)
+                        roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
+                    }
+                })
+            })
+        })
+    }
+
+    hostel.findByIdAndUpdate(roomData.hostel_id._id, roomData.hostel_id, { new: true })
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => console.log(err))
+
     room.findByIdAndUpdate(id, roomData, { new: true })
         .then(data => {
             res.json(data)

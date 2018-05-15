@@ -12,19 +12,32 @@ function authentication(userAuth, cb) {
     var password = userAuth.session.password;
     var ifPasTrue = false;
     var returnRes = ''
+    var authObj = {}
     userRegSer.getUserByUserName(user_name, function (err, auth) {
         if (err) {
             return cb(err)
-        } else if (!auth) {
+        } else if (!auth) {            
+            userAuth.session.isValid = false
             returnRes = { message: 'User Not Found', data: userAuth.session }
+            console.log(JSON.stringify(returnRes))
             return cb(err, returnRes)
         } else {
+            // authObj = auth
+            authObj.isValid = true;
+            authObj.user_name = auth.user_name;
+            authObj.email = auth.email;
+            authObj._id = auth._id
+            
             ifPasTrue = bcrypt.compareSync(password, auth.password)
             if (ifPasTrue == true) {
-                returnRes = { message: 'Login Success !!!', data: auth }
+                
+                returnRes = { message: 'Login Success !!!', data: authObj }
+                console.log(JSON.stringify(authObj))
                 return cb(err, returnRes)
             } else {
+                userAuth.session.isValid = false
                 returnRes = { message: 'Invalid Password', data: userAuth.session }
+                console.log(JSON.stringify(returnRes))
                 return cb(err, returnRes)
             }
         }

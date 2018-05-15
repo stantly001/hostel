@@ -15,6 +15,7 @@ export class HttpdataService {
   }
 
 
+
   /**
    * @param 
    * Get All Hostel Details
@@ -31,7 +32,6 @@ export class HttpdataService {
    * Save New Hostel Details
    */
   addHosteldata(hostel: Hostel): Observable<Hostel> {
-    console.log(hostel)
     return this.http.post(this.baseUrl + "/hostel/add", hostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -44,7 +44,6 @@ export class HttpdataService {
    * Get HostelDetail By HostelId
    */
   getRoomDetailsByHostelId(hostelId){
-    console.log("hostelId",hostelId)
     return this.http.get(this.baseUrl + "/room/"+hostelId)
     .map(this.extractData)
     .catch(this.handleErrorObservable);
@@ -80,7 +79,6 @@ export class HttpdataService {
    * Update Hostel By Hostel Id
    */
   updateHosteldata(hostel: Hostel): Observable<Hostel> {
-    console.log(hostel)
     return this.http.put(this.baseUrl + "/hostel/update/" + hostel._id, hostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -101,7 +99,6 @@ export class HttpdataService {
  * get All Filters
  */
   getAllFilters() {
-    console.log("getFilters----->")
     return this.http.get(this.baseUrl + "/filter")
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -135,7 +132,6 @@ export class HttpdataService {
    * Update Filter By Filter Id
    */
   updateFilterdata(filter: any): Observable<any> {
-    console.log(filter)
     return this.http.put(this.baseUrl + "/filter/update/" + filter._id, filter)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -185,7 +181,6 @@ export class HttpdataService {
    * Update Service
    */
   updateService(service: any): Observable<any> {
-    console.log("ser", service)
     return this.http.put(this.baseUrl + "/service/update/" + service._id, service)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -227,7 +222,14 @@ export class HttpdataService {
    * Update Room
    */
   updateRoom(room: any): Observable<any> {
-    console.log("room", room)
+
+console.log(room)
+
+
+
+
+
+    
     return this.http.put(this.baseUrl + "/room/update/" + room._id, room)
       .map(this.extractData)
       .catch(this.handleErrorObservable);

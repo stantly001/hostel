@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NouisliderModule } from 'ng2-nouislider';
 import { HttpdataService } from '../service/httpdata.service';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -11,6 +12,7 @@ import { HttpdataService } from '../service/httpdata.service';
 export class FilterComponent implements OnInit {
   errorMessage: any;
   filters = [];
+  filter = {};
   // isPayment: boolean;
   // isLocation: boolean;
   // isFacilities: boolean;
@@ -32,7 +34,8 @@ export class FilterComponent implements OnInit {
   // properties: Array<any> = [];
   // ratings: Array<any> = [];
   // roomTypes: Array<any> = [];
-  constructor(private _httpDataService: HttpdataService) {
+  constructor(private _httpDataService: HttpdataService, private activatedRoute: ActivatedRoute,
+    private router: Router) {
 
 
   }
@@ -40,7 +43,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     console.log("filter Init called...");
-    
+
     this._httpDataService.getAllFilters().subscribe(
       data => this.filters = data,
       error => this.errorMessage = <any>error)
@@ -71,6 +74,25 @@ export class FilterComponent implements OnInit {
     //   console.log("--->", this.roomTypes);
     // });
 
+  }
+
+  selectFilters(filterType: any, filterTitle: string) {
+    const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+    if (!this.filter[filterTitle]) {
+      this.filter[filterTitle] = []
+    }
+    if (filterType.selectedStatus == true) {
+      this.filter[filterTitle].push(filterType.filter_name)
+    } else {
+      const index: number = this.filter[filterTitle].indexOf(filterType.filter_name)
+      this.filter[filterTitle].splice(index, 1)
+    }
+    if (this.filter[filterTitle].length) {
+      queryParams[filterTitle] = JSON.stringify(this.filter[filterTitle].join(","))
+    } else {
+      queryParams[filterTitle] = null
+    }
+    this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
   }
 
 

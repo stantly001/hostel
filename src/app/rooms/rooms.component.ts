@@ -281,18 +281,18 @@ export class RoomsComponent implements OnInit {
 
   /**
    * 
-   * @param hostel 
+   * @param room 
    * @param floor 
    * Save Hostel
    */
-  saveHostel(hostel, floor) {
+  saveHostel(room, floor) {
     // this.applyFloor(hostel, floor);
-    console.log("Hostel", hostel);
+    console.log("Hostel", room);
     let user = JSON.parse(sessionStorage.getItem("user"));
-    hostel.created_by = user.data;
+    room.created_by = user.data;
     this.newHostel = false;
-    if (hostel._id) {
-      return this._httpDataService.updateRoom(hostel).subscribe(data => {
+    if (room._id) {
+      return this._httpDataService.updateRoom(room).subscribe(data => {
         // this.getAllRooms();
         console.log(data);
         // this.router.navigate(["/"])
@@ -300,7 +300,7 @@ export class RoomsComponent implements OnInit {
         error => this.errorMessage = <any>error)
 
     } else {
-      return this._httpDataService.saveRoom(hostel).subscribe(data => {
+      return this._httpDataService.saveRoom(room).subscribe(data => {
         // this.getAllRooms();
         console.log(data);
       },
@@ -315,7 +315,6 @@ export class RoomsComponent implements OnInit {
    * Assigning selected view Type to room
    */
   selectViewType(viewType, room) {
-
     room.view_type = viewType;
     console.log("RoomType", room);
   }

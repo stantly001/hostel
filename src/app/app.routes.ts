@@ -17,15 +17,15 @@ import { HostelViewComponent } from './hostel-view/hostel-view.component';
 export const Approute: Routes = [
 
     {
-        path: 'hostel',
+        path: 'home',
         component: HomeSectionComponent,
     },
     {
-        path: 'hostel/search',
+        path: 'hostel',
         component: ViewComponent,
     },
     {
-        path: 'hostel/:hostelId',
+        path: 'hostelDetailView/:hostelId',
         component: DetailviewComponent,
     },
      {
@@ -38,7 +38,7 @@ export const Approute: Routes = [
         component: AdminComponent,
         children: [            
             {
-                path: 'hostelView',
+                path: 'hostel',
                 component: HostelViewComponent,
                 children: [
                     {
@@ -48,7 +48,7 @@ export const Approute: Routes = [
                         path: 'viewRooms',
                         component: RoomsComponent
                     },{
-                        path: 'hostelView/addHostel',
+                        path: 'hostel/addHostel',
                         redirectTo: 'addHostel',
                         pathMatch: 'full'
                     }
@@ -63,14 +63,14 @@ export const Approute: Routes = [
                 component: HostelServiceComponent
             },{
                 path: '',
-                redirectTo: 'hostelView',
+                redirectTo: 'hostel',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: 'hostel',
+        redirectTo: 'home',
         pathMatch: 'full',
     },
 

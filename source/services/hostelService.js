@@ -62,7 +62,9 @@ function getAllHostel(req, res) {
                         property_description: items.property_description,
                         policy: items.policy,
                         checkin_24hrs: items.checkin_24hrs,
-                        floors: items.floors
+                        floors: items.floors,
+                        available_service: items.available_service,
+                        room_type: items.room_type
                     }
                 })
                 return res.json(returnData);
@@ -169,7 +171,9 @@ function filterHostelModel(res) {
         checkin_24hrs: res.checkin_24hrs,
         floors: res.floors,
         hostel_services: res.hostel_services,
-        created_by: res.created_by
+        created_by: res.created_by,
+        available_service: res.available_service,
+        room_type: res.room_type
     };
     return hostel;
 }
@@ -352,7 +356,9 @@ function updateFilterHostelDetail(data, res) {
     data.checkin_24hrs = res.checkin_24hrs;
     data.hostel_services = res.hostel_services;
     data.floors = res.floors;
-    data.created_by = res.created_by
+    data.created_by = res.created_by;
+    data.available_service = res.available_service;
+    data.room_type = res.room_type
     // }
 
     return data;
@@ -442,7 +448,7 @@ function removeHostelImgById(hostelImgId) {
 }
 
 var hostelService = {
-    getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos,
+    getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos, getImgToBase64ByHostel,
     getHostelById, updateHostelById, removeHostelById, convertImageUrlTOBase64
 };
 

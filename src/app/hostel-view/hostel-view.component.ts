@@ -10,7 +10,7 @@ export class HostelViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    alert("hostel search")
+    
   }
 
 }

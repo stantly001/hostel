@@ -137,8 +137,6 @@ ngAfterViewInit(){
    * Save Hostel
    */
   save = (hostel) => {
-    console.log("hostel", hostel)
-    console.log("multiselect",this.multiselect.nativeElement)
     this.removeBase64(hostel);
     if (hostel._id) {
       this._httpDataService.updateHosteldata(hostel).subscribe(
