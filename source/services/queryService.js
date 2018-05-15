@@ -2,6 +2,12 @@ var hostel = require('../models/hostel');
 var room = require('../models/room');
 var hs = require('../services/hostelService');
 
+/**
+ * 
+ * @param {*} params 
+ * @param {*} res 
+ * Filter By Query
+ */
 function findSelectedHostelByQuery(params, res) {
     // Object.keys(params).forEach(function (key) {
     //     console.log(params[key].replace(/"/g, "").split(','))
@@ -11,7 +17,7 @@ function findSelectedHostelByQuery(params, res) {
     var roomService = removeSpecialChar(params['Room Services'])
     var country = params['country']
     var city = params['city']
-    
+
     var query = hostel.find()
     if (country) {
         query.where('country').equals(country)
