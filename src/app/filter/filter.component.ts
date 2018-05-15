@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 
 export class FilterComponent implements OnInit {
+  priceByMinMax: any;
   errorMessage: any;
   filters = [];
   filter = {};
@@ -21,7 +22,7 @@ export class FilterComponent implements OnInit {
   isRating: boolean;
   isPrice: boolean;
   // availability: boolean;
-  priceRange: number[] = [2, 5];
+  priceRange: number[];
   ratingRange: number[] = [2, 10];
 
   // availabilities: Array<any> = [];
@@ -91,7 +92,10 @@ export class FilterComponent implements OnInit {
 
   getFilterData(){
     this._httpDataService.getAllFilters().subscribe(
-      data => this.filters = data,
+      data => {
+        this.priceByMinMax = data.hostel;
+        this.filters = data.filterData        
+      },
       error => this.errorMessage = <any>error)
   }
 
