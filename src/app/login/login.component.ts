@@ -29,10 +29,12 @@ export class LoginComponent implements OnInit {
     if (login) {
       this._httpDataService.authUserLogin(login).subscribe(
         data => {
+          if(data.data.isValid==true){
           sessionStorage.setItem("user", JSON.stringify(data));
           let userId = data.data._id;
           this.loginUsers = data;//.push(data});
-          this.route.navigate(["/hostel"], { queryParams: { "userId": userId } });
+          this.route.navigate(["admin/hostel/addHostel"]);
+          }
           console.log(data)
         },
         

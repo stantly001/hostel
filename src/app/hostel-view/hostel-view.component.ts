@@ -10,6 +10,7 @@ export class HostelViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

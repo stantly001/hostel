@@ -59,7 +59,7 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
       queryParams['city'] = null
     }
     console.log(queryParams)
-    this.router.navigate(['hostel/search'], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
+    this.router.navigate(['hostel'], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
 
   }
 }

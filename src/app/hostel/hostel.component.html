@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="col-sm-12">s
   <!-- <ul class="nav nav-tabs">
     <li class="active">
       <a data-toggle="tab" href="#hostel">Hostel</a>
@@ -10,7 +10,7 @@
   <div class="tab-content">
     <div id="hostel" class="tab-pane fade in active">
       <div class="pull-right add-button" [hidden]="clicked">
-        <button class="btn btn-primary btn-sm" (click)="clicked=true">Add</button>
+        <button class="btn btn-primary btn-sm" (click)="clicked=true;">Add</button>
       </div>
       <div class="table table-responsive" [hidden]="clicked">
         <table class="table table-bordered">
@@ -453,9 +453,9 @@
       </div>
 
     </div>
-    <div id="rooms" class="tab-pane fade">
-      <app-rooms></app-rooms>
-    </div>
+    <!-- <div id="rooms" class="tab-pane fade" *ngIf="services&&hostels">
+      <app-rooms [services]="services" [hostels]="hostels"></app-rooms>
+    </div> -->
   </div>
 
 

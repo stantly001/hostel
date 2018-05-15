@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild ,AfterViewInit} from '@angular/core';
 import Globals from '../utils/globals';
 import { Hostel } from '../model/hostel';
 import { AgmCoreModule } from '@agm/core';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./hostel.component.css'],
   providers: [HttpdataService]
 })
-export class HostelComponent implements OnInit {
+export class HostelComponent implements OnInit,AfterViewInit {
 
   selectedItems: any;
   lat: number = 51.678418;
@@ -55,12 +55,13 @@ export class HostelComponent implements OnInit {
     { dispName: 'Rajasthan', fieldName: 'rajasthan' },
     { dispName: 'Bihar', fieldName: 'bihar' }
   ]
-  @ViewChild('multiselect') multiselect: any;
+  @ViewChild('multiselect',{read: ElementRef}) multiselect: ElementRef;
   constructor(private _httpDataService: HttpdataService, private router: Router) {
-
+      
   }
 
   ngOnInit() {
+    
     this.isService = false;
     // this.hostelServices = []
     this.selectedItems = []
@@ -75,8 +76,8 @@ export class HostelComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-    console.log(this.hostels)
-    console.log(Globals.baseAppUrl)
+    
+    
   }
 
   /**
@@ -117,13 +118,20 @@ export class HostelComponent implements OnInit {
    * @param hostel 
    * Remove imgBase64
    */
-  removeBase64(hostel) {
-    hostel.images.forEach(element => {
-      if (element.imgBase64) {
-        delete element.imgBase64;
-      }
-    });
+removeBase64(hostel){
+  hostel.images.forEach(element => {
+    if(element.imgBase64){
+    delete element.imgBase64; 
+    }
+  });
+}
+
+ngAfterViewInit(){
+  if(this.multiselect){
+  console.log("multiselect",this.multiselect.nativeElement)
   }
+}
+
 
   /**
    * Save Hostel
@@ -195,7 +203,16 @@ export class HostelComponent implements OnInit {
    */
   getAllServices() {
     this._httpDataService.getAllServices().subscribe(
-      data => this.services = data,
+      data =>{ this.services = data;
+        data.forEach(element => {
+          if(element.service_name=="Base Service"){
+            this.isService=true;
+          this.selectedItems.push(element);
+          this.hostel.hostel_services.push( {service: element});
+          }
+        });
+        console.log("hostel",this.hostel)
+      },
       error => this.errorMessage = <any>error)
   }
 
@@ -223,6 +240,8 @@ export class HostelComponent implements OnInit {
     });
 
   }
+
+
   onDeSelectAll(items: any) {
     this.hostel.hostel_services = items;
   }

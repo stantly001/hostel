@@ -1,13 +1,15 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone,Input,AfterViewInit } from '@angular/core';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload/src/interfaces';
 import { HttpdataService } from '../service/httpdata.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Services } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
+
 export class RoomsComponent implements OnInit {
   roomTypes: { id: number; name: string; }[];
   isRoom: boolean;
@@ -17,7 +19,7 @@ export class RoomsComponent implements OnInit {
   newHostel: boolean = true;
   floor: any;
   // hostelsList: Array<any>;
-  // hostels: Array<any>;
+  hostels: Array<any>;
   hostel: any = { floors: [] };
   floorsList: Array<number>;
   services: Array<any>;
@@ -33,7 +35,7 @@ export class RoomsComponent implements OnInit {
       }
     })
   }
-
+  
   ngOnInit() {
     this.getServices();
     this.getAllHostels();
@@ -83,6 +85,7 @@ export class RoomsComponent implements OnInit {
       1, 2, 3, 4, 5
     ];
   }
+ 
   /**
     * Get All Services
     */
@@ -188,7 +191,7 @@ export class RoomsComponent implements OnInit {
       let parsedValue = Number(floor.no_of_rooms);
       if (!isNaN(parsedValue)) {
         for (let i = 0; i < parsedValue; i++) {
-          let roomNumber = this.pad(i, 3, floor);
+          let roomNumber = this.generateRoomNo(i, 3, floor);
           floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
           this.hostel.hostel_id.hostel_services.forEach(element => {
             let tempObj = Object.assign({}, element)
@@ -233,7 +236,7 @@ export class RoomsComponent implements OnInit {
       } else {
         if (!isNaN(newRooms)) {
           for (let i = roomsLength; i < no_of_rooms; i++) {
-            let roomNumber = this.pad(i, 3, floor);
+            let roomNumber = this.generateRoomNo(i, 3, floor);
             floor.rooms.push({ room_services: [], is_active: true, room_number: roomNumber });
             this.hostel.hostel_id.hostel_services.forEach(element => {
               let tempObj = Object.assign({}, element)
@@ -320,9 +323,9 @@ export class RoomsComponent implements OnInit {
    * 
    * @param number 
    * @param length 
-   * Add Room Number
+   * Generate Room Number
    */
-  pad(number, length, floor) {
+  generateRoomNo(number, length, floor) {
     var str = '' + floor.floor_no;
     while (str.length < length) {
       if(number<10){
