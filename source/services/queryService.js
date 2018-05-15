@@ -6,7 +6,7 @@ var hs = require('../services/hostelService');
  * 
  * @param {*} params 
  * @param {*} res 
- * Filter By Query
+ * Filter By Queries
  */
 function findSelectedHostelByQuery(params, res) {
     // Object.keys(params).forEach(function (key) {
@@ -17,6 +17,7 @@ function findSelectedHostelByQuery(params, res) {
     var roomService = removeSpecialChar(params['Room Services'])
     var country = params['country']
     var city = params['city']
+    var price = { min: params['priceMin'], max: params['priceMax'] }
 
     var query = hostel.find()
     if (country) {
@@ -27,6 +28,9 @@ function findSelectedHostelByQuery(params, res) {
     }
     if (roomType) {
         query.where('room_type.type_name').in(roomType)
+    }
+    if (price) {
+        query.where('hostel_services.base_amount').gte(price.min).lte(price.max)
     }
     if (roomService) {
         query.where('available_service.service_name').in(roomService)
