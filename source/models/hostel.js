@@ -151,6 +151,7 @@ var Hostel = new Schema({
     amount_per_day: Number,
     amount_per_week: Number,
     free_service: Boolean,
+    base_amount:Number,
     service: {
       type: Schema.Types.ObjectId,
       ref: 'Service'

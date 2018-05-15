@@ -1,7 +1,7 @@
 <!-- <p>
   rooms works!
 </p> -->
-<div class="row" id="rooms">
+<div class="row" id="rooms">ss
   <div class="col-md-12">
     <section class="panel">
       <!-- <div *ngFor="let hostel of hostels; let i=index"> -->
@@ -114,31 +114,35 @@
                   <tbody>
                       <tr *ngFor="let roomService of room.room_services; let roomIndex=index;">
                           <td>
-                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false">
+                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false" [disabled]="roomService?.service.service_name=='Base Service'">
                                 </ng-select>
                           </td>
-                          <td>
+                          <td *ngIf="roomService?.service.service_name!='Base Service'">
                             <input type="text" class="form-control" name="amount_per_day"  
                             [(ngModel)]="roomService.amount_per_day" 
                             *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
                           <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
                           </td>
-                          <td>
+                          <td *ngIf="roomService?.service.service_name!='Base Service'">
                             <input type="text" class="form-control" name="amount_per_week"  
                             [(ngModel)]="roomService.amount_per_week"
                              *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
                              <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">--</span>
                           </td>
-                          <td>
+                          <td *ngIf="roomService?.service.service_name!='Base Service'">
                               <input type="text" class="form-control"   [(ngModel)]="roomService.amount_per_month" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
                               <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
                             </td>
-                          <td>
+                          <td *ngIf="roomService?.service.service_name!='Base Service'">
                             <input type="checkbox"  class="checkbox" name="free_service" 
                             [(ngModel)]="roomService.free_service">
                           </td>
+                          <td class="text-center" colspan="4" *ngIf="roomService?.service.service_name=='Base Service'">
+                            <input type="text" name="" id="" class="form-control" 
+                            [(ngModel)]="roomService.base_amount" >
+                          </td>
                           <td>
-                            <button class="btn btn-xs btn-danger" (click)="deleteService(room,roomIndex)">
+                            <button class="btn btn-xs btn-danger" (click)="deleteService(room,roomIndex)" [disabled]="roomService?.service.service_name=='Base Service'">
                               <i class="fa fa-close"></i>
                             </button>
                           </td>
