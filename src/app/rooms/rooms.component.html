@@ -114,7 +114,7 @@
                   <tbody>
                       <tr *ngFor="let roomService of room.room_services; let roomIndex=index;">
                           <td>
-                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false">
+                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false" [disabled]="roomService?.service.service_name=='Base Service'">
                                 </ng-select>
                           </td>
                           <td *ngIf="roomService?.service.service_name!='Base Service'">
