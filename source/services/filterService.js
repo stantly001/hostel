@@ -24,6 +24,7 @@ function getAllFilters(req, res) {
             }
         }]))
     ]).spread(function (filter, hostel) {
+        console.log(hostel)
         minMax.min = hostel[0].min[0];
         minMax.max = hostel[0].max[0];
         res.json({ filterData: filter, hostel: minMax })

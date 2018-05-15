@@ -3,10 +3,10 @@
 		<a class="pull-left" (click)="filterObj.isFilter=!filterObj.isFilter">
 			<i class="fa" [class.fa-plus]="filterObj.isFilter==true" [class.fa-minus]="filterObj.isFilter==false||!filterObj.isFilter"></i>
 		</a>
-		<h3 class="sear-head">{{filterObj.field_name}} -- {{priceByMinMax.min}} -- {{priceByMinMax.max}}</h3>
+		<h3 class="sear-head">{{filterObj.field_name}}</h3>
 		<div *ngIf="filterObj.view_type=='slider'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">
-			<nouislider [connect]="true" [min]="priceByMinMax.min" [max]="priceByMinMax.max" [step]="1" [(ngModel)]="priceRange" (change)="priceChange($event)"></nouislider>
-			<label for="" class="hostel-label">Range From Rs.{{prices?.rangeFrom}} to Rs.{{prices?.rangeTo}}</label>
+			<nouislider [connect]="true" [min]="priceByMinMax?.min" [max]="priceByMinMax?.max" [step]="1" [(ngModel)]="priceRange" (change)="priceChange(priceRange)"></nouislider>
+			<label for="" class="hostel-label">Range From Rs.{{priceByMinMax?.min}} to Rs.{{priceByMinMax?.max}}</label>
 		</div>
 
 		<div *ngIf="filterObj.view_type=='checkBox'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">

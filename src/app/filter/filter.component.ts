@@ -62,6 +62,8 @@ export class FilterComponent implements OnInit {
     //   this.payments = response.payment;
     //   this.prices = response.price[0];
     this.priceRange = [20, 600];
+    // this.priceByMinMax.min=100;
+    // this.priceByMinMax.max=1000;
     //   this.properties = response.property;
     //   this.ratings = response.rating[0];
     //   this.ratingRange = [this.ratings['ratingFrom'], this.ratings['ratingTo']];
@@ -90,21 +92,37 @@ export class FilterComponent implements OnInit {
     this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
   }
 
-  getFilterData(){
+  getFilterData() {
     this._httpDataService.getAllFilters().subscribe(
       data => {
         this.priceByMinMax = data.hostel;
-        this.filters = data.filterData        
+        this.filters = data.filterData
       },
       error => this.errorMessage = <any>error)
   }
 
 
-  // priceChange(event) {
-  //   console.log("event", event);
-  //   this.prices['rangeFrom']=event[0];
-  //   this.prices['rangeTo']=event[1];
-  // }
+  priceChange(price) {
+    let searchPrice = { min: price[0], max: price[1] }
+    const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+
+    if (searchPrice.min) {
+      queryParams['priceMin'] = searchPrice.min
+    } else {
+      queryParams['priceMin'] = null
+    }
+
+    if (searchPrice.max) {
+      queryParams['priceMax'] = searchPrice.max
+    } else {
+      queryParams['priceMax'] = null
+    }
+    this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
+    // this.router.navigate(['hostel'], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
+
+    // this.prices['rangeFrom']=event[0];
+    // this.prices['rangeTo']=event[1];
+  }
   // ratingChange(event) {
   //   console.log("rating", event)
   //   this.ratings['ratingFrom']=event[0];
