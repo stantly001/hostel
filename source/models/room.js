@@ -34,6 +34,7 @@ var Room = new Schema({
                 amount_per_month: Number,
                 amount_per_day: Number,
                 amount_per_week: Number,
+                base_amount:Number,
                 free_service: Boolean
             }],
             is_active: {
