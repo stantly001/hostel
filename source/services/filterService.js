@@ -1,8 +1,8 @@
 var bodyParser = require('body-parser');
 var path = require('path');
-
+var Q = require('q');
 //Mongoose Model
-
+var hostel = require('../models/hostel')
 var filter = require('../models/filter')
 
 /**
@@ -12,14 +12,32 @@ var filter = require('../models/filter')
  * Get All Filters
  */
 function getAllFilters(req, res) {
-    filter.find(function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            return res.json(data);
-        }
+    var minMax = {};
+
+    return Q.all([
+        Q(filter.find()),
+        Q(hostel.aggregate([{
+            "$group": {
+                "_id": null,
+                "min": { "$min": "$hostel_services.base_amount" },
+                "max": { "$max": "$hostel_services.base_amount" }
+            }
+        }]))
+    ]).spread(function (filter, hostel) {
+        minMax.min = hostel[0].min[0];
+        minMax.max = hostel[0].max[0];
+        res.json({ filterData: filter, hostel: minMax })
     })
+
+
+    // filter.find(function (err, data) {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         return res.json(data);
+    //     }
+    // })
 }
 
 /**
