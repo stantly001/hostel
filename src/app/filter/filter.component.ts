@@ -36,17 +36,11 @@ export class FilterComponent implements OnInit {
   // roomTypes: Array<any> = [];
   constructor(private _httpDataService: HttpdataService, private activatedRoute: ActivatedRoute,
     private router: Router) {
-
-
   }
 
 
   ngOnInit() {
-    console.log("filter Init called...");
-
-    this._httpDataService.getAllFilters().subscribe(
-      data => this.filters = data,
-      error => this.errorMessage = <any>error)
+    this.getFilterData()
     // this.availability = false;
     // this.isPrice = false;
     // this.isRating = false;
@@ -93,6 +87,12 @@ export class FilterComponent implements OnInit {
       queryParams[filterTitle] = null
     }
     this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
+  }
+
+  getFilterData(){
+    this._httpDataService.getAllFilters().subscribe(
+      data => this.filters = data,
+      error => this.errorMessage = <any>error)
   }
 
 

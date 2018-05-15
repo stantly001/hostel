@@ -1,8 +1,8 @@
 var bodyParser = require('body-parser');
 var path = require('path');
-
+var Q        = require('q');
 //Mongoose Model
-
+var hostel = require('../models/hostel')
 var filter = require('../models/filter')
 
 /**
@@ -12,6 +12,25 @@ var filter = require('../models/filter')
  * Get All Filters
  */
 function getAllFilters(req, res) {
+
+return Q.all([Q(filter.find()),Q(hostel.find())]).spread(function(filter, hostel){
+    res.json({filterData: filter, hostel: hostel})
+// console.log(filter, hostel)
+})
+// .then(function(){
+//     return Q(hostel.find(function(){
+
+//     })
+    
+    
+//     .spread(function(hostel){
+
+//     }))
+// })
+
+
+
+
     filter.find(function (err, data) {
         if (err) {
             console.log(err);
