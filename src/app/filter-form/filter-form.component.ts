@@ -24,7 +24,7 @@ export class FilterFormComponent implements OnInit {
 
   getData(): void {
     this._httpDataService.getAllFilters().subscribe(
-      data => this.filters = data,
+      data => this.filters = data.filterData,
       error => this.errorMessage = <any>error)
   }
 
