@@ -177,6 +177,7 @@ ngAfterViewInit(){
    */
   update(user, index) {
     this.hostel = user;
+    this.selectedItems=[];
     user.hostel_services.forEach(element => {
       this.selectedItems.push(element.service);
     });
