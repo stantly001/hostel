@@ -106,6 +106,7 @@ export class FilterComponent implements OnInit {
   getFilterData() {
     this._httpDataService.getAllFilters().subscribe(
       data => {
+        this.priceRange = [data.hostel.min, data.hostel.max];
         this.priceByMinMax = data.hostel;
         // this.setFilters(data);
         this.filters = data.filterData
