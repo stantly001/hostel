@@ -14,7 +14,6 @@ export class ListComponent implements OnInit {
   errorMessage: any;
   hostels: any;
   constructor(private _httpDataService: HttpdataService, private _queryService: QueryService, private activatedRoute: ActivatedRoute) {
-    console.log(this.activatedRoute.queryParams)
     this.getFilterHostelData()
   }
 
