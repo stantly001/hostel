@@ -47,41 +47,7 @@ function findSelectedHostelByQuery(params, res) {
             console.log(err);
         } else {
             var returnData = doc.map(items => {
-                return {
-                    images: items.images.map(img => {
-                        return {
-                            _id: img._id,
-                            url: img.url,
-                            imgBase64: hs.getImgToBase64ByHostel(img.url),
-                            name: img.name,
-                            hostelId: img.hostelId
-                        }
-                    }),
-                    created: items.created,
-                    last_updated: items.last_updated,
-                    hostel_services: items.hostel_services,
-                    _id: items._id,
-                    name: items.name,
-                    country: items.country,
-                    city: items.city,
-                    state: items.state,
-                    street: items.street,
-                    email: items.email,
-                    longitude: items.longitude,
-                    latitude: items.latitude,
-                    language: items.language,
-                    property_type: items.property_type,
-                    url: items.url,
-                    things_to_note: items.things_to_note,
-                    cancellation_policy: items.cancellation_policy,
-                    default_currency: items.default_currency,
-                    property_description: items.property_description,
-                    policy: items.policy,
-                    checkin_24hrs: items.checkin_24hrs,
-                    floors: items.floors,
-                    available_service: items.available_service,
-                    room_type: items.room_type
-                }
+                return hs.setHostelDetails(items)
             })
             return res.json(returnData);
         }

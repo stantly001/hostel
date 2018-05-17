@@ -20,9 +20,53 @@ const imgFilePath = "../hmsDoc/visuals";
  * @param {*} res 
  * Get All Hostel Details
  */
-function getAllHostel(req, res) {
-    console.log("session------>", req.session.id);
 
+function setHostelDetails(data) {
+    var returnData = {
+        images: setHostelImages(data.images),
+        created: data.created,
+        last_updated: data.last_updated,
+        hostel_services: data.hostel_services,
+        _id: data._id,
+        name: data.name,
+        country: data.country,
+        city: data.city,
+        state: data.state,
+        street: data.street,
+        email: data.email,
+        longitude: data.longitude,
+        latitude: data.latitude,
+        language: data.language,
+        property_type: data.property_type,
+        url: data.url,
+        things_to_note: data.things_to_note,
+        cancellation_policy: data.cancellation_policy,
+        default_currency: data.default_currency,
+        property_description: data.property_description,
+        policy: data.policy,
+        checkin_24hrs: data.checkin_24hrs,
+        floors: data.floors,
+        available_service: data.available_service,
+        room_type: data.room_type
+    }
+    return returnData
+}
+
+function setHostelImages(images) {
+    var returnData = images.map(img => {
+        return {
+            _id: img._id,
+            url: img.url,
+            imgBase64: getImgToBase64ByHostel(img.url),
+            name: img.name,
+            hostelId: img.hostelId
+        }
+    })
+    return returnData
+}
+
+
+function getAllHostel(req, res) {
     hostel.find().populate("images")
         .populate("created_by")
         .populate("hostel_services.service")
@@ -31,41 +75,42 @@ function getAllHostel(req, res) {
                 console.log(err);
             } else {
                 var returnData = data.map(items => {
-                    return {
-                        images: items.images.map(img => {
-                            return {
-                                _id: img._id,
-                                url: img.url,
-                                imgBase64: getImgToBase64ByHostel(img.url),
-                                name: img.name,
-                                hostelId: img.hostelId
-                            }
-                        }),
-                        created: items.created,
-                        last_updated: items.last_updated,
-                        hostel_services: items.hostel_services,
-                        _id: items._id,
-                        name: items.name,
-                        country: items.country,
-                        city: items.city,
-                        state: items.state,
-                        street: items.street,
-                        email: items.email,
-                        longitude: items.longitude,
-                        latitude: items.latitude,
-                        language: items.language,
-                        property_type: items.property_type,
-                        url: items.url,
-                        things_to_note: items.things_to_note,
-                        cancellation_policy: items.cancellation_policy,
-                        default_currency: items.default_currency,
-                        property_description: items.property_description,
-                        policy: items.policy,
-                        checkin_24hrs: items.checkin_24hrs,
-                        floors: items.floors,
-                        available_service: items.available_service,
-                        room_type: items.room_type
-                    }
+                    return setHostelDetails(items)
+                    // {
+                        // images: items.images.map(img => {
+                        //     return {
+                        //         _id: img._id,
+                        //         url: img.url,
+                        //         imgBase64: getImgToBase64ByHostel(img.url),
+                        //         name: img.name,
+                        //         hostelId: img.hostelId
+                        //     }
+                        // }),
+                        // created: items.created,
+                        // last_updated: items.last_updated,
+                        // hostel_services: items.hostel_services,
+                        // _id: items._id,
+                        // name: items.name,
+                        // country: items.country,
+                        // city: items.city,
+                        // state: items.state,
+                        // street: items.street,
+                        // email: items.email,
+                        // longitude: items.longitude,
+                        // latitude: items.latitude,
+                        // language: items.language,
+                        // property_type: items.property_type,
+                        // url: items.url,
+                        // things_to_note: items.things_to_note,
+                        // cancellation_policy: items.cancellation_policy,
+                        // default_currency: items.default_currency,
+                        // property_description: items.property_description,
+                        // policy: items.policy,
+                        // checkin_24hrs: items.checkin_24hrs,
+                        // floors: items.floors,
+                        // available_service: items.available_service,
+                        // room_type: items.room_type
+                    // }
                 })
                 return res.json(returnData);
             }
@@ -448,7 +493,7 @@ function removeHostelImgById(hostelImgId) {
 
 var hostelService = {
     getAllHostel, addHostel, onUploadFile, getAllImagesAndVideos, getImgToBase64ByHostel,
-    getHostelById, updateHostelById, removeHostelById, convertImageUrlTOBase64
+    getHostelById, updateHostelById, removeHostelById, convertImageUrlTOBase64, setHostelDetails
 };
 
 module.exports = hostelService;
