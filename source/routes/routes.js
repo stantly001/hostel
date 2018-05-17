@@ -4,10 +4,11 @@ var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
-var hostelServiceController=require('../controllers/hostelServiceController');
-var roomController=require('../controllers/roomController');
+var hostelServiceController = require('../controllers/hostelServiceController');
+var roomController = require('../controllers/roomController');
 var authServiceCtrl = require('../controllers/authController');
-var queryService = require('../controllers/queryController');
+var queryServiceController = require('../controllers/queryController');
+var bookingController = require('../controllers/bookingController');
 
 
 /**
@@ -63,7 +64,12 @@ routes.route('/auth/user').post(authServiceCtrl.authentication)
 /**
  * Query Params To Find Data
  */
-routes.route('/query/getFilterData').get(queryService.findSelectedHostelByQuery)
+routes.route('/query/getFilterData').get(queryServiceController.findSelectedHostelByQuery)
 
+/**
+ * Booking
+ */
+routes.route('/booking/getAllBooking').get(bookingController.getAllBooking)
+routes.route('/booking/saveBooking').post(bookingController.saveBooking)
 
 module.exports = routes;

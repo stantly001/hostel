@@ -246,7 +246,6 @@ var upload = multer({ storage: Storage }).array("image", 3);
 function onUploadFile(req, res) {
     upload(req, res, function (err) {
         if (err) {
-            console.log(err);
             return res.end("Something went wrong!");
         }
         return res.status(200).json({ "success": "File uploaded sucessfully!.", data: imgObj });
