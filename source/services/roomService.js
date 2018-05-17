@@ -106,14 +106,11 @@ function filterCreatedBy(data) {
  */
 function saveRoom(req, res) {
     var newRoom = setRoomData(req.body);
-    console.log("newRoom", newRoom)
     newRoom.save().then(item => {
-        console.log("item", item)
         return res.status(200).json({ 'success': 'Room added successfully', 'data': item });
-    })
-        .catch(err => {
-            return res.status(400).send("unable to save to database");
-        });
+    }).catch(err => {
+        return res.status(400).send("unable to save to database");
+    });
 }
 
 /**
@@ -166,26 +163,30 @@ function updateRoom(id, roomData, res) {
     if (roomData.floors) {
         roomData.floors.map(room => {
             return room.rooms.map(service => {
-
                 if (temp_room_type.indexOf(service.room_type) == -1) {
                     temp_room_type.push(service.room_type)
-                    roomData.hostel_id.room_type.push({ type_name: service.room_type })
+                    // console.log(roomData.hostel_id.room_type.find(type => type.type_name === service.room_type))
+                    let roomType = roomData.hostel_id.room_type.find(type => type.type_name === service.room_type)
+                    if (!roomType.type_name) {
+                        roomData.hostel_id.room_type.push({ type_name: service.room_type })
+                    }
                 }
-
-
                 return service.room_services.map(val => {
                     if (temp_service.indexOf(val.service.service_name) == -1) {
                         temp_service.push(val.service.service_name)
-                        roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
+                        // console.log(roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name))
+                        let availabelService = roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name)
+                        if (!availabelService.service_name) {
+                            roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
+                        }
                     }
                 })
             })
         })
     }
-
     hostel.findByIdAndUpdate(roomData.hostel_id._id, roomData.hostel_id, { new: true })
         .then(data => {
-            console.log(data)
+            // console.log(data)
         })
         .catch(err => console.log(err))
 
