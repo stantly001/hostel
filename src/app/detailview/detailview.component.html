@@ -1,53 +1,15 @@
 <div class="search-page">
   <div class="container" style="color:gray">
     <div class="search-grids">
-      <div class="col-md-3 ">
-        <div>
-          <a class="spl-btn-bor rating">{{hostelViewObject?.world_rating}}</a>
-          <span>Superb </span>
-          <a>
-            <i class="fa fa-comment-o"></i>
-            275 Total Reviews
-          </a>
-        </div>
-        <ul class=" clearfix">
-          <li>
-            <span class="">
-              <i class="fa fa-map-marker fa-flip-horizontal rounded"></i>
-            </span>
-            <span class="hwta-rating-factors-label">
-              Perfect
-              <b>Location</b>
-            </span>
-          </li>
-
-          <li>
-            <span class="">
-              <i class="fa fa-user fa-flip-horizontal rounded"></i>
-            </span>
-            <span class="">
-              Superb
-              <b>Staff</b>
-            </span>
-          </li>
-
-          <li>
-            <span class="">
-              <i class="fa fa-magic fa-rotate-180 rounded"></i>
-            </span>
-            <span class="">
-              Fantastic
-              <b>Cleanliness</b>
-            </span>
-          </li>
-        </ul>
+      <div class="col-md-6 ">
+          <ngx-gallery [options]= "galleryOptions" [images]= "hostelViewObject.hostel_id?.images" ></ngx-gallery>
       </div>
     </div>
-    <div class="col-md-9 text-left">
+    <div class="col-md-6 text-left">
       <div>
         <h2>Property Description</h2>
       </div>
-      <p>{{hostelViewObject?.description}}</p>
+      <p>{{hostelViewObject?.hostel_id.property_description}}</p>
       <!-- <p>Undoubtedly the best location in Chennai for a backpacker located near the famous Marina Beach, T Nagar, Kapaleeswarar
         Temple, Express Mall, Theosophical Society, Besant Nagar, Ramakrishna Math, Yoga Mandir and all the famous monuments
         and tourist spots. A Bus station is just outside the hostel taking you to AIRPORT, PONDICHERRY, MAMALLAPURAM, CENTRAL

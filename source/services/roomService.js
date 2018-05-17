@@ -2,6 +2,9 @@ var multer = require('multer')
 var path = require('path');
 var bodyParser = require('body-parser');
 
+//hostelService
+var hs = require('../services/hostelService');
+
 //Mongoose Models
 var room = require('../models/room');
 var hostel = require('../models/hostel');
@@ -139,16 +142,53 @@ function getRoomDetails(req, res) {
  */
 function getRoomDetailsByHostelId(hostelId, req, res) {
     console.log("hostelId-->", hostelId)
-    room.findOne({ hostel_id: hostelId }).populate("hostel_id").populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            console.log("data-->", data)
-            return res.json(data);
+    room.findOne({ hostel_id: hostelId }).populate({ path: 'hostel_id', populate: { path: 'images' } })
+        .populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                var returnData = {};
+                returnData.created_by = data.created_by;
+                returnData.created = data.created;
+                returnData.last_updated = data.last_updated;
+                returnData.floors = data.floors;
+                returnData._id = data._id;
+                returnData.hostel_id = {
+                    _id:data.hostel_id._id,
+                    created:data.hostel_id.created,
+                    last_updated:data.hostel_id.last_updated,
+                    room_type:data.hostel_id.room_type,
+                    available_service:data.hostel_id.available_service,
+                    name:data.hostel_id.name,
+                    country:data.hostel_id.country,
+                    city:data.hostel_id.city,
+                    state:data.hostel_id.state,
+                    floors:data.hostel_id.floors,
+                    property_description:data.hostel_id.property_description,
+                    images:setImages(data),
+                };
+
+                return res.json(returnData);
+            }
+        })
+}
+
+function setImages(data) {
+    var hostelImage = data.hostel_id.images.map(img => {
+        return {
+            _id: img._id,
+            url: img.url,
+            imgBase64: hs.getImgToBase64ByHostel(img.url),
+            name: img.name,
+            hostelId: img.hostelId
         }
     })
+    return hostelImage;
 }
+
+
+
 
 /**
  * 

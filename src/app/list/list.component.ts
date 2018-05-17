@@ -18,15 +18,12 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.defaultsService.getHostels().subscribe(response => {
-    //   console.log("Hostel",response)
-    //   this.hostels=response;
-    // })
-    // this._httpDataService.getAllHostelData().subscribe(
-    //   data => this.hostels = data,
-    //   error => this.errorMessage = <any>error)
+  
   }
 
+  /**
+   * Get Filtered Hostel Data
+   */
   getFilterHostelData() {
     this.activatedRoute.queryParams.subscribe(params => {
       this._queryService.getFilterData(params).subscribe(

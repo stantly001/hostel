@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpdataService } from '../service/httpdata.service';
-
+import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
 @Component({
   selector: 'app-detailview',
   templateUrl: './detailview.component.html',
@@ -12,38 +12,64 @@ export class DetailviewComponent implements OnInit {
   errorMessage: any;
   hostelViewObject: any;
   hostelId: any;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
   constructor(private activateRoute: ActivatedRoute,private _httpDataService:HttpdataService) { }
 
   ngOnInit() {
-    /**
-     * get hostelId from url
-     */
-    this.activateRoute.params.subscribe(res => {
-      this.hostelId = res["hostelId"];
-      console.log(this.hostelId);
-      console.log(res);
-    })
+    this.getParams();
+    this.defaultGallerySettings();
+  }
 
-    /**
-     * Call Function
-     */
-    this.getHostelObjectByHostelId();
+  /**
+   * Default Gallery Settings
+   */
+  defaultGallerySettings(){
+    this.galleryOptions = [
+      {
+        width: '100%',
+        height: '400px',
+        thumbnailsColumns: 4,
+        imageArrows: true
+      }
+    ];
 
   }
   /**
-     * get hostel object By hostelId
+   * Get Params From Url
+   */
+  getParams(){
+    this.activateRoute.params.subscribe(res => {
+      this.hostelId = res["hostelId"];
+      this.getHostelObjectByHostelId(this.hostelId);
+    })
+  }
+
+
+  /**
+     * get hostel Rooms By hostelId
      */
-  getHostelObjectByHostelId() {
-    this._httpDataService.getAllHostelData().subscribe(
-      data => this.hostelViewObject = data.filter(res=>res._id==this.hostelId)[0],
+  getHostelObjectByHostelId(hostelId) {
+    this._httpDataService.getHostelRooms(hostelId).subscribe(
+      data => {
+        this.hostelViewObject = data;
+        this.setHostelImage(data)
+        console.log("data",data)
+      },
       error => this.errorMessage = <any>error)
-    // this.defaultsService.getHostels().subscribe(response => {
-    //  this.hostelViewObject=response.filter(res=>res.id==this.hostelId)[0];
-    //  console.log("hostelView",this.hostelViewObject);
-    //  });
+  }
 
-    
-
-
+   /**
+   * Set Hostel Image
+   */
+  setHostelImage(hostel) {
+    hostel.hostel_id.images.map(img => {
+      return img//{small: img.imgBase64, medium: img.imgBase64, big: img.imgBase64}
+    }).forEach(element => {
+      console.log(element);
+      element.small = element.imgBase64,
+        element.medium = element.imgBase64,
+        element.big = element.imgBase64
+    });
   }
 }
