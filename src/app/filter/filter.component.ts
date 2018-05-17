@@ -42,7 +42,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.getFilterData();
-  
+
     // this.availability = false;
     // this.isPrice = false;
     // this.isRating = false;
@@ -62,7 +62,7 @@ export class FilterComponent implements OnInit {
     //   this.locations = response.location;
     //   this.payments = response.payment;
     //   this.prices = response.price[0];
-    
+
     // this.priceByMinMax.min=100;
     // this.priceByMinMax.max=1000;
     //   this.properties = response.property;
@@ -108,7 +108,7 @@ export class FilterComponent implements OnInit {
       data => {
         this.priceRange = [data.hostel.min, data.hostel.max];
         this.priceByMinMax = data.hostel;
-        // this.setFilters(data);
+        this.setFilters(data);
         this.filters = data.filterData
       },
       error => this.errorMessage = <any>error)
@@ -143,27 +143,40 @@ export class FilterComponent implements OnInit {
   }
 
 
-// setFilters(filter){
-//   console.log("filter",filter)
-//   this.activatedRoute.queryParams.subscribe(res=>{
-//     if(res.priceMax&&res.priceMin){
-//      this.priceRange = [res.priceMin, res.priceMax];
-//    }else if(res.priceMax){
-//      this.priceRange = [filter.hostel.min, res.priceMax];
-//    }else if(res.priceMin){
-//      this.priceRange = [res.priceMin, filter.hostel.max];
-//    }else{
-//      this.priceRange = [filter.hostel.min, filter.hostel.max];
-//    }
-//    filter.filterData.forEach(element => {
-//      if(element.filterTypes){
-//        element.filterTypes.forEach(elem => {
-//          if(elem.filter_name==)
-//        });
-//      }
-//    });
-//   })
-// }
+  /**
+   * 
+   * @param filter 
+   * Set Filters
+   */
+  setFilters(filter) {
+    this.activatedRoute.queryParams.subscribe(res => {
+      if (res.priceMax && res.priceMin) {
+        this.priceRange = [res.priceMin, res.priceMax];
+      } else if (res.priceMax) {
+        this.priceRange = [filter.hostel.min, res.priceMax];
+      } else if (res.priceMin) {
+        this.priceRange = [res.priceMin, filter.hostel.max];
+      } else {
+        this.priceRange = [filter.hostel.min, filter.hostel.max];
+      }
+      filter.filterData.forEach(element => {
+        Object.keys(res).forEach(elem => {
+          if (element.field_name == elem) {
+            element.filter_types.forEach(filterElem => {
+              let queryParamValue=res[elem];
+              let queryArray = queryParamValue.replace(/(^"|"$)/g, '').split(',');
+              queryArray.forEach(el => {
+                if(filterElem.filter_name==el){
+                  filterElem.selectedStatus=true;
+              }
+              });
+              
+            });
+          }
+        });
+      });
+    })
+  }
 
 
 
