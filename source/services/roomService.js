@@ -154,41 +154,11 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
                 returnData.last_updated = data.last_updated;
                 returnData.floors = data.floors;
                 returnData._id = data._id;
-                returnData.hostel_id = {
-                    _id:data.hostel_id._id,
-                    created:data.hostel_id.created,
-                    last_updated:data.hostel_id.last_updated,
-                    room_type:data.hostel_id.room_type,
-                    available_service:data.hostel_id.available_service,
-                    name:data.hostel_id.name,
-                    country:data.hostel_id.country,
-                    city:data.hostel_id.city,
-                    state:data.hostel_id.state,
-                    floors:data.hostel_id.floors,
-                    property_description:data.hostel_id.property_description,
-                    images:setImages(data),
-                };
-
+                returnData.hostel_id=hs.setHostelDetails(data.hostel_id)
                 return res.json(returnData);
             }
         })
 }
-
-function setImages(data) {
-    var hostelImage = data.hostel_id.images.map(img => {
-        return {
-            _id: img._id,
-            url: img.url,
-            imgBase64: hs.getImgToBase64ByHostel(img.url),
-            name: img.name,
-            hostelId: img.hostelId
-        }
-    })
-    return hostelImage;
-}
-
-
-
 
 /**
  * 
