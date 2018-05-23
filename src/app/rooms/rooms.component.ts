@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,Input,AfterViewInit } from '@angular/core';
+import { Component, OnInit, NgZone, Input, AfterViewInit } from '@angular/core';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload/src/interfaces';
 import { HttpdataService } from '../service/httpdata.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -35,7 +35,7 @@ export class RoomsComponent implements OnInit {
       }
     })
   }
-  
+
   ngOnInit() {
     this.getServices();
     this.getAllHostels();
@@ -85,7 +85,7 @@ export class RoomsComponent implements OnInit {
       1, 2, 3, 4, 5
     ];
   }
- 
+
   /**
     * Get All Services
     */
@@ -95,8 +95,6 @@ export class RoomsComponent implements OnInit {
       data => {
         this.services = data;
         this.selectedServices = data;
-        console.log("selectedServices", this.selectedServices);
-        console.log("service", this.services);
       }),
       error => { this.errorMessage = <any>error };
   }
@@ -110,8 +108,6 @@ export class RoomsComponent implements OnInit {
       error => this.errorMessage = <any>error)
   }
 
-
-
   /**
    * 
    * @param id 
@@ -120,18 +116,15 @@ export class RoomsComponent implements OnInit {
   getRoomDetailsByHostelId(id) {
     this._httpDataService.getRoomDetailsByHostelId(id).subscribe(data => {
       if (Object.keys(data).length != 0) {
-        console.log("DSFSFSFS", data)
         this.setFloor(data);
         this.hostel = data;
       } else {
         this._httpDataService.getHostelById(id).subscribe(data => {
-          console.log("data", data)
           this.hostel.hostel_id = data;
           this.setFloor(this.hostel);
         })
       }
       // this.floor = data.floors[0];
-      console.log('hostel', data);
     }), error => {
       this.errorMessage = error;
     };
@@ -145,14 +138,11 @@ export class RoomsComponent implements OnInit {
    */
   selectFloor(value) {
     this.floor = {};
-    console.log("Floors", this.hostel.floors);
     let temp = this.hostel.floors.find((floor) => floor.floor_no == value);
-    console.log("temp", temp);
     if (temp) {
       this.floor = Object.assign({}, temp);
       // this.floor = temp;
     } else {
-      console.log("test")
       this.floor = { floor_no: value, rooms: [] };
     }
     //hostel.floors.push({floor_no: value,rooms:[]});
@@ -164,7 +154,6 @@ export class RoomsComponent implements OnInit {
    * Set Floor
    */
   setFloor(hostel) {
-    console.log("Hostel ID", hostel);
     this.floorsList = [];
     let floorCount = hostel.hostel_id.floors;
     let parsedFloorCount = Number(floorCount);
@@ -173,11 +162,7 @@ export class RoomsComponent implements OnInit {
         this.floorsList.push(i + 1);
       }
     }
-    console.log("Hostel Obj", hostel);
   }
-
-
-
 
   /**
    * 
@@ -209,7 +194,6 @@ export class RoomsComponent implements OnInit {
     }
   }
 
-
   /**
    * 
    * @param room 
@@ -219,7 +203,6 @@ export class RoomsComponent implements OnInit {
   deleteService(room, roomIndex) {
     room.room_services.splice(roomIndex, 1)
   }
-
 
   /**
    * 
@@ -249,8 +232,6 @@ export class RoomsComponent implements OnInit {
     }
   }
 
-
-
   /**
    * Apply changes to selected floor
    */
@@ -260,12 +241,10 @@ export class RoomsComponent implements OnInit {
       hostel.floors.push(newFloor);
       this.floor = {};
     } else {
-      temp = newFloor;
+      hostel.floors = newFloor;
       this.floor = {};
     }
-    console.log("hostel-->", hostel)
   }
-
 
   /**
    * 
@@ -276,9 +255,6 @@ export class RoomsComponent implements OnInit {
     room.room_services.push({})
   }
 
-
-
-
   /**
    * 
    * @param room 
@@ -287,7 +263,6 @@ export class RoomsComponent implements OnInit {
    */
   saveHostel(room, floor) {
     // this.applyFloor(hostel, floor);
-    console.log("Hostel", room);
     let user = JSON.parse(sessionStorage.getItem("user"));
     room.created_by = user.data;
     this.newHostel = false;
@@ -316,7 +291,6 @@ export class RoomsComponent implements OnInit {
    */
   selectViewType(viewType, room) {
     room.view_type = viewType;
-    console.log("RoomType", room);
   }
 
   /**
@@ -328,10 +302,10 @@ export class RoomsComponent implements OnInit {
   generateRoomNo(number, length, floor) {
     var str = '' + floor.floor_no;
     while (str.length < length) {
-      if(number<10){
-      str = str+"0"+ number;
-      }else{
-        str = str+ number;
+      if (number < 10) {
+        str = str + "0" + number;
+      } else {
+        str = str + number;
       }
     }
     return str;

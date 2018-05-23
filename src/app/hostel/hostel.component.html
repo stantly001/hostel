@@ -9,9 +9,7 @@
   </ul> -->
   <div class="tab-content">
     <div id="hostel" class="tab-pane fade in active">
-      <div class="pull-right add-button" [hidden]="clicked">
-        <button class="btn btn-primary btn-sm" (click)="clicked=true;">Add</button>
-      </div>
+      
       <div class="table table-responsive" [hidden]="clicked">
         <table class="table table-bordered">
           <thead>
@@ -22,7 +20,11 @@
               <th>State</th>
               <th>Street</th>
               <th>Email</th>
-              <th>Action</th>
+              <th>
+                <div class="pull-right add-button" [hidden]="clicked">
+                  <button class="btn btn-primary btn-sm" (click)="clicked=true;">Add</button>
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody>

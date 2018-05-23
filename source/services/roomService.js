@@ -13,7 +13,7 @@ var hostel = require('../models/hostel');
  */
 function setRoomData(res) {
     var roomData = new room({
-        hostel_id: filterHostelModel(res.hostel_id),//res.hostel_id,
+        hostel_id: filterHostelModel(res.hostel_id),
         floors: res.floors,
         created_by: filterCreatedBy(res.created_by)
     })
@@ -138,13 +138,11 @@ function getRoomDetails(req, res) {
  * Get RoomDetails ByHostelId
  */
 function getRoomDetailsByHostelId(hostelId, req, res) {
-    console.log("hostelId-->", hostelId)
     room.findOne({ hostel_id: hostelId }).populate("hostel_id").populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
-            console.log("data-->", data)
             return res.json(data);
         }
     })
@@ -160,14 +158,14 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
 function updateRoom(id, roomData, res) {
     var temp_service = [];
     var temp_room_type = []
-    if (roomData.floors) {
+    if (roomData.floors.length > 0) {
         roomData.floors.map(room => {
             return room.rooms.map(service => {
                 if (temp_room_type.indexOf(service.room_type) == -1) {
                     temp_room_type.push(service.room_type)
                     // console.log(roomData.hostel_id.room_type.find(type => type.type_name === service.room_type))
                     let roomType = roomData.hostel_id.room_type.find(type => type.type_name === service.room_type)
-                    if (!roomType.type_name) {
+                    if (roomType && !roomType.type_name) {
                         roomData.hostel_id.room_type.push({ type_name: service.room_type })
                     }
                 }
@@ -176,7 +174,7 @@ function updateRoom(id, roomData, res) {
                         temp_service.push(val.service.service_name)
                         // console.log(roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name))
                         let availabelService = roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name)
-                        if (!availabelService.service_name) {
+                        if (availabelService && !availabelService.service_name) {
                             roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
                         }
                     }

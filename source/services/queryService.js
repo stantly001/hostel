@@ -2,16 +2,44 @@ var hostel = require('../models/hostel');
 var room = require('../models/room');
 var hs = require('../services/hostelService');
 var isEmpty = require('is-empty');
+// var smsTwilio = require('twilio');
 /**
  * 
  * @param {*} params 
  * @param {*} res 
  * Filter By Queries
  */
+
+
+
+
+
 function findSelectedHostelByQuery(params, res) {
-    // Object.keys(params).forEach(function (key) {
-    //     console.log(params[key].replace(/"/g, "").split(','))
+    //var client = smsTwilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);//
+
+
+    // var client = new smsTwilio('ACe0ae3f23dcb9e985e8a7ba34cc95bbfb', '5aed905241510a6d5bcddc26972cf611');
+    
+    
+    // console.log("Client Id", client)
+    // // Send the text message.
+    // client.sendSms({
+    //     to: '+919952790466',
+    //     from: '+19045310815',
+    //     body: 'Hello from Twilio!'
     // });
+
+    // client.api.messages
+    //     .create({
+    //         body: 'Hello from Twilio!',
+    //         to: '+919952790466',
+    //         from: '+19045310815',
+    //     }).then(function (data) {
+    //         console.log('Administrator notified');
+    //     }).catch(function (err) {
+    //         console.error('Could not notify administrator');
+    //         console.error(err);
+    //     });
 
     var roomType = removeSpecialChar(params['Room Type'])
     var roomService = removeSpecialChar(params['Room Services'])
