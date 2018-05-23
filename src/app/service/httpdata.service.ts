@@ -241,6 +241,17 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * 
+   * @param room 
+   * Book Room
+   */
+  bookRoom(room){
+    return this.http.post(this.baseUrl + "/booking/saveBooking", room)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   
   /**
    * 

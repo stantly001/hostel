@@ -15,11 +15,11 @@
       <h3>Check Availability</h3>
       <div class="col-md-4">
         <label for="">Date</label>
-        <ng-datepicker [(ngModel)]="checkInDate" #datePicker></ng-datepicker>
+        <ng-datepicker [(ngModel)]="bookingObj.checkInDate" #datePicker></ng-datepicker>
       </div>
       <div class="col-md-4">
         <label for="">Select Floors</label>
-        <select class="sel form-control" [(ngModel)]="floor" (change)="setHostelRooms(floor)">
+        <select class="sel form-control" [(ngModel)]="floor" (change)="selectFloor(floor, bookingObj)">
           <option value="" aria-hidden="">choose</option>
           <option *ngFor="let floor of hostelViewObject?.floors" [ngValue]="floor">{{floor.floor_no}}</option>
         </select>
@@ -30,7 +30,7 @@
         <label>Rooms</label>
         <ul class="nav nav-tabs" *ngIf="floor">
           <li *ngFor="let room of rooms" [class.active]="room.active">
-            <a (click)="selectRoom(room)">{{room.room_number}}</a>
+            <a (click)="selectRoom(bookingObj, room)">{{room.room_number}}</a>
           </li>
         </ul>
         <div>
@@ -50,9 +50,17 @@
             </thead>
             <tbody>
               <tr>
-                <td>{{selectedRoom?.room_type}}</td>
-                <td>{{selectedRoom?.guest}}</td>
-                <td>{{selectedRoom?.price}}</td>
+                <td>{{bookingObj.selectedRoom?.room_type}}</td>
+                <td>
+                  <div *ngIf="bookingObj.selectedRoom?.room_type=='Single Room'||bookingObj.selectedRoom?.room_type=='Double Room'">{{bookingObj.selectedRoom?.guest}}</div>
+                  <div *ngIf="bookingObj.selectedRoom?.room_type=='Twin Room'">
+                    <select name="" id="" [(ngModel)]="bookingObj.selectedRoom.guest">
+                      <option value="" aria-hidden="true">Choose Guest</option>
+                      <option *ngFor="let guest of bookingObj.selectedRoom?.guests"  [ngValue]="guest">{{guest}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>{{bookingObj.selectedRoom?.price}}</td>
               </tr>
             </tbody>
           </table>
@@ -71,10 +79,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let roomService of selectedRoom?.room_services">
+              <tr *ngFor="let roomService of bookingObj.selectedRoom?.room_services">
                 <td>
                   <div class="single-star-bottom booking-service" *ngIf="roomService?.free_service">
-                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="">
+                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="" [(ngModel)]="roomService.free_service">
                     <label for="{{roomService?.service.service_name}}">
                       <span></span>
                       <span>{{roomService?.service.service_name}}</span>
@@ -83,7 +91,7 @@
                 </td>
                 <td>
                   <div class="single-star-bottom booking-service" *ngIf="!roomService?.free_service&&roomService?.service.service_name!='Base Service'">
-                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="">
+                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="" [(ngModel)]="roomService.paidService">
                     <label for="{{roomService?.service.service_name}}">
                       <span></span>
                       <span>{{roomService?.service.service_name}}</span>
@@ -93,7 +101,10 @@
               </tr>
             </tbody>
           </table>
-          <div class="pull-right"><button class="btn btn-default" (click)="selectBookingRoom(selectedRoom)">Apply&Continue</button></div>
+          <div class="pull-right">
+            <button class="btn btn-default" (click)="setSelectedRoom(bookingObj,floor)">Continue</button>
+            <button class="btn btn-default" (click)="selectBookingRoom(bookingObj,floor)">Apply</button>
+          </div>
         </div>
 
         <div>
@@ -128,7 +139,7 @@
 
         </div>
         <div class="pull-right">
-          <button class="btn btn-danger">Book Now</button>
+          <button class="btn btn-danger" (click)="bookRoom(floor,bookingObj)">Book Now</button>
         </div>
       </div>
     </div>

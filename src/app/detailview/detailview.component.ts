@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpdataService } from '../service/httpdata.service';
 import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
+// import { userInfo } from 'os';
 @Component({
   selector: 'app-detailview',
   templateUrl: './detailview.component.html',
@@ -10,6 +11,12 @@ import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
 
 export class DetailviewComponent implements OnInit {
 
+  tempFloorArray: any[];
+  roomsArray: any[];
+  hostelFloors: any;
+  hostelRooms: any;
+  user: string;
+  total: any;
   tempRooms: any;
   selectedRooms: any;
   selectedRoom: any;
@@ -27,15 +34,21 @@ export class DetailviewComponent implements OnInit {
   guest = 0;
   roomGuest = 0;
   Double_no_of_rooms = 0;
+  bookingObj = { floor: [] };
   @ViewChild("datePicker") datePicker: any;
   constructor(private activateRoute: ActivatedRoute, private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
     this.selectedRooms = [];
     this.tempRooms = [];
+    this.hostelRooms = [];
+    this.hostelFloors = [];
     this.checkInDate = new Date();
     this.getParams();
     this.defaultGallerySettings();
+    this.user = sessionStorage.getItem("user");
+    this.roomsArray = []
+    this.tempFloorArray = []
 
   }
 
@@ -73,10 +86,9 @@ export class DetailviewComponent implements OnInit {
         this.hostelViewObject = data;
         this.floor = data.floors[0];
         if (this.floor) {
-          this.setHostelRooms(this.floor);
+          this.selectFloor(this.floor, this.bookingObj);
         }
-        this.setHostelImage(data)
-        console.log("data", data)
+        this.setHostelImage(data);
       },
       error => this.errorMessage = <any>error)
   }
@@ -88,7 +100,6 @@ export class DetailviewComponent implements OnInit {
     hostel.hostel_id.images.map(img => {
       return img//{small: img.imgBase64, medium: img.imgBase64, big: img.imgBase64}
     }).forEach(element => {
-      console.log(element);
       element.small = element.imgBase64,
         element.medium = element.imgBase64,
         element.big = element.imgBase64
@@ -102,10 +113,10 @@ export class DetailviewComponent implements OnInit {
    * @param floor 
    * Set Hostel rooms
    */
-  setHostelRooms(floor) {
-    console.log("floor", floor)
+  selectFloor(floor, bookingObj) {
     this.rooms = floor.rooms;
-    this.selectRoom(this.rooms[0]);
+    bookingObj.select_floor = floor
+    this.selectRoom(bookingObj, this.rooms[0]);
   }
 
   /**
@@ -113,11 +124,8 @@ export class DetailviewComponent implements OnInit {
    * @param room 
    * Select Room
    */
-  selectRoom(room) {
-    console.log("room", room)
-    this.selectedRoom = room;
-    console.log("selected Room", this.selectedRoom)
-    // console.log("services",room.room_services)
+  selectRoom(bookingObj, room) {
+    bookingObj.selectedRoom = room;
     this.rooms.forEach(element => {
       if (room._id == element._id) {
         element.active = true;
@@ -126,13 +134,24 @@ export class DetailviewComponent implements OnInit {
       }
     });
     if (room.room_type == "Single Room") {
-      this.selectedRoom.guest = 1;
+      bookingObj.selectedRoom.guest = 1;
     } else if (room.room_type == "Double Room") {
-      this.selectedRoom.guest = 2;
+      bookingObj.selectedRoom.guest = 2;
+    } else {
+      let roomBeds = bookingObj.selectedRoom.no_of_beds;
+      if (!bookingObj.selectedRoom.guests) {
+        bookingObj.selectedRoom.guests = [];
+      }
+      if (!isNaN(roomBeds)) {
+        for (let i = 0; i < roomBeds; i++) {
+          bookingObj.selectedRoom.guests.push(i + 1);
+        }
+      }
+  
     }
     room.room_services.forEach(element => {
       if (element.service.service_name == "Base Service") {
-        this.selectedRoom.price = element.base_amount;
+        bookingObj.selectedRoom.price = element.base_amount;
       }
     });
   }
@@ -140,47 +159,129 @@ export class DetailviewComponent implements OnInit {
 
   /**
    * 
+   * @param bookingObj 
+   * @param floor 
+   * Set Selected Room
+   */
+  setSelectedRoom(bookingObj, floor) {
+    if (bookingObj.select_floor._id) {
+      var tempRoom = {
+        selectedRoom: bookingObj.selectedRoom,
+        floor_id: bookingObj.select_floor._id,
+      }
+
+
+      let findIndexByFloorId = this.tempFloorArray.indexOf(tempRoom.floor_id)//this.roomsArray.findIndex(val => val.floor_id === bookingObj.select_floor._id);
+      //let objByFloorIndex = this.roomsArray[findIndexByFloorId]
+
+      if (findIndexByFloorId == -1) {
+        let paid_services = [];
+
+        tempRoom.selectedRoom.room_services.forEach(element => {
+          console.log("element", element)
+          if (element.paidService) {
+            if (!tempRoom.selectedRoom.paid_service) {
+              tempRoom.selectedRoom.paid_service = [];
+            }
+            tempRoom.selectedRoom.paid_service.push({
+              service: element.service._id,
+              service_price: element.amount_per_month
+            })
+          } if (element.free_service) {
+            if (!tempRoom.selectedRoom.free_service) {
+              tempRoom.selectedRoom.free_service = [];
+            }
+            tempRoom.selectedRoom.free_service.push({
+              service: element.service._id,
+              service_price: element.amount_per_month
+            })
+          }
+        });
+
+        this.tempFloorArray.push(tempRoom.floor_id)
+        bookingObj.floor.push({ floor_id: tempRoom.floor_id, floor_no: bookingObj.select_floor.floor_no, rooms: [tempRoom.selectedRoom] })
+
+
+      } else {
+        findIndexByFloorId = bookingObj.floor.findIndex(val => val.floor_id === bookingObj.select_floor._id);
+        console.log(findIndexByFloorId)
+        let objByFloorIndex = bookingObj.floor[findIndexByFloorId]
+        bookingObj.floor.forEach(val => {
+          if (val.floor_id == bookingObj.select_floor._id) {
+            tempRoom.selectedRoom.room_services.forEach(element => {
+              if (element.paidService) {
+                if (!tempRoom.selectedRoom.paid_service) {
+                  tempRoom.selectedRoom.paid_service = [];
+                }
+                tempRoom.selectedRoom.paid_service.push({
+                  service: element.service._id,
+                  service_price: element.amount_per_month
+                })
+              } if (element.free_service) {
+                if (!tempRoom.selectedRoom.free_service) {
+                  tempRoom.selectedRoom.free_service = [];
+                }
+                tempRoom.selectedRoom.free_service.push({
+                  service: element.service._id,
+                  service_price: element.amount_per_month
+                })
+              }
+            });
+            val.rooms.push(tempRoom.selectedRoom)
+          }
+        })
+
+      }
+    }
+  }
+
+
+
+
+
+
+  /**
+   * 
    * @param selectedRoom 
    * Select Booking Room
    */
-  selectBookingRoom(selectedRoom) {
-    let groupByName = {};
-    this.tempRooms.push(selectedRoom);
-    this.selectedRooms = []
-    // if (this.selectedRooms.length == 0) {
-    // this.selectedRooms.push(bkroom);
-    this.tempRooms.forEach(function (a) {
-      groupByName[a.room_type] = groupByName[a.room_type] || [];
-      groupByName[a.room_type].push({
-        _id: a._id, active: a.active, guest: a.guest, is_active: a.is_active, no_of_beds: a.no_of_beds
-        , room_number: a.room_number, room_type: a.room_type,room_services:a.room_services
+  selectBookingRoom(bookingObj, floor) {
+    let groupByRoomType = {};
+    this.selectedRooms = [];
+    bookingObj.floor.forEach(element => {
+      element.rooms.forEach(function (room) {
+        groupByRoomType[room.room_type] = groupByRoomType[room.room_type] || [];
+        groupByRoomType[room.room_type].push({
+          _id: room._id, active: room.active, guest: room.guest, is_active: room.is_active, no_of_beds: room.no_of_beds
+          , room_number: room.room_number, room_type: room.room_type, room_services: room.room_services
+        });
       });
     });
-    Object.keys(groupByName).forEach(function (key) {
+
+    Object.keys(groupByRoomType).forEach(function (key) {
       var replaced = key.replace(' ', '');
       if (key !== replaced) {
-        groupByName[replaced] = groupByName[key];
-        delete groupByName[key];
+        groupByRoomType[replaced] = groupByRoomType[key];
+        delete groupByRoomType[key];
       }
     });
-    console.log("groupByName", groupByName);
-    let bkroom = this.setBookingRoom(groupByName);
+    let bkroom = this.setBookingRoom(groupByRoomType);
     this.selectedRooms = bkroom;
-    console.log("", this.selectedRooms)
-    // } 
-    // this.selectedRooms.map(data => {
-    //   if (data.room_type == bkroom.room_type) {
-    //     data.room_type = bkroom.room_type;
-    //     data.no_of_rooms = bkroom.no_of_rooms;
-    //     data.guest = bkroom.guest;
-    //   } else {
-    //     this.selectedRooms.push(bkroom);
-    //   }
-    // })
   }
+
+  /**
+   * Total Price
+   */
   totalRoomPrice() {
-    return this.selectedRooms.reduce((sum, val) => sum + val.total_price, 0);
+    this.total = this.selectedRooms.reduce((sum, val) => sum + val.total_price, 0);
+    return this.total;
   }
+
+  /**
+   * 
+   * @param room 
+   * Set Booking Room
+   */
   setBookingRoom(room) {
     let bookingRoom = [];
     let singleRoom;
@@ -188,18 +289,19 @@ export class DetailviewComponent implements OnInit {
     if (room.SingleRoom) {
       let no_of_rooms = room.SingleRoom.length;
       let total_room_price = 0;
-      let paid_service=0;
-      let total_price=0;
+      let paid_service = 0;
+      let total_price = 0;
+      let guest = 0;
       room.SingleRoom.map(data => {
         data.room_services.map(res => {
           if (res.base_amount) {
             total_room_price += res.base_amount;
           }
-          if (res.amount_per_month) {
-            paid_service += res.amount_per_month;
+          if (res.paidService) {
+            paid_service += res.amount_per_month ? res.amount_per_month : 0;
           }
         })
-        let guest = 0;
+
 
         guest += data.guest;
         singleRoom = {
@@ -207,76 +309,115 @@ export class DetailviewComponent implements OnInit {
           no_of_rooms: no_of_rooms,
           guest: guest,
           total_room_price: total_room_price,
-          paid_service:paid_service,
-          total_price:total_room_price+paid_service
+          paid_service: paid_service,
+          total_price: total_room_price + paid_service
         }
       })
       bookingRoom.push(singleRoom);
-      console.log("booking Room", bookingRoom)
-      // return bookingRoom;
     } if (room.DoubleRoom) {
       let total_room_price = 0;
-      let paid_service=0;
-      let total_price=0;
+      let paid_service = 0;
+      let total_price = 0;
+      let guest = 0;
       let no_of_rooms = room.DoubleRoom.length;
       room.DoubleRoom.map(data => {
         data.room_services.map(res => {
           if (res.base_amount) {
             total_room_price += res.base_amount;
           }
-          if (res.amount_per_month) {
-            paid_service += res.amount_per_month;
+          if (res.paidService) {
+            paid_service += res.amount_per_month ? res.amount_per_month : 0;
           }
         })
-        let guest = 0;
         guest += data.guest;
         doubleRoom = {
           room_type: data.room_type,
           no_of_rooms: no_of_rooms,
           guest: guest,
           total_room_price: total_room_price,
-          paid_service:paid_service,
-          total_price:total_room_price+paid_service
+          paid_service: paid_service,
+          total_price: total_room_price + paid_service
         }
       })
       bookingRoom.push(doubleRoom);
-      console.log("booking Room", bookingRoom)
-
     }
     return bookingRoom;
-
-
-
-    // let total_room_price=0;
-    // total_room_price+=room.room_services.map(data=>{
-    //   return data.base_amount;
-    // })
-    // if (room.room_type == "Single Room") {
-    //   this.guest += room.guest;
-    //   this.no_of_rooms++;
-    //   let bookingRoom = {
-    //     room_type: room.room_type,
-    //     no_of_rooms: this.no_of_rooms,
-    //     guest: this.guest,
-    //     total_room_price:total_room_price
-    //   }
-    //   return bookingRoom;
-    // }
-    // if (room.room_type == "Double Room") {
-    //   this.roomGuest += room.guest;
-    //   this.Double_no_of_rooms = this.Double_no_of_rooms + 2;
-    //   let bookingRoom = {
-    //     room_type: room.room_type,
-    //     no_of_rooms: this.Double_no_of_rooms,
-    //     guest: this.roomGuest
-    //   }
-    //   return bookingRoom;
-    // }
-    // console.log("guest",guest);
-    // console.log("no_of_rooms",no_of_rooms)
-    // console.log("booking Room",bookingRoom)
-    // // this.selectedRooms.push(bookingRoom);
-    // console.log("selectedRooms",this.selectedRooms)
   }
+
+
+  /**
+   * 
+   * @param floor 
+   * @param bookingObj
+   * Book Room 
+   */
+  bookRoom(floor, bookingObj) {
+    bookingObj.floor.forEach(element => {
+      console.log("elem", element)
+      delete element.floor_id
+      element.rooms.forEach(elem => {
+        if (elem.guest) {
+          elem.remainingBeds = elem.no_of_beds - elem.guest;
+          if (element.remainingBeds == 0) {
+            element.roomStatus = "completed"
+          }
+        }
+        delete elem._id;
+        delete elem.is_active;
+        delete elem.active;
+        delete elem.no_of_beds;
+        delete elem.guest;
+        delete elem.view_type;
+        delete elem.room_services
+        if (elem.paid_service && elem.paid_service.length == 0) {
+          delete elem.paid_service
+        }
+        if (elem.free_service && elem.free_service.length == 0) {
+          delete elem.free_service
+        }
+      });
+    });
+
+    let hostelBookingObj = {
+      hostel: this.hostelViewObject,
+      floor: bookingObj.floor,
+    }
+
+    hostelBookingObj.floor.forEach(element => {
+      let unCompleted = false;
+      element.forEach(elem => {
+        if (elem.roomStatus != "completed") {
+          unCompleted = true;
+        } 
+      });
+      if (unCompleted) {
+        element.floorStatus = "completed"
+      }else{
+        element.floorStatus = ""
+      }
+    });
+
+
+
+    var data = {
+      hostel_id: this.hostelViewObject.hostel_id._id,
+      room_id: this.hostelViewObject._id,
+      floors: bookingObj.floor,
+      total_price: this.total,
+      created_by: this.user
+    }
+  
+    this._httpDataService.bookRoom(data).subscribe(
+      data => {
+      },
+      error => this.errorMessage = <any>error)
+
+  }
+
+
+
+
+
+
 
 }

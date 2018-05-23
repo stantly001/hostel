@@ -1,12 +1,12 @@
 var bookingService = require('../services/bookingService')
 
 function saveBooking(req, res) {
-    return bookingService.saveBooking(req, res)
+    var booking_detail = req.body
+    return bookingService.saveBooking(booking_detail, res)
 }
 
 function getAllBooking(req, res) {
-    var booking_detail = req.body
-    return bookingService.getAllBooking(booking_detail, res)
+    return bookingService.getAllBooking(req, res)
 }
 
 var bookingController = {

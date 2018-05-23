@@ -20,7 +20,7 @@ var booking = new Schema({
     floors: [{
         floor_no: Number,
         rooms: [{
-            room_no: {
+            room_number: {
                 type: Number
             },
             room_type: {
