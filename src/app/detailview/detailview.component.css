@@ -60,3 +60,8 @@ flag.flag-au {
     margin-top: -2px;
 
 }
+.booking-service{
+    margin:0 !important;
+    padding: 0 !important;
+    border-bottom:none !important;
+}

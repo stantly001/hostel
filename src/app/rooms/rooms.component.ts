@@ -257,6 +257,20 @@ export class RoomsComponent implements OnInit {
 
   /**
    * 
+   * @param hostel 
+   * Remove Base64
+   */
+  removeBase64(hostel){
+    hostel.images.forEach(element => {
+      if(element.imgBase64){
+      delete element.imgBase64; 
+      }
+    });
+  }
+
+
+  /**
+   * 
    * @param room 
    * @param floor 
    * Save Hostel
@@ -267,6 +281,7 @@ export class RoomsComponent implements OnInit {
     room.created_by = user.data;
     this.newHostel = false;
     if (room._id) {
+      this.removeBase64(room.hostel_id);
       return this._httpDataService.updateRoom(room).subscribe(data => {
         // this.getAllRooms();
         console.log(data);
@@ -275,6 +290,7 @@ export class RoomsComponent implements OnInit {
         error => this.errorMessage = <any>error)
 
     } else {
+      this.removeBase64(room.hostel_id);
       return this._httpDataService.saveRoom(room).subscribe(data => {
         // this.getAllRooms();
         console.log(data);

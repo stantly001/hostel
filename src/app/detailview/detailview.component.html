@@ -1,74 +1,149 @@
 <div class="search-page">
   <div class="container" style="color:gray">
     <div class="search-grids">
-      <div class="col-md-3 ">
-        <div>
-          <a class="spl-btn-bor rating">{{hostelViewObject?.world_rating}}</a>
-          <span>Superb </span>
-          <a>
-            <i class="fa fa-comment-o"></i>
-            275 Total Reviews
-          </a>
-        </div>
-        <ul class=" clearfix">
-          <li>
-            <span class="">
-              <i class="fa fa-map-marker fa-flip-horizontal rounded"></i>
-            </span>
-            <span class="hwta-rating-factors-label">
-              Perfect
-              <b>Location</b>
-            </span>
-          </li>
-
-          <li>
-            <span class="">
-              <i class="fa fa-user fa-flip-horizontal rounded"></i>
-            </span>
-            <span class="">
-              Superb
-              <b>Staff</b>
-            </span>
-          </li>
-
-          <li>
-            <span class="">
-              <i class="fa fa-magic fa-rotate-180 rounded"></i>
-            </span>
-            <span class="">
-              Fantastic
-              <b>Cleanliness</b>
-            </span>
-          </li>
-        </ul>
+      <div class="col-md-6 " *ngIf="hostelViewObject">
+        <ngx-gallery [options]="galleryOptions" [images]="hostelViewObject?.hostel_id.images"></ngx-gallery>
       </div>
     </div>
-    <div class="col-md-9 text-left">
+    <div class="col-md-6 text-left">
       <div>
-        <h2>Property Description</h2>
+        <h3>Property Description</h3>
       </div>
-      <p>{{hostelViewObject?.description}}</p>
-      <!-- <p>Undoubtedly the best location in Chennai for a backpacker located near the famous Marina Beach, T Nagar, Kapaleeswarar
-        Temple, Express Mall, Theosophical Society, Besant Nagar, Ramakrishna Math, Yoga Mandir and all the famous monuments
-        and tourist spots. A Bus station is just outside the hostel taking you to AIRPORT, PONDICHERRY, MAMALLAPURAM, CENTRAL
-        STATION AND ALL OTHER PLACES OF IMPORTANCE at unbelievable prices.Chennai being a non party City we cater spiritual
-        and silence seeking tourists and students. Our facilities include Free WiFi - Fully AC dorms - Great location - Spacious
-        lockers - Clean toilets – Security cameras – TV Room -paid laundry - Free bottled drinking water - Money exchange
-        - comfortable common areas. By staying with us you will save a lot of money on commuting expenses as we have a Bus
-        depot outside the hostel.</p> -->
-    </div>
-
-    <div class="col-md-12">
-      <div>
-        <span>Read All Reviews</span>
-      </div>
-      <div>
-        <img src="assets/images/13.jpg" class="img-responsive" />
-      </div>
+      <p>{{hostelViewObject?.hostel_id.property_description}}</p>
     </div>
     <div class="col-md-12">
       <h3>Check Availability</h3>
-      <table class="table">
+      <div class="col-md-4">
+        <label for="">Date</label>
+        <ng-datepicker [(ngModel)]="bookingObj.checkInDate" #datePicker></ng-datepicker>
+      </div>
+      <div class="col-md-4">
+        <label for="">Select Floors</label>
+        <select class="sel form-control" [(ngModel)]="floor" (change)="selectFloor(floor, bookingObj)">
+          <option value="" aria-hidden="">choose</option>
+          <option *ngFor="let floor of hostelViewObject?.floors" [ngValue]="floor">{{floor.floor_no}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div>
+        <label>Rooms</label>
+        <ul class="nav nav-tabs" *ngIf="floor">
+          <li *ngFor="let room of rooms" [class.active]="room.active">
+            <a (click)="selectRoom(bookingObj, room)">{{room.room_number}}</a>
+          </li>
+        </ul>
+        <div>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>
+                  Room Type
+                </th>
+                <th>
+                  Guests
+                </th>
+                <th>
+                  Price
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{bookingObj.selectedRoom?.room_type}}</td>
+                <td>
+                  <div *ngIf="bookingObj.selectedRoom?.room_type=='Single Room'||bookingObj.selectedRoom?.room_type=='Double Room'">{{bookingObj.selectedRoom?.guest}}</div>
+                  <div *ngIf="bookingObj.selectedRoom?.room_type=='Twin Room'">
+                    <select class="form-control" name="" id="" [(ngModel)]="bookingObj.selectedRoom.guest">
+                      <option value="" aria-hidden="true">Choose Guest</option>
+                      <option *ngFor="let guest of bookingObj.selectedRoom?.guests"  [ngValue]="guest">{{guest}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>{{bookingObj.selectedRoom?.price}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h4>Available Service</h4>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>
+                  Free Service
+                </th>
+                <th>
+                  Paid Service
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let roomService of bookingObj.selectedRoom?.room_services">
+                <td>
+                  <div class="single-star-bottom booking-service" *ngIf="roomService?.free_service">
+                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="" [(ngModel)]="roomService.free_service">
+                    <label for="{{roomService?.service.service_name}}">
+                      <span></span>
+                      <span>{{roomService?.service.service_name}}</span>
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div class="single-star-bottom booking-service" *ngIf="!roomService?.free_service&&roomService?.service.service_name!='Base Service'">
+                    <input type="checkbox" id="{{roomService?.service.service_name}}" value="" [(ngModel)]="roomService.paidService">
+                    <label for="{{roomService?.service.service_name}}">
+                      <span></span>
+                      <span>{{roomService?.service.service_name}}</span>
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pull-right">
+            <button class="btn btn-default" (click)="setSelectedRoom(bookingObj,floor)">Continue</button>
+            <button class="btn btn-default" (click)="selectBookingRoom(bookingObj,floor)">Apply</button>
+          </div>
+        </div>
+
+        <div>
+          <h4>Your Rooms </h4>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Room Type</th>
+                <th>No.of Rooms</th>
+                <th>No.of.Guest</th>
+                <th>Total Room Price</th>
+                <th>paid Service</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let room of selectedRooms">
+                <td>{{room?.room_type}}</td>
+                <td>{{room?.no_of_rooms}}</td>
+                <td>{{room?.guest}}</td>
+                <td>{{room?.total_room_price}}</td>
+                <td>{{room?.paid_service}}</td>
+                <td>{{room?.total_price}}</td>
+              </tr>
+              <tr>
+                <td colspan="4"></td>
+                <td>Total Price</td>
+                <td>{{totalRoomPrice()}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-danger" (click)="bookRoom(floor,bookingObj)">Book Now</button>
+        </div>
+      </div>
+    </div>
+    <!-- <table class="table">
         <thead class="thead-light">
           <tr>
             <th>Dorm Beds
@@ -105,9 +180,9 @@
             </td>
           </tr>
         </tbody>
-      </table>
-      <br>
-      <table class="table">
+      </table> -->
+    <!-- <br> -->
+    <!-- <table class="table">
         <thead class="thead-light">
           <tr>
             <th>Dorm Beds
@@ -131,15 +206,17 @@
             </td>
           </tr>
         </tbody>
-      </table>
-    </div>
-    <div class="pull-right">
-      <button type="submit" class="btn btn-danger">Book Now<i class="fa fa-angle-right"></i></button>
-    </div>
+      </table> -->
+
+    <!-- <div class="pull-right">
+      <button type="submit" class="btn btn-danger">Book Now
+        <i class="fa fa-angle-right"></i>
+      </button>
+    </div> -->
   </div>
   <!-- container-->
   <!-- country display -->
-  <div class="container-row">
+  <!-- <div class="container-row">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -175,11 +252,10 @@
               <p class="guests-counter">5+ Guests</p>
             </li>
           </ul>
-          <!-- flag-lists --> 
         </div>
       </div>
     </div>
     <div class="triangle"></div>
-  </div>
+  </div> -->
   <!-- container-row -->
 </div>

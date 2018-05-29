@@ -2,6 +2,9 @@ var multer = require('multer')
 var path = require('path');
 var bodyParser = require('body-parser');
 
+//hostelService
+var hs = require('../services/hostelService');
+
 //Mongoose Models
 var room = require('../models/room');
 var hostel = require('../models/hostel');
@@ -138,14 +141,23 @@ function getRoomDetails(req, res) {
  * Get RoomDetails ByHostelId
  */
 function getRoomDetailsByHostelId(hostelId, req, res) {
-    room.findOne({ hostel_id: hostelId }).populate("hostel_id").populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            return res.json(data);
-        }
-    })
+    console.log("hostelId-->", hostelId)
+    room.findOne({ hostel_id: hostelId }).populate({ path: 'hostel_id', populate: { path: 'images' } })
+        .populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                var returnData = {};
+                returnData.created_by = data.created_by;
+                returnData.created = data.created;
+                returnData.last_updated = data.last_updated;
+                returnData.floors = data.floors;
+                returnData._id = data._id;
+                returnData.hostel_id=hs.setHostelDetails(data.hostel_id)
+                return res.json(returnData);
+            }
+        })
 }
 
 /**

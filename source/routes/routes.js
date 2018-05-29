@@ -4,7 +4,7 @@ var routes = express.Router();
 var hostelControllers = require('../controllers/hostelcontroller');
 var filterController = require('../controllers/filterController');
 var registrationController = require('../controllers/registrationController');
-var hostelServiceController = require('../controllers/hostelServiceController');
+var defaultServiceController = require('../controllers/defaultServiceController');
 var roomController = require('../controllers/roomController');
 var authServiceCtrl = require('../controllers/authController');
 var queryServiceController = require('../controllers/queryController');
@@ -42,10 +42,10 @@ routes.route('/user/getUserByUsername').get(registrationController.getUserByUser
 /**
  * Service
  */
-routes.route('/service/saveService').post(hostelServiceController.saveService);
-routes.route('/service').get(hostelServiceController.getAllServices);
-routes.route('/service/update/:serviceId').put(hostelServiceController.updateService);
-routes.route('/service/remove/:serviceId').delete(hostelServiceController.removeServiceById);
+routes.route('/service/saveService').post(defaultServiceController.saveService);
+routes.route('/service').get(defaultServiceController.getAllServices);
+routes.route('/service/update/:serviceId').put(defaultServiceController.updateService);
+routes.route('/service/remove/:serviceId').delete(defaultServiceController.removeServiceById);
 
 /**
  * rooms

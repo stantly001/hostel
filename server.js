@@ -11,8 +11,8 @@ const express = require('express'),
 var sessionDb = dbConnection.connection;
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
 // app.use(express.static(path.join(__dirname, 'src')));

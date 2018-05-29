@@ -205,6 +205,20 @@ export class HttpdataService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+
+  /**
+   * 
+   * @param hostel 
+   * Get Hostel Rooms By HostelId
+   */
+  getHostelRooms(id){
+    return this.http.get(this.baseUrl + "/room/" + id)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+
+
   /**
    * 
    * @param room 
@@ -222,15 +236,18 @@ export class HttpdataService {
    * Update Room
    */
   updateRoom(room: any): Observable<any> {
-
-console.log(room)
-
-
-
-
-
-    
     return this.http.put(this.baseUrl + "/room/update/" + room._id, room)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  /**
+   * 
+   * @param room 
+   * Book Room
+   */
+  bookRoom(room){
+    return this.http.post(this.baseUrl + "/booking/saveBooking", room)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

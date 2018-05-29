@@ -41,7 +41,8 @@ export class FilterComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getFilterData()
+    this.getFilterData();
+
     // this.availability = false;
     // this.isPrice = false;
     // this.isRating = false;
@@ -61,7 +62,7 @@ export class FilterComponent implements OnInit {
     //   this.locations = response.location;
     //   this.payments = response.payment;
     //   this.prices = response.price[0];
-    
+
     // this.priceByMinMax.min=100;
     // this.priceByMinMax.max=1000;
     //   this.properties = response.property;
@@ -73,6 +74,12 @@ export class FilterComponent implements OnInit {
 
   }
 
+  /**
+   * 
+   * @param filterType 
+   * @param filterTitle
+   * Select Filters 
+   */
   selectFilters(filterType: any, filterTitle: string) {
     const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
     if (!this.filter[filterTitle]) {
@@ -92,17 +99,27 @@ export class FilterComponent implements OnInit {
     this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: queryParams, queryParamsHandling: 'merge' });
   }
 
+
+  /**
+   * Get Filter Data
+   */
   getFilterData() {
     this._httpDataService.getAllFilters().subscribe(
       data => {
         this.priceRange = [data.hostel.min, data.hostel.max];
         this.priceByMinMax = data.hostel;
+        this.setFilters(data);
         this.filters = data.filterData
       },
       error => this.errorMessage = <any>error)
   }
 
 
+  /**
+   * 
+   * @param price 
+   * Price Filter
+   */
   priceChange(price) {
     let searchPrice = { min: price[0], max: price[1] }
     const queryParams: Params = Object.assign({}, this.activatedRoute.snapshot.queryParams);
@@ -124,6 +141,45 @@ export class FilterComponent implements OnInit {
     // this.prices['rangeFrom']=event[0];
     // this.prices['rangeTo']=event[1];
   }
+
+
+  /**
+   * 
+   * @param filter 
+   * Set Filters
+   */
+  setFilters(filter) {
+    this.activatedRoute.queryParams.subscribe(res => {
+      if (res.priceMax && res.priceMin) {
+        this.priceRange = [res.priceMin, res.priceMax];
+      } else if (res.priceMax) {
+        this.priceRange = [filter.hostel.min, res.priceMax];
+      } else if (res.priceMin) {
+        this.priceRange = [res.priceMin, filter.hostel.max];
+      } else {
+        this.priceRange = [filter.hostel.min, filter.hostel.max];
+      }
+      filter.filterData.forEach(element => {
+        Object.keys(res).forEach(elem => {
+          if (element.field_name == elem) {
+            element.filter_types.forEach(filterElem => {
+              let queryParamValue=res[elem];
+              let queryArray = queryParamValue.replace(/(^"|"$)/g, '').split(',');
+              queryArray.forEach(el => {
+                if(filterElem.filter_name==el){
+                  filterElem.selectedStatus=true;
+              }
+              });
+              
+            });
+          }
+        });
+      });
+    })
+  }
+
+
+
   // ratingChange(event) {
   //   console.log("rating", event)
   //   this.ratings['ratingFrom']=event[0];

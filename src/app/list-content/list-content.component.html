@@ -1,7 +1,6 @@
 <div class="hotel-left">
   <a href="#">
     <span class="glyphicon glyphicon-bed" aria-hidden="true"></span>{{hostelObj?.name}}</a>
-  <p>{{hostelObj?.place}}</p>
   <div class="hotel-left-grids">
     <div class="hotel-left-one">
       <a>
@@ -10,18 +9,27 @@
       </a>
     </div>
     <div class="hotel-left-two">
-      <div class="rating text-left">
+      <!-- <div class="rating text-left">
         <span>☆</span>
         <span>☆</span>
         <span>☆</span>
         <span>☆</span>
         <span>☆</span>
+      </div> -->
+      <!-- <a href="#"> -->
+        <!-- <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{hostelObj?.street}}</a> -->
+      <!-- <p>2.5 km to Sed ut perspiciatis
+        <span> 2.6 km to sit voluptatem</span> -->
+      <!-- </p> -->
+      <div *ngFor="let hostelServices of hostelObj.hostel_services">
+        <span *ngIf="hostelServices.service.service_name!='Base Service'">
+          <i class="fa fa-wifi" *ngIf="hostelServices.service.service_name=='Wi-Fi'"></i>
+          <i class="fa fa-television" *ngIf="hostelServices.service.service_name=='Television'">
+            
+          </i>{{hostelServices.service.service_name}}</span>
       </div>
-      <a href="#">
-        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{hostelObj?.street}}</a>
-      <p>2.5 km to Sed ut perspiciatis
-        <span> 2.6 km to sit voluptatem</span>
-      </p>
+      <div><p>{{hostelObj.property_description}}</p></div>
+      <div><Address>{{hostelObj?.city}},{{hostelObj?.state}}</Address></div>
     </div>
     <div class="clearfix"></div>
   </div>

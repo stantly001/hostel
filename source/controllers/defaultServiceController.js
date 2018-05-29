@@ -1,5 +1,5 @@
 var bodyParser = require('body-parser');
-var hostelServicesService = require('../services/hostelServicesService')
+var defaultService = require('../services/defaultService')
 
 
 /**
@@ -9,7 +9,7 @@ var hostelServicesService = require('../services/hostelServicesService')
  * Save Service
  */
 function saveService(req, res) {
-    return hostelServicesService.saveService(req, res);
+    return defaultService.saveService(req, res);
 }
 
 /**
@@ -19,7 +19,7 @@ function saveService(req, res) {
  * Get All Services
  */
 function getAllServices(req, res) {
-    return hostelServicesService.getAllServices(req, res);
+    return defaultService.getAllServices(req, res);
 }
 
 /**
@@ -29,7 +29,7 @@ function getAllServices(req, res) {
  * Update Service 
  */
 function updateService(req,res){
-    return hostelServicesService.updateService(req.params.serviceId, req.body, res);
+    return defaultService.updateService(req.params.serviceId, req.body, res);
 }
 
 /**
@@ -39,10 +39,10 @@ function updateService(req,res){
  * Remove Service
  */
 function removeServiceById(req, res) {
-    return hostelServicesService.removeServiceById(req.params.serviceId, res);
+    return defaultService.removeServiceById(req.params.serviceId, res);
 }
 
-var hostelServiceController={
+var defaultServiceController={
     saveService,getAllServices,updateService,removeServiceById
 }
-module.exports=hostelServiceController
+module.exports=defaultServiceController
