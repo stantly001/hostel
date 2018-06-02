@@ -28,14 +28,14 @@ export class DetailviewComponent implements OnInit {
   errorMessage: any;
   hostelViewObject: any;
   hostelId: any;
-  checkInDate: Date;
+  
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   no_of_rooms = 0;
   guest = 0;
   roomGuest = 0;
   Double_no_of_rooms = 0;
-  bookingObj = { floor: [] };
+  bookingObj = { floor: [] ,checkInDate: new Date() };
   @ViewChild("datePicker") datePicker: any;
   constructor(private activateRoute: ActivatedRoute, private _httpDataService: HttpdataService) { }
 
@@ -44,7 +44,6 @@ export class DetailviewComponent implements OnInit {
     this.tempRooms = [];
     this.hostelRooms = [];
     this.hostelFloors = [];
-    this.checkInDate = new Date();
     this.getParams();
     this.defaultGallerySettings();
     this.user = sessionStorage.getItem("user");
@@ -366,30 +365,31 @@ export class DetailviewComponent implements OnInit {
    * Book Room 
    */
   bookRoom(floor, bookingObj) {
+    console.log(this.datePicker);
     console.log("bookingObj>>>>", bookingObj)
 
-    var guestObj = {
-      firstName: bookingObj.firstName,
-      lastName: bookingObj.lastName,
-      mobile: bookingObj.mobile,
-      email: bookingObj.email,
-      address: bookingObj.address
-    }
+    // var guestObj = {
+    //   firstName: bookingObj.firstName,
+    //   lastName: bookingObj.lastName,
+    //   mobile: bookingObj.mobile,
+    //   email: bookingObj.email,
+    //   address: bookingObj.address
+    // }
 
-    console.log("floorsByHostel", this.floorsByHostel)
-    var data = {
-      // hostel_id: this.hostelViewObject.hostel_id._id,
-      room: this.floorsByHostel,
-      floors: this.removeKeyByBooking(bookingObj).floor,
-      total_price: this.total,
-      guest_info: guestObj
-      // created_by: this.user
-    }
+    // console.log("floorsByHostel", this.floorsByHostel)
+    // var data = {
+    //   // hostel_id: this.hostelViewObject.hostel_id._id,
+    //   room: this.floorsByHostel,
+    //   floors: this.removeKeyByBooking(bookingObj).floor,
+    //   total_price: this.total,
+    //   guest_info: guestObj
+    //   // created_by: this.user
+    // }
 
-    this._httpDataService.bookRoom(data).subscribe(
-      data => {
-      },
-      error => this.errorMessage = <any>error)
+    // this._httpDataService.bookRoom(data).subscribe(
+    //   data => {
+    //   },
+    //   error => this.errorMessage = <any>error)
 
 
   }

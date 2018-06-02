@@ -44,31 +44,22 @@ function findAvailablility(bkObj, res) {
             var roomStatus = true;
             var checkStatus = true;
             var floorObject = getFloorById(booking_by_floor, room);
-            console.log("floorObject>>>>>", floorObject)
             if (floorObject) {
-                checkStatus = false;
                 var remainingBeds = floorObject.no_of_beds - floorObject.guest;
-                console.log("guest>>>>>>", floorObject.guest)
                 if (!isNaN(remainingBeds)) {
                     room.remainingBeds = remainingBeds;
                 }
 
                 if (room.remainingBeds == 0) {
-                    console.log("11111")
                     roomStatus = false;
                     room.remainingBedStatus = "completed"
                 } else {
-                    console.log("22222")
                     roomStatus = true;
                     room.remainingBedStatus = "available"
                 }
-                console.log("room$$$$$", room)
 
             }
-            console.log("roomStatus", roomStatus)
-            if (checkStatus == false) {
                 byRoom.remainingRoomStatus = roomStatus;
-            }
             if (byRoom.remainingRoomStatus == false) {
                 floorStatus = false;
             } else {
@@ -81,19 +72,16 @@ function findAvailablility(bkObj, res) {
     })
 
     roomService.updateRoom(by_room._id, by_room, res);
-    //    hostelService.updateHostelById(by_hostel, res, by_hostel._id)
-    // console.log("byRoom", by_room)
-    // console.log("by room =====> ", by_room.floors)
-    // booking_by_floor.forEach(floor => {
-
-    // console.log("floor>>>>",floor)
-
-
-
-    //  });
 
 }
 
+
+/**
+ * 
+ * @param {*} floor 
+ * @param {*} room
+ * Get Floor By Id 
+ */
 function getFloorById(floor, room) {
     var roomByFloor;
     floor.map(function (val) {
@@ -101,20 +89,22 @@ function getFloorById(floor, room) {
     }).forEach(val => {
         // console.log("Room Id ", room_id_by_floor)
         var roomIndexByFloor = val.findIndex(x => x.room_id_by_floor == room._id)
-        console.log("Room Index  ", roomIndexByFloor)
         if (roomIndexByFloor != -1) {
-            console.log("Room-->>>.  ", val[roomIndexByFloor])
             roomByFloor = val[roomIndexByFloor]
         }
     })
-    console.log("Find roomByFloor :: ", roomByFloor)
     if (roomByFloor) {
         return roomByFloor
     }
 }
 
 
-
+/**
+ * 
+ * @param {*} params 
+ * @param {*} res
+ * Save Booking 
+ */
 function saveBooking(params, res) {
     var bookingParam = params
     var bookingDetail = bookingBean(bookingParam)
@@ -139,11 +129,7 @@ function getAllBooking(req, res) {
 
 
 function getBookingDataByUser(req,res,userId){
-    console.log("sddfdfd>>>",userId)
-    // getAllBooking(req,res);
     var query=booking.find();
-    // query.where('created_by').equals(userId);
-    // console.log("created_by>>>>",query.where('hostel_id.created_by').equals(userId))
     query.populate({
         path: 'hostel_id',
         match: { created_by: { $eq: userId }},
