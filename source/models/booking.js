@@ -19,8 +19,10 @@ var booking = new Schema({
     },
     floors: [{
         floor_no: Number,
+        status:Boolean,
         rooms: [{
             room_id_by_floor: String,
+            status:Boolean,
             room_number: {
                 type: Number
             },

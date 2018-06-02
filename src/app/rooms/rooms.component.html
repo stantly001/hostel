@@ -8,7 +8,7 @@
       <div>
         <div class="col-md-3">
           <label>Hostel Name</label>
-           <p>{{hostel.hostel_id?hostel.hostel_id.name:hostel.name}}</p> 
+          <p>{{hostel.hostel_id?hostel.hostel_id.name:hostel.name}}</p>
           <!-- <label>Hostels</label>
           <select class="form-control" [(ngModel)]="hostel.hostel_id" (change)="setFloor(hostel)">
             <option value="" selected aria-hidden>Select Hostel</option>
@@ -18,7 +18,7 @@
         <div class="col-md-3">
           <label>Floors</label>
           <select class="form-control" [(ngModel)]="floor.floor_no" (change)="selectFloor($event.target.value)">
-              <option value="" selected aria-hidden>Select Floor</option>
+            <option value="" selected aria-hidden>Select Floor</option>
             <option *ngFor="let floorList of floorsList">{{floorList}}</option>
           </select>
         </div>
@@ -88,68 +88,69 @@
               </td>
             </tr>
             <tr>
-              <td colspan="5">             
-                 <div [class.collapse]="showService!=floorIndex">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <th>
-                        Service Name
-                      </th>
-                      <th>
-                        Amount/Day
-                      </th>
-                      <th>
-                        Amount/Week
-                      </th>
-                      <th>
+              <td colspan="5">
+                <div [class.collapse]="showService!=floorIndex">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>
+                          Service Name
+                        </th>
+                        <th>
+                          Amount/Day
+                        </th>
+                        <th>
+                          Amount/Week
+                        </th>
+                        <th>
                           Amount/Month
                         </th>
-                      <th>
-                        Free Service
-                      </th>
-                      <th><button class="btn btn-xs btn-success" (click)="addService(room)"><span><i class="fa fa-plus"></i></span></button></th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                        <th>
+                          Free Service
+                        </th>
+                        <th>
+                          <button class="btn btn-xs btn-success" (click)="addService(room)">
+                            <span>
+                              <i class="fa fa-plus"></i>
+                            </span>
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <tr *ngFor="let roomService of room.room_services; let roomIndex=index;">
-                          <td>
-                              <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false" [disabled]="roomService?.service.service_name=='Base Service'">
-                                </ng-select>
-                          </td>
-                          <td *ngIf="roomService?.service.service_name!='Base Service'">
-                            <input type="text" class="form-control" name="amount_per_day"  
-                            [(ngModel)]="roomService.amount_per_day" 
-                            *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                        <td>
+                          <ng-select [items]="services" [(ngModel)]="roomService.service" class="custom" [addTag]="true" bindLabel="service_name" [loading]="false"
+                            [disabled]="roomService?.service.service_name=='Base Service'">
+                          </ng-select>
+                        </td>
+                        <td *ngIf="roomService?.service.service_name!='Base Service'">
+                          <input type="text" class="form-control" name="amount_per_day" [(ngModel)]="roomService.amount_per_day" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
                           <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
-                          </td>
-                          <td *ngIf="roomService?.service.service_name!='Base Service'">
-                            <input type="text" class="form-control" name="amount_per_week"  
-                            [(ngModel)]="roomService.amount_per_week"
-                             *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
-                             <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">--</span>
-                          </td>
-                          <td *ngIf="roomService?.service.service_name!='Base Service'">
-                              <input type="text" class="form-control"   [(ngModel)]="roomService.amount_per_month" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
-                              <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
-                            </td>
-                          <td *ngIf="roomService?.service.service_name!='Base Service'">
-                            <input type="checkbox"  class="checkbox" name="free_service" 
-                            [(ngModel)]="roomService.free_service">
-                          </td>
-                          <td class="text-center" colspan="4" *ngIf="roomService?.service.service_name=='Base Service'">
-                            <input type="text" name="" id="" class="form-control" 
-                            [(ngModel)]="roomService.base_amount" >
-                          </td>
-                          <td>
-                            <button class="btn btn-xs btn-danger" (click)="deleteService(room,roomIndex)" [disabled]="roomService?.service.service_name=='Base Service'">
-                              <i class="fa fa-close"></i>
-                            </button>
-                          </td>
-                        </tr>
-                  </tbody>
-                </table>
-              </div>
+                        </td>
+                        <td *ngIf="roomService?.service.service_name!='Base Service'">
+                          <input type="text" class="form-control" name="amount_per_week" [(ngModel)]="roomService.amount_per_week" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                          <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">--</span>
+                        </td>
+                        <td *ngIf="roomService?.service.service_name!='Base Service'">
+                          <input type="text" class="form-control" [(ngModel)]="roomService.amount_per_month" *ngIf="roomService?.free_service==false||!(roomService?.free_service)">
+                          <span class="text-center" *ngIf="roomService?.free_service==true||(roomService?.free_service)">-</span>
+                        </td>
+                        <td *ngIf="roomService?.service.service_name!='Base Service'">
+                          <input type="checkbox" class="checkbox" name="free_service" [(ngModel)]="roomService.free_service">
+                        </td>
+                        <td class="text-center" colspan="4" *ngIf="roomService?.service.service_name=='Base Service'">
+                          <input type="text" name="" id="" class="form-control" [(ngModel)]="roomService.base_amount">
+                        </td>
+                        <td>
+                          <button class="btn btn-xs btn-danger" (click)="deleteService(room,roomIndex)" [disabled]="roomService?.service.service_name=='Base Service'">
+                            <i class="fa fa-close"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -184,5 +185,5 @@
       </div> -->
       <!-- </div> -->
     </section>
-</div>
+  </div>
 </div>

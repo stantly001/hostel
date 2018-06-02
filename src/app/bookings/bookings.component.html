@@ -1,17 +1,131 @@
 <div class="col-md-9">
-  <div class="col-sm-12">
+  <div class="col-sm-12 table table-responsive">
 
     <table class="table table-condensed">
       <thead>
         <tr>
-          <th>price</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Phone</th>
           <th>From</th>
+          <th>price</th>
+          <th>price</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let bookedHostel of bookedHostels">
+      <tbody *ngFor="let bookedHostel of bookedHostels;let index=index">
+        <tr>
+          <td>{{bookedHostel?.guest_info?.firstName}}</td>
+          <td>{{bookedHostel?.guest_info?.address}}</td>
+          <td>{{bookedHostel?.guest_info?.email}}</td>
+          <td>{{bookedHostel?.guest_info?.mobile}}</td>
+          <td>{{bookedHostel?.guest_info?.fromDate| date: 'dd/MM/yyyy'}}</td>
           <td>{{bookedHostel?.total_price}}</td>
-          <td>{{bookedHostel?.guest_info}}</td>
+          <td>
+            <button class="btn btn-xs btn-default" (click)="bookedHostel.index=!bookedHostel.index">
+              <i *ngIf="!bookedHostel.index" class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i *ngIf="bookedHostel.index" class="fa fa-chevron-up" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            <div class="col-md-12" *ngIf="bookedHostel.index">
+
+              <div *ngFor="let bookedFloor of bookedHostel?.floors">
+                <div class="col-md-12 card">
+
+                  <div class="">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                      <div class="col-md-12">
+                        <label for="">
+                          <u> Floor: {{bookedFloor.floor_no}}</u>
+                        </label>
+                      </div>
+                      <div class="col-md-12">
+                        <div *ngFor="let room of bookedFloor.rooms">
+                          <div class="col-md-3">
+                            <label for="">Room:{{room.room_number}}</label>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="">Service:</label>
+                            <ul *ngFor="let paid_service of room.paid_service">
+                              <li> {{paid_service.service.service_name}}</li>
+                            </ul>
+
+
+                          </div>
+                          <div class="col-md-5">
+                            <div class="col-sm-9">
+                              <label for="">Vacate By</label>
+                              <ng-datepicker [(ngModel)]="checkInDate" #datePicker></ng-datepicker>
+
+                            </div>
+                            <div class="col-sm-3">
+                              <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#applyModal">Apply</button>
+                              <div id="applyModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure you want to vacate?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" (click)="vacateHostel(room,bookedFloor,bookedHostel)">Yes</button>
+                                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="card" style="width: 18rem;">
+                      <img class="card-img-top" src="..." alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div> -->
+
+
+                </div>
+              </div>
+              <!-- <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Floor</th>
+                    <th>Room Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bookedRooms of bookedHostel?.room_id.floors">
+                    <td>{{bookedRooms.floor_no}}</td>
+                    <td>
+                      <div>
+                        <ul *ngFor="let room of bookedRooms.rooms">
+                          <li>{{room.room_number}}</li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -140,6 +140,7 @@ function getBookingDataByUser(req,res,userId){
       })
       query.populate('hostel_id')
       query.populate('room_id')
+      query.populate('floors.rooms.paid_service.service')
     query.exec(function (err, data) {
         if (err) {
             res.json({ message: 'Somthing Wrong', data: err })

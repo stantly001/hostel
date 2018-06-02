@@ -10,10 +10,12 @@ export class BookingsComponent implements OnInit {
 
   bookedHostels: any;
   errorMessage: any;
+  checkInDate:Date
   constructor(private _httpDataService: HttpdataService) { }
 
   ngOnInit() {
     this.getBookingDataByUser();
+    this.checkInDate=new Date();
   }
 
 
@@ -28,6 +30,13 @@ export class BookingsComponent implements OnInit {
 
 }
 
+
+vacateHostel(room,bookedFloor,bookedHostel){
+
+
+
+
+}
 
 
 }
