@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { HostelServiceComponent } from './hostel-service/hostel-service.component';
 import { LoginComponent } from './login/login.component';
 import { HostelViewComponent } from './hostel-view/hostel-view.component';
+import { BookingsComponent } from './bookings/bookings.component';
 
 export const Approute: Routes = [
 
@@ -28,15 +29,15 @@ export const Approute: Routes = [
         path: 'hostelDetailView/:hostelId',
         component: DetailviewComponent,
     },
-     {
+    {
         path: 'rooms',
         component: ViewRoomsComponent
     },
-    
+
     {
         path: 'admin',
         component: AdminComponent,
-        children: [            
+        children: [
             {
                 path: 'hostel',
                 component: HostelViewComponent,
@@ -47,7 +48,7 @@ export const Approute: Routes = [
                     }, {
                         path: 'viewRooms',
                         component: RoomsComponent
-                    },{
+                    }, {
                         path: 'hostel/addHostel',
                         redirectTo: 'addHostel',
                         pathMatch: 'full'
@@ -57,11 +58,14 @@ export const Approute: Routes = [
             {
                 path: 'filter',
                 component: FilterFormComponent
+            }, {
+                path: 'bookings',
+                component: BookingsComponent
             }
-            ,{
+            , {
                 path: 'services',
                 component: HostelServiceComponent
-            },{
+            }, {
                 path: '',
                 redirectTo: 'hostel',
                 pathMatch: 'full'

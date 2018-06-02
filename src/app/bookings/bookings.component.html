@@ -1,0 +1,18 @@
+<div class="col-md-9">
+  <div class="col-sm-12">
+
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bookedHostel of bookedHostels">
+          <td>{{bookedHostel?.total_price}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

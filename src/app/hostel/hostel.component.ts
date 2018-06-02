@@ -137,6 +137,10 @@ ngAfterViewInit(){
    * Save Hostel
    */
   save = (hostel) => {
+    let user = JSON.parse(sessionStorage.getItem("user")).data;
+    if(user){
+    hostel.created_by=user;
+    }
     this.removeBase64(hostel);
     if (hostel._id) {
       this._httpDataService.updateHosteldata(hostel).subscribe(

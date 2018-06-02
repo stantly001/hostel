@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 
 export class FilterComponent implements OnInit {
+  filterObj: any;
   priceByMinMax: any;
   errorMessage: any;
   filters = [];
@@ -178,7 +179,11 @@ export class FilterComponent implements OnInit {
     })
   }
 
+  clearFilter(){
+console.log("filter>>>>",this.filterObj)
 
+
+  }
 
   // ratingChange(event) {
   //   console.log("rating", event)

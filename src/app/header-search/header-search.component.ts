@@ -33,6 +33,10 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
 
     this.checkInDate = new Date();
+    this.activatedRoute.queryParams.subscribe(queyParam=>{
+      this.search["search_country"]=queyParam.country;
+      this.search["search_city"]=queyParam.city;
+    })
   }
 
   ngOnInit() {

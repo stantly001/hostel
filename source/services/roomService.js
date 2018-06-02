@@ -18,6 +18,7 @@ function setRoomData(res) {
     var roomData = new room({
         hostel_id: filterHostelModel(res.hostel_id),
         floors: res.floors,
+        remainingFloorStatus: res.remainingFloorStatus,
         created_by: filterCreatedBy(res.created_by)
     })
     return roomData;
@@ -30,6 +31,7 @@ function filterHostelModel(res) {
         country: res.country,
         city: res.city,
         state: res.state,
+        hostelStatus: res.hostelStatus,
         street: res.street,
         property_type: res.property_type,
         wheel_chair_accomadate: res.wheel_chair_accomadate,
@@ -110,6 +112,32 @@ function filterCreatedBy(data) {
 function saveRoom(req, res) {
     var newRoom = setRoomData(req.body);
     newRoom.save().then(item => {
+        var temp_service = [];
+        var temp_room_type = []
+        if (item.floors.length > 0) {
+            item.floors.map(floor => {
+                return floor.rooms.map(room => {
+                    if (temp_room_type.indexOf(room.room_type) == -1) {
+                        temp_room_type.push(room.room_type)
+                        // console.log(roomData.hostel_id.room_type.find(type => type.type_name === service.room_type))
+                        let roomType = roomData.hostel_id.room_type.find(type => type.type_name == room.room_type)
+                        if (!roomType) {
+                            roomData.hostel_id.room_type.push({ type_name: room.room_type })
+                        }
+                    }
+                    return room.room_services.map(val => {
+                        if (temp_service.indexOf(val.service.service_name) == -1) {
+                            temp_service.push(val.service.service_name)
+                            // console.log(roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name))
+                            let availabelService = roomData.hostel_id.available_service.find(service => service.service_name == val.service.service_name)
+                            if (availabelService && !availabelService.service_name) {
+                                roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
+                            }
+                        }
+                    })
+                })
+            })
+        }
         return res.status(200).json({ 'success': 'Room added successfully', 'data': item });
     }).catch(err => {
         return res.status(400).send("unable to save to database");
@@ -148,13 +176,17 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
                 console.log(err);
             }
             else {
+
                 var returnData = {};
-                returnData.created_by = data.created_by;
-                returnData.created = data.created;
-                returnData.last_updated = data.last_updated;
-                returnData.floors = data.floors;
-                returnData._id = data._id;
-                returnData.hostel_id=hs.setHostelDetails(data.hostel_id)
+                if (data) {
+                    returnData.created_by = data.created_by;
+                    returnData.created = data.created;
+                    returnData.remainingFloorStatus = data.remainingFloorStatus;
+                    returnData.last_updated = data.last_updated;
+                    returnData.floors = data.floors;
+                    returnData._id = data._id;
+                    returnData.hostel_id = hs.setHostelDetails(data.hostel_id)
+                }
                 return res.json(returnData);
             }
         })
@@ -168,24 +200,32 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
  * update Room
  */
 function updateRoom(id, roomData, res) {
+    console.log("id>>>>>>", id);
+    console.log("roomData>>>>>", roomData)
+
     var temp_service = [];
     var temp_room_type = []
+    console.log("floors>>>", roomData.floors)
+    console.log("floorsLength>>>", roomData.floors.length)
     if (roomData.floors.length > 0) {
-        roomData.floors.map(room => {
-            return room.rooms.map(service => {
-                if (temp_room_type.indexOf(service.room_type) == -1) {
-                    temp_room_type.push(service.room_type)
+        console.log("floorsLength>>>", roomData.floors.length)
+        roomData.floors.map(floor => {
+            console.log("rooom>>>>>>>", floor)
+            return floor.rooms.map(room => {
+                console.log("service>>>>>>>", room)
+                if (temp_room_type.indexOf(room.room_type) == -1) {
+                    temp_room_type.push(room.room_type)
                     // console.log(roomData.hostel_id.room_type.find(type => type.type_name === service.room_type))
-                    let roomType = roomData.hostel_id.room_type.find(type => type.type_name === service.room_type)
-                    if (roomType && !roomType.type_name) {
-                        roomData.hostel_id.room_type.push({ type_name: service.room_type })
+                    let roomType = roomData.hostel_id.room_type.find(type => type.type_name == room.room_type)
+                    if (!roomType) {
+                        roomData.hostel_id.room_type.push({ type_name: room.room_type })
                     }
                 }
-                return service.room_services.map(val => {
+                return room.room_services.map(val => {
                     if (temp_service.indexOf(val.service.service_name) == -1) {
                         temp_service.push(val.service.service_name)
                         // console.log(roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name))
-                        let availabelService = roomData.hostel_id.available_service.find(service => service.service_name === val.service.service_name)
+                        let availabelService = roomData.hostel_id.available_service.find(service => service.service_name == val.service.service_name)
                         if (availabelService && !availabelService.service_name) {
                             roomData.hostel_id.available_service.push({ service_name: val.service.service_name })
                         }
@@ -196,13 +236,13 @@ function updateRoom(id, roomData, res) {
     }
     hostel.findByIdAndUpdate(roomData.hostel_id._id, roomData.hostel_id, { new: true })
         .then(data => {
-            // console.log(data)
+            console.log(">>>>>>>>>>>", data)
         })
         .catch(err => console.log(err))
 
     room.findByIdAndUpdate(id, roomData, { new: true })
         .then(data => {
-            res.json(data)
+            // res.json(data)
         })
         .catch(err => {
             return res.status(400).send("unable to save to database");

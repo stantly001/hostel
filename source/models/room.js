@@ -18,6 +18,9 @@ var Room = new Schema({
         type: Date,
         default: Date.now
     },
+    remainingFloorStatus: {
+        type: Boolean
+    },
     floors: [{
         no_of_rooms: {
             type: Number
@@ -25,18 +28,27 @@ var Room = new Schema({
         floor_no: {
             type: Number
         },
+        remainingRoomStatus:{
+            type:Boolean
+        },
         rooms: [{
             room_services: [{
                 service: {
                     type: Schema.Types.ObjectId,
                     ref: 'Service'
-                }, 
+                },
                 amount_per_month: Number,
                 amount_per_day: Number,
                 amount_per_week: Number,
-                base_amount:Number,
+                base_amount: Number,
                 free_service: Boolean
             }],
+            remainingBedStatus: {
+                type: String
+            },
+            remainingBeds: {
+                type: Number
+            },
             is_active: {
                 type: Boolean
             },
@@ -52,8 +64,8 @@ var Room = new Schema({
             view_type: {
                 type: Object
             },
-            room_type:{
-                type:Object
+            room_type: {
+                type: Object
             }
         }],
     }]

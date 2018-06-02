@@ -65,3 +65,7 @@ flag.flag-au {
     padding: 0 !important;
     border-bottom:none !important;
 }
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+ }

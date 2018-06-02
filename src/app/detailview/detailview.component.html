@@ -21,7 +21,7 @@
         <label for="">Select Floors</label>
         <select class="sel form-control" [(ngModel)]="floor" (change)="selectFloor(floor, bookingObj)">
           <option value="" aria-hidden="">choose</option>
-          <option *ngFor="let floor of hostelViewObject?.floors" [ngValue]="floor">{{floor.floor_no}}</option>
+          <option *ngFor="let floor of hostelViewObject?.floors" [ngValue]="floor" [disabled]="floor.remainingRoomStatus==false">{{floor.floor_no}}</option>
         </select>
       </div>
     </div>
@@ -29,8 +29,8 @@
       <div>
         <label>Rooms</label>
         <ul class="nav nav-tabs" *ngIf="floor">
-          <li *ngFor="let room of rooms" [class.active]="room.active">
-            <a (click)="selectRoom(bookingObj, room)">{{room.room_number}}</a>
+          <li *ngFor="let room of rooms" [class.active]="room.active&&room.remainingBedStatus!='completed'">
+            <a (click)="selectRoom(bookingObj, room)" [class.disabled]="room.remainingBedStatus=='completed'">{{room.room_number}}</a>
           </li>
         </ul>
         <div>
@@ -56,7 +56,7 @@
                   <div *ngIf="bookingObj.selectedRoom?.room_type=='Twin Room'">
                     <select class="form-control" name="" id="" [(ngModel)]="bookingObj.selectedRoom.guest">
                       <option value="" aria-hidden="true">Choose Guest</option>
-                      <option *ngFor="let guest of bookingObj.selectedRoom?.guests"  [ngValue]="guest">{{guest}}</option>
+                      <option *ngFor="let guest of bookingObj.selectedRoom?.guests" [ngValue]="guest">{{guest}}</option>
                     </select>
                   </div>
                 </td>
@@ -139,8 +139,66 @@
 
         </div>
         <div class="pull-right">
-          <button class="btn btn-danger" (click)="bookRoom(floor,bookingObj)">Book Now</button>
+          <!-- bookRoom(floor,bookingObj) -->
+          <button class="btn btn-danger" data-toggle="modal" data-target="#bookingModal">Book Now</button>
         </div>
+      </div>
+    </div>
+
+
+    <div id="bookingModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Guest Details</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12 form-group">
+              <div class="col-md-6">
+                <label for="">First Name</label>
+                <input type="text" [(ngModel)]="bookingObj.firstName" name="" id="" class="form-control">
+              </div>
+              <div class="col-md-6 ">
+                <label for="">Last Name</label>
+                <input type="text" [(ngModel)]="bookingObj.lastName" name="" id="" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12 form-group">
+              <div class="col-md-6">
+                <label for="">E-mail</label>
+                <input type="text" [(ngModel)]="bookingObj.email" name="" id="" class="form-control">
+              </div>
+              <div class="col-md-6 ">
+                <label for="">Mobile</label>
+                <input type="text" [(ngModel)]="bookingObj.mobile" name="" id="" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-6 ">
+                  <label for="">Address</label>
+                  <textarea [(ngModel)]="bookingObj.address" name="" id="" class="form-control"></textarea>
+                </div>
+              </div>
+            <div class="col-md-12">
+              <div class="col-sm-12">
+                <div class="col-sm-1">
+                  <input type="checkbox" name="" id="" [(ngModel)]="bookingObj.isAccept">
+                </div>
+                <div class="col-md-11">
+                  <label for="">I have read accept terms and conditions</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" [disabled]="checkValidation(bookingObj)" (click)="bookRoom(floor,bookingObj)">Confirm My Booking</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
       </div>
     </div>
     <!-- <table class="table">

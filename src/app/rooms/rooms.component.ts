@@ -3,6 +3,7 @@ import { ImageResult, ResizeOptions } from 'ng2-imageupload/src/interfaces';
 import { HttpdataService } from '../service/httpdata.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Services } from '@angular/core/src/view';
+import { Key } from 'protractor';
 
 @Component({
   selector: 'app-rooms',
@@ -241,7 +242,11 @@ export class RoomsComponent implements OnInit {
       hostel.floors.push(newFloor);
       this.floor = {};
     } else {
-      hostel.floors = newFloor;
+      hostel.floors.forEach((element,index) => {
+        if(element.floor_no==newFloor.floor_no){
+          hostel.floors[index]=newFloor;
+        }
+      });
       this.floor = {};
     }
   }

@@ -7,6 +7,9 @@ var Hostel = new Schema({
   name: {
     type: String
   },
+  hostelStatus:{
+    type:Boolean
+  },
   created: {
     type: Date,
     default: Date.now

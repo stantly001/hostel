@@ -27,6 +27,7 @@ function setHostelDetails(data) {
         created: data.created,
         last_updated: data.last_updated,
         hostel_services: data.hostel_services,
+        hostelStatus:data.hostelStatus,
         _id: data._id,
         name: data.name,
         country: data.country,
@@ -175,6 +176,7 @@ function filterHostelModel(res) {
         // _id: res._id,
         name: res.name,
         country: res.country,
+        hostelStatus:res.hostelStatus,
         city: res.city,
         state: res.state,
         street: res.street,
@@ -359,6 +361,7 @@ function updateFilterHostelDetail(data, res) {
     // var updateFilterHostel = {
     data.name = res.name;
     data.country = res.country;
+   data.hostelStatus=res.hostelStatus;
     data.city = res.city;
     data.state = res.state;
     data.street = res.street;
@@ -420,12 +423,12 @@ function updateHostelVisualsModel(res) {
 
 /**
  * 
- * @param {*} req 
+ * @param {*} obj 
  * @param {*} res 
  *  Update hostelData by HostelId
  */
-function updateHostelById(req, res, id) {
-    let hostelData = req.body;
+function updateHostelById(obj, res, id) {
+    let hostelData = obj;
     hostel.findById(id, function (err, data) {
         if (!data)
             return next(new Error('Could not load Document'));

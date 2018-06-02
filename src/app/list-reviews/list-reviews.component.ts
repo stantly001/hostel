@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-reviews',
@@ -7,22 +8,31 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListReviewsComponent implements OnInit {
   hostelPrice: any;
+  queryParam: any;
   @Input('hostelData') hostelObj;
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+    this.activatedRoute.queryParams.subscribe(queyParam => {
+      this.queryParam = queyParam;
+    });
+  }
 
   ngOnInit() {
-   this.setHotelPrice();
+    this.setHotelPrice();
   }
-  
+
   /**
    * Set Hostel Price
    */
-  setHotelPrice(){
+  setHotelPrice() {
     this.hostelObj.hostel_services.forEach(element => {
-      if(element.base_amount){
-        this.hostelPrice=element.base_amount;
+      if (element.base_amount) {
+        this.hostelPrice = element.base_amount;
       }
     });
   }
 
+  viewHostel(hostelId) {
+    this.router.navigate(['hostelDetailView/' + hostelId], { queryParams: this.queryParam });
+
+  }
 }

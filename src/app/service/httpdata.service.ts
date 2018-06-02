@@ -252,7 +252,17 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
-  
+  /**
+   * 
+   * @param user 
+   * get Booking DataBy User
+   */
+  getBookingDataByUser(user){
+    return this.http.get(this.baseUrl + "/booking/getBookingDataByUser/"+user._id)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   /**
    * 
    * @param register 

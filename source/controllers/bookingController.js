@@ -8,9 +8,11 @@ function saveBooking(req, res) {
 function getAllBooking(req, res) {
     return bookingService.getAllBooking(req, res)
 }
-
+function getBookingDataByUser(req, res) {
+    return bookingService.getBookingDataByUser(req, res, req.params.userId)
+}
 var bookingController = {
-    saveBooking, getAllBooking
+    saveBooking, getAllBooking,getBookingDataByUser
 }
 
 module.exports = bookingController

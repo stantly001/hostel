@@ -51,6 +51,7 @@ function authentication(userAuth, cb) {
  * User Login
  */
 function userLogin(req, res) {
+    console.log(req)
     var sessionAuth = authSession(req);
     authentication(sessionAuth, function (err, data) {
         console.log(data)
@@ -68,6 +69,7 @@ function userLogin(req, res) {
  * set session
  */
 function authSession(req) {
+    
     var authUser = req.body;
     req.session.user_name = authUser.user_name;
     req.session.password = authUser.password;

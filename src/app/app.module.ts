@@ -40,6 +40,7 @@ import { LoginComponent } from './login/login.component';
 import { HostelViewComponent } from './hostel-view/hostel-view.component'
 
 import {AgmCoreModule} from '@agm/core';
+import { BookingsComponent } from './bookings/bookings.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {AgmCoreModule} from '@agm/core';
     HostelServiceComponent,
     RegisterComponent,
     LoginComponent,
-    HostelViewComponent
+    HostelViewComponent,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,

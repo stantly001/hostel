@@ -6,7 +6,7 @@ var mail = require('../utils/mail/mail')
  * @param {*} res 
  */
 function findSelectedHostelByQuery(req, res) {
-    console.log(mail.mail(req, res))
+    // console.log(mail.mail(req, res))
     var queryParamsToObj = JSON.parse(req.query.queryFilter)
     return queryService.findSelectedHostelByQuery(queryParamsToObj, res)
 }

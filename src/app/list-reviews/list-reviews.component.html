@@ -1,5 +1,6 @@
 <div class="hotel-right text-right">
   <h4>INR {{hostelPrice}}</h4>
   <p>Best price</p>
-  <a [routerLink]="['../hostelDetailView',hostelObj._id]">View</a>
+  <a (click)="viewHostel(hostelObj._id)">View</a>
+  <!-- <a *ngIf="!hostelObj.hostelStatus" [class.disabled]="hostelObj.hostelStatus==false">Sold Out</a> -->
 </div>

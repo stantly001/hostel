@@ -84,10 +84,23 @@ export class DetailviewComponent implements OnInit {
   getHostelObjectByHostelId(hostelId) {
     this._httpDataService.getHostelRooms(hostelId).subscribe(
       data => {
+        let hostelByRoomObj = JSON.parse(JSON.stringify(data));
         this.hostelViewObject = data;
-        // this.floorsByHostel = data
+        let tempArray = [];
+        this.floorsByHostel = hostelByRoomObj;
         console.log(data)
-        this.floor = data.floors[0];
+        data.floors.forEach(element => {
+          console.log("element", element)
+          if (element.remainingRoomStatus == true) {
+            tempArray.push(element);
+          }
+          else if (!element.hasOwnProperty("remainingRoomStatus")) {
+            tempArray.push(element);
+          }
+        });
+        let currentFloor = tempArray.shift();
+        this.floor = currentFloor;
+        console.log("floor>>>>", this.floor)
         if (this.floor) {
           this.selectFloor(this.floor, this.bookingObj);
         }
@@ -116,9 +129,17 @@ export class DetailviewComponent implements OnInit {
    * Set Hostel rooms
    */
   selectFloor(floor, bookingObj) {
+    let tempArray = []
     this.rooms = floor.rooms;
-    bookingObj.select_floor = floor
-    this.selectRoom(bookingObj, this.rooms[0]);
+    bookingObj.select_floor = floor;
+    this.rooms.forEach(element => {
+      if (element.remainingBedStatus != "completed") {
+        tempArray.push(element);
+      }
+    });
+    let currentRoom = tempArray.shift();
+    console.log("current Room>>", currentRoom)
+    this.selectRoom(bookingObj, currentRoom);
   }
 
   /**
@@ -149,6 +170,7 @@ export class DetailviewComponent implements OnInit {
         bookingObj.selectedRoom.guests = [];
       }
       if (!isNaN(roomBeds)) {
+        bookingObj.selectedRoom.guests = [];
         for (let i = 0; i < roomBeds; i++) {
           bookingObj.selectedRoom.guests.push(i + 1);
         }
@@ -265,6 +287,7 @@ export class DetailviewComponent implements OnInit {
       }
     });
     let bkroom = this.setBookingRoom(groupByRoomType);
+    console.log("bkroom", bkroom)
     this.selectedRooms = bkroom;
   }
 
@@ -283,44 +306,20 @@ export class DetailviewComponent implements OnInit {
    */
   setBookingRoom(room) {
     let bookingRoom = [];
-    let singleRoom;
-    let doubleRoom;
-    let total_room_price = 0;
-    let paid_service = 0;
-    let total_price = 0;
-    let guest = 0;
-    let no_of_rooms
-    if (room.SingleRoom) {
-      no_of_rooms = room.SingleRoom.length;
-
-      room.SingleRoom.map(data => {
-        data.room_services.map(res => {
-          if (res.base_amount) {
-            total_room_price += res.base_amount;
-          }
-          if (res.paidService) {
-            paid_service += res.amount_per_month ? res.amount_per_month : 0;
-          }
-        })
-        guest += data.guest;
-        singleRoom = {
-          room_type: data.room_type,
-          no_of_rooms: no_of_rooms,
-          guest: guest,
-          total_room_price: total_room_price,
-          paid_service: paid_service,
-          total_price: total_room_price + paid_service
-        }
-      })
-      bookingRoom.push(singleRoom);
-    }
-    if (room.DoubleRoom) {
+    let total_room_price;
+    let paid_service;
+    let total_price;
+    let guest;
+    let no_of_rooms;
+    Object.keys(room).forEach(element => {
       total_room_price = 0;
       paid_service = 0;
       total_price = 0;
       guest = 0;
-      no_of_rooms = room.DoubleRoom.length;
-      room.DoubleRoom.map(data => {
+      no_of_rooms = 0;
+      let roomName = element;
+      no_of_rooms = room[element].length;
+      room[element].map(data => {
         data.room_services.map(res => {
           if (res.base_amount) {
             total_room_price += res.base_amount;
@@ -330,7 +329,7 @@ export class DetailviewComponent implements OnInit {
           }
         })
         guest += data.guest;
-        doubleRoom = {
+        room[element] = {
           room_type: data.room_type,
           no_of_rooms: no_of_rooms,
           guest: guest,
@@ -339,10 +338,25 @@ export class DetailviewComponent implements OnInit {
           total_price: total_room_price + paid_service
         }
       })
-      bookingRoom.push(doubleRoom);
-    }
+      console.log("room[element]", room[element])
+      bookingRoom.push(room[element]);
+    });
     return bookingRoom;
   }
+
+
+
+  checkValidation(bookingObj) {
+    if (bookingObj.email && bookingObj.address
+      && bookingObj.mobile && bookingObj.firstName
+      && bookingObj.lastName && bookingObj.isAccept) {
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
 
 
   /**
@@ -352,53 +366,34 @@ export class DetailviewComponent implements OnInit {
    * Book Room 
    */
   bookRoom(floor, bookingObj) {
+    console.log("bookingObj>>>>", bookingObj)
 
+    var guestObj = {
+      firstName: bookingObj.firstName,
+      lastName: bookingObj.lastName,
+      mobile: bookingObj.mobile,
+      email: bookingObj.email,
+      address: bookingObj.address
+    }
 
-    // let hostelBookingObj = {
-    //   hostel: this.hostelViewObject,
-    //   floor: bookingObj.floor,
-    // }
-
-    // hostelBookingObj.floor.forEach(element => {
-    //   let unCompleted = false;
-    //   console.log(element)
-    //   // element.forEach(elem => {
-    //   //   if (elem.roomStatus != "completed") {
-    //   //     unCompleted = true;
-    //   //   }
-    //   // });
-    //   // if (unCompleted) {
-    //   //   element.floorStatus = "completed"
-    //   // } else {
-    //   //   element.floorStatus = ""
-    //   // }
-    // });
-console.log(this.floorsByHostel)
+    console.log("floorsByHostel", this.floorsByHostel)
     var data = {
       // hostel_id: this.hostelViewObject.hostel_id._id,
-      room: this.hostelViewObject,
+      room: this.floorsByHostel,
       floors: this.removeKeyByBooking(bookingObj).floor,
       total_price: this.total,
+      guest_info: guestObj
       // created_by: this.user
     }
 
-    // console.log(data)
-    // this.setBookingFlag(bookingObj)
     this._httpDataService.bookRoom(data).subscribe(
       data => {
       },
       error => this.errorMessage = <any>error)
 
+
   }
 
-  // setBookingFlag(bkObj) {
-  //   var returnObj = {};
-  //   console.log(bkObj)
-
-
-
-  //   // this.hostelViewObject.hostel_id
-  // }
 
   /**
    * 
@@ -409,20 +404,14 @@ console.log(this.floorsByHostel)
     bookingObj.floor.forEach(bkObj => {
       delete bkObj.floor_id
       return bkObj.rooms.forEach(roomObj => {
-        // if (elem.guest) {
-        //   elem.remainingBeds = elem.no_of_beds - elem.guest;
-        //   if (element.remainingBeds == 0) {
-        //     element.roomStatus = "completed"
-        //   }
-        // }
         roomObj.room_id_by_floor = roomObj._id
-        delete roomObj._id;
-        delete roomObj.is_active;
-        delete roomObj.active;
-        delete roomObj.no_of_beds;
-        delete roomObj.guest;
-        delete roomObj.view_type;
-        delete roomObj.room_services
+        // delete roomObj._id;
+        // delete roomObj.is_active;
+        // delete roomObj.active;
+        // delete roomObj.no_of_beds;
+        // delete roomObj.guest;
+        // delete roomObj.view_type;
+        // delete roomObj.room_services
         if (roomObj.paid_service && roomObj.paid_service.length == 0) {
           delete roomObj.paid_service
         }

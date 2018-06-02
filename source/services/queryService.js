@@ -40,7 +40,7 @@ function findSelectedHostelByQuery(params, res) {
     //         console.error('Could not notify administrator');
     //         console.error(err);
     //     });
-
+console.log("params",params)
     var roomType = removeSpecialChar(params['Room Type'])
     var roomService = removeSpecialChar(params['Room Services'])
     var country = params['country']
@@ -51,7 +51,7 @@ function findSelectedHostelByQuery(params, res) {
         price = { min: params['priceMin'], max: params['priceMax'] }
     }
 
-    var query = hostel.find()
+    var query = hostel.find({hostelStatus: {$ne: false}})
     if (country) {
         query.where('country').equals(country)
     }
@@ -59,7 +59,7 @@ function findSelectedHostelByQuery(params, res) {
         query.where('city').equals(city)
     }
     if (roomType) {
-        query.where('room_type.type_name').in(roomType)
+        query.where('room_type.type_name').in(roomType);
     }
     if (!isEmpty(price)) {
         query.where('hostel_services.base_amount').gte(price.min).lte(price.max)

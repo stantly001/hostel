@@ -48,6 +48,9 @@ var booking = new Schema({
         }]
 
     }],
+    guest_info: {
+        type: Object
+    },
     total_price: {
         type: Number
     },
