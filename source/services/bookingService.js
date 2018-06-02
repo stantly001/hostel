@@ -15,7 +15,8 @@ function bookingBean(bkObj) {
         hostel_id: bkObj.room.hostel_id._id,
         room_id: bkObj.room._id,
         floors: bkObj.floors,
-        total_price: bkObj.total_price
+        total_price: bkObj.total_price,
+        guest_info:bkObj.guest_info
     }
 
     return booking

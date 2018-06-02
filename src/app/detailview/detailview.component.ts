@@ -365,31 +365,32 @@ export class DetailviewComponent implements OnInit {
    * Book Room 
    */
   bookRoom(floor, bookingObj) {
-    console.log(this.datePicker);
+    console.log(this.datePicker.date);
     console.log("bookingObj>>>>", bookingObj)
+    bookingObj.checkInDate=this.datePicker.date;
+    var guestObj = {
+      firstName: bookingObj.firstName,
+      lastName: bookingObj.lastName,
+      mobile: bookingObj.mobile,
+      email: bookingObj.email,
+      address: bookingObj.address,
+      fromDate:bookingObj.checkInDate
+    }
 
-    // var guestObj = {
-    //   firstName: bookingObj.firstName,
-    //   lastName: bookingObj.lastName,
-    //   mobile: bookingObj.mobile,
-    //   email: bookingObj.email,
-    //   address: bookingObj.address
-    // }
+    console.log("floorsByHostel", this.floorsByHostel)
+    var data = {
+      // hostel_id: this.hostelViewObject.hostel_id._id,
+      room: this.floorsByHostel,
+      floors: this.removeKeyByBooking(bookingObj).floor,
+      total_price: this.total,
+      guest_info: guestObj
+      // created_by: this.user
+    }
 
-    // console.log("floorsByHostel", this.floorsByHostel)
-    // var data = {
-    //   // hostel_id: this.hostelViewObject.hostel_id._id,
-    //   room: this.floorsByHostel,
-    //   floors: this.removeKeyByBooking(bookingObj).floor,
-    //   total_price: this.total,
-    //   guest_info: guestObj
-    //   // created_by: this.user
-    // }
-
-    // this._httpDataService.bookRoom(data).subscribe(
-    //   data => {
-    //   },
-    //   error => this.errorMessage = <any>error)
+    this._httpDataService.bookRoom(data).subscribe(
+      data => {
+      },
+      error => this.errorMessage = <any>error)
 
 
   }
