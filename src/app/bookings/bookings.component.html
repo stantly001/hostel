@@ -5,11 +5,13 @@
       <thead>
         <tr>
           <th>price</th>
+          <th>From</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let bookedHostel of bookedHostels">
           <td>{{bookedHostel?.total_price}}</td>
+          <td>{{bookedHostel?.createdAt}}</td>
         </tr>
       </tbody>
     </table>
