@@ -51,7 +51,7 @@ console.log("params",params)
         price = { min: params['priceMin'], max: params['priceMax'] }
     }
 
-    var query = hostel.find({hostelStatus: {$ne: false}})
+    var query = hostel.find()
     if (country) {
         query.where('country').equals(country)
     }

@@ -265,6 +265,18 @@ export class HttpdataService {
 
   /**
    * 
+   * @param bookedHostel 
+   * Update Booked Room
+   */
+  updateBookedRoom(bookedHostel){
+    return this.http.put(this.baseUrl + "/booking/updateBooking/" + bookedHostel._id, bookedHostel)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+
+  /**
+   * 
    * @param register 
    * Auth Login
    */

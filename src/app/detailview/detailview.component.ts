@@ -138,7 +138,7 @@ export class DetailviewComponent implements OnInit {
     });
     let currentRoom = tempArray.shift();
     console.log("current Room>>", currentRoom)
-    this.selectRoom(bookingObj, currentRoom);
+    this.selectRoom(bookingObj, this.rooms[0]);
   }
 
   /**
@@ -386,6 +386,7 @@ export class DetailviewComponent implements OnInit {
       guest_info: guestObj
       // created_by: this.user
     }
+    console.log("data>>>",data)
 
     this._httpDataService.bookRoom(data).subscribe(
       data => {
@@ -405,7 +406,9 @@ export class DetailviewComponent implements OnInit {
     bookingObj.floor.forEach(bkObj => {
       delete bkObj.floor_id
       return bkObj.rooms.forEach(roomObj => {
-        roomObj.room_id_by_floor = roomObj._id
+        roomObj.room_id_by_floor = roomObj._id,
+        roomObj.no_of_beds=roomObj.no_of_beds,
+        roomObj.remainingBeds=roomObj.remainingBeds
         // delete roomObj._id;
         // delete roomObj.is_active;
         // delete roomObj.active;

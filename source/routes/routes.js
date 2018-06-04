@@ -72,4 +72,5 @@ routes.route('/query/getFilterData').get(queryServiceController.findSelectedHost
 routes.route('/booking/getAllBooking').get(bookingController.getAllBooking)
 routes.route('/booking/saveBooking').post(bookingController.saveBooking)
 routes.route('/booking/getBookingDataByUser/:userId').get(bookingController.getBookingDataByUser)
+routes.route('/booking/updateBooking/:bookingId').put(bookingController.updateBooking)
 module.exports = routes;

@@ -11,8 +11,12 @@ function getAllBooking(req, res) {
 function getBookingDataByUser(req, res) {
     return bookingService.getBookingDataByUser(req, res, req.params.userId)
 }
+
+function updateBooking(req, res) {
+    return bookingService.updateBooking(req, res, req.params.bookingId);
+}
 var bookingController = {
-    saveBooking, getAllBooking,getBookingDataByUser
+    saveBooking, getAllBooking, getBookingDataByUser, updateBooking
 }
 
 module.exports = bookingController

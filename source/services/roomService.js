@@ -172,12 +172,13 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
     console.log("hostelId-->", hostelId)
     room.findOne({ hostel_id: hostelId }).populate({ path: 'hostel_id', populate: { path: 'images' } })
         .populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
+            var returnData = {};
             if (err) {
                 console.log(err);
             }
             else {
 
-                var returnData = {};
+                
                 if (data) {
                     returnData.created_by = data.created_by;
                     returnData.created = data.created;
@@ -187,6 +188,8 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
                     returnData._id = data._id;
                     returnData.hostel_id = hs.setHostelDetails(data.hostel_id)
                 }
+                console.log("returnData>>>>>",returnData);
+               
                 return res.json(returnData);
             }
         })
@@ -200,19 +203,12 @@ function getRoomDetailsByHostelId(hostelId, req, res) {
  * update Room
  */
 function updateRoom(id, roomData, res) {
-    console.log("id>>>>>>", id);
-    console.log("roomData>>>>>", roomData)
-
+    console.log("RoomData>>>",roomData)
     var temp_service = [];
     var temp_room_type = []
-    console.log("floors>>>", roomData.floors)
-    console.log("floorsLength>>>", roomData.floors.length)
     if (roomData.floors.length > 0) {
-        console.log("floorsLength>>>", roomData.floors.length)
         roomData.floors.map(floor => {
-            console.log("rooom>>>>>>>", floor)
             return floor.rooms.map(room => {
-                console.log("service>>>>>>>", room)
                 if (temp_room_type.indexOf(room.room_type) == -1) {
                     temp_room_type.push(room.room_type)
                     // console.log(roomData.hostel_id.room_type.find(type => type.type_name === service.room_type))
@@ -236,7 +232,6 @@ function updateRoom(id, roomData, res) {
     }
     hostel.findByIdAndUpdate(roomData.hostel_id._id, roomData.hostel_id, { new: true })
         .then(data => {
-            console.log(">>>>>>>>>>>", data)
         })
         .catch(err => console.log(err))
 
