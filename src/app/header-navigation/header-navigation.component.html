@@ -12,7 +12,7 @@
       <img src="assets/images/menu.png" alt="" />
     </span>
     <nav class="cl-effect-11" id="cl-effect-11">
-      <ul class="nav1">ss
+      <ul class="nav1">
         <li>
           <a class="active" routerLink="home" data-hover="HOME">HOME</a>
         </li>
@@ -20,9 +20,9 @@
           <a href="about.html" data-hover="ABOUT">ABOUT</a>
         </li>
         <!-- <li><a href="typography.html" data-hover="SERVICES">SERVICES</a></li> -->
-        <li>
+        <!-- <li>
           <a href="booking.html" data-hover="BOOKING">BOOKING</a>
-        </li>
+        </li> -->
         <li>
           <a href="contact.html" data-hover="CONTACT">CONTACT</a>
         </li>
@@ -33,7 +33,7 @@
           <a routerLink="viewRooms" data-hover="View Rooms">View Rooms</a>
         </li> -->
         <li *ngIf="!user">
-            <a href="" data-hover="SIGNIN" data-toggle="modal" data-target="#login">SIGNIN</a>
+            <a href="" data-hover="SIGNIN" data-toggle="modal" data-target="#login">SIGNIN/SIGNUP</a>
           <!--<a routerLink="../hostel/login" data-hover="LOGIN">Login</a>-->
         </li>
         <li *ngIf="user" class="dropdown">
