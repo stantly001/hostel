@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   // public getUserDetails():Observable<any> {
   //   return this.userDetails.asObservable();;
   // }
-  
+
   ngOnInit() {
   }
 
@@ -41,9 +41,11 @@ export class LoginComponent implements OnInit {
           if (data.data.isValid == true) {
             sessionStorage.setItem("user", JSON.stringify(data));
             let userId = data.data._id;
+            this._httpDataService.setUserDetails(data);
             // this.setUserDetails(data);
             this.loginUsers = data;//.push(data});
-            this.route.navigate(["admin/hostel/addHostel"]);
+            window.location.href = "admin/hostel/addHostel";
+            // this.route.navigate(["admin/hostel/addHostel"]);
           }
           console.log(data)
         },

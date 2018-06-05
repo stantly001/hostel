@@ -170,7 +170,8 @@ function getRoomDetails(req, res) {
  */
 function getRoomDetailsByHostelId(hostelId, req, res) {
     console.log("hostelId-->", hostelId)
-    room.findOne({ hostel_id: hostelId }).populate({ path: 'hostel_id', populate: { path: 'images' } })
+    room.findOne({ hostel_id: hostelId }).populate({ path: 'hostel_id', populate: { path: 'images' }})
+    .populate({ path: 'hostel_id', populate:{ path: 'hostel_services.service', ref: 'Service' }})
         .populate("created_by").populate("floors.rooms.room_services.service").exec(function (err, data) {
             var returnData = {};
             if (err) {

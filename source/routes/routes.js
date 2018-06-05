@@ -59,7 +59,8 @@ routes.route('/room/update/:roomId').put(roomController.updateRoom);
 /**
  * User Login
  */
-routes.route('/auth/user').post(authServiceCtrl.authentication)
+routes.route('/auth/user').post(authServiceCtrl.authentication);
+routes.route('/auth/logout').post(authServiceCtrl.logout);
 
 /**
  * Query Params To Find Data

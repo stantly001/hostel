@@ -31,11 +31,17 @@ export class BookingsComponent implements OnInit {
   }
 
 
+  hasProp(obj, type) {
+    return obj.hasOwnProperty(type);
+  }
+
+
+
   vacateHostel(bookedRoom, bookedFloor, bookedHostel) {
-    bookedHostel.to_date=this.datePicker.date;
-// console.log("date",this.datePicker.date)
-//     console.log("room>>>>", bookedRoom);
-//     console.log("bookedFloor>>>>", bookedFloor);
+    bookedHostel.to_date = this.datePicker.date;
+    // console.log("date",this.datePicker.date)
+    //     console.log("room>>>>", bookedRoom);
+    //     console.log("bookedFloor>>>>", bookedFloor);
     console.log("bookedHostel>>>>", bookedHostel)
 
     bookedHostel.floors.forEach(floor => {
@@ -44,9 +50,19 @@ export class BookingsComponent implements OnInit {
           if (room.room_number == bookedRoom.room_number) {
             room.status = false;
           }
+          if (room.status == true) {
+            floor.status = true;
+          } else {
+            floor.status = false;
+          }
         });
+        if (floor.status == true) {
+          bookedHostel.status = true;
+        } else {
+          bookedHostel.status = false;
+        }
       }
-console.log("DDDDD",bookedHostel)
+      console.log("DDDDD", bookedHostel)
     });
 
 

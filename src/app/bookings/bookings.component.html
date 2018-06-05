@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody *ngFor="let bookedHostel of bookedHostels;let index=index">
-        <tr>
+        <tr *ngIf="!hasProp(bookedHostel,'status')||bookedHostel.status==true">
           <td>{{bookedHostel?.guest_info?.firstName}}</td>
           <td>{{bookedHostel?.guest_info?.address}}</td>
           <td>{{bookedHostel?.guest_info?.email}}</td>
@@ -30,12 +30,12 @@
           </td>
         </tr>
         <tr>
-          <td colspan="7">
+          <td colspan="7"  *ngIf="!hasProp(bookedHostel,'status')||bookedHostel.status==true">
             <div class="col-md-12" *ngIf="bookedHostel.index">
 
               <div *ngFor="let bookedFloor of bookedHostel?.floors">
-                <div class="col-md-12 card">
-
+                <div class="col-md-12 card" *ngIf="!hasProp(bookedFloor,'status')||bookedFloor.status==true" >
+                  <!--  -->
                   <div class="">
                     <div class="card-header">
                     </div>
@@ -47,7 +47,7 @@
                       </div>
                       <div class="col-md-12">
                         <div *ngFor="let room of bookedFloor.rooms">
-                          <div class="col-md-3">
+                          <div class="col-md-3" *ngIf="!hasProp(room,'status')||room.status==true">
                             <label for="">Room:{{room.room_number}}</label>
                           </div>
                           <div class="col-md-4">

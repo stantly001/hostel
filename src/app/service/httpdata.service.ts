@@ -5,16 +5,23 @@ import Globals from '../utils/globals';
 // import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { Hostel } from '../model/hostel';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
 export class HttpdataService {
+  user: Observable<Object>;
   baseUrl: any;
   constructor(private http: HttpClient) {
     this.baseUrl = Globals.baseAppUrl;
+    let storedProp = sessionStorage.getItem("user");
+    if (storedProp) {
+      this.setUserDetails(JSON.parse(storedProp));
+    }
+
   }
 
-
+  private userDetails: BehaviorSubject<Object> = new BehaviorSubject<Object>({});
 
   /**
    * @param 
@@ -43,10 +50,10 @@ export class HttpdataService {
    * @param hostelId 
    * Get HostelDetail By HostelId
    */
-  getRoomDetailsByHostelId(hostelId){
-    return this.http.get(this.baseUrl + "/room/"+hostelId)
-    .map(this.extractData)
-    .catch(this.handleErrorObservable);
+  getRoomDetailsByHostelId(hostelId) {
+    return this.http.get(this.baseUrl + "/room/" + hostelId)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 
   /**
@@ -66,10 +73,10 @@ export class HttpdataService {
    * @param hostelId 
    * Get Hostel By Id
    */
-  getHostelById(hostelId){
-    return this.http.get(this.baseUrl + "/hostel/getHostelById/"+hostelId)
-    .map(this.extractData)
-    .catch(this.handleErrorObservable);
+  getHostelById(hostelId) {
+    return this.http.get(this.baseUrl + "/hostel/getHostelById/" + hostelId)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 
 
@@ -197,9 +204,9 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
-/**
-   * Get Rooms
-   */
+  /**
+     * Get Rooms
+     */
   getAllRooms() {
     return this.http.get(this.baseUrl + "/room")
       .map(this.extractData)
@@ -211,7 +218,7 @@ export class HttpdataService {
    * @param hostel 
    * Get Hostel Rooms By HostelId
    */
-  getHostelRooms(id){
+  getHostelRooms(id) {
     return this.http.get(this.baseUrl + "/room/" + id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -246,7 +253,7 @@ export class HttpdataService {
    * @param room 
    * Book Room
    */
-  bookRoom(room){
+  bookRoom(room) {
     return this.http.post(this.baseUrl + "/booking/saveBooking", room)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -257,8 +264,8 @@ export class HttpdataService {
    * @param user 
    * get Booking DataBy User
    */
-  getBookingDataByUser(user){
-    return this.http.get(this.baseUrl + "/booking/getBookingDataByUser/"+user._id)
+  getBookingDataByUser(user) {
+    return this.http.get(this.baseUrl + "/booking/getBookingDataByUser/" + user._id)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -268,7 +275,7 @@ export class HttpdataService {
    * @param bookedHostel 
    * Update Booked Room
    */
-  updateBookedRoom(bookedHostel){
+  updateBookedRoom(bookedHostel) {
     return this.http.put(this.baseUrl + "/booking/updateBooking/" + bookedHostel._id, bookedHostel)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
@@ -286,6 +293,20 @@ export class HttpdataService {
       .catch(this.handleErrorObservable);
   }
 
+  public setUserDetails(data: Object) {
+    this.userDetails.next(data);
+    console.log("userDetails", this.userDetails)
+  }
+  public getUserDetails(): Observable<Object> {
+    
+    return this.userDetails;
+  }
+  
+  logOut(userDetail){
+    return this.http.post(this.baseUrl + "/auth/logout",userDetail)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
 
   private extractData(res: Response) {
     let body = res;

@@ -6,7 +6,7 @@
 		<h3 class="sear-head">{{filterObj.field_name}}</h3>
 		<div *ngIf="filterObj.view_type=='slider'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">
 			<nouislider [connect]="true" [min]="priceByMinMax?.min" [max]="priceByMinMax?.max" [step]="1" [(ngModel)]="priceRange" (change)="priceChange(priceRange)"></nouislider>
-			<label for="" class="hostel-label">Range From Rs.{{priceByMinMax?.min}} to Rs.{{priceByMinMax?.max}}</label>
+			<label for="" class="hostel-label">Range From Rs.{{priceRange[0]}} to Rs.{{priceRange[1]}}</label>
 		</div>
 
 		<div *ngIf="filterObj.view_type=='checkBox'" class="panel-collapse" [class.collapse]="filterObj.isFilter==true">

@@ -88,7 +88,9 @@ function logout(req, res) {
             if (err) {
                 return next(err);
             } else {
-                return res.redirect('/');
+                // return res.redirect('/');
+                var data="logout successfully"
+                return res.json(data);
             }
         });
     }

@@ -152,6 +152,8 @@ function getBookingDataByUser(req, res, userId) {
     query.populate('hostel_id')
     query.populate({ path: 'room_id', populate: { path: 'hostel_id', ref: 'Hostel', populate: { path: 'hostel_services.service', ref: 'Service' } } })
     // query.populate('room_id.hostel_id')
+    query.populate({ path: 'room_id', populate: { path: 'hostel_id', ref: 'Hostel',populate: { path: 'images' }}})
+    query.populate({ path: 'hostel_id', populate: { path: 'images' } })
     query.populate('floors.rooms.paid_service.service')
     query.exec(function (err, data) {
         if (err) {
@@ -190,12 +192,12 @@ function updateBooking(req, res, bookingId) {
                     } else {
                         roomStatus = true;
                         room.remainingBedStatus = "available"
-                        
+
                     }
                 }
             }
-            
-            val.remainingRoomStatus=roomStatus
+
+            val.remainingRoomStatus = roomStatus
             if (val.remainingRoomStatus == false) {
                 floorStatus = false;
             } else {
@@ -211,13 +213,13 @@ function updateBooking(req, res, bookingId) {
     // res.json(roomData);
     var roomId = req.body.room_id._id;
     roomService.updateRoom(roomId, roomData, res);
-    hostelService.updateHostelById(hostelData, res, hostelData._id)
+    // hostelService.updateHostelById(hostelData, res, hostelData._id)
     booking.findByIdAndUpdate(bookingId, { $set: req.body }, function (err, data) {
         if (err) {
             console.log(err);
         }
         // console.log("RESULT: " + data);
-        else{
+        else {
             // getBookingDataByUser(req,res,)
         }
     });

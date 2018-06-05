@@ -134,11 +134,14 @@ export class DetailviewComponent implements OnInit {
     this.rooms.forEach(element => {
       if (element.remainingBedStatus != "completed") {
         tempArray.push(element);
+      }else if (!element.hasOwnProperty("remainingBedStatus")) {
+        tempArray.push(element);
       }
     });
+    console.log("tempArray>>>>>",tempArray)
     let currentRoom = tempArray.shift();
     console.log("current Room>>", currentRoom)
-    this.selectRoom(bookingObj, this.rooms[0]);
+    this.selectRoom(bookingObj, currentRoom);
   }
 
   /**
